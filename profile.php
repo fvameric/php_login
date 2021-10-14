@@ -1,10 +1,7 @@
 <?php
-    // Include the database configuration file
    include 'db.php';
 
    $nickname = $_GET['user'];
-
-
 ?>
 
 <!DOCTYPE html>
@@ -21,22 +18,20 @@
     <?php
         $sql='SELECT * FROM `users` WHERE 1';
         $consulta = mysqli_query($con,$sql);
-
+        
         while ($fila = $consulta->fetch_assoc()) {
             if ($nickname == $fila['nickname']) {
                 echo "<div class='content'>";
-                    echo "Id: ".$fila['id'];
-                    echo "<br>Nombre: ".$fila['nickname'];
-                    echo "<br>Contraseña: ".$fila['password'];
-                    echo "<br>Email: ".$fila['email'];
-                    echo "<br>Avatar: <br><br>";
-                    echo "<img src='uploads/".$fila['avatar']."' >";
+                    echo "<div class='nombre'>".$fila['nickname']."</div>";
+                    echo "<div class='email'>".$fila['email']."</div>";
+                    echo "<br><img src='".$fila['avatar']."' >";
                 echo "</div>";
             }
         }
     ?>
+    <form method="post" action="/login.html">
+        <button type="submit">Cerrar sesión</button>
+    </form>
     </div>
 </body>
 </html>
-
-
