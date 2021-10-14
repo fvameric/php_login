@@ -11,9 +11,9 @@
     $email = $_POST['email'];
 
     if(isset($_POST["submit"])){
-        if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath))
+        if($fileType == 'jpg' || $fileType == 'png' || $fileType == 'gif')
         {
-            if($fileType == 'jpg' || $fileType == 'png' || $fileType == 'gif') {
+            if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
                 $imageData = base64_encode(file_get_contents($targetFilePath));
                 $src = 'data:'.$fileType.';base64,' . $imageData;
     
@@ -49,10 +49,10 @@
                     echo "</form>";
                 }
             } else {
-              echo "No es una imagen.";
+              echo 'No se pudo mover a la carpeta uploads';
             }
         } else {
-            echo 'No se pudo mover a la carpeta uploads';
+            echo "No es una imagen.";
         }
     }
 ?>
