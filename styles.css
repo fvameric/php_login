@@ -22,35 +22,77 @@ button:focus{
     outline: none;
 }
 
+/* header */
+
+.user-header {
+    display: flex;
+}
+
 .user-header img {
     height: 100px;
     width: 100px;
 }
 
-.lista-users img {
-    height: 40px;
-    width: 40px;
-}
-
-.lista {
-    list-style: none;
+.user-header-content {
+    margin: 0 0 0 5px;
     display: flex;
     flex-direction: column;
+    padding: 2px;
+    width: 200px;
 }
 
-.lista-avatar {
+.nombre{
+    font-size: 30px;
+    font-weight: bold;
+    margin: 2px;
+}
+
+.email{
+    margin: 2px;
+}
+
+.btn-cerrar-sesion {
+    margin: 10px 0 0 0;
+}
+
+/* Lista de usuarios administradores */
+
+.scroll-usuarios{
+	height: 10rem;
+	overflow-x: hidden;
+	overflow-y: scroll;
+    width: 350px;
+}
+
+.lista-usuarios {
+    display: flex;
+}
+
+.lista-usuarios-avatares img{
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
 }
 
-.lista-item p {
-    color: #aaa;
+.lista-usuarios-content {
+    margin: 0 0 0 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    width: 200px;
 }
 
-.scroll-usuarios{
-	height: 20rem;
-	overflow-x: hidden;
-	overflow-y: scroll;
+.lista-usuarios-nombre {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 0 0 2px;
 }
+
+.lista-usuarios-email {
+    font-size: 12px;
+    margin: 0 0 2px 2px;
+}
+
 
 .lista-item-contenido h5 {
     font-size: 1.5em;
@@ -59,4 +101,8 @@ button:focus{
 .lista-item-contenido h6 {
     font-size: 1em;
     color: #888;
+}
+
+.eresAdmin {
+    width: 400px;
 }

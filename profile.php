@@ -17,49 +17,54 @@
         $consultaUser = mysqli_query($con, $sqlUserId);
         $filaUser = $consultaUser->fetch_assoc();
     ?>
-
-    <h1>Perfil</h1>
     <div class='user-header'>
-        <div class='nombre'>
-            <h3><?php echo $filaUser['nickname']; ?></h3>
-        </div>
-        <div class='email'>
-            <?php echo $filaUser['email']; ?>
-        </div>
         <div class='avatar'>
             <img src=<?php echo $filaUser['avatar']; ?>>
         </div>
-        <form method="post" action="login.html">
-            <button type="submit">Cerrar sesión</button>
-        </form>
+        <div class='user-header-content'>
+            <div class='nombre'>
+                <?php echo $filaUser['nickname']; ?>
+            </div>
+            <div class='email'>
+                <?php echo $filaUser['email']; ?>
+            </div>
+            <form method="post" action="login.html" class="btn-cerrar-sesion">
+                <button type="submit">Cerrar sesión</button>
+            </form>
+        </div>
     </div>
 
-    <?php if ($filaUser['admin'] == 1) { ?>
+    <?php if ($filaUser['admin'] == 1) { ?> <!--inicio si el usuario que ha iniciado sesión es admin  -->
     <hr>
-    <h1>Eres admin, puedes ver el resto de usuarios:</h1>
-
+    <div class="eresAdmin">
+        <h3>Eres admin, puedes ver el resto de usuarios:</h3>
+    </div>
     <div class="scroll-usuarios">
         <?php
             $sqlAllUsers="SELECT * FROM `users` WHERE 1";
             $consultaAllUsers = mysqli_query($con,$sqlAllUsers);
-            while ($filaAllUsers = $consultaAllUsers->fetch_assoc()) {
-                if ($filaAllUsers['admin']==0) { ?>
-                    <div class="lista-users">
-                        <ul class="lista">
-                            <li class="lista-item">
-                                <div>
-                                    <img src=<?php echo $filaAllUsers['avatar']; ?> class="lista-avatar">
-                                </div>
-                                <div class="lista-item-contenido">
-                                    <h5><?php echo $filaAllUsers['nickname']; ?></h5>
-                                    <h6><?php echo $filaAllUsers['email']; ?></h6>
-                                </div>    
-                            </li>
-                        </ul>
+            while ($filaAllUsers = $consultaAllUsers->fetch_assoc()) { // inicio while usuarios
+                if ($filaAllUsers['admin']==0) { ?> <!--inicio if usuarios normales -->
+                    <div class="lista-usuarios">
+                        <div class="lista-usuarios-avatares">
+                            <img src=<?php echo $filaAllUsers['avatar']; ?> class="lista-avatar">
+                        </div>
+                        <div class="lista-usuarios-content">
+                            <div class="lista-usuarios-nombre">
+                                <?php echo $filaAllUsers['nickname']; ?>
+                            </div>
+                            <div class="lista-usuarios-email">
+                                <?php echo $filaAllUsers['email']; ?>
+                            </div>
+                        </div>
                     </div>
-                <?php } ?>
-            <?php } ?>
-        <?php } ?>
+                <?php } ?> <!--cierre if usuarios normales -->
+            <?php } ?> <!--cierre while usuarios -->
+        <?php } ?> <!--cierre si el usuario que ha iniciado sesión es admin  -->
+    </div>
+
+    <div class="listaProductos">
+
     </div>
 </body>
 </html>
