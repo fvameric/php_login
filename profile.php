@@ -1,46 +1,65 @@
-<?php
-   include 'db.php';
-
-   $nickname = $_GET['user'];
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Perfil</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="content">
     <?php
-        $sql='SELECT * FROM `users` WHERE 1';
-        $consulta = mysqli_query($con,$sql);
+        include 'db.php';
+        $id = $_GET['id'];
+        $administrador = false;
 
-        while ($fila = $consulta->fetch_assoc()) {
-            if ($nickname == $fila['nickname']) {
-                if ($fila['admin']==0) {
-                    echo "<div class='content'>";
-                        echo "<div class='nombre'>".$fila['nickname']."</div>";
-                        echo "<div class='email'>".$fila['email']."</div>";
-                        echo "<br><img src='".$fila['avatar']."' >";
-                    echo "</div>";
-                } elseif ($fila['admin']==1) {
-                    echo "<div class='content'>";
-                        echo "<div class='nombre'>".$fila['nickname']."</div>";
-                        echo "<div class='email'>".$fila['email']."</div>";
-                        echo "<br><img src='".$fila['avatar']."' >";
-                        echo "<button>Eliminar usuarios</button>";
-                    echo "</div>";
-                }
-            }
-        }
+        $sqlUserId="SELECT * FROM `users` WHERE id = '".$id."'";
+        $consultaUser = mysqli_query($con, $sqlUserId);
+        $filaUser = $consultaUser->fetch_assoc();
     ?>
-    <form method="post" action="/login.html">
-        <button type="submit">Cerrar sesión</button>
-    </form>
+
+    <h1>Perfil</h1>
+    <div class='user-header'>
+        <div class='nombre'>
+            <h3><?php echo $filaUser['nickname']; ?></h3>
+        </div>
+        <div class='email'>
+            <?php echo $filaUser['email']; ?>
+        </div>
+        <div class='avatar'>
+            <img src=<?php echo $filaUser['avatar']; ?>>
+        </div>
+        <form method="post" action="login.html">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </div>
+
+    <?php if ($filaUser['admin'] == 1) { ?>
+    <hr>
+    <h1>Eres admin, puedes ver el resto de usuarios:</h1>
+
+    <div class="scroll-usuarios">
+        <?php
+            $sqlAllUsers="SELECT * FROM `users` WHERE 1";
+            $consultaAllUsers = mysqli_query($con,$sqlAllUsers);
+            while ($filaAllUsers = $consultaAllUsers->fetch_assoc()) {
+                if ($filaAllUsers['admin']==0) { ?>
+                    <div class="lista-users">
+                        <ul class="lista">
+                            <li class="lista-item">
+                                <div>
+                                    <img src=<?php echo $filaAllUsers['avatar']; ?> class="lista-avatar">
+                                </div>
+                                <div class="lista-item-contenido">
+                                    <h5><?php echo $filaAllUsers['nickname']; ?></h5>
+                                    <h6><?php echo $filaAllUsers['email']; ?></h6>
+                                </div>    
+                            </li>
+                        </ul>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+        <?php } ?>
     </div>
 </body>
 </html>

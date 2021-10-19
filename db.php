@@ -2,7 +2,7 @@
 $servidor   = 'localhost';
 $usuario    = 'root';
 $pass       = 'usbw';
-$bd         = 'usuarios';
+$bd         = 'tienda';
 
 $con = mysqli_connect($servidor, $usuario, $pass, $bd);
 

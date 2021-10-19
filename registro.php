@@ -32,7 +32,7 @@
                 }
     
                 if (!$userExiste) {
-                    $sql = 'INSERT INTO `usuarios`.`users` (`id` ,`nickname` ,`password`, `email`, `avatar`)VALUES (NULL , "'.$nickname.'", "'.$password.'", "'.$email.'", "'.$src.'")';
+                    $sql = 'INSERT INTO `usuarios`.`users` (`id` ,`nickname` ,`password`, `email`, `avatar`, `admin`)VALUES (NULL , "'.$nickname.'", "'.$password.'", "'.$email.'", "'.$src.'",0)';
                     $consulta = mysqli_query($con,$sql);
     
                     if (!$consulta) {
