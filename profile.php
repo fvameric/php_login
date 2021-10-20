@@ -1,3 +1,13 @@
+<?php
+    include_once 'db.php';
+    $id = $_GET['id'];
+    $administrador = false;
+
+    $sqlUserId="SELECT * FROM `users` WHERE id = '".$id."'";
+    $consultaUser = mysqli_query($con, $sqlUserId);
+    $filaUser = $consultaUser->fetch_assoc();
+?>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,15 +18,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <?php
-        include 'db.php';
-        $id = $_GET['id'];
-        $administrador = false;
 
-        $sqlUserId="SELECT * FROM `users` WHERE id = '".$id."'";
-        $consultaUser = mysqli_query($con, $sqlUserId);
-        $filaUser = $consultaUser->fetch_assoc();
-    ?>
     <div class='user-header'>
         <div class='avatar'>
             <img src=<?php echo $filaUser['avatar']; ?>>
@@ -41,6 +43,7 @@
     </div>
     <div class="scroll-usuarios">
         <?php
+
             $sqlAllUsers="SELECT * FROM `users` WHERE 1";
             $consultaAllUsers = mysqli_query($con,$sqlAllUsers);
             while ($filaAllUsers = $consultaAllUsers->fetch_assoc()) { // inicio while usuarios
@@ -55,6 +58,11 @@
                             </div>
                             <div class="lista-usuarios-email">
                                 <?php echo $filaAllUsers['email']; ?>
+                            </div>
+                            <div class="lista-usuarios-eliminar">
+                            <form method="post">
+                                <input type="button" name="eliminar" value="eliminar" onclick="eliminarUser()" />
+                            </form>
                             </div>
                         </div>
                     </div>
