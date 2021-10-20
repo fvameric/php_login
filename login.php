@@ -1,22 +1,22 @@
 <?php
-    include('db.php');
+include 'db.php';
 
-    $nickname = $_POST['nickname'];
-    $password = $_POST['password'];
-    
-    $userExiste = false;
+require_once('crud_users.php');
+require_once('user.php');
 
-    $sql="SELECT * FROM `users` WHERE nickname = '".$nickname."'";
-    $consulta = mysqli_query($con,$sql);
-    $fila=$consulta->fetch_assoc();
+$nickname = $_POST['nickname'];
+$password = $_POST['password'];
 
-    if ($nickname == $fila['nickname'] AND $password == $fila['password']) {
-        header("Location: profile.php?id=".$fila['id']);
-    } else {
-        echo '<br>Nombre o Contraseña incorrectos';
+$crudUser = new CrudUser();
+$userId = $crudUser->validarLogin($nickname, $password);
 
-        echo "<form action='login.html'>";
-            echo "<button type='submit' value='Atrás'>Volver atrás</button>";
-        echo "</form>";
-    }
 ?>
+<?php if (is_null($userId) || empty($userId)) { ?>
+    <link rel="stylesheet" href="styles.css">
+    <div class="loginError">
+        Nombre o contraseña incorrectos.
+        <form action='login.html'>
+            <button type='submit' value='Atrás'>Volver atrás</button>
+        </form>
+    </div>
+<?php } ?>

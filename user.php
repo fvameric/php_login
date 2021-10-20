@@ -8,6 +8,14 @@
         private $admin;
 
         function __construct(){}
+        // get set id
+        public function getId(){
+            return $this->id;
+        }
+
+        public function setId($id){
+            $this->id = $id;
+        }
 
         // get set nombre
         public function getNickname(){
