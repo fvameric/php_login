@@ -1,11 +1,19 @@
 <?php
-    include_once 'db.php';
+    include('db.php');
     $id = $_GET['id'];
     $administrador = false;
 
     $sqlUserId="SELECT * FROM `users` WHERE id = '".$id."'";
     $consultaUser = mysqli_query($con, $sqlUserId);
     $filaUser = $consultaUser->fetch_assoc();
+
+    require_once('crud_users.php');
+    require_once('user.php');
+
+    $crudUser = new CrudUser();
+    $user = new User();
+
+    $listaUsers = $crudUser->mostrar();
 ?>
     
 <!DOCTYPE html>
@@ -18,7 +26,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <div class='user-header'>
         <div class='avatar'>
             <img src=<?php echo $filaUser['avatar']; ?>>
@@ -37,42 +44,30 @@
     </div>
 
     <?php if ($filaUser['admin'] == 1) { ?> <!--inicio si el usuario que ha iniciado sesión es admin  -->
-    <hr>
-    <div class="eresAdmin">
-        <h3>Eres admin, puedes ver el resto de usuarios:</h3>
-    </div>
-    <div class="scroll-usuarios">
-        <?php
-
-            $sqlAllUsers="SELECT * FROM `users` WHERE 1";
-            $consultaAllUsers = mysqli_query($con,$sqlAllUsers);
-            while ($filaAllUsers = $consultaAllUsers->fetch_assoc()) { // inicio while usuarios
-                if ($filaAllUsers['admin']==0) { ?> <!--inicio if usuarios normales -->
-                    <div class="lista-usuarios">
-                        <div class="lista-usuarios-avatares">
-                            <img src=<?php echo $filaAllUsers['avatar']; ?> class="lista-avatar">
+        <hr>
+        <div class="eresAdmin">
+            <h3>Eres admin, puedes ver el resto de usuarios:</h3>
+        </div>
+        <div class="scroll-usuarios">
+            <?php foreach($listaUsers as $user) { ?>
+                <div class="lista-usuarios">
+                    <div class="lista-usuarios-avatares">
+                        <img src=<?php echo $user->getAvatar() ?> class="lista-avatar">
+                    </div>
+                    <div class="lista-usuarios-content">
+                        <div class="lista-usuarios-nombre">
+                            <?php echo $user->getNombre() ?>
                         </div>
-                        <div class="lista-usuarios-content">
-                            <div class="lista-usuarios-nombre">
-                                <?php echo $filaAllUsers['nickname']; ?>
-                            </div>
-                            <div class="lista-usuarios-email">
-                                <?php echo $filaAllUsers['email']; ?>
-                            </div>
-                            <div class="lista-usuarios-eliminar">
-                            <form method="post">
-                                <input type="button" name="eliminar" value="eliminar" onclick="eliminarUser()" />
-                            </form>
-                            </div>
+                        <div class="lista-usuarios-email">
+                            <?php echo $user->getEmail(); ?>
+                        </div>
+                        <div class="lista-usuarios-eliminar">
+                            <a href="administrar_usuario.php?id=<?php echo $user->getId(); ?>&action=e">Eliminar</a>
                         </div>
                     </div>
-                <?php } ?> <!--cierre if usuarios normales -->
-            <?php } ?> <!--cierre while usuarios -->
-        <?php } ?> <!--cierre si el usuario que ha iniciado sesión es admin  -->
-    </div>
-
-    <div class="listaProductos">
-
-    </div>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
 </body>
 </html>
