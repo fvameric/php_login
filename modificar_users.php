@@ -6,7 +6,6 @@ $crud = new CrudUser();
 $user = new User();
 
 $id = $_POST['id_admin'];
-echo $id;
 
 if (isset($_POST['id_user'])) {
     $user=$crud->obtenerUser($_POST['id_user']);

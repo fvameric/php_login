@@ -2,7 +2,7 @@
 require_once('crud_users.php');
 require_once('user.php');
 
-include 'modificar_users.php';
+require_once 'modificar_users.php';
 
 $id_admin = $_POST['id_admin'];
 
@@ -24,15 +24,14 @@ if (isset($_POST['aceptarmodif'])) {
         $userModif->setId($id_user);
         $userModif->setNickname($nickname);
         $userModif->setEmail($email);
-        $crud->modificarUsuario($userModif, $id_admin);
-        header("Location: profileAdmin.php?id=".$id_admin);
+        $crud->modificarUsuario($userModif, $id_user);
     } else {
-        echo 'entra2';
         $userModif->setId($id_user);
         $userModif->setNickname($nickname);
         $userModif->setEmail($email);
         $userModif->setAvatar($_FILES["file"]["name"]);
-        $crud->modificarUsuario($userModif, $id_admin);
+        $crud->modificarUsuario($userModif, $id_user);
     }
 }
+//header("Location: profileAdmin.php?id=".$id_admin);
 ?>
