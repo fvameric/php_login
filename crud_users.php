@@ -115,6 +115,7 @@
 
         public function modificarUsuario($userModif){
             include 'db.php';
+            $sqlUpdate="UPDATE `users` SET id=NULL, nickname='".$userModif->getNickname()."', password='".$userModif->getPassword()."', email='".$userModif->getEmail()."', avatar='".$userModif->getAvatar()."' WHERE id=".$id;
         }
 
         public function obtenerUser($id) {

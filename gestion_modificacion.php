@@ -10,7 +10,6 @@ $password = $_POST['password'];
 $email = $_POST['email'];
 $avatar = $_POST['avatar'];
 
-
 echo 'id: '.$id;
 echo '<br>';
 echo 'nickname: '.$nickname;
@@ -21,34 +20,30 @@ echo 'email: '.$email;
 echo '<br>';
 echo 'avatar: '.$avatar;
 
+
 $crud = new CrudUser();
 $userModif = new User();
-$userModif = $userModif->obtenerUser($id);
+$userModif = $crud->obtenerUser($id);
 
-$targetDir = "uploads/";
-if (empty($_FILES["file"]["name"])) {
-    echo 'se utilizara la antigua';
-    echo $userModif->getAvatar();
-    /*
-    $filename = $_FILES["file"]["name"];
-    $targetFilePath = $targetDir . $filename;
-    $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-    */
-} else {
-    echo 'se buscó imagen';
-    echo $_FILES["file"]["name"];
-}
-
-
-
+//$targetDir = "uploads/";
 
 /*
-if (isset($_POST['id_user'])) {
-    $userModif->
+if (empty($_FILES["file"]["name"])) {
+    
+    
     $userModif->setNickname($nickname);
     $userModif->setEmail($email);
     $crud->modificarUsuario($userModif);
-    header("Location: profileAdmin.php?id=".$_POST['id_admin']);
+    
+    //header("Location: profileAdmin.php?id=".$_POST['id_admin']);
+} else {
+    
+    $userModif->setNickname($nickname);
+    $userModif->setEmail($email);
+    $userModif->setAvatar($_FILES["file"]["name"]);
+    $crud->modificarUsuario($userModif);
+    
+    //header("Location: profileAdmin.php?id=".$_POST['id_admin']);
 }
 */
 ?>

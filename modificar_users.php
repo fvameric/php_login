@@ -20,7 +20,7 @@ if (isset($_POST['id_user'])) {
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <form action='gestion_modificacion.php' method='post' enctype="multipart/form-data">
+    <form action='gestion_modificacion.php' method='POST' enctype="multipart/form-data">
         <div class='modificar-user'>
             <div class='modificar-avatar'>
                 <img src=<?php echo $user->getAvatar() ?>>
@@ -37,7 +37,7 @@ if (isset($_POST['id_user'])) {
                 </div>
             </div>
             
-            <input type='hidden' name='id' value='<?php echo $user->getId() ?>'>
+            <input type='hidden' name='id_user' value='<?php echo $user->getId() ?>'>
             <input type='hidden' name='password' value='<?php echo $user->getPassword() ?>'>
             <input type='hidden' name='actualizar' value='actualizar'>
         </div>
