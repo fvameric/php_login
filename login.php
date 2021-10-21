@@ -8,15 +8,21 @@ $nickname = $_POST['nickname'];
 $password = $_POST['password'];
 
 $crudUser = new CrudUser();
-$userId = $crudUser->validarLogin($nickname, $password);
 
-?>
-<?php if (is_null($userId) || empty($userId)) { ?>
-    <link rel="stylesheet" href="styles.css">
-    <div class="loginError">
-        Nombre o contraseña incorrectos.
-        <form action='login.html'>
-            <button type='submit' value='Atrás'>Volver atrás</button>
-        </form>
-    </div>
-<?php } ?>
+if ($nickname != "" && $password != "") {
+    $userId = $crudUser->validarLogin($nickname, $password);
+
+    if (is_null($userId) || empty($userId)) {
+        echo 'Nombre o contraseña incorrectos.';
+
+        echo "<form action='login.html'>";
+            echo "<button type='submit' value='Atrás'>Volver atrás</button>";
+        echo "</form>";
+    }
+} else {
+    echo "Nombre o contraseña vacios";
+
+    echo "<form action='login.html'>";
+        echo "<button type='submit' value='Atrás'>Volver atrás</button>";
+    echo "</form>";
+}

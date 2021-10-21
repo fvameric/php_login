@@ -2,15 +2,12 @@
     include('db.php');
 
     $id = $_GET['id'];
-    include_once 'selectID.php';
     
     require_once('crud_users.php');
     require_once('user.php');
 
     $crudUser = new CrudUser();
-    $user = new User();
-
-    $listaUsers = $crudUser->mostrar();
+    $filaUser = $crudUser->obtenerUser($id);
 ?>
     
 <!DOCTYPE html>

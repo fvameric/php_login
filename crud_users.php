@@ -30,14 +30,72 @@
 
             $sql="SELECT * FROM `users` WHERE nickname = '".$username."' AND password='".$password."'";
             $consulta = mysqli_query($con,$sql);
-            
-            if ($consulta) {
-                $fila = $consulta->fetch_assoc();
+            $fila = $consulta->fetch_assoc();
+            if ($username == $fila['nickname'] && $password == $fila['password']) {
                 if ($fila['admin'] == 1) {
                     header("Location: profileAdmin.php?id=".$fila['id']);
                 } else {
                     header("Location: profile.php?id=".$fila['id']);
                 }
+            } else {
+                return null;
+            }
+        }
+
+        public function emailExiste($email) {
+            include 'db.php';
+            $sql="SELECT * FROM `users` WHERE email='".$email."'";
+            $consultaEmail = mysqli_query($con,$sql);
+            $fila = $consultaEmail->fetch_assoc();
+            if ($email == $fila['email']) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function nicknameExiste($nickname) {
+            include 'db.php';
+            $sql="SELECT * FROM `users` WHERE nickname='".$nickname."'";
+            $consultaNickname = mysqli_query($con,$sql);
+            $fila = $consultaNickname->fetch_assoc();
+            if ($nickname == $fila['nickname']) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function convertirBase64($targetFilePath) {
+            $imageData = base64_encode(file_get_contents($targetFilePath));
+            return 'data:'.$fileType.';base64,' . $imageData;
+        }
+
+        public function validarRegistro($nickname, $email, $avatar) {
+            if ($this->emailExiste($email)) {
+                return "<br>El email ya está en uso<br>";
+            }
+            if ($this->nicknameExiste($nickname)) {
+                return "<br>Este nombre de usuario ya está en uso<br>";
+            }
+
+            echo 'avatar: '.$avatar;
+            if ($avatar != 'jpg' || $avatar != 'png' || $avatar != 'gif') {
+                return "<br>No es una imagen<br>";
+            }             
+        }
+
+        public function agregarUser($username, $password, $email, $avatar) {
+            include 'db.php';
+
+            $str = "";
+
+            if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath))
+            {
+                $src = convertirBase64($targetFilePath);
+
+                $sql = 'INSERT INTO `usuarios`.`users` (`id` ,`nickname` ,`password`, `email`, `avatar`, `admin`)VALUES (NULL , "'.$nickname.'", "'.$password.'", "'.$email.'", "'.$src.'",0)';
+                return $consulta = mysqli_query($con,$sql);
             } else {
                 return null;
             }
@@ -51,10 +109,9 @@
 
         public function modificarUsuario($userModif){
             include 'db.php';
-
         }
 
-        public function obtenerUser($id){
+        public function obtenerUser($id) {
             include 'db.php';
 
             $sqlUserId="SELECT * FROM `users` WHERE id = '".$id."'";

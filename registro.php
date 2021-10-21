@@ -1,58 +1,30 @@
 <?php
     include('db.php');
     
-    $targetDir = "uploads/";
-    $filename = $_FILES["file"]["name"];
-    $targetFilePath = $targetDir . $filename;
-    $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+    require('crud_users.php');
+    require('user.php');
+
+    $crudUser = new CrudUser();
+    $user = new User();
 
     $nickname = $_POST['nickname'];
     $password = $_POST['password'];
     $email = $_POST['email'];
 
-    if(isset($_POST["submit"])){
-        if($fileType == 'jpg' || $fileType == 'png' || $fileType == 'gif')
-        {
-            if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
-                $imageData = base64_encode(file_get_contents($targetFilePath));
-                $src = 'data:'.$fileType.';base64,' . $imageData;
-    
-                $sql='SELECT * FROM `users` WHERE 1';
-                $consultaUsersExistentes = mysqli_query($con,$sql);
-    
-                $userExiste = false;
-                if (trim($nickname) != "" && trim($password) != "") {
-                    while($fila=$consultaUsersExistentes->fetch_assoc()) {
-                        if ($nickname == $fila['nickname'] AND $password == $fila['password']) {
-                            $userExiste = true;
-                        }
-                    }
-                } else {
-                    die('El nombre o contraseña están vacíos');
-                }
-    
-                if (!$userExiste) {
-                    $sql = 'INSERT INTO `usuarios`.`users` (`id` ,`nickname` ,`password`, `email`, `avatar`, `admin`)VALUES (NULL , "'.$nickname.'", "'.$password.'", "'.$email.'", "'.$src.'",0)';
-                    $consulta = mysqli_query($con,$sql);
-    
-                    if (!$consulta) {
-                        die('<br>No se ha podido realizar el insert');
-                    } else {
-                        echo '<br>Se realizó el insert';
-                    }
-                } else {
-                    echo 'El usuario ya existe';
-                    echo '<button >Volver atrás</button>';
-    
-                    echo "<form action='index.html'>";
-                        echo "<button type='submit' value='Login'>Volver atrás</button>";
-                    echo "</form>";
-                }
-            } else {
-              echo 'No se pudo mover a la carpeta uploads';
+    $targetDir = "uploads/";
+    $filename = $_FILES["file"]["name"];
+    $targetFilePath = $targetDir . $filename;
+    $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+
+    if(isset($_POST['submit']))
+    {
+        $validacion = $crudUser->validarRegistro($nickname, $email, $fileType);
+        if ($validacion == "") {
+            if ($crudUser->agregarUser($nickname, $password, $email, $fileType) != NULL) {
+                echo 'Se registró correctamente.';
             }
         } else {
-            echo "No es una imagen.";
+            echo $validacion;
         }
     }
 ?>
@@ -67,7 +39,7 @@
     <link rel="stylesheet" href="styles.css">
     </head>
         <body>
-            <form action="login.html">
+            <form action="index.html">
                 <input type="submit" value="Volver atrás" />
             </form>
         </body>
