@@ -39,8 +39,7 @@
     <link rel="stylesheet" href="styles.css">
     </head>
         <body>
-            <form action="index.html">
-                <input type="submit" value="Volver atrás" />
-            </form>
+            <a href="javascript:history.go(-1)">Volver atrás</a>
+            <!--<form action="index.html"><input type="submit" value="Volver atrás" /></form>-->
         </body>
 </html>

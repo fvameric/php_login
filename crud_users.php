@@ -90,8 +90,6 @@
         public function agregarUser($nickname, $password, $email, $avatar) {
             include 'db.php';
 
-            $str = "";
-
             $targetDir = "uploads/";
             $filename = $_FILES["file"]["name"];
             $targetFilePath = $targetDir . $filename;

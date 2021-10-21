@@ -39,14 +39,20 @@
             </form>
         </div>
     </div>
-</body>
-
 
 <?php if ($user->getAdmin() == 1) { ?>
     <hr>
     <div class="eresAdmin">
         <h3>Eres admin, puedes ver el resto de usuarios:</h3>
     </div>
+
+    <div class="lista-usuarios-crear">
+        <form method="POST" action="crearUsuario.php">
+            <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
+            <input type="submit" name="crear" id="crear" value="Crear usuario"/>
+        </form>
+    </div>
+
     <div class="scroll-usuarios">
         <?php foreach($listaUsers as $usuario) { ?>
             <div class="lista-usuarios">
@@ -81,11 +87,5 @@
         <?php } ?>
     </div>
 <?php } ?>
-
-<div class="lista-usuarios-crear">
-    <form method="POST" action="crear_users.php">
-        <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
-        <input type="submit" name="crear" id="crear" value="Crear usuario"/>
-    </form>
-</div>
+</body>
 </html>

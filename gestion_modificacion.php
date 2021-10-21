@@ -15,9 +15,11 @@ $crud = new CrudUser();
 $userModif = new User();
 $userModif = $crud->obtenerUser($id_user);
 
-$filename = $_FILES["file"]["name"];
-
 //$targetDir = "uploads/";
+
+$targetDir = "uploads/";
+$filename = $_FILES["file"]["name"];
+$targetFilePath = $targetDir . $filename;
 
 if (isset($_POST['aceptarmodif'])) {
     if ($filename == "") {
@@ -25,12 +27,19 @@ if (isset($_POST['aceptarmodif'])) {
         $userModif->setNickname($nickname);
         $userModif->setEmail($email);
         $crud->modificarUsuario($userModif, $id_user);
+        echo 'Se modificó el usuario';
     } else {
+        if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
+            $src = $crud->convertirBase64($targetFilePath);
+        } else {
+            echo 'No se pudo mover la imagen';
+        }
         $userModif->setId($id_user);
         $userModif->setNickname($nickname);
         $userModif->setEmail($email);
-        $userModif->setAvatar($_FILES["file"]["name"]);
+        $userModif->setAvatar($src);
         $crud->modificarUsuario($userModif, $id_user);
+        echo 'Se modificó el usuario';
     }
 }
 //header("Location: profileAdmin.php?id=".$id_admin);
