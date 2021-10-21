@@ -113,9 +113,11 @@
             $consulta = mysqli_query($con,$sqlDelete);
         }
 
-        public function modificarUsuario($userModif){
+        public function modificarUsuario($userModif, $id_admin){
             include 'db.php';
-            $sqlUpdate="UPDATE `users` SET id=NULL, nickname='".$userModif->getNickname()."', password='".$userModif->getPassword()."', email='".$userModif->getEmail()."', avatar='".$userModif->getAvatar()."' WHERE id=".$id;
+            $id_user = $userModif->getId();
+            
+            //$sqlUpdate="UPDATE `users` SET id=NULL, nickname='".$userModif->getNickname()."', password='".$userModif->getPassword()."', email='".$userModif->getEmail()."', avatar='".$userModif->getAvatar()."' WHERE id=".$id_user;
         }
 
         public function obtenerUser($id) {

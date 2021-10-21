@@ -4,46 +4,35 @@ require_once('user.php');
 
 include 'modificar_users.php';
 
-$id = $_POST['id'];
+$id_admin = $_POST['id_admin'];
+
+$id_user = $_POST['id_user'];
 $nickname = $_POST['nickname'];
 $password = $_POST['password'];
 $email = $_POST['email'];
-$avatar = $_POST['avatar'];
-
-echo 'id: '.$id;
-echo '<br>';
-echo 'nickname: '.$nickname;
-echo '<br>';
-echo 'password: '.$password;
-echo '<br>';
-echo 'email: '.$email;
-echo '<br>';
-echo 'avatar: '.$avatar;
-
 
 $crud = new CrudUser();
 $userModif = new User();
-$userModif = $crud->obtenerUser($id);
+$userModif = $crud->obtenerUser($id_user);
+
+$filename = $_FILES["file"]["name"];
 
 //$targetDir = "uploads/";
 
-/*
-if (empty($_FILES["file"]["name"])) {
-    
-    
-    $userModif->setNickname($nickname);
-    $userModif->setEmail($email);
-    $crud->modificarUsuario($userModif);
-    
-    //header("Location: profileAdmin.php?id=".$_POST['id_admin']);
-} else {
-    
-    $userModif->setNickname($nickname);
-    $userModif->setEmail($email);
-    $userModif->setAvatar($_FILES["file"]["name"]);
-    $crud->modificarUsuario($userModif);
-    
-    //header("Location: profileAdmin.php?id=".$_POST['id_admin']);
+if (isset($_POST['aceptarmodif'])) {
+    if ($filename == "") {
+        $userModif->setId($id_user);
+        $userModif->setNickname($nickname);
+        $userModif->setEmail($email);
+        $crud->modificarUsuario($userModif, $id_admin);
+        header("Location: profileAdmin.php?id=".$id_admin);
+    } else {
+        echo 'entra2';
+        $userModif->setId($id_user);
+        $userModif->setNickname($nickname);
+        $userModif->setEmail($email);
+        $userModif->setAvatar($_FILES["file"]["name"]);
+        $crud->modificarUsuario($userModif, $id_admin);
+    }
 }
-*/
 ?>
