@@ -40,7 +40,7 @@
         </div>
     </div>
 </body>
-</html>
+
 
 <?php if ($user->getAdmin() == 1) { ?>
     <hr>
@@ -82,3 +82,10 @@
     </div>
 <?php } ?>
 
+<div class="lista-usuarios-crear">
+    <form method="POST" action="crear_users.php">
+        <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
+        <input type="submit" name="crear" id="crear" value="Crear usuario"/>
+    </form>
+</div>
+</html>
