@@ -25,13 +25,13 @@
             return $listaUsers;
         }
 
-        public function validarLogin($username, $password) {
+        public function validarLogin($nickname, $password) {
             include 'db.php';
 
-            $sql="SELECT * FROM `users` WHERE nickname = '".$username."' AND password='".$password."'";
+            $sql="SELECT * FROM `users` WHERE nickname = '".$nickname."' AND password='".$password."'";
             $consulta = mysqli_query($con,$sql);
             $fila = $consulta->fetch_assoc();
-            if ($username == $fila['nickname'] && $password == $fila['password']) {
+            if ($nickname == $fila['nickname'] && $password == $fila['password']) {
                 if ($fila['admin'] == 1) {
                     header("Location: profileAdmin.php?id=".$fila['id']);
                 } else {
@@ -67,8 +67,15 @@
         }
 
         public function convertirBase64($targetFilePath) {
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
             $imageData = base64_encode(file_get_contents($targetFilePath));
-            return 'data:'.$fileType.';base64,' . $imageData;
+
+            if ($fileType == 'jpg' || $fileType == 'png' || $fileType == 'gif') {
+                return 'data:'.$fileType.';base64,' . $imageData;
+            } else {
+                return "<br>No es una imagen<br>";
+            }
+            
         }
 
         public function validarRegistro($nickname, $email, $avatar) {
@@ -77,24 +84,23 @@
             }
             if ($this->nicknameExiste($nickname)) {
                 return "<br>Este nombre de usuario ya está en uso<br>";
-            }
-
-            echo 'avatar: '.$avatar;
-            if ($avatar != 'jpg' || $avatar != 'png' || $avatar != 'gif') {
-                return "<br>No es una imagen<br>";
-            }             
+            }          
         }
 
-        public function agregarUser($username, $password, $email, $avatar) {
+        public function agregarUser($nickname, $password, $email, $avatar) {
             include 'db.php';
 
             $str = "";
 
+            $targetDir = "uploads/";
+            $filename = $_FILES["file"]["name"];
+            $targetFilePath = $targetDir . $filename;
+
             if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath))
             {
-                $src = convertirBase64($targetFilePath);
+                $src = $this->convertirBase64($targetFilePath);
 
-                $sql = 'INSERT INTO `usuarios`.`users` (`id` ,`nickname` ,`password`, `email`, `avatar`, `admin`)VALUES (NULL , "'.$nickname.'", "'.$password.'", "'.$email.'", "'.$src.'",0)';
+                $sql = 'INSERT INTO `users` (`id` ,`nickname` ,`password`, `email`, `avatar`, `admin`)VALUES (NULL , "'.$nickname.'", "'.$password.'", "'.$email.'", "'.$src.'",0)';
                 return $consulta = mysqli_query($con,$sql);
             } else {
                 return null;

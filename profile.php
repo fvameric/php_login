@@ -22,14 +22,14 @@
 <body>
     <div class='user-header'>
         <div class='avatar'>
-            <img src=<?php echo $filaUser['avatar']; ?>>
+            <img src=<?php echo $filaUser->getAvatar(); ?>>
         </div>
         <div class='user-header-content'>
             <div class='nombre'>
-                <?php echo $filaUser['nickname']; ?>
+                <?php echo $filaUser->getNickname(); ?>
             </div>
             <div class='email'>
-                <?php echo $filaUser['email']; ?>
+                <?php echo $filaUser->getEmail(); ?>
             </div>
             <form method="post" action="login.html" class="btn-cerrar-sesion">
                 <button type="submit">Cerrar sesión</button>

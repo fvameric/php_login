@@ -10,6 +10,7 @@ $password = $_POST['password'];
 $email = $_POST['email'];
 $avatar = $_POST['avatar'];
 
+
 echo 'id: '.$id;
 echo '<br>';
 echo 'nickname: '.$nickname;
@@ -22,6 +23,24 @@ echo 'avatar: '.$avatar;
 
 $crud = new CrudUser();
 $userModif = new User();
+$userModif = $userModif->obtenerUser($id);
+
+$targetDir = "uploads/";
+if (empty($_FILES["file"]["name"])) {
+    echo 'se utilizara la antigua';
+    echo $userModif->getAvatar();
+    /*
+    $filename = $_FILES["file"]["name"];
+    $targetFilePath = $targetDir . $filename;
+    $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+    */
+} else {
+    echo 'se buscó imagen';
+    echo $_FILES["file"]["name"];
+}
+
+
+
 
 /*
 if (isset($_POST['id_user'])) {
