@@ -1,6 +1,6 @@
 <?php
 require_once('crud_users.php');
-require_once('user.php');
+require_once('/clases/user.php');
 
 $crud = new CrudUser();
 $user = new User();

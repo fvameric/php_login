@@ -1,10 +1,10 @@
 <?php
-    include('db.php');
+    include '/conexion/db.php';
     
     $id = $_GET['id'];
 
-    require_once('crud_users.php');
-    require_once('user.php');
+    require_once('/crud_users/crud_users.php');
+    require_once('/clases/user.php');
 
     $crudUser = new CrudUser();
     $user = new User();
@@ -47,7 +47,7 @@
     </div>
 
     <div class="lista-usuarios-crear">
-        <form method="POST" action="crearUsuario.php">
+        <form method="POST" action="/crud_users/pagina_creacion.php">
             <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
             <input type="submit" name="crear" id="crear" value="Crear usuario"/>
         </form>
@@ -69,14 +69,14 @@
                 </div>
                 <div class="lista-usuarios-crud">
                     <div class="lista-usuarios-modificar">
-                        <form method="POST" action="modificar_users.php">
+                        <form method="POST" action="/crud_users/pagina_modificacion.php">
                             <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
                             <input type="hidden" name="id_user" value="<?php echo $usuario->getId() ?>"/>
                             <input type="submit" id="modificar" value="Modificar"/>
                         </form>
                     </div>
                     <div class="lista-usuarios-eliminar">
-                        <form method="POST" action="eliminar_users.php">
+                        <form method="POST" action="/crud_users/gestion_eliminacion.php">
                             <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
                             <input type="hidden" name="id_user" value="<?php echo $usuario->getId() ?>"/>
                             <input type="submit" id="eliminar" value="Eliminar"/>

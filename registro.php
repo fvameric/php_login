@@ -1,8 +1,8 @@
 <?php
-    include('db.php');
+    include('/conexion/db.php');
     
-    require('crud_users.php');
-    require('user.php');
+    require('/crud_users/crud_users.php');
+    require('/clases/user.php');
 
     $crudUser = new CrudUser();
     $user = new User();

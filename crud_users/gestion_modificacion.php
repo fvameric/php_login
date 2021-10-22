@@ -1,8 +1,8 @@
 <?php
 require_once('crud_users.php');
-require_once('user.php');
+require_once('../clases/user.php');
 
-require_once 'modificar_users.php';
+require_once 'pagina_modificacion.php';
 
 $id_admin = $_POST['id_admin'];
 
@@ -17,7 +17,7 @@ $userModif = $crud->obtenerUser($id_user);
 
 //$targetDir = "uploads/";
 
-$targetDir = "uploads/";
+$targetDir = "../uploads/";
 $filename = $_FILES["file"]["name"];
 $targetFilePath = $targetDir . $filename;
 

@@ -1,6 +1,6 @@
 <?php
 require_once('crud_users.php');
-require_once('user.php');
+require_once('../clases/user.php');
 
 $crud = new CrudUser();
 $user = new User();
@@ -19,10 +19,10 @@ if (isset($_POST['id_user'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar usuario</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <form action='gestion_modificacion.php' method='POST' enctype="multipart/form-data">
+    <form action='/crud_users/gestion_modificacion.php' method='POST' enctype="multipart/form-data">
         <div class='modificar-user'>
             <div class='modificar-avatar'>
                 <img src=<?php echo $user->getAvatar() ?>>
@@ -45,7 +45,7 @@ if (isset($_POST['id_user'])) {
         </div>
         <div class='aceptar-modificaciones'>
             <input type='submit' name="aceptarmodif" value='Aceptar modificaciones'>
-            <a href="profileAdmin.php?id=<?php echo $id ?>">Volver atrás</a>
+            <a href="../profileAdmin.php?id=<?php echo $id ?>">Volver atrás</a>
         </div>
     </form>
 </body>
