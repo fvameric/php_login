@@ -15,8 +15,6 @@ $crud = new CrudUser();
 $userModif = new User();
 $userModif = $crud->obtenerUser($id_user);
 
-//$targetDir = "uploads/";
-
 $targetDir = "../uploads/";
 $filename = $_FILES["file"]["name"];
 $targetFilePath = $targetDir . $filename;
@@ -42,5 +40,4 @@ if (isset($_POST['aceptarmodif'])) {
         echo 'Se modificó el usuario';
     }
 }
-//header("Location: profileAdmin.php?id=".$id_admin);
 ?>

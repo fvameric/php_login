@@ -1,15 +1,17 @@
 <?php
-    include('/conexion/db.php');
+    include('db.php');
     
-    require('/crud_users/crud_users.php');
-    require('/clases/user.php');
+    require('crud_plantas.php');
+    require('../clases/planta.php');
 
-    $crudUser = new CrudUser();
-    $user = new User();
+    $crudPlanta= new CrudPlanta();
+    $planta = new Planta();
 
-    $nickname = $_POST['nickname'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
+    $nombre = $_POST['nombre'];
+    $descripcion = $_POST['descripcion'];
+    $precio = $_POST['precio'];
+    $stock = $_POST['stock'];
+    $compradas = $_POST['compradas'];
 
     $targetDir = "uploads/";
     $filename = $_FILES["file"]["name"];
@@ -18,14 +20,21 @@
 
     if(isset($_POST['submit']))
     {
+        if ($crudPlanta->agregarPlanta($nombre, $descripcion, $precio, $stock, $compradas) != NULL) {
+            echo 'Se registró correctamente.';
+        }
+
+        /*
         $validacion = $crudUser->validarRegistro($nickname, $email, $fileType);
         if ($validacion == "") {
             if ($crudUser->agregarUser($nickname, $password, $email, $fileType) != NULL) {
                 echo 'Se registró correctamente.';
             }
+            
         } else {
             echo $validacion;
         }
+        */
     }
 ?>
 
@@ -40,6 +49,5 @@
     </head>
         <body>
             <a href="javascript:history.go(-1)">Volver atrás</a>
-            <!--<form action="registro.html"><input type="submit" value="Volver atrás" /></form>-->
         </body>
 </html>

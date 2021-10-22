@@ -35,7 +35,7 @@ if (isset($_POST['id_user'])) {
                 </div>
                 <div class='modificar-content-email'>
                     <label>Email:</label>
-                    <input type="text" name="email" value="<?php echo $user->getEmail() ?>">
+                    <input type="email" name="email" value="<?php echo $user->getEmail() ?>">
                 </div>
             </div>
             <input type='hidden' name='id_admin' value='<?php echo $id ?>'>

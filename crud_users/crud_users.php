@@ -2,7 +2,6 @@
     class CrudUser {
         public function __construc(){}
 
-        // mostrará solo usuarios no admin
         public function mostrar() {
             include 'db.php';
 
@@ -86,10 +85,10 @@
             }          
         }
 
-        public function agregarUser($nickname, $password, $email, $avatar) {
+        public function agregarUser($nickname, $password, $email) {
             include 'db.php';
 
-            $targetDir = "uploads/";
+            $targetDir = "../uploads/";
             $filename = $_FILES["file"]["name"];
             $targetFilePath = $targetDir . $filename;
 
@@ -114,6 +113,12 @@
             include 'db.php';
             $sqlUpdate="UPDATE `users` SET id=".$id_user.", nickname='".$userModif->getNickname()."', password='".$userModif->getPassword()."', email='".$userModif->getEmail()."', avatar='".$userModif->getAvatar()."' WHERE id=".$id_user;
             $consultaUpdate = mysqli_query($con, $sqlUpdate);
+
+            if(!$consultaUpdate) {
+                echo 'no se realizó la consulta';
+            } else {
+                echo 'se realizó la consulta';
+            }
         }
 
         public function obtenerUser($id) {
@@ -123,14 +128,14 @@
             $consultaUser = mysqli_query($con, $sqlUserId);
             $fila = $consultaUser->fetch_assoc();
             
-            $newUser = new User();
-            $newUser->setId($fila['id']);
-            $newUser->setNickname($fila['nickname']);
-            $newUser->setPassword($fila['password']);
-            $newUser->setEmail($fila['email']);
-            $newUser->setAvatar($fila['avatar']);
-            $newUser->setAdmin($fila['admin']);
-            return $newUser;
+            $user = new User();
+            $user->setId($fila['id']);
+            $user->setNickname($fila['nickname']);
+            $user->setPassword($fila['password']);
+            $user->setEmail($fila['email']);
+            $user->setAvatar($fila['avatar']);
+            $user->setAdmin($fila['admin']);
+            return $user;
         }
     }
 ?>

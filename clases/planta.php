@@ -9,7 +9,7 @@
         private $compradas;
 
         function __construct(){}
-        
+
         // get set id
         public function getId(){
             return $this->id;
