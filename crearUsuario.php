@@ -27,7 +27,7 @@ $id_admin = $_POST['id_admin'];
         <label>Contraseña</label>
         <input type="password" id="password" name="password"><br><br>
         
-        <button type="submit" name="submit" value="Registrarse">Registrarse</button>
+        <button type="submit" name="submit" value="Registrarse">Registrar</button>
     </form>
     <br>
     <a href="profileAdmin.php?id=<?php echo $id_admin ?>">Volver atrás</a>

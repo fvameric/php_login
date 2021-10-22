@@ -75,7 +75,6 @@
             } else {
                 return "<br>No es una imagen<br>";
             }
-            
         }
 
         public function validarRegistro($nickname, $email, $avatar) {
