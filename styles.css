@@ -27,6 +27,25 @@ button:focus{
 
 .user-header {
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+    
+    background-color: rgba(211, 211, 211, 0.7);
+    backdrop-filter: brightness(100%) blur(3px);
+    border-bottom: 1px solid black;
+}
+
+.user-header-logo {
+    margin-left: 50px; 
+}
+
+.user-header-userinfo {
+    display: flex;
+    margin-left: auto; 
+    margin-right: 0;
 }
 
 .user-header img {
@@ -65,6 +84,12 @@ button:focus{
     margin: 10px 0 0 0;
 }
 
+/* div para espaciar */
+
+.espacio {
+    height: 80px;
+}
+
 /* Lista de usuarios administradores */
 
 .scroll-usuarios{
@@ -72,6 +97,7 @@ button:focus{
 	overflow-x: hidden;
 	overflow-y: scroll;
     width: 430px;
+    margin: 0 0 0 10px;
 }
 
 .lista-usuarios {
@@ -139,6 +165,7 @@ button:focus{
 
 .eresAdmin {
     width: 400px;
+    margin: 0 0 0 10px;
 }
 
 .lista-usuarios-crear input {
@@ -148,7 +175,7 @@ button:focus{
     color: white;
     cursor: pointer;
     padding: 5px 10px;
-    margin-bottom: 10px;
+    margin: 0 0 10px 10px;
 }
 
 .lista-usuarios-crear input:hover {
@@ -203,14 +230,14 @@ button:focus{
     flex-wrap: wrap;
 }
 .lista-plantas-crear input {
-    margin-top: 50px;
+    margin: 20px 0 0 10px;
     background-color: black;
     border-radius: 5px;
     border: 0px;
     color: white;
     cursor: pointer;
     padding: 5px 10px;
-    margin-bottom: 10px;
+
 }
 
 .lista-plantas-crear input:hover {
@@ -241,13 +268,28 @@ button:focus{
 .lista-plantas-content {
     height: 100px;
     border-top: 1px solid black;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.lista-plantas-fotos {
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
 }
 
 .lista-plantas-fotos img {
     height: 200px;
-    max-width: 100%;
+    width: 100%;
     vertical-align: middle;
+    transition: transform 1s; /* Animation */
+
+}
+
+.lista-plantas-fotos:hover img {
+    position: relative;
+    transform: scale(1.5);
 }
 
 .lista-plantas-nombre {
@@ -291,14 +333,16 @@ button:focus{
     flex: 1 1 auto;
     border-right: 1px solid black;
     background: rgba(255, 255, 255, 0);
-    -webkit-transition: background .5s ease-out;
-    -moz-transition: background .5s ease-out;
-    -o-transition: background .5s ease-out;
-    transition: background .5s ease-out;
+    -webkit-transition: background .3s ease-out, box-shadow .3s ease-out;
+    -moz-transition: background .3s ease-out, box-shadow .3s ease-out;
+    -o-transition: background .3s ease-out, box-shadow .3s ease-out;
+    transition: background .3s ease-out, box-shadow .3s ease-out;
 }
 
 .lista-plantas-modificar:hover {
     background: rgba(0, 0, 0, 0.719);
+    -webkit-box-shadow: 0px 0px 25px -1px #000000; 
+    box-shadow: 0px 0px 25px -1px #000000;
 }
 
 .lista-plantas-modificar #modificar {
@@ -313,14 +357,16 @@ button:focus{
 .lista-plantas-eliminar {
     flex: 1 1 auto;
     background: rgba(255, 255, 255, 0);
-    -webkit-transition: background .5s ease-out;
-    -moz-transition: background .5s ease-out;
-    -o-transition: background .5s ease-out;
-    transition: background .5s ease-out;
+    -webkit-transition: background .3s ease-out, box-shadow .3s ease-out;
+    -moz-transition: background .3s ease-out, box-shadow .3s ease-out;
+    -o-transition: background .3s ease-out, box-shadow .3s ease-out;
+    transition: background .3s ease-out, box-shadow .3s ease-out;
 }
 
 .lista-plantas-eliminar:hover {
     background: rgba(255, 55, 55, 0.973);
+    -webkit-box-shadow: 0px 0px 25px -1px #FF0000; 
+    box-shadow: 0px 0px 25px -1px #FF0000;
 }
 
 .lista-plantas-eliminar #eliminar {
@@ -336,14 +382,16 @@ button:focus{
     border-top: 1px solid black;
     text-align: center;
     background: rgba(255, 255, 255, 0);
-    -webkit-transition: background .5s ease-out;
-    -moz-transition: background .5s ease-out;
-    -o-transition: background .5s ease-out;
-    transition: background .5s ease-out;
+    -webkit-transition: background .3s ease-out, box-shadow .3s ease-out;
+    -moz-transition: background .3s ease-out, box-shadow .3s ease-out;
+    -o-transition: background .3s ease-out, box-shadow .3s ease-out;
+    transition: background .3s ease-out, box-shadow .3s ease-out;
 }
 
 .ver-detalles-planta:hover {
     background: rgba(126, 170, 44, 0.897);
+    -webkit-box-shadow: 0px -5px 25px -1px #91B52D; 
+    box-shadow: 0px -5px 25px -1px #91B52D;
     
 }
 
@@ -354,7 +402,6 @@ button:focus{
     cursor: pointer;
     max-width: 100%;
     background: transparent; 
-
     -webkit-transition: color .2s; /* For Safari 3.0 to 6.0 */
     transition: color .2s; /* For modern browsers */
 }

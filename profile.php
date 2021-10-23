@@ -33,47 +33,54 @@
 </head>
 <body>
     <div class='user-header'>
-        <div class='avatar'>
-            <img src=<?php echo $user->getAvatar(); ?>>
+        <div class='user-header-logo'>
+            <img src="images/logo.png"></img>
         </div>
-        <div class='user-header-content'>
-            <div class='nombre'>
-                <?php echo $user->getNickname(); ?>
+        <div class='user-header-userinfo'>
+            <div class='avatar'>
+                <img src=<?php echo $user->getAvatar(); ?>>
             </div>
-            <div class='email'>
-                <?php echo $user->getEmail(); ?>
+            <div class='user-header-content'>
+                <div class='nombre'>
+                    <?php echo $user->getNickname(); ?>
+                </div>
+                <div class='email'>
+                    <?php echo $user->getEmail(); ?>
+                </div>
+                <form method="post" action="login.html" class="btn-cerrar-sesion">
+                    <button type="submit">Cerrar sesión</button>
+                </form>
             </div>
-            <form method="post" action="login.html" class="btn-cerrar-sesion">
-                <button type="submit">Cerrar sesión</button>
-            </form>
         </div>
     </div>
-    <hr>
+    <div class="espacio">
+    </div>
+
     <div class="scroll-plantas">
-    <?php foreach($listaPlantas as $plantas) { ?>
-        <div class="lista-plantas">
-            <div class="carta">
-                <div class="lista-plantas-fotos">
-                    <img src=<?php echo $plantas->getFoto() ?> class="lista-fotos">
-                </div>
-                <div class="lista-plantas-content">
-                    <div class="lista-plantas-nombre">
-                        <?php echo $plantas->getNombre() ?>
+        <?php foreach($listaPlantas as $plantas) { ?>
+            <div class="lista-plantas">
+                <div class="carta">
+                    <div class="lista-plantas-fotos">
+                        <img src=<?php echo $plantas->getFoto() ?> class="lista-fotos">
                     </div>
-                    <div class="lista-plantas-precio">
-                        <?php echo $plantas->getPrecio() ?> €
+                    <div class="lista-plantas-content">
+                        <div class="lista-plantas-nombre">
+                            <?php echo $plantas->getNombre() ?>
+                        </div>
+                        <div class="lista-plantas-precio">
+                            <?php echo $plantas->getPrecio() ?> €
+                        </div>
                     </div>
-                </div>
-                <div class="ver-detalles-planta">
-                    <form method="POST" action="">
-                        <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
-                        <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                        <input type="submit" id="detalles" value="Ver detalle"/>
-                    </form>
+                    <div class="ver-detalles-planta">
+                        <form method="POST" action="">
+                            <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
+                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
+                            <input type="submit" id="detalles" value="Ver detalle"/>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    <?php } ?>
-</div>
+        <?php } ?>
+    </div>
 </body>
 </html>
