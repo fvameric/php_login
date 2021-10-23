@@ -145,6 +145,6 @@
             </div>
         </div>
     <?php } ?>
-    </div>
+</div>
 </body>
 </html>

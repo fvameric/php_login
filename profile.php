@@ -48,40 +48,32 @@
             </form>
         </div>
     </div>
-
+    <hr>
+    <div class="scroll-plantas">
     <?php foreach($listaPlantas as $plantas) { ?>
         <div class="lista-plantas">
-            <div class="lista-plantas-fotos">
-                <img src=<?php echo $plantas->getFoto() ?> class="lista-fotos">
-            </div>
-            <div class="lista-plantas-content">
-                <div class="lista-usuarios-nombre">
-                    <?php echo $plantas->getNombre() ?>
+            <div class="carta">
+                <div class="lista-plantas-fotos">
+                    <img src=<?php echo $plantas->getFoto() ?> class="lista-fotos">
                 </div>
-                <div class="lista-usuarios-precio">
-                    <?php echo $plantas->getPrecio() ?> €
+                <div class="lista-plantas-content">
+                    <div class="lista-plantas-nombre">
+                        <?php echo $plantas->getNombre() ?>
+                    </div>
+                    <div class="lista-plantas-precio">
+                        <?php echo $plantas->getPrecio() ?> €
+                    </div>
                 </div>
-                <div class="lista-plantas-descripcion">
-                    <?php echo $plantas->getDescripcion(); ?>
-                </div>
-            </div>
-            <div class="lista-plantas-crud">
-                <div class="lista-usuarios-modificar">
-                    <form method="POST" action="/crud_plantas/pagina_modificacion.php">
+                <div class="ver-detalles-planta">
+                    <form method="POST" action="">
                         <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
                         <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                        <input type="submit" id="modificar" value="Modificar"/>
-                    </form>
-                </div>
-                <div class="lista-plantas-eliminar">
-                    <form method="POST" action="/crud_plantas/gestion_eliminacion.php">
-                        <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
-                        <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                        <input type="submit" id="eliminar" value="Eliminar"/>
+                        <input type="submit" id="detalles" value="Ver detalle"/>
                     </form>
                 </div>
             </div>
         </div>
     <?php } ?>
+</div>
 </body>
 </html>

@@ -200,6 +200,7 @@ button:focus{
 
 .scroll-plantas {
     display: flex;
+    flex-wrap: wrap;
 }
 .lista-plantas-crear input {
     margin-top: 50px;
