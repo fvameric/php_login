@@ -240,11 +240,11 @@ button:focus{
 .lista-plantas-content {
     height: 100px;
     border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    
 }
 
 .lista-plantas-fotos img {
-    height: auto;
+    height: 200px;
     max-width: 100%;
     vertical-align: middle;
 }
@@ -274,6 +274,7 @@ button:focus{
     display: flex;
     justify-content: space-between;
     text-align: center;
+    border-top: 1px solid black;
 }
 
 .lista-plantas-crud input {
@@ -328,4 +329,35 @@ button:focus{
 
 .lista-plantas-eliminar:hover #eliminar {
     color:rgb(255, 255, 255);
+}
+
+.ver-detalles-planta {
+    border-top: 1px solid black;
+    text-align: center;
+    background: rgba(255, 255, 255, 0);
+    -webkit-transition: background .5s ease-out;
+    -moz-transition: background .5s ease-out;
+    -o-transition: background .5s ease-out;
+    transition: background .5s ease-out;
+}
+
+.ver-detalles-planta:hover {
+    background: rgba(126, 170, 44, 0.897);
+    
+}
+
+.ver-detalles-planta input {
+    margin: 10px;
+    border: 0px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    max-width: 100%;
+    background: transparent; 
+
+    -webkit-transition: color .2s; /* For Safari 3.0 to 6.0 */
+    transition: color .2s; /* For modern browsers */
+}
+
+.ver-detalles-planta:hover input {
+    color: rgb(255, 255, 255);
 }

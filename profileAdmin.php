@@ -135,6 +135,13 @@
                         </form>
                     </div>
                 </div>
+                <div class="ver-detalles-planta">
+                    <form method="POST" action="">
+                        <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
+                        <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
+                        <input type="submit" id="detalles" value="Ver detalle"/>
+                    </form>
+                </div>
             </div>
         </div>
     <?php } ?>
