@@ -29,13 +29,9 @@
 
             $sql="SELECT * FROM `users` WHERE nickname = '".$nickname."' AND password='".$password."'";
             $consulta = mysqli_query($con,$sql);
-            $fila = $consulta->fetch_assoc();
-            if ($nickname == $fila['nickname'] && $password == $fila['password']) {
-                if ($fila['admin'] == 1) {
-                    header("Location: profileAdmin.php?id=".$fila['id']);
-                } else {
-                    header("Location: profile.php?id=".$fila['id']);
-                }
+            $user = $consulta->fetch_assoc();
+            if ($nickname == $user['nickname'] && $password == $user['password']) {
+                return $user;
             } else {
                 return null;
             }
@@ -88,7 +84,7 @@
         public function agregarUser($nickname, $password, $email) {
             include 'db.php';
 
-            $targetDir = "../uploads/";
+            $targetDir = "uploads/";
             $filename = $_FILES["file"]["name"];
             $targetFilePath = $targetDir . $filename;
 

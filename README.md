@@ -3,7 +3,7 @@ M07 - CFGS DAW 2 - 21/22
 
 Consta de dos archivos html:
 - index.html que será con el que se iniciará la página web en 000webhost.
-- login.html para pedir otro formulario pero esta vez para loguearse.
+- login.php para pedir otro formulario pero esta vez para loguearse.
 
 Archivos php:
 - db.php: conectividad con la base de datos.

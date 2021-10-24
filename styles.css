@@ -24,39 +24,56 @@ button:focus{
 }
 
 /* header */
+.menu-user {
+    margin-left: auto; 
+    margin-right: 0;
+    padding: 10px;
+}
 
-.user-header {
+.btn-registrarse, .btn-iniciarsesion {
+    background-color: black;
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.header {
     display: flex;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 99999;
-    
+    height: 100px;
     background-color: rgba(211, 211, 211, 0.7);
     backdrop-filter: brightness(100%) blur(3px);
     border-bottom: 1px solid black;
 }
 
-.user-header-logo {
-    margin-left: 50px; 
+.header-logo {
+    margin-left: 50px;
+    cursor: pointer;
 }
 
-.user-header-userinfo {
+.header-logo img {
+    height: 50px;
+    width: 50px;
+}
+
+.header-userinfo {
     display: flex;
-    margin-left: auto; 
-    margin-right: 0;
+    margin-left: auto;
+    margin-right: 200px;
 }
 
-.user-header img {
-    height: 100px;
-    width: 100px;
-}
 
-.user-header-content {
+.header-content {
     margin: 0 0 0 5px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 2px;
     width: 200px;
 }
@@ -64,6 +81,8 @@ button:focus{
 .avatar {
     display: flex;
     flex-direction: column;
+    height: 50px;
+    width: 50px;
 }
 
 .avatar input {
@@ -71,23 +90,18 @@ button:focus{
 }
 
 .nombre{
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
-    margin: 2px;
 }
 
 .email{
     margin: 2px;
 }
 
-.btn-cerrar-sesion {
-    margin: 10px 0 0 0;
-}
-
 /* div para espaciar */
 
 .espacio {
-    height: 80px;
+    height: 100px;
 }
 
 /* Lista de usuarios administradores */
@@ -266,7 +280,7 @@ button:focus{
 }
 
 .lista-plantas-content {
-    height: 100px;
+    height: 120px;
     border-top: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -290,6 +304,14 @@ button:focus{
 .lista-plantas-fotos:hover img {
     position: relative;
     transform: scale(1.5);
+
+    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: pixelated; /* Chrome */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
 }
 
 .lista-plantas-nombre {
@@ -408,4 +430,41 @@ button:focus{
 
 .ver-detalles-planta:hover input {
     color: rgb(255, 255, 255);
+}
+
+/* Login */
+
+.formulario-login {
+    border: 1px solid black;
+    border-radius: 5px;
+	max-width: 300px;
+	margin: 0 auto;
+	padding: 80px 0;
+	height: 200px;
+	text-align: center;
+}
+
+.formulario-login h1 {
+    font-size: 40px;
+    font-weight: 200;
+}
+
+.formulario-login form {
+	padding: 20px 0;
+	position: relative;
+	z-index: 2;
+}
+
+.form-login input {
+    display: block;
+    appearance: none;
+    outline: 0;
+    width: 250px;
+    
+    border-radius: 3px;
+    padding: 10px 15px;
+    margin: 0 auto 10px auto;
+    display: block;
+    text-align: center;
+    font-size: 18px;
 }

@@ -20,6 +20,12 @@
     $planta = new Planta();
     $listaPlantas = $crudPlanta->mostrar();
     $planta = $crudPlanta->obtenerPlanta($id);
+
+    $contadorCarrito = 0;
+
+    if(isset($_POST["add"])) {
+        $contadorCarrito = $contadorCarrito + 1;
+    }
 ?>
     
 <!DOCTYPE html>
@@ -32,23 +38,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class='user-header'>
-        <div class='user-header-logo'>
-            <img src="images/logo.png"></img>
+    <div class='header'>
+    <div class='header-logo'>
+            <a href="index.php" class="logo">
+                <img src="images/logo.png">
+            </a>
         </div>
-        <div class='user-header-userinfo'>
+        <div class='header-userinfo'>
             <div class='avatar'>
                 <img src=<?php echo $user->getAvatar(); ?>>
             </div>
-            <div class='user-header-content'>
+            <div class='header-content'>
                 <div class='nombre'>
                     <?php echo $user->getNickname(); ?>
                 </div>
-                <div class='email'>
-                    <?php echo $user->getEmail(); ?>
-                </div>
-                <form method="post" action="login.html" class="btn-cerrar-sesion">
+                <form method="post" action="login.php" class="btn-cerrar-sesion">
                     <button type="submit">Cerrar sesión</button>
+                </form>
+                <form method="post" action="" class="btn-carrito">
+                    <button>Carrito</button>
+                    <?php echo $contadorCarrito; ?>
                 </form>
             </div>
         </div>
@@ -125,6 +134,14 @@
                         <div class="lista-plantas-precio">
                             <?php echo $plantas->getPrecio() ?> €
                         </div>
+                        <div class="agregar-carrito">
+                            <form class="btn-carrito">
+                                <input type="text" name="cantidad" value="1" size="2" />
+                                <input type="submit" name="add" value="Add"/>
+                            </form>
+
+                            <button onclick="agregar(+1)">assas</button>
+                        </div>
                     </div>
                     <div class="lista-plantas-crud">
                         <div class="lista-plantas-modificar">
@@ -146,7 +163,7 @@
                         <form method="POST" action="">
                             <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
                             <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                            <input type="submit" id="detalles" value="Ver detalle"/>
+                            <input type="submit" id="detalles" value="Ver detalle"  style="pointer-events:none"/>
                         </form>
                     </div>
                 </div>

@@ -1,3 +1,25 @@
+<?php
+    include('/conexion/db.php');
+    
+    //obtencion plantas
+    require_once('/crud_plantas/crud_plantas.php');
+    require_once('/clases/planta.php');
+
+    $crudPlanta = new CrudPlanta();
+    $planta = new Planta();
+    $listaPlantas = $crudPlanta->mostrar();
+
+    $id_admin = $_POST['id_admin'];
+    $id_planta = $_POST['id_planta'];
+
+    $newPlanta;
+
+    foreach($listaPlantas as $planta) {
+        if ($id_planta == $planta->getId()) {
+            $newPlanta = $planta;
+        }
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -5,7 +27,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda login</title>
+    <title>Document</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,13 +44,8 @@
     </div>
     <div class="espacio">
     </div>
-    <div class="formulario-login">
-        <form action="gestion_login.php" method="POST" class="form-login">
-            <h1>Login</h1>
-            <input type="text" name="nickname" placeholder="Nombre"><br><br>
-            <input type="password" name="password" placeholder="Contraseña"><br><br>
-            <button type="submit" value="Sign in">Sign in</button>
-        </form>
-    </div>
+    <?php
+    echo $newPlanta->getNombre();
+    ?>
 </body>
 </html>
