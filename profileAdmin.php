@@ -65,7 +65,12 @@
                             </div>
                         </label>
                         <ul id="collapse-menu">
-                            <li><a href="login.php">Salir</a></li>
+                            <li>
+                                <form method="POST" action="/crud_deseados/pagina_deseados.php">
+                                    <input type="hidden" name="id_user" value="<?php echo $id ?>"/>
+                                    <input type="submit" id="deseados" value="Deseados"/>
+                                </form>
+                            </li>
                             <li><a href="login.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
@@ -147,8 +152,9 @@
                                 <?php echo $plantas->getPrecio() ?> €
                             </div>
                             <div class="agregar-carrito">
-                                <form method="POST" action="deseados.php" class="btn-carrito">
+                                <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-carrito">
                                     <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
+                                    <input type="hidden" name="id_user" value="<?php echo $id ?>"/>
                                     <input type="submit" name="add" value="Add"/>
                                 </form>
                             </div>
