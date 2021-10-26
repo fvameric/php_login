@@ -41,16 +41,49 @@ button:focus{
 }
 
 .header {
-    display: flex;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 99999;
-    height: 100px;
+    max-width: 100%;
+    height: 50px;
+    z-index: 90;
+    background-color: #55a10e;
+    /*
     background-color: rgba(211, 211, 211, 0.7);
     backdrop-filter: brightness(100%) blur(3px);
     border-bottom: 1px solid black;
+    */
+}
+
+@media only screen and (min-width: 1200px) {
+    .topbar {
+        width: 1080px;
+        max-width: 1080px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .topbar {
+        max-width: 1080px;
+    }
+}
+@media only screen and (min-width: 996px) {
+    .topbar {
+        max-width: 1080px;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .topbar {
+        max-width: 1080px;
+        padding: 0;
+    }
+}
+
+.topbar {
+    display: flex;
+    height: 50px;
+    margin: 0 auto;
 }
 
 .header-logo {
@@ -59,28 +92,26 @@ button:focus{
 }
 
 .header-logo img {
-    height: 50px;
-    width: 50px;
+    padding: 5px;
+    height: 42px;
+    width: 42px;
 }
 
 .header-userinfo {
     display: flex;
+    flex-direction: row;
     margin-left: auto;
-    margin-right: 200px;
 }
-
 
 .header-content {
-    margin: 0 0 0 5px;
     display: flex;
     flex-direction: row;
-    padding: 2px;
-    width: 200px;
+    width: 250px;
+    padding: 10px;
+    justify-content: space-around;
 }
 
-.avatar {
-    display: flex;
-    flex-direction: column;
+.avatar img {
     height: 50px;
     width: 50px;
 }
@@ -98,14 +129,90 @@ button:focus{
     margin: 2px;
 }
 
-/* div para espaciar */
+/* Dropdown menú */
+.triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 17.3px 10px 0 10px;
+    border-color: #000000 transparent transparent transparent;
+    cursor: pointer;
+}
 
+#menu-toggle {
+    display: none;
+}
+  
+#collapse-menu {
+    transition: transform 0.3s;
+    transform-origin: top;
+    color: #FFF;
+    top: 100%;
+    left: 0;
+    z-index: 99;
+    float: left;
+    min-width: 100px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: left;
+    background-color: #252c31;
+    border-radius: 6px;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+}
+
+#collapse-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.428571429;
+    color: #d3dce4;
+    white-space: nowrap;
+    list-style: none;
+    text-decoration: none;
+}
+
+#collapse-menu li:hover {
+    background-color: #606f7a;
+}
+  
+input:not(:checked) ~ #collapse-menu {
+    transform: scaleY(0);
+}
+
+.presentacion {
+    height: 200px;
+    background-color: #2b2e30;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+    background-image: url("images/bg.jpg");
+    background-position: 50% 50%;
+}
+
+/* div para espaciar */
 .espacio {
-    height: 100px;
+    height: 50px;
+}
+
+/* Contenido principal de la página */
+@media only screen and (min-width: 1200px) {
+    .content{ 
+        max-width: 1080px;
+        padding-top: 14px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.content{
+    width: 100%;
+    margin: 0 auto;
 }
 
 /* Lista de usuarios administradores */
-
 .scroll-usuarios{
 	height: 10rem;
 	overflow-x: hidden;
@@ -197,7 +304,6 @@ button:focus{
 }
 
 /* Login */
-
 .loginError button {
     background-color: black;
     border-radius: 5px;
@@ -243,6 +349,7 @@ button:focus{
     display: flex;
     flex-wrap: wrap;
 }
+
 .lista-plantas-crear input {
     margin: 20px 0 0 10px;
     background-color: black;
@@ -261,7 +368,7 @@ button:focus{
 .lista-plantas {
     display: flex;
     flex-wrap: wrap;
-    padding: 10px;
+    padding: 8px;
     width: 200px;
 }
 
@@ -433,20 +540,19 @@ button:focus{
 }
 
 /* Login */
-
 .formulario-login {
     border: 1px solid black;
     border-radius: 5px;
 	max-width: 300px;
 	margin: 0 auto;
-	padding: 80px 0;
-	height: 200px;
+	padding: 10px 0;
 	text-align: center;
 }
 
 .formulario-login h1 {
     font-size: 40px;
     font-weight: 200;
+    padding: 0 0 50px 0;
 }
 
 .formulario-login form {
@@ -460,8 +566,7 @@ button:focus{
     appearance: none;
     outline: 0;
     width: 250px;
-    
-    border-radius: 3px;
+    border-radius: 5px;
     padding: 10px 15px;
     margin: 0 auto 10px auto;
     display: block;
