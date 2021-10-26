@@ -573,3 +573,11 @@ input:not(:checked) ~ #collapse-menu {
     text-align: center;
     font-size: 18px;
 }
+
+
+/* Ver Detalle */
+
+.foto-planta-detalle img {
+    height: 200px;
+    width: 200px;
+}

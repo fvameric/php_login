@@ -147,8 +147,8 @@
                                 <?php echo $plantas->getPrecio() ?> €
                             </div>
                             <div class="agregar-carrito">
-                                <form class="btn-carrito">
-                                    <input type="text" name="cantidad" value="1" size="2" />
+                                <form method="POST" action="deseados.php" class="btn-carrito">
+                                    <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
                                     <input type="submit" name="add" value="Add"/>
                                 </form>
                             </div>
@@ -170,10 +170,10 @@
                             </div>
                         </div>
                         <div class="ver-detalles-planta">
-                            <form method="POST" action="">
+                            <form method="POST" action="ver_detalle.php">
                                 <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
                                 <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                                <input type="submit" id="detalles" value="Ver detalle"  style="pointer-events:none"/>
+                                <input type="submit" id="detalles" value="Ver detalle"/>
                             </form>
                         </div>
                     </div>
