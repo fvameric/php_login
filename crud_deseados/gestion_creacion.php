@@ -25,8 +25,7 @@
     
         $crudPlantas = new CrudPlanta();
         $planta = new Planta();
-    
-        echo $id_user;
+        
         $crudDeseados->agregarDeseado($id_user, $id_planta);
         header("Location: pagina_deseados.php");
     }

@@ -103,6 +103,21 @@ button:focus{
     margin-left: auto;
 }
 
+.header-userinfo a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.userinfo {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+}
+
+.nombre {
+    padding: 10px;
+}
+
 .header-content {
     display: flex;
     flex-direction: row;
@@ -189,6 +204,7 @@ input:not(:checked) ~ #collapse-menu {
     margin-left: calc(-50vw + 50%);
     position: relative;
     background-image: url("images/bg.jpg");
+    background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 

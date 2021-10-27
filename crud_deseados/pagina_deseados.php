@@ -19,7 +19,7 @@
         $crudDeseados = new CrudDeseados();
         $deseado = new Deseados();
         $listaDeseados = $crudDeseados->mostrar();
-        $deseado = $crudDeseados->obtenerDeseado($id_user);
+        //$deseado = $crudDeseados->obtenerDeseado($id_user);
 
         //obtencion plantas
         require_once('../crud_plantas/crud_plantas.php');

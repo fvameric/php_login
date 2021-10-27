@@ -49,18 +49,20 @@
         <div class='topbar'>
             <div class='header-logo'>
                 <a href="index.php" class="logo">
-                    <img src="images/logo.png">
+                    <img src="images/logo.png"/>
                 </a>
             </div>
             <div class='header-userinfo'>
-                <div class='avatar'>
-                    <img src=<?php echo $user->getAvatar(); ?>>
-                </div>
-                <div class='header-content'>
+                <a href="profileAdmin.php" class="userinfo">
+                    <div class='avatar'>
+                        <img src=<?php echo $user->getAvatar(); ?>>
+                    </div>
                     <div class='nombre'>
                         <?php echo $user->getNickname(); ?>
                     </div>
+                </a>
 
+                <div class='header-content'>
                     <form method="post" action="" class="btn-carrito">
                         <button>Carrito</button>
                     </form>
@@ -155,10 +157,12 @@
                                 <?php echo $plantas->getPrecio() ?> €
                             </div>
                             <div class="agregar-deseados">
-                                <?php if ($plantas->getId()) { ?>
+                                <?php 
+                                $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
+                                if ($idDeseado != null) { ?>
                                     <div class="agregar-deseado">
                                         <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-carrito">
-                                            <input type="hidden" name="id_deseado" value="<?php echo $deseados->getId() ?>"/>
+                                            <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>"/>
                                             <input type="submit" name="quitar" value="Quitar"/>
                                         </form>
                                     </div>

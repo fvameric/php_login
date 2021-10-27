@@ -40,17 +40,21 @@
     <div class='header'>
         <div class='topbar'>
             <div class='header-logo'>
-                <img src="images/logo.png"></img>
+                <a href="index.php" class="logo">
+                    <img src="images/logo.png"/>
+                </a>
             </div>
             <div class='header-userinfo'>
-                <div class='avatar'>
-                    <img src=<?php echo $user->getAvatar(); ?>>
-                </div>
-                <div class='header-content'>
+                <a href="profile.php" class="userinfo">
+                    <div class='avatar'>
+                        <img src=<?php echo $user->getAvatar(); ?>>
+                    </div>
                     <div class='nombre'>
                         <?php echo $user->getNickname(); ?>
                     </div>
-                    
+                </a>
+
+                <div class='header-content'>
                     <form method="post" action="" class="btn-carrito">
                         <button>Carrito</button>
                     </form>

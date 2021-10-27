@@ -7,6 +7,6 @@ $planta = new Planta();
 
 if (isset($_POST['id_planta'])) {
     $crud->eliminar($_POST['id_planta']);
-    header("Location: ../profileAdmin.php?id=".$_POST['id_admin']);
+    header("Location: ../profileAdmin.php");
 }
 ?>

@@ -9,6 +9,5 @@
     $deseado = new Deseados();
 
     $crudDeseados->eliminarDeseado($id_deseado);
-    
     header("Location: pagina_deseados.php");
 ?>

@@ -30,6 +30,7 @@
 
         public function eliminarDeseado($id_deseado) {
             include 'db.php';
+            
             $sqlDelete="DELETE FROM `deseados` WHERE id=".$id_deseado;
             $consulta = mysqli_query($con,$sqlDelete);
 
@@ -42,7 +43,7 @@
 
         public function modificarDeseados($deseadoModif, $id_deseado) {
             include 'db.php';
-            $sqlUpdate="UPDATE `deseados` SET id=".$id_deseado.", user_id='".$deseadoModif->getUserId()."', planta_id='".$deseadoModif->getPlantaId()."')";
+            $sqlUpdate="UPDATE `deseados` SET id=".$id_deseado.", user_id=".$deseadoModif->getUserId().", planta_id=".$deseadoModif->getPlantaId().")";
             $consultaUpdate = mysqli_query($con, $sqlUpdate);
 
             if(!$consultaUpdate) {
@@ -52,18 +53,21 @@
             }
         }
 
-        public function obtenerDeseado($id) {
+        public function obtenerDeseado($id_planta, $id_user) {
             include 'db.php';
 
-            $sqlId="SELECT * FROM `deseados` WHERE user_id = '".$id."'";
+            $sqlId="SELECT * FROM `deseados` WHERE user_id = ".$id_user." AND planta_id=".$id_planta;
             $consultaDeseados = mysqli_query($con, $sqlId);
             $fila = $consultaDeseados->fetch_assoc();
             
-            $deseado = new Deseados();
-            $deseado->setId($fila['id']);
-            $deseado->setUserId($fila['user_id']);
-            $deseado->setPlantaId($fila['planta_id']);
-            return $deseado;
+            $idDeseado = $fila['id'];
+            
+            if (!empty($fila))
+            {
+                return $idDeseado;
+            } else {
+                return null;
+            }
         }
     }
 ?>

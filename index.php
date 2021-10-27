@@ -44,14 +44,27 @@
                     </a>
                 </div>
                 <div class='header-userinfo'>
-                    <div class='avatar'>
-                        <img src=<?php echo $user->getAvatar(); ?>>
-                    </div>
+                    <?php if ($_SESSION['isAdmin'] == 0) { ?>
+                        <a href="profile.php" class="userinfo">
+                            <div class='avatar'>
+                                <img src=<?php echo $user->getAvatar(); ?>>
+                            </div>
+                            <div class='nombre'>
+                                <?php echo $user->getNickname(); ?>
+                            </div>
+                        </a>
+                    <?php } else { ?>
+                        <a href="profileAdmin.php" class="userinfo">
+                            <div class='avatar'>
+                                <img src=<?php echo $user->getAvatar(); ?>>
+                            </div>
+                            <div class='nombre'>
+                                <?php echo $user->getNickname(); ?>
+                            </div>
+                        </a>
+                    <?php } ?>
+                    
                     <div class='header-content'>
-                        <div class='nombre'>
-                            <?php echo $user->getNickname(); ?>
-                        </div>
-
                         <form method="post" action="" class="btn-carrito">
                             <button>Carrito</button>
                         </form>
