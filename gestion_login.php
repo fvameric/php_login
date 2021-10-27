@@ -15,7 +15,7 @@ $crudUser = new CrudUser();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -44,9 +44,15 @@ $crudUser = new CrudUser();
         <?php } else
         {
             if ($user['admin'] == 1) {
-                header("Location: profileAdmin.php?id=".$user['id']);
+                session_start();
+                $_SESSION['sessionID']=$user['id'];
+                $_SESSION['isAdmin']=$user['admin'];
+                header("Location: profileAdmin.php");
             } else {
-                header("Location: profile.php?id=".$user['id']);
+                session_start();
+                $_SESSION['sessionID']=$user['id'];
+                $_SESSION['isAdmin']=$user['admin'];
+                header("Location: profile.php");
             }
         }
         ?>

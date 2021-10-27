@@ -87,7 +87,6 @@ button:focus{
 }
 
 .header-logo {
-    margin-left: 50px;
     cursor: pointer;
 }
 
@@ -505,6 +504,15 @@ input:not(:checked) ~ #collapse-menu {
 
 .lista-plantas-eliminar:hover #eliminar {
     color:rgb(255, 255, 255);
+}
+
+.agregar-carrito input {
+    background-color: black;
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
 }
 
 .ver-detalles-planta {

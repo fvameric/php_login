@@ -1,23 +1,26 @@
 <?php
-    $id_user = $_POST['id_user'];
+    session_start();
+    if (isset($_SESSION['sessionID'])) {
+        $id_user = $_SESSION['sessionID'];
 
-    //obtencion users
-    require_once('../crud_users/crud_users.php');
-    require_once('../clases/user.php');
-
-    $crudUser = new CrudUser();
-    $user = new User();
-    $listaUsers = $crudUser->mostrar();
-    $user = $crudUser->obtenerUser($id_user);
-
-    //obtencion deseados
-    require_once('crud_deseados.php');
-    require_once('../clases/deseados.php');
-
-    $crudDeseados = new CrudDeseados();
-    $deseado = new Deseados();
-    $listaDeseados = $crudDeseados->mostrar();
-    $deseado = $crudDeseados->obtenerDeseado($id_user);
+        //obtencion users
+        require_once('../crud_users/crud_users.php');
+        require_once('../clases/user.php');
+    
+        $crudUser = new CrudUser();
+        $user = new User();
+        $listaUsers = $crudUser->mostrar();
+        $user = $crudUser->obtenerUser($id_user);
+    
+        //obtencion deseados
+        require_once('crud_deseados.php');
+        require_once('../clases/deseados.php');
+    
+        $crudDeseados = new CrudDeseados();
+        $deseado = new Deseados();
+        $listaDeseados = $crudDeseados->mostrar();
+        $deseado = $crudDeseados->obtenerDeseado($id_user);
+    }
 ?>
 
 <!DOCTYPE html>

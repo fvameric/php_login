@@ -1,30 +1,35 @@
 <?php
     include '/conexion/db.php';
     
-    $id = $_GET['id'];
+    session_start();
+    if (isset($_SESSION['sessionID'])) {
+        $id_user = $_SESSION['sessionID'];
 
-    //obtencion users
-    require_once('/crud_users/crud_users.php');
-    require_once('/clases/user.php');
-
-    $crudUser = new CrudUser();
-    $user = new User();
-    $listaUsers = $crudUser->mostrar();
-    $user = $crudUser->obtenerUser($id);
-
-    //obtencion plantas
-    require_once('/crud_plantas/crud_plantas.php');
-    require_once('/clases/planta.php');
-
-    $crudPlanta = new CrudPlanta();
-    $planta = new Planta();
-    $listaPlantas = $crudPlanta->mostrar();
-    $planta = $crudPlanta->obtenerPlanta($id);
-
-    $contadorCarrito = 0;
-
-    if(isset($_POST["add"])) {
-        $contadorCarrito = $contadorCarrito + 1;
+        //obtencion users
+        require_once('/crud_users/crud_users.php');
+        require_once('/clases/user.php');
+    
+        $crudUser = new CrudUser();
+        $user = new User();
+        $listaUsers = $crudUser->mostrar();
+        $user = $crudUser->obtenerUser($id_user);
+    
+        //obtencion plantas
+        require_once('/crud_plantas/crud_plantas.php');
+        require_once('/clases/planta.php');
+    
+        $crudPlanta = new CrudPlanta();
+        $planta = new Planta();
+        $listaPlantas = $crudPlanta->mostrar();
+        //$planta = $crudPlanta->obtenerPlanta($id);
+    
+        $contadorCarrito = 0;
+    
+        if(isset($_POST["add"])) {
+            $contadorCarrito = $contadorCarrito + 1;
+        }
+    } else {
+        header("Location: index.php");
     }
 ?>
     
@@ -65,13 +70,9 @@
                             </div>
                         </label>
                         <ul id="collapse-menu">
-                            <li>
-                                <form method="POST" action="/crud_deseados/pagina_deseados.php">
-                                    <input type="hidden" name="id_user" value="<?php echo $id ?>"/>
-                                    <input type="submit" id="deseados" value="Deseados"/>
-                                </form>
-                            </li>
-                            <li><a href="login.php">Cerrar sesión</a></li>
+                            <li><a href="profileAdmin.php">Perfil</a></li>
+                            <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
+                            <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -155,7 +156,7 @@
                                 <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-carrito">
                                     <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
                                     <input type="hidden" name="id_user" value="<?php echo $id ?>"/>
-                                    <input type="submit" name="add" value="Add"/>
+                                    <img src="images/star-plus.png"><input type="submit" name="add" value="Add"></input></img>
                                 </form>
                             </div>
                         </div>
