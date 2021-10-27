@@ -22,12 +22,14 @@
         $planta = new Planta();
         $listaPlantas = $crudPlanta->mostrar();
         //$planta = $crudPlanta->obtenerPlanta($id);
+
+        //obtencion deseados
+        require_once('/crud_deseados/crud_deseados.php');
+        require_once('/clases/deseados.php');
     
-        $contadorCarrito = 0;
-    
-        if(isset($_POST["add"])) {
-            $contadorCarrito = $contadorCarrito + 1;
-        }
+        $crudDeseados = new CrudDeseados();
+        $deseado = new Deseados();
+        $listaDeseados = $crudDeseados->mostrar();
     } else {
         header("Location: index.php");
     }
@@ -152,12 +154,23 @@
                             <div class="lista-plantas-precio">
                                 <?php echo $plantas->getPrecio() ?> €
                             </div>
-                            <div class="agregar-carrito">
-                                <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-carrito">
-                                    <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                                    <input type="hidden" name="id_user" value="<?php echo $id ?>"/>
-                                    <img src="images/star-plus.png"><input type="submit" name="add" value="Add"></input></img>
-                                </form>
+                            <div class="agregar-deseados">
+                                <?php if ($plantas->getId()) { ?>
+                                    <div class="agregar-deseado">
+                                        <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-carrito">
+                                            <input type="hidden" name="id_deseado" value="<?php echo $deseados->getId() ?>"/>
+                                            <input type="submit" name="quitar" value="Quitar"/>
+                                        </form>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="agregar-deseado">
+                                        <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-carrito">
+                                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
+                                            <input type="hidden" name="id_user" value="<?php echo $id ?>"/>
+                                            <input type="submit" name="add" value="Agregar deseado"/>
+                                        </form>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="lista-plantas-crud">
