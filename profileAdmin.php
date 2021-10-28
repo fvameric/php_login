@@ -48,9 +48,11 @@
     <div class='header'>
         <div class='topbar'>
             <div class='header-logo'>
+                <!--
                 <a href="index.php" class="logo">
                     <img src="images/logo.png"/>
                 </a>
+                -->
             </div>
             <div class='header-userinfo'>
                 <a href="profileAdmin.php" class="userinfo">
@@ -82,9 +84,56 @@
                 </div>
             </div>
         </div>
+        <div class="menu-navegacion">
+            <div class="menu-logo">
+                <a href="index.php" class="logo">
+                    <img src="images/logo.png"/>
+                </a>
+            </div>
+            <div class="botones-menu">
+                <div class="caja1">
+                    <a>test</a>
+                </div>
+                <div class="caja2">
+                    <a>test</a>
+                </div>
+                <div class="caja3">
+                    <a>test</a>
+                </div>
+                <div class="caja4">
+                    <a>test</a>
+                </div>
+                <div class="caja5">
+                    <a>test</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="espacio">
+    </div>
+
+    <div class="enlaces-navegacion">
+        <a href="index.php">Home</a>
+    </div>
+
+    <div class="carritotest">
+        <?php
+            if(isset($_POST['SubmitButton'])){ //check if form was submitted
+                $total = 0;
+                $input = $_POST['inputNumber']; //get input
+                $total = $total + $input;
+            }
+            
+        ?>
+        <form action="" method="post">
+            <br>
+            <?php echo $input; ?>
+            <br>
+            <?php echo $total; ?>
+            <input type="number" name="inputNumber"/>
+            <input type="submit" name="SubmitButton"/>
+        </form>
     </div>
 
     <div class="content">

@@ -7,6 +7,7 @@ html,
 body {
     margin: 20px;
     -webkit-font-smoothing: antialiased;
+    background-color: #f1f1f1;
 }
 button {
     background-color: black;
@@ -84,7 +85,31 @@ button:focus{
 .topbar {
     display: flex;
     height: 50px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+}
+
+/* Menu navegacion debajo de header */
+.menu-navegacion {
+    height: 80px;
+    background-color: #dfdfdf;
+    display: flex;
+}
+.menu-logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.botones-menu {
+    width: 400px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.caja1, .caja2, .caja3, .caja4, .caja5 {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
 }
 
 .header-logo {
@@ -157,7 +182,7 @@ button:focus{
 #menu-toggle {
     display: none;
 }
-  
+
 #collapse-menu {
     transition: transform 0.3s;
     transform-origin: top;
@@ -210,7 +235,7 @@ input:not(:checked) ~ #collapse-menu {
 
 /* div para espaciar */
 .espacio {
-    height: 50px;
+    height: 100px;
 }
 
 /* Contenido principal de la página */
@@ -225,7 +250,8 @@ input:not(:checked) ~ #collapse-menu {
 
 .content{
     width: 100%;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    background-color: #ffffff;
 }
 
 /* Lista de usuarios administradores */
