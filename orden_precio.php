@@ -173,15 +173,31 @@
         </div>
 
         <div class="lista-orden-test">
-            <form method="post" action="orden_precio.php">
+            <form method="post" action="">
                 Order
                 <button type="submit" name="asc_sort" id="asc_sort" class="button" value="1">Sort</button>
             </form>
+            <?php 
+            if(isset($_POST['asc_sort']) && !empty($_POST['asc_sort']) && $_POST['asc_sort']==1)
+            {
+                
+            
+            }else{
+            
+                
+            }
+            /*
+            if($_POST['sort'] === true) {
+                
+                
+            }
+            */
+            ?>
         </div>
 
         <div class="scroll-plantas">
             <?php
-            
+            $listaPlantas = $crudPlanta->ordenarPorPrecio($listaPlantas);
             foreach($listaPlantas as $plantas) { ?>
                 <div class="lista-plantas">
                     <div class="carta">
