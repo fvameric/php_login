@@ -117,25 +117,6 @@
         <a href="index.php">Home</a>
     </div>
 
-    <div class="carritotest">
-        <?php
-            if(isset($_POST['SubmitButton'])){ //check if form was submitted
-                $total = 0;
-                $input = $_POST['inputNumber']; //get input
-                $total = $total + $input;
-            }
-            
-        ?>
-        <form action="" method="post">
-            <br>
-            <?php echo $input; ?>
-            <br>
-            <?php echo $total; ?>
-            <input type="number" name="inputNumber"/>
-            <input type="submit" name="SubmitButton"/>
-        </form>
-    </div>
-
     <div class="content">
         <?php if ($user->getAdmin() == 1) { ?>
             <div class="eresAdmin">
@@ -191,8 +172,33 @@
             </form>
         </div>
 
+        <div class="lista-orden-test">
+            <form method="post" action="">
+                Order
+                <button type="submit" name="asc_sort" id="asc_sort" class="button" value="1">Sort</button>
+            </form>
+            <?php 
+            if(isset($_POST['asc_sort']) && !empty($_POST['asc_sort']) && $_POST['asc_sort']==1)
+            {
+                
+            
+            }else{
+            
+                
+            }
+            /*
+            if($_POST['sort'] === true) {
+                
+                $listaPlantas = $crudPlanta->ordenarPorPrecio($listaPlantas);
+            }
+            */
+            ?>
+        </div>
+
         <div class="scroll-plantas">
-            <?php foreach($listaPlantas as $plantas) { ?>
+            <?php
+            
+            foreach($listaPlantas as $plantas) { ?>
                 <div class="lista-plantas">
                     <div class="carta">
                         <div class="lista-plantas-fotos">

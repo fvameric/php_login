@@ -89,5 +89,15 @@
             $planta->setCompradas($fila['compradas']);
             return $planta;
         }
+
+        public function ordenarPorPrecio($lista) {
+            function cmp($a, $b) {
+                return strcmp($a->getPrecio(), $b->getPrecio());
+            }
+            
+            usort($lista, "cmp");
+
+            return $lista;
+        }
     }
 ?>
