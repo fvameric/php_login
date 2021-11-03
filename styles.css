@@ -385,6 +385,12 @@ input:not(:checked) ~ #collapse-menu {
     margin-top: 5px;
 }
 
+/* Ordenar plantas */
+
+.lista-orden {
+    padding: 10px;
+}
+
 /* Plantas */
 
 .scroll-plantas {

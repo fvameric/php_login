@@ -69,7 +69,6 @@
                         <button>Carrito</button>
                     </form>
                     <div class="dropdown">
-
                         <input id="menu-toggle" type="checkbox">
                         <label id="menu-label" for="menu-toggle">
                             <div class="triangle">
@@ -172,10 +171,22 @@
             </form>
         </div>
 
-        <div class="lista-orden-test">
-            <form method="post" action="orden_precio.php">
-                Order
-                <button type="submit" name="asc_sort" id="asc_sort" class="button" value="1">Sort</button>
+        <div class="lista-orden">
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <?php
+                    if (isset($_POST['sort'])) {
+                        if($_POST['sort'] == 1) {
+                            $listaPlantas = $crudPlanta->ordenarPorPrecio($listaPlantas);
+                        } else if ($_POST['sort'] == 2) {
+                            $listaPlantas = $crudPlanta->ordenarPorNombre($listaPlantas);
+                        } else if ($_POST['sort'] == 3) {
+                            $listaPlantas = $crudPlanta->ordenarPorDeseados($listaPlantas, $listaDeseados);
+                        }
+                    }
+                ?>
+                <button type="submit" name="sort" class="button" value="1">Ordenar por precio</button>
+                <button type="submit" name="sort" class="button" value="2">Ordenar por nombre</button>
+                <button type="submit" name="sort" class="button" value="3">Ordenar por deseados</button>
             </form>
         </div>
 

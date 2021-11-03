@@ -90,14 +90,25 @@
             return $planta;
         }
 
-        public function ordenarPorPrecio($lista) {
-            function cmp($a, $b) {
-                return strcmp($a->getPrecio(), $b->getPrecio());
-            }
-            
+        public function ordenarPorDefecto($lista) {
+            function cmp($a, $b) { return strcmp($a->getId(), $b->getId()); }
             usort($lista, "cmp");
-
             return $lista;
         }
+
+        public function ordenarPorPrecio($lista) {
+            function cmp($a, $b) { return strcmp($a->getPrecio(), $b->getPrecio()); }
+            usort($lista, "cmp");
+            return $lista;
+        }
+
+        public function ordenarPorNombre($lista) {
+            function cmp($a, $b) { return strcmp($a->getNombre(), $b->getNombre()); }
+            usort($lista, "cmp");
+            return $lista;
+        }
+
+        public function ordenarPorDeseados($listaPlantas, $listaDeseados) {
+            
     }
 ?>
