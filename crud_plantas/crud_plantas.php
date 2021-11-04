@@ -109,6 +109,49 @@
         }
 
         public function ordenarPorDeseados($listaPlantas, $listaDeseados) {
+            $sortarr = array();
+            foreach ($listaDeseados as $a) {
+                foreach ($listaPlantas as $k => $b) {
+                    if($b->getId()==$a->getPlantaId()) {
+                        $sortarr[]=$b;
+                        unset($listaPlantas[$k]);
+                    }
+                }
+            }
             
+            $finalarr = array_merge($sortarr, $listaPlantas);
+            return $finalarr;
+        }
+
+        public function busqueda($input, $listaPlantas) {
+            $listaBusqueda=[];
+            $listaPerc=[];
+            foreach ($listaPlantas as $t) {
+                $sim = similar_text($input,$t->getNombre(),$perc);
+                if ($perc == 0) {
+                } else if ($perc >= 10) {
+                    $listaBusqueda[] = $t;
+                    $listaPerc[] = $perc;
+                }
+            }
+            arsort($listaPerc);
+            $ordered_array = array_replace($listaPerc, $listaBusqueda);
+            //return $new;
+
+            
+            foreach ($ordered_array as $l) {
+                echo '<br>';
+                echo 'nombre: '.$l->getNombre();
+                echo '<br>';
+            }
+
+            foreach ($listaPerc as $p) {
+                echo 'perc: '.$p;
+                echo '<br>';
+            }
+            
+
+            //return $listaBusqueda;
+        }
     }
 ?>

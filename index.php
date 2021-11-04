@@ -80,8 +80,8 @@
                                     <li><a href="profile.php">Perfil</a></li>
                                 <?php } else { ?>
                                     <li><a href="profileAdmin.php">Perfil</a></li>
+                                    <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
                                 <?php } ?>
-                                
                                 <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
                             </ul>
                         </div>

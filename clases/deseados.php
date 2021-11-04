@@ -25,11 +25,11 @@
 
         // get set planta_id
         public function getPlantaId(){
-            return $this->PlantaId;
+            return $this->planta_id;
         }
 
-        public function setPlantaId($PlantaId){
-            $this->PlantaId = $PlantaId;
+        public function setPlantaId($planta_id){
+            $this->planta_id = $planta_id;
         }
     }
 ?>

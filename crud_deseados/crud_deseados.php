@@ -60,7 +60,7 @@
             $consultaDeseados = mysqli_query($con, $sqlId);
             $fila = $consultaDeseados->fetch_assoc();
             
-            $idDeseado = $fila['id'];
+            $idDeseado = $fila['planta_id'];
             
             if (!empty($fila))
             {
