@@ -47,7 +47,7 @@ button:focus{
     left: 0;
     width: 100%;
     max-width: 100%;
-    height: 50px;
+    height: 35px;
     z-index: 90;
     background: rgb(87,135,31);
     background: linear-gradient(90deg, rgba(87,135,31,1) 0%, rgba(132,191,34,1) 100%);
@@ -84,7 +84,7 @@ button:focus{
 
 .topbar {
     display: flex;
-    height: 50px;
+    height: 35px;
     /*margin: 0 auto;*/
 }
 
@@ -152,8 +152,8 @@ button:focus{
 }
 
 .avatar img {
-    height: 50px;
-    width: 50px;
+    height: 35px;
+    width: 35px;
 }
 
 .avatar input {

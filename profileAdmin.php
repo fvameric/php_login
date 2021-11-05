@@ -168,7 +168,7 @@
                             <div class="lista-usuarios-eliminar">
                                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                     <button type="submit" name="eliminarUsers" class="button">Eliminar</button>
-                                </form>
+                                
                                 <?php
                                 $flagtest = false;
                                 if (isset($_POST['eliminarUsers'])) { ?>
@@ -181,16 +181,19 @@
                                             denyButtonText: `Don't save`,
                                         }).then((result) => {
                                             if (result.isConfirmed) {
+                                                $flagtest = true;
                                                 Swal.fire('Saved!', '', 'success');
-                                                <?php
-                                                //$crudUser->eliminar($usuario->getId());
-                                                ?>
                                             } else if (result.isDenied) {
                                                 Swal.fire('Changes are not saved', '', 'info');
                                             }
                                         });
                                     </script>
-                                <?php } ?>
+                                <?php }
+                                if ($flagtest == true) {
+                                    $crudUser->eliminar($usuario->getId());
+                                }
+                                ?>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -202,6 +205,12 @@
             <form method="POST" action="/crud_plantas/pagina_creacion.php">
                 <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
                 <input type="submit" name="crear" id="crear" value="Crear planta"/>
+            </form>
+        </div>
+
+        <div class="descargar-xml">
+            <form method="POST" action="crear_xml.php">
+                <input type="submit" name="xml" value="Crear XML"/>
             </form>
         </div>
 
