@@ -47,7 +47,7 @@
         header("Location: index.php");
     }
 ?>
-    
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +56,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="../sweetalert2.all.js"></script>
 </head>
 <body>
     <div class='header'>
