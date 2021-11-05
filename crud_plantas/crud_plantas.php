@@ -114,13 +114,13 @@
                 foreach ($listaPlantas as $k => $b) {
                     if($b->getId()==$a->getPlantaId()) {
                         $sortarr[]=$b;
-                        unset($listaPlantas[$k]);
+                        //unset($listaPlantas[$k]);
                     }
                 }
             }
             
-            $finalarr = array_merge($sortarr, $listaPlantas);
-            return $finalarr;
+            //$finalarr = array_merge($sortarr, $listaPlantas);
+            return $sortarr;
         }
 
         public function busqueda($input, $listaPlantas) {
