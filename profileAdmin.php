@@ -184,20 +184,22 @@
             </form>
         </div>
 
-        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            Search <input type="text" name="search"><br>
-            <button type="submit" name="buscar" class="button" value="0">Buscar</button>
+        <div class="buscador">
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                Buscador <input type="text" name="search"><br>
+                <button type="submit" name="buscar" class="button" value="0">Buscar</button>
 
-            <?php
-            if (isset($_POST['buscar'])) {
-                if ($_POST['buscar'] == 0) {
-                    $search = $_POST['search'];
-                    $listaPlantas = $crudPlanta->busqueda($search, $listaPlantas);
+                <?php
+                if (isset($_POST['buscar'])) {
+                    if ($_POST['buscar'] == 0) {
+                        $search = $_POST['search'];
+                        $listaPlantas = $crudPlanta->busqueda($search, $listaPlantas);
+                    }
                 }
-            }
-            ?>
-        </form>
-
+                ?>
+            </form>
+        </div>
+        
         <div class="lista-orden">
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <button type="submit" name="sort" class="button" value="1">Ordenar por defecto</button>

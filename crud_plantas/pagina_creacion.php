@@ -36,6 +36,6 @@ $id_admin = $_POST['id_admin'];
         <button type="submit" name="submit" value="Registrarse">Registrar</button>
     </form>
     <br>
-    <a href="../profileAdmin.php?id=<?php echo $id_admin ?>">Volver atrás</a>
+    <a href="../profileAdmin.php">Volver atrás</a>
 </body>
 </html>

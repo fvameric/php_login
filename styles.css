@@ -385,6 +385,11 @@ input:not(:checked) ~ #collapse-menu {
     margin-top: 5px;
 }
 
+/* Buscador de plantas */
+.buscador {
+    padding: 10px;
+}
+
 /* Ordenar plantas */
 
 .lista-orden {
@@ -435,7 +440,7 @@ input:not(:checked) ~ #collapse-menu {
 }
 
 .lista-plantas-content {
-    height: 120px;
+    height: 135px;
     border-top: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -555,6 +560,9 @@ input:not(:checked) ~ #collapse-menu {
     color:rgb(255, 255, 255);
 }
 
+.agregar-deseado {
+    padding: 10px;
+}
 .agregar-deseado input {
     background-color: black;
     border-radius: 5px;

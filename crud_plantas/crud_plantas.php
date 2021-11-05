@@ -126,32 +126,29 @@
         public function busqueda($input, $listaPlantas) {
             $listaBusqueda=[];
             $listaPerc=[];
+
             foreach ($listaPlantas as $t) {
-                $sim = similar_text($input,$t->getNombre(),$perc);
-                if ($perc == 0) {
-                } else if ($perc >= 10) {
-                    $listaBusqueda[] = $t;
+                similar_text($input, $t->getNombre(), $perc);
+                if ($perc != 0) {
                     $listaPerc[] = $perc;
                 }
             }
-            arsort($listaPerc);
-            $ordered_array = array_replace($listaPerc, $listaBusqueda);
-            //return $new;
-
-            
-            foreach ($ordered_array as $l) {
-                echo '<br>';
-                echo 'nombre: '.$l->getNombre();
-                echo '<br>';
-            }
-
+            $listaCalc=[];
+            $max = 0;
+            $calc = 0;
             foreach ($listaPerc as $p) {
-                echo 'perc: '.$p;
-                echo '<br>';
+                $max = max($listaPerc);
+                $calc = $p / $max * 100;
+                $listaCalc[] = $calc;
             }
-            
-
-            //return $listaBusqueda;
+            $listaPlantasFinal=[];
+            foreach($listaCalc as $key => $val){
+                $val2 = $listaPlantas[$key];
+                if ($val >= 60) {
+                    $listaPlantasFinal[] = $val2;
+                }
+              }
+            return $listaPlantasFinal;
         }
     }
 ?>
