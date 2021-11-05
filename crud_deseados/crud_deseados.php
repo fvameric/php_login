@@ -33,24 +33,12 @@
             
             $sqlDelete="DELETE FROM `deseados` WHERE id=".$id_deseado;
             $consulta = mysqli_query($con,$sqlDelete);
-
-            if(!$consulta) {
-                echo 'no se realizó la consulta';
-            } else {
-                echo 'se realizó la consulta';
-            }
         }
 
         public function modificarDeseados($deseadoModif, $id_deseado) {
             include 'db.php';
             $sqlUpdate="UPDATE `deseados` SET id=".$id_deseado.", user_id=".$deseadoModif->getUserId().", planta_id=".$deseadoModif->getPlantaId().")";
             $consultaUpdate = mysqli_query($con, $sqlUpdate);
-
-            if(!$consultaUpdate) {
-                echo 'no se realizó la consulta';
-            } else {
-                echo 'se realizó la consulta';
-            }
         }
 
         public function obtenerDeseado($id_planta, $id_user) {
@@ -60,10 +48,9 @@
             $consultaDeseados = mysqli_query($con, $sqlId);
             $fila = $consultaDeseados->fetch_assoc();
             
-            $idDeseado = $fila['planta_id'];
+            $idDeseado = $fila['id'];
             
-            if (!empty($fila))
-            {
+            if (!empty($fila)) {
                 return $idDeseado;
             } else {
                 return null;

@@ -228,11 +228,12 @@
                             <div class="agregar-deseados">
                                 <?php 
                                 $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
+
                                 if ($idDeseado != null) { ?>
-                                    <div class="agregar-deseado">
+                                    <div class="quitar-deseado">
                                         <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-carrito">
                                             <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>"/>
-                                            <input type="submit" name="quitar" value="Quitar"/>
+                                            <input type="submit" name="quitarDeseado" value="Quitar"/>
                                         </form>
                                     </div>
                                 <?php } else { ?>

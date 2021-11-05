@@ -81,7 +81,7 @@
     
     <div class="content">
         <div class="volver">
-            <a href="javascript:history.go(-1)">Volver atrás</a>
+            <a href="../profileAdmin.php">Volver atrás</a>
         </div>
 
         <div class="scroll-plantas">

@@ -27,6 +27,7 @@
         $planta = new Planta();
         
         $crudDeseados->agregarDeseado($id_user, $id_planta);
-        header("Location: pagina_deseados.php");
+        //header("Location: pagina_deseados.php");
+        header("Location: ../profileAdmin.php");
     }
 ?>
