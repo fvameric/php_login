@@ -19,12 +19,14 @@
         $planta->addChild('foto', $p->getFoto());
         $planta->addChild('compradas', $p->getCompradas());
     }
-
-    Header('Content-type: text/xml');
-    print($xml->asXML());
+    
+    $xml->preserveWhiteSpace = false;
+    $xml->formatOutput = true;
 
     $contenidoXML = $xml->asXML();
     $file = fopen('plantas.xml','w');
     fwrite($file, $contenidoXML);
     fclose($file);
+
+    header('Location: profileAdmin.php');
 ?>
