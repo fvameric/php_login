@@ -396,6 +396,26 @@ input:not(:checked) ~ #collapse-menu {
     padding: 10px;
 }
 
+.lista-orden button {
+    margin-top: 10px;
+}
+
+/* Crear XML */
+
+.descargar-xml {
+    margin: 10px;
+}
+
+.descargar-xml input {
+    margin: 20px 0 0 10px;
+    background-color: black;
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
 /* Plantas */
 
 .scroll-plantas {
@@ -419,6 +439,7 @@ input:not(:checked) ~ #collapse-menu {
 }
 
 .lista-plantas {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     padding: 8px;
@@ -560,11 +581,15 @@ input:not(:checked) ~ #collapse-menu {
     color:rgb(255, 255, 255);
 }
 
-.quitar-deseado {
-    padding: 10px;
+/* Agregar o quitar deseados */
+
+.carta .btn-agregar-deseado {
+    position: absolute;
+    top: 10px;
+    left: 140px;
 }
-.quitar-deseado input {
-    background-color: black;
+.agregar-deseado button {
+    background-color: transparent;
     border-radius: 5px;
     border: 0px;
     color: white;
@@ -572,17 +597,25 @@ input:not(:checked) ~ #collapse-menu {
     padding: 5px 10px;
 }
 
-.agregar-deseado {
+.carta .btn-quitar-deseado {
+    position: absolute;
+    top: 10px;
+    left: 140px;
+}
+
+.quitar-deseado {
     padding: 10px;
 }
-.agregar-deseado input {
-    background-color: black;
+
+.quitar-deseado button {
+    background-color: transparent;
     border-radius: 5px;
     border: 0px;
-    color: white;
     cursor: pointer;
     padding: 5px 10px;
 }
+
+/* Botón ver detalle */
 
 .ver-detalles-planta {
     border-top: 1px solid black;

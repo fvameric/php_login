@@ -210,7 +210,7 @@
 
         <div class="descargar-xml">
             <form method="POST" action="crear_xml.php">
-                <input type="submit" name="xml" value="Crear XML"/>
+                <button type="submit" name="xml">Crear XML</button>
             </form>
         </div>
 
@@ -261,17 +261,21 @@
 
                                 if ($idDeseado != null) { ?>
                                     <div class="quitar-deseado">
-                                        <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-carrito">
+                                        <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
                                             <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>"/>
-                                            <input type="submit" name="quitarDeseado" value="Quitar"/>
+                                            <button type="submit" name="quitarDeseado" value="Quitar">
+                                                <img src="images/star-off.png">
+                                            </button>
                                         </form>
                                     </div>
                                 <?php } else { ?>
                                     <div class="agregar-deseado">
-                                        <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-carrito">
+                                        <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
                                             <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
                                             <input type="hidden" name="id_user" value="<?php echo $id ?>"/>
-                                            <input type="submit" name="add" value="Agregar deseado"/>
+                                            <button type="submit" name="add" value="Agregar">
+                                                <img src="images/star-plus.png">
+                                            </button>
                                         </form>
                                     </div>
                                 <?php } ?>
