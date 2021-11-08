@@ -57,6 +57,7 @@
     <title>Perfil</title>
     <link rel="stylesheet" href="styles.css">
     <script src="../sweetalert2.all.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 </head>
 <body>
     <div class='header'>
@@ -132,10 +133,6 @@
 
     <div class="content">
         <?php if ($user->getAdmin() == 1) { ?>
-            <div class="eresAdmin">
-                <h3>Eres admin, puedes ver el resto de usuarios:</h3>
-            </div>
-
             <div class="lista-usuarios-crear">
                 <form method="POST" action="/crud_users/pagina_creacion.php">
                     <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
@@ -214,21 +211,19 @@
             </form>
         </div>
 
-        <div class="buscador">
-            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                Buscador <input type="text" name="search"><br>
-                <button type="submit" name="buscar" class="button" value="0">Buscar</button>
+        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="buscador">
+            <input type="search" name="search" class="barra-buscador" placeholder="Buscador">
+            <button type="submit" name="buscar" class="btn-buscador" value="0">Buscar</button>
 
-                <?php
-                if (isset($_POST['buscar'])) {
-                    if ($_POST['buscar'] == 0) {
-                        $search = $_POST['search'];
-                        $listaPlantas = $crudPlanta->busqueda($search, $listaPlantas);
-                    }
+            <?php
+            if (isset($_POST['buscar'])) {
+                if ($_POST['buscar'] == 0) {
+                    $search = $_POST['search'];
+                    $listaPlantas = $crudPlanta->busqueda($search, $listaPlantas);
                 }
-                ?>
-            </form>
-        </div>
+            }
+            ?>
+        </form>
         
         <div class="lista-orden">
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -263,9 +258,7 @@
                                     <div class="quitar-deseado">
                                         <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
                                             <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>"/>
-                                            <button type="submit" name="quitarDeseado" value="Quitar">
-                                                <img src="images/star-off.png">
-                                            </button>
+                                            <button type="submit" name="quitarDeseado">★</button>
                                         </form>
                                     </div>
                                 <?php } else { ?>
@@ -273,9 +266,7 @@
                                         <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
                                             <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
                                             <input type="hidden" name="id_user" value="<?php echo $id ?>"/>
-                                            <button type="submit" name="add" value="Agregar">
-                                                <img src="images/star-plus.png">
-                                            </button>
+                                            <button type="submit" name="add">☆</button>
                                         </form>
                                     </div>
                                 <?php } ?>

@@ -248,6 +248,11 @@ input:not(:checked) ~ #collapse-menu {
     }
 }
 
+/* Enlaces de navegacion */
+.enlaces-navegacion {
+    margin: 0 0 10px 0;
+}
+
 .content{
     width: 100%;
     /*margin: 0 auto;*/
@@ -259,12 +264,15 @@ input:not(:checked) ~ #collapse-menu {
 	height: 10rem;
 	overflow-x: hidden;
 	overflow-y: scroll;
-    width: 430px;
     margin: 0 0 0 10px;
 }
 
 .lista-usuarios {
     display: flex;
+}
+
+.lista-usuarios:nth-of-type(odd) {
+    background-color: #f1f1f1 ;
 }
 
 .lista-usuarios-avatares img{
@@ -278,7 +286,6 @@ input:not(:checked) ~ #collapse-menu {
     display: flex;
     flex-direction: column;
     padding: 2px;
-    width: 200px;
 }
 
 .lista-usuarios-nombre {
@@ -294,6 +301,8 @@ input:not(:checked) ~ #collapse-menu {
 
 .lista-usuarios-crud {
     display: flex;
+    margin-left: auto; 
+    margin-right: 50px;
 }
 
 .lista-usuarios-crud input {
@@ -308,12 +317,15 @@ input:not(:checked) ~ #collapse-menu {
 .lista-usuarios-modificar input {
     margin: 2px 2px 0 2px;
 }
+.lista-usuarios-modificar input:hover {
+    background-color: #3e4144;
+}
 
-.lista-usuarios-eliminar input {
+.lista-usuarios-eliminar button {
     background-color: rgb(240, 32, 32);
     margin: 2px 2px 0 2px;
 }
-.lista-usuarios-eliminar input:hover {
+.lista-usuarios-eliminar button:hover {
     background-color: rgb(241, 101, 101);
 }
 
@@ -326,11 +338,6 @@ input:not(:checked) ~ #collapse-menu {
     color: #888;
 }
 
-.eresAdmin {
-    width: 400px;
-    margin: 0 0 0 10px;
-}
-
 .lista-usuarios-crear input {
     background-color: black;
     border-radius: 5px;
@@ -338,7 +345,7 @@ input:not(:checked) ~ #collapse-menu {
     color: white;
     cursor: pointer;
     padding: 5px 10px;
-    margin: 0 0 10px 10px;
+    margin: 10px;
 }
 
 .lista-usuarios-crear input:hover {
@@ -387,7 +394,20 @@ input:not(:checked) ~ #collapse-menu {
 
 /* Buscador de plantas */
 .buscador {
+    display: flex;
     padding: 10px;
+}
+
+.barra-buscador {
+    width:100%;
+    height: 40px;
+}
+
+.btn-buscador{
+    margin-left: 20px;
+    width: 120px;
+    height: 40px;
+    font-size: 15px;
 }
 
 /* Ordenar plantas */
@@ -461,7 +481,7 @@ input:not(:checked) ~ #collapse-menu {
 }
 
 .lista-plantas-content {
-    height: 135px;
+    height: 100px;
     border-top: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -585,34 +605,35 @@ input:not(:checked) ~ #collapse-menu {
 
 .carta .btn-agregar-deseado {
     position: absolute;
-    top: 10px;
-    left: 140px;
+    top: 0;
+    left: 160px;
 }
 .agregar-deseado button {
     background-color: transparent;
-    border-radius: 5px;
-    border: 0px;
-    color: white;
+    color: rgb(0, 0, 0);
     cursor: pointer;
-    padding: 5px 10px;
+    font-size: 30px;
+    transition: transform .2s;
+}
+
+.agregar-deseado button:hover {
+    transform: scale(1.5);
 }
 
 .carta .btn-quitar-deseado {
     position: absolute;
-    top: 10px;
-    left: 140px;
+    top: 0px;
+    left: 160px;
 }
-
-.quitar-deseado {
-    padding: 10px;
-}
-
 .quitar-deseado button {
     background-color: transparent;
-    border-radius: 5px;
-    border: 0px;
+    color: rgb(255, 190, 70);
     cursor: pointer;
-    padding: 5px 10px;
+    font-size: 30px;
+    transition: transform .2s;
+}
+.quitar-deseado button:hover {
+    transform: scale(1.5);
 }
 
 /* Botón ver detalle */
