@@ -97,6 +97,7 @@ button:focus{
     display: flex;
     justify-content: space-around;
 }
+
 .menu-logo img {
     width: 100%;
     height: 100%;
@@ -411,6 +412,7 @@ input:not(:checked) ~ #collapse-menu {
 
 /* Buscador de plantas */
 .buscador {
+    width: 100%;
     display: flex;
 }
 

@@ -114,6 +114,19 @@
                     <a>test</a>
                 </div>
             </div>
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="buscador">
+                <input type="search" name="search" class="barra-buscador" placeholder="Buscador">
+                <button type="submit" name="buscar" class="btn-buscador" value="0">Buscar</button>
+
+                <?php
+                if (isset($_POST['buscar'])) {
+                    if ($_POST['buscar'] == 0) {
+                        $search = $_POST['search'];
+                        $listaPlantas = $crudPlanta->busqueda($search, $listaPlantas);
+                    }
+                }
+                ?>
+            </form>
         </div>
     </div>
 
@@ -208,19 +221,7 @@
             </form>
         </div>
 
-        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="buscador">
-            <input type="search" name="search" class="barra-buscador" placeholder="Buscador">
-            <button type="submit" name="buscar" class="btn-buscador" value="0">Buscar</button>
-
-            <?php
-            if (isset($_POST['buscar'])) {
-                if ($_POST['buscar'] == 0) {
-                    $search = $_POST['search'];
-                    $listaPlantas = $crudPlanta->busqueda($search, $listaPlantas);
-                }
-            }
-            ?>
-        </form>
+        
         
         <div class="lista-orden">
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
