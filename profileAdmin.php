@@ -62,13 +62,6 @@
 <body>
     <div class='header'>
         <div class='topbar'>
-            <div class='header-logo'>
-                <!--
-                <a href="index.php" class="logo">
-                    <img src="images/logo.png"/>
-                </a>
-                -->
-            </div>
             <div class='header-userinfo'>
                 <a href="profileAdmin.php" class="userinfo">
                     <div class='avatar'>
@@ -129,6 +122,10 @@
 
     <div class="enlaces-navegacion">
         <a href="index.php">Home</a>
+        <div class="flecha-navegacion">
+            ▶
+        </div>
+        <a href="../profileAdmin.php">Perfil</a>
     </div>
 
     <div class="content">
