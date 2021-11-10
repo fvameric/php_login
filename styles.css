@@ -104,19 +104,19 @@ button:focus{
 }
 
 .botones-menu {
-    width: 450px;
+    width: 750px;
     display: flex;
-    justify-content: space-evenly;
     border-left: 2px solid rgb(207, 207, 207);
     border-right: 2px solid rgb(207, 207, 207);
 }
 
-.caja1, .caja2, .caja3, .caja4, .caja5 {
-    height: 100%;
+.caja1, .caja2, .caja3, .caja4, .caja5, .caja6 {
     width: 100%;
     text-align: center;
     padding-top: 30px;
     padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .header-logo {
@@ -263,6 +263,11 @@ input:not(:checked) ~ #collapse-menu {
 
 .enlaces-navegacion a {
     margin: 5px;
+    text-decoration: none;
+}
+
+.enlaces-navegacion a:visited {
+    color:#888;
 }
 
 .flecha-navegacion {
@@ -357,17 +362,26 @@ input:not(:checked) ~ #collapse-menu {
 }
 
 .lista-usuarios-crear input {
-    background-color: black;
-    border-radius: 5px;
-    border: 0px;
-    color: white;
     cursor: pointer;
     padding: 5px 10px;
-    margin: 10px;
+    margin: 5px 0 10px 10px;
+    border-radius: 3px;
+    border: 1px solid rgb(2, 99, 155);
+    color: rgb(2, 99, 155);
+    cursor: pointer;
+    padding: 15px 20px;
+    background-color: #FFF;
+    -webkit-transition: background .3s ease-out;
+    -moz-transition: background .3s ease-out;
+    -o-transition: background .3s ease-out;
+    transition: background .3s ease-out;
+    -webkit-transition: color .2s;
+    transition: color .2s;
 }
 
 .lista-usuarios-crear input:hover {
-    background-color: #3e4144;
+    background: rgba(2, 99, 155, 0.719);
+    color: #FFF;
 }
 
 /* Login */
@@ -420,6 +434,12 @@ input:not(:checked) ~ #collapse-menu {
     width: 100%;
     height: 100%;
     border: transparent;
+}
+
+.barra-buscador::placeholder {
+    font-size: 25px;
+    color: #CCC;
+    padding: 30px;
 }
 
 .btn-buscador{
@@ -477,17 +497,23 @@ input:not(:checked) ~ #collapse-menu {
 
 .lista-plantas-crear input {
     margin: 20px 0 0 10px;
-    background-color: black;
-    border-radius: 5px;
-    border: 0px;
-    color: white;
+    border-radius: 3px;
+    border: 1px solid rgb(76, 155, 2);
+    color: rgb(76, 155, 2);
     cursor: pointer;
-    padding: 5px 10px;
-
+    padding: 15px 20px;
+    background-color: #FFF;
+    -webkit-transition: background .3s ease-out;
+    -moz-transition: background .3s ease-out;
+    -o-transition: background .3s ease-out;
+    transition: background .3s ease-out;
+    -webkit-transition: color .2s;
+    transition: color .2s;
 }
 
 .lista-plantas-crear input:hover {
-    background-color: #3e4144;
+    background: rgba(76, 155, 2, 0.719);
+    color: #FFF;
 }
 
 .lista-plantas {
@@ -502,7 +528,7 @@ input:not(:checked) ~ #collapse-menu {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: 1px solid black;
+    border: 1px solid rgb(134, 134, 134);
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -586,7 +612,7 @@ input:not(:checked) ~ #collapse-menu {
 
 .lista-plantas-modificar {
     flex: 1 1 auto;
-    border-right: 1px solid black;
+    border-right: 1px solid rgb(134, 134, 134);
     background: rgba(255, 255, 255, 0);
     -webkit-transition: background .3s ease-out, box-shadow .3s ease-out;
     -moz-transition: background .3s ease-out, box-shadow .3s ease-out;
@@ -671,7 +697,7 @@ input:not(:checked) ~ #collapse-menu {
 /* Botón ver detalle */
 
 .ver-detalles-planta {
-    border-top: 1px solid black;
+    border-top: 1px solid rgb(134, 134, 134);
     text-align: center;
     background: rgba(255, 255, 255, 0);
     -webkit-transition: background .3s ease-out, box-shadow .3s ease-out;

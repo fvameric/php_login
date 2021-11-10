@@ -73,9 +73,12 @@
                 </a>
 
                 <div class='header-content'>
+                    <!--
                     <form method="post" action="" class="btn-carrito">
                         <button>Carrito</button>
                     </form>
+                    -->
+
                     <div class="dropdown">
                         <input id="menu-toggle" type="checkbox">
                         <label id="menu-label" for="menu-toggle">
@@ -99,31 +102,32 @@
             </div>
             <div class="botones-menu">
                 <div class="caja1">
-                    <a>test</a>
+                    <a>Senecio</a>
                 </div>
                 <div class="caja2">
-                    <a>test</a>
+                    <a>Haworthia</a>
                 </div>
                 <div class="caja3">
-                    <a>test</a>
+                    <a>Euphorbia</a>
                 </div>
                 <div class="caja4">
-                    <a>test</a>
+                    <a>Echeveria</a>
                 </div>
                 <div class="caja5">
-                    <a>test</a>
+                    <a>Cotyledon</a>
+                </div>
+                <div class="caja6">
+                    <a>Aeonium</a>
                 </div>
             </div>
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="buscador">
                 <input type="search" name="search" class="barra-buscador" placeholder="Buscador">
-                <button type="submit" name="buscar" class="btn-buscador" value="0">Buscar</button>
+                <!--<button type="submit" name="buscar" class="btn-buscador" value="0">Buscar</button>-->
 
                 <?php
-                if (isset($_POST['buscar'])) {
-                    if ($_POST['buscar'] == 0) {
-                        $search = $_POST['search'];
-                        $listaPlantas = $crudPlanta->busqueda($search, $listaPlantas);
-                    }
+                if (isset($_POST['search'])) {
+                    $search = $_POST['search'];
+                    $listaPlantas = $crudPlanta->busqueda($search, $listaPlantas);
                 }
                 ?>
             </form>
@@ -215,13 +219,13 @@
             </form>
         </div>
 
+        <!--
         <div class="descargar-xml">
             <form method="POST" action="crear_xml.php">
                 <button type="submit" name="xml">Crear XML</button>
             </form>
         </div>
-
-        
+        -->
         
         <div class="lista-orden">
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
