@@ -12,24 +12,38 @@ $id_admin = $_POST['id_admin'];
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <h1>Crear usuario nuevo:</h1>
+    <div class="enlaces-navegacion">
+        <a href="../index.php">Home</a>
+        <div class="flecha-navegacion">
+            ▶
+        </div>
+        <a href="../profileAdmin.php">Perfil</a>
+        <div class="flecha-navegacion">
+            ▶
+        </div>
+        <a href="pagina_creacion.php">Creación de usuarios</a>
+    </div>
 
-    <form id="formRegistro" action="../registro.php" method="POST" enctype="multipart/form-data">
-        <label>Avatar</label>
-        <input type="file" name="file"><br><br>
+    <div class="content">
+        <div class="crear-nuevo-usuario">
+            <h2>Crear usuario nuevo:</h2>
 
-        <label>Email</label>
-        <input type="email" id="email" name="email"><br><br>
+            <form id="formRegistro" action="../registro.php" method="POST" enctype="multipart/form-data">
+                <label>Avatar</label>
+                <input type="file" name="file"><br><br>
 
-        <label>Nickname</label>
-        <input type="text" id="nickname" name="nickname"><br><br>
-        
-        <label>Contraseña</label>
-        <input type="password" id="password" name="password"><br><br>
-        
-        <button type="submit" name="submit" value="Registrarse">Registrar</button>
-    </form>
-    <br>
-    <a href="../profileAdmin.php?id=<?php echo $id_admin ?>">Volver atrás</a>
+                <label>Email</label>
+                <input type="email" id="email" name="email"><br><br>
+
+                <label>Nickname</label>
+                <input type="text" id="nickname" name="nickname"><br><br>
+                
+                <label>Contraseña</label>
+                <input type="password" id="password" name="password"><br><br>
+                
+                <button type="submit" name="submit" value="Registrarse">Registrar</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

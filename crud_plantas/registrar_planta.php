@@ -12,6 +12,7 @@
     $precio = $_POST['precio'];
     $stock = $_POST['stock'];
     $compradas = $_POST['compradas'];
+    $categoria = $_POST['categoria'];
 
     $targetDir = "uploads/";
     $filename = $_FILES["file"]["name"];
@@ -20,21 +21,9 @@
 
     if(isset($_POST['submit']))
     {
-        if ($crudPlanta->agregarPlanta($nombre, $descripcion, $precio, $stock, $compradas) != NULL) {
+        if ($crudPlanta->agregarPlanta($nombre, $descripcion, $precio, $stock, $compradas, $categoria) != NULL) {
             echo 'Se registró correctamente.';
         }
-
-        /*
-        $validacion = $crudUser->validarRegistro($nickname, $email, $fileType);
-        if ($validacion == "") {
-            if ($crudUser->agregarUser($nickname, $password, $email, $fileType) != NULL) {
-                echo 'Se registró correctamente.';
-            }
-            
-        } else {
-            echo $validacion;
-        }
-        */
     }
 ?>
 

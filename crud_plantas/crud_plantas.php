@@ -19,6 +19,7 @@
                 $newPlant->setStock($fila['stock']);
                 $newPlant->setFoto($fila['foto']);
                 $newPlant->setCompradas($fila['compradas']);
+                $newPlant->setCategoria($fila['categoria']);
 
                 $listaPlantas[] = $newPlant;
             }
@@ -36,7 +37,7 @@
             }
         }
 
-        public function agregarPlanta($nombre, $descripcion, $precio, $stock, $compradas) {
+        public function agregarPlanta($nombre, $descripcion, $precio, $stock, $compradas, $categoria) {
             include 'db.php';
 
             $targetDir = "../uploads/";
@@ -47,7 +48,7 @@
             {
                 $src = $this->convertirBase64($targetFilePath);
 
-                $sql = "INSERT INTO `plantas`(`id`, `nombre`, `descripcion`, `precio`, `stock`, `foto`, `compradas`) VALUES (NULL,'".$nombre."','".$descripcion."',".$precio.",".$stock.",'".$src."',".$compradas.")";
+                $sql = "INSERT INTO `plantas`(`id`, `nombre`, `descripcion`, `precio`, `stock`, `foto`, `compradas`, `categoria`) VALUES (NULL,'".$nombre."','".$descripcion."',".$precio.",".$stock.",'".$src."',".$compradas.", ".$categoria.")";
                 return $consulta = mysqli_query($con,$sql);
             } else {
                 return null;
@@ -62,7 +63,7 @@
 
         public function modificarPlanta($plantaModif, $id_planta){
             include 'db.php';
-            $sqlUpdate="UPDATE `plantas` SET id=".$id_planta.", nombre='".$plantaModif->getNombre()."', descripcion='".$plantaModif->getDescripcion()."', precio=".$plantaModif->getPrecio().", stock=".$plantaModif->getStock().", foto='".$plantaModif->getFoto()."', compradas=".$plantaModif->getCompradas()." WHERE id=".$id_planta;
+            $sqlUpdate="UPDATE `plantas` SET id=".$id_planta.", nombre='".$plantaModif->getNombre()."', descripcion='".$plantaModif->getDescripcion()."', precio=".$plantaModif->getPrecio().", stock=".$plantaModif->getStock().", foto='".$plantaModif->getFoto()."', compradas=".$plantaModif->getCompradas().", categoria=".$plantaModif->getCategoria()." WHERE id=".$id_planta;
             $consultaUpdate = mysqli_query($con, $sqlUpdate);
 
             if(!$consultaUpdate) {
@@ -87,6 +88,7 @@
             $planta->setStock($fila['stock']);
             $planta->setFoto($fila['foto']);
             $planta->setCompradas($fila['compradas']);
+            $planta->setCategoria($fila['categoria']);
             return $planta;
         }
 
@@ -149,6 +151,30 @@
                 }
               }
             return $listaPlantasFinal;
+        }
+
+        public function ordenarPorCategoria($numcategoria) {
+            include 'db.php';
+
+            $listaPlantas=[];
+
+            $sql="SELECT * FROM `plantas` WHERE categoria=".$numcategoria;
+            $consulta = mysqli_query($con,$sql);
+
+            while($fila=$consulta->fetch_assoc()) {
+                $newPlant = new Planta();
+                $newPlant->setId($fila['id']);
+                $newPlant->setNombre($fila['nombre']);
+                $newPlant->setDescripcion($fila['descripcion']);
+                $newPlant->setPrecio($fila['precio']);
+                $newPlant->setStock($fila['stock']);
+                $newPlant->setFoto($fila['foto']);
+                $newPlant->setCompradas($fila['compradas']);
+                $newPlant->setCategoria($fila['categoria']);
+
+                $listaPlantas[] = $newPlant;
+            }
+            return $listaPlantas;
         }
     }
 ?>

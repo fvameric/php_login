@@ -7,6 +7,7 @@
         private $stock;
         private $foto;
         private $compradas;
+        private $categoria;
 
         function __construct(){}
 
@@ -71,6 +72,15 @@
 
         public function setCompradas($compradas){
             $this->compradas = $compradas;
+        }
+
+        // get set categoria
+        public function getCategoria(){
+            return $this->$categoria;
+        }
+
+        public function setCategoria($categoria){
+            $this->categoria = $categoria;
         }
     }
 ?>

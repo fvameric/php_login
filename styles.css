@@ -110,7 +110,7 @@ button:focus{
     border-right: 2px solid rgb(207, 207, 207);
 }
 
-.caja1, .caja2, .caja3, .caja4, .caja5, .caja6 {
+.caja1, .caja2, .caja3, .caja4, .caja5, .caja6, .caja7 {
     width: 100%;
     text-align: center;
     padding-top: 30px;
@@ -540,7 +540,7 @@ input:not(:checked) ~ #collapse-menu {
 
 .lista-plantas-content {
     height: 100px;
-    border-top: 1px solid black;
+    border-top: 1px solid rgb(134, 134, 134);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -598,7 +598,7 @@ input:not(:checked) ~ #collapse-menu {
     display: flex;
     justify-content: space-between;
     text-align: center;
-    border-top: 1px solid black;
+    border-top: 1px solid rgb(134, 134, 134);
 }
 
 .lista-plantas-crud input {
@@ -769,4 +769,61 @@ input:not(:checked) ~ #collapse-menu {
 .foto-planta-detalle img {
     height: 200px;
     width: 200px;
+}
+
+/* Crear usuario nuevo */
+
+.crear-nuevo-usuario {
+    padding: 10px;
+}
+
+.crear-nuevo-usuario button {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px 0 10px 10px;
+    border-radius: 3px;
+    border: 1px solid rgb(2, 99, 155);
+    color: rgb(2, 99, 155);
+    cursor: pointer;
+    padding: 15px 20px;
+    background-color: #FFF;
+    -webkit-transition: background .3s ease-out;
+    -moz-transition: background .3s ease-out;
+    -o-transition: background .3s ease-out;
+    transition: background .3s ease-out;
+    -webkit-transition: color .2s;
+    transition: color .2s;
+}
+
+.crear-nuevo-usuario button:hover {
+    background: rgba(2, 99, 155, 0.719);
+    color: #FFF;
+}
+
+/* Crear planta nueva */
+
+#nombre {
+    width: 300px;
+    height: 50px;
+}
+
+#descripcion {
+    width: 300px;
+    height: 150px;
+}
+
+/* Side panel */
+
+.side-panel {
+    background: rgb(92,173,69);
+    background: linear-gradient(90deg, rgba(92,173,69,1) 0%, rgba(66,175,126,1) 100%);
+    width: 300px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* Content wrapper */
+
+.content-wrapper {
+    display: flex;
 }
