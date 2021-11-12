@@ -184,35 +184,13 @@
                                     </form>
                                 </div>
                                 <div class="lista-usuarios-eliminar">
-                                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                                        <button type="submit" name="eliminarUsers" class="button">Eliminar</button>
-                                    
-                                    <?php
-                                    $flagtest = false;
-                                    if (isset($_POST['eliminarUsers'])) { ?>
-                                        <script type="text/javascript">
-                                            Swal.fire({
-                                                title: 'Do you want to save the changes?',
-                                                showDenyButton: true,
-                                                showCancelButton: true,
-                                                confirmButtonText: 'Save',
-                                                denyButtonText: `Don't save`,
-                                            }).then((result) => {
-                                                if (result.isConfirmed) {
-                                                    $flagtest = true;
-                                                    Swal.fire('Saved!', '', 'success');
-                                                } else if (result.isDenied) {
-                                                    Swal.fire('Changes are not saved', '', 'info');
-                                                }
-                                            });
-                                        </script>
-                                    <?php }
-                                    if ($flagtest == true) {
-                                        $crudUser->eliminar($usuario->getId());
-                                    }
-                                    ?>
+                                    <form method="POST" action="/crud_users/gestion_eliminacion.php">
+                                        <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
+                                        <input type="hidden" name="id_user" value="<?php echo $usuario->getId() ?>"/>
+                                        <input type="submit" id="eliminar" value="Eliminar"/>
                                     </form>
                                 </div>
+
                             </div>
                         </div>
                     <?php } ?>
