@@ -9,6 +9,8 @@
 
     $nickname = $_POST['nickname'];
     $password = $_POST['password'];
+    $password_hash = crypt($password, CRYPT_SHA256);
+
     $email = $_POST['email'];
 
     $targetDir = "uploads/";
@@ -20,7 +22,7 @@
     {
         $validacion = $crudUser->validarRegistro($nickname, $email, $fileType);
         if ($validacion == "") {
-            if ($crudUser->agregarUser($nickname, $password, $email, $fileType) != NULL) {
+            if ($crudUser->agregarUser($nickname, $password_hash, $email, $fileType) != NULL) {
                 echo 'Se registró correctamente.';
             }
         } else {
