@@ -1,6 +1,5 @@
 <?php
     session_start();
-    echo 'isset: '.isset($_SESSION['sessionID']);
     if (isset($_SESSION['sessionID']) == true) {
         header("Location: index.php");
     }

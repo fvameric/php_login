@@ -34,8 +34,11 @@ $crudUser = new CrudUser();
     </div>
 
     <?php if ($nickname != "" && $password != "") {
-        $password_hash = crypt($password, CRYPT_SHA256);
-        $user = $crudUser->validarLogin($nickname, $password_hash); ?>
+
+        $password_hash = crypt($password,'$5$rounds=5000$anexamplestringforsalt$');
+        $arrStr = explode("$", $password_hash);
+
+        $user = $crudUser->validarLogin($nickname, $arrStr[4]); ?>
 
         <?php if (is_null($user) || empty($user)) { ?>
             <label>Nombre o contraseña incorrectos.<label>
