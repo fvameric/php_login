@@ -73,12 +73,6 @@
                 </a>
 
                 <div class='header-content'>
-                    <!--
-                    <form method="post" action="" class="btn-carrito">
-                        <button>Carrito</button>
-                    </form>
-                    -->
-
                     <div class="dropdown">
                         <input id="menu-toggle" type="checkbox">
                         <label id="menu-label" for="menu-toggle">
@@ -91,6 +85,12 @@
                             <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
+
+                    <form method="post" action="" class="btn-carrito">
+                        <button>&#128722;</button>
+                        <label></label>
+                    </form>
+                    
                 </div>
             </div>
         </div>

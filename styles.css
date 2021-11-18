@@ -452,8 +452,6 @@ input:not(:checked) ~ #collapse-menu {
 /* Carrito */
 
 .btn-carrito {
-    border:rgb(207, 207, 207);
-    border-left: 1px solid black;
 }
 .carrito {
     background-color: transparent;
