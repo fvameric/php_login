@@ -43,6 +43,8 @@
                 $listaPlantas = $crudPlanta->ordenarPorDeseados($listaPlantas, $listaDeseados);
             }
         }
+
+        $_SESSION['arrayPlantas'] = [];
     } else {
         header("Location: index.php");
     }
@@ -73,6 +75,11 @@
                 </a>
 
                 <div class='header-content'>
+                    <li><a href="profileAdmin.php">Perfil</a></li>
+                    <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
+                    <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
+
+                    <!--
                     <div class="dropdown">
                         <input id="menu-toggle" type="checkbox">
                         <label id="menu-label" for="menu-toggle">
@@ -85,12 +92,14 @@
                             <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
+                    -->
 
-                    <form method="post" action="" class="btn-carrito">
+                    <form method="post" action="carrito.php" class="btn-carrito">
                         <button>&#128722;</button>
                         <label></label>
                     </form>
                     
+                    <span class="dot"> <?php echo count($_SESSION['arrayPlantas']); ?> </span>
                 </div>
             </div>
         </div>
@@ -236,6 +245,12 @@
                                 </div>
                                 <div class="lista-plantas-precio">
                                     <?php echo $plantas->getPrecio() ?> €
+                                </div>
+                                <div>
+                                    <form method="POST" action="carrito.php">
+                                        <input type="hidden" name="plant" value="<?php echo json_encode($plantas); ?>"/>
+                                        <input type="submit" name="carro"/>
+                                    </form>
                                 </div>
                                 <div class="agregar-deseados">
                                     <?php 

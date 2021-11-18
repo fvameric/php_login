@@ -133,11 +133,12 @@ button:focus{
     display: flex;
     flex-direction: row;
     margin-left: 30px;
+    float: right;
 }
 
 .header-userinfo a {
     text-decoration: none;
-    color: #fff;
+    color: rgb(0, 0, 0);
 }
 
 .userinfo {
@@ -196,8 +197,7 @@ button:focus{
     color: #FFF;
     top: 100%;
     left: 0;
-    z-index: 99;
-    float: left;
+    z-index: 999;
     min-width: 100px;
     padding: 5px 0;
     margin: 2px 0 0;
@@ -824,4 +824,14 @@ input:not(:checked) ~ #collapse-menu {
 
 .content-wrapper {
     display: flex;
+}
+
+/* carro */
+
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: rgb(226, 226, 226);
+    border-radius: 50%;
+    display: inline-block;
 }
