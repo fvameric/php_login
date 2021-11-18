@@ -248,7 +248,7 @@
                                 </div>
                                 <div>
                                     <form method="POST" action="carrito.php">
-                                        <input type="hidden" name="plant" value="<?php echo json_encode($plantas); ?>"/>
+                                        <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>"/>
                                         <input type="submit" name="carro"/>
                                     </form>
                                 </div>
