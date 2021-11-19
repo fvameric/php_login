@@ -1,14 +1,15 @@
-
 * {
     font-family: Helvetica, Arial, sans-serif;
     font-weight: 200;
 }
+
 html,
 body {
     margin: 20px;
     -webkit-font-smoothing: antialiased;
     background-color: #f1f1f1;
 }
+
 button {
     background-color: black;
     border-radius: 5px;
@@ -17,21 +18,26 @@ button {
     cursor: pointer;
     padding: 5px 10px;
 }
+
 button:hover {
     background-color: #3e4144;
 }
-button:focus{
+
+button:focus {
     outline: none;
 }
 
+
 /* header */
+
 .menu-user {
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: 0;
     padding: 10px;
 }
 
-.btn-registrarse, .btn-iniciarsesion {
+.btn-registrarse,
+.btn-iniciarsesion {
     background-color: black;
     border-radius: 5px;
     border: 0px;
@@ -71,11 +77,13 @@ button:focus{
         max-width: 1080px;
     }
 }
+
 @media only screen and (min-width: 996px) {
     .topbar {
         max-width: 1080px;
     }
 }
+
 @media only screen and (min-width: 768px) {
     .topbar {
         max-width: 1080px;
@@ -89,7 +97,9 @@ button:focus{
     /*margin: 0 auto;*/
 }
 
+
 /* Menu navegacion debajo de header */
+
 .menu-navegacion {
     height: 80px;
     background-color: #ffffff;
@@ -110,7 +120,13 @@ button:focus{
     border-right: 2px solid rgb(207, 207, 207);
 }
 
-.caja1, .caja2, .caja3, .caja4, .caja5, .caja6, .caja7 {
+.caja1,
+.caja2,
+.caja3,
+.caja4,
+.caja5,
+.caja6,
+.caja7 {
     width: 100%;
     text-align: center;
     padding-top: 30px;
@@ -154,9 +170,13 @@ button:focus{
 .header-content {
     display: flex;
     flex-direction: row;
-    width: 250px;
+    width: 550px;
     padding: 10px;
     justify-content: space-around;
+}
+
+.header-content li {
+    list-style: none;
 }
 
 .avatar img {
@@ -168,16 +188,18 @@ button:focus{
     margin-top: 5px;
 }
 
-.nombre{
+.nombre {
     font-size: 20px;
     font-weight: bold;
 }
 
-.email{
+.email {
     margin: 2px;
 }
 
+
 /* Dropdown menú */
+
 .triangle {
     width: 0;
     height: 0;
@@ -224,8 +246,8 @@ button:focus{
 #collapse-menu li:hover {
     background-color: #606f7a;
 }
-  
-input:not(:checked) ~ #collapse-menu {
+
+input:not(:checked)~#collapse-menu {
     transform: scaleY(0);
 }
 
@@ -240,14 +262,18 @@ input:not(:checked) ~ #collapse-menu {
     background-position: 50% 50%;
 }
 
+
 /* div para espaciar */
+
 .espacio {
     height: 100px;
 }
 
+
 /* Contenido principal de la página */
+
 @media only screen and (min-width: 1200px) {
-    .content{ 
+    .content {
         max-width: 1080px;
         padding-top: 14px;
         padding-left: 0px;
@@ -255,7 +281,9 @@ input:not(:checked) ~ #collapse-menu {
     }
 }
 
+
 /* Enlaces de navegacion */
+
 .enlaces-navegacion {
     display: flex;
     padding: 5px;
@@ -267,26 +295,28 @@ input:not(:checked) ~ #collapse-menu {
 }
 
 .enlaces-navegacion a:visited {
-    color:#888;
+    color: #888;
 }
 
 .flecha-navegacion {
     margin: 8px;
     font-size: 10px;
-    color:#888;
+    color: #888;
 }
 
-.content{
+.content {
     width: 100%;
     /*margin: 0 auto;*/
     background-color: #ffffff;
 }
 
+
 /* Lista de usuarios administradores */
-.scroll-usuarios{
-	height: 10rem;
-	overflow-x: hidden;
-	overflow-y: scroll;
+
+.scroll-usuarios {
+    height: 10rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
     margin: 0 0 0 10px;
 }
 
@@ -295,10 +325,10 @@ input:not(:checked) ~ #collapse-menu {
 }
 
 .lista-usuarios:nth-of-type(odd) {
-    background-color: #f1f1f1 ;
+    background-color: #f1f1f1;
 }
 
-.lista-usuarios-avatares img{
+.lista-usuarios-avatares img {
     height: 40px;
     width: 40px;
     border-radius: 50%;
@@ -324,7 +354,7 @@ input:not(:checked) ~ #collapse-menu {
 
 .lista-usuarios-crud {
     display: flex;
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: 50px;
 }
 
@@ -340,6 +370,7 @@ input:not(:checked) ~ #collapse-menu {
 .lista-usuarios-modificar input {
     margin: 2px 2px 0 2px;
 }
+
 .lista-usuarios-modificar input:hover {
     background-color: #3e4144;
 }
@@ -348,6 +379,7 @@ input:not(:checked) ~ #collapse-menu {
     background-color: rgb(240, 32, 32);
     margin: 2px 2px 0 2px;
 }
+
 .lista-usuarios-eliminar button:hover {
     background-color: rgb(241, 101, 101);
 }
@@ -356,6 +388,7 @@ input:not(:checked) ~ #collapse-menu {
     font-size: 1.5em;
     color: #555;
 }
+
 .lista-item-contenido h6 {
     font-size: 1em;
     color: #888;
@@ -384,7 +417,9 @@ input:not(:checked) ~ #collapse-menu {
     color: #FFF;
 }
 
+
 /* Login */
+
 .loginError button {
     background-color: black;
     border-radius: 5px;
@@ -393,6 +428,7 @@ input:not(:checked) ~ #collapse-menu {
     cursor: pointer;
     padding: 5px 10px;
 }
+
 
 /* Página modificar user */
 
@@ -424,7 +460,9 @@ input:not(:checked) ~ #collapse-menu {
     margin-top: 5px;
 }
 
+
 /* Buscador de plantas */
+
 .buscador {
     width: 100%;
     display: flex;
@@ -442,23 +480,25 @@ input:not(:checked) ~ #collapse-menu {
     padding: 30px;
 }
 
-.btn-buscador{
+.btn-buscador {
     margin-left: 20px;
     width: 120px;
     height: 40px;
     font-size: 15px;
 }
 
+
 /* Carrito */
 
-.btn-carrito {
-}
+.btn-carrito {}
+
 .carrito {
     background-color: transparent;
-    color:rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
     padding-top: 30px;
     padding-bottom: 30px;
 }
+
 
 /* Ordenar plantas */
 
@@ -469,6 +509,7 @@ input:not(:checked) ~ #collapse-menu {
 .lista-orden button {
     margin-top: 10px;
 }
+
 
 /* Crear XML */
 
@@ -485,6 +526,7 @@ input:not(:checked) ~ #collapse-menu {
     cursor: pointer;
     padding: 5px 10px;
 }
+
 
 /* Plantas */
 
@@ -528,12 +570,12 @@ input:not(:checked) ~ #collapse-menu {
     overflow: hidden;
     border: 1px solid rgb(134, 134, 134);
     border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
 .carta:hover {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .lista-plantas-content {
@@ -554,21 +596,27 @@ input:not(:checked) ~ #collapse-menu {
     height: 200px;
     width: 100%;
     vertical-align: middle;
-    transition: transform 1s; /* Animation */
-
+    transition: transform 1s;
+    /* Animation */
 }
 
 .lista-plantas-fotos:hover img {
     position: relative;
     transform: scale(1.5);
-
-    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-    image-rendering: -moz-crisp-edges;          /* Firefox                        */
-    image-rendering: -o-crisp-edges;            /* Opera                          */
-    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-    image-rendering: pixelated; /* Chrome */
-    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+    image-rendering: optimizeSpeed;
+    /* STOP SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;
+    /* Firefox                        */
+    image-rendering: -o-crisp-edges;
+    /* Opera                          */
+    image-rendering: -webkit-optimize-contrast;
+    /* Chrome (and eventually Safari) */
+    image-rendering: pixelated;
+    /* Chrome */
+    image-rendering: optimize-contrast;
+    /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;
+    /* IE8+                           */
 }
 
 .lista-plantas-nombre {
@@ -576,6 +624,7 @@ input:not(:checked) ~ #collapse-menu {
     font-weight: bold;
     padding: 10px;
 }
+
 
 /*
 .lista-plantas-descripcion {
@@ -620,17 +669,19 @@ input:not(:checked) ~ #collapse-menu {
 
 .lista-plantas-modificar:hover {
     background: rgba(0, 0, 0, 0.719);
-    -webkit-box-shadow: 0px 0px 25px -1px #000000; 
+    -webkit-box-shadow: 0px 0px 25px -1px #000000;
     box-shadow: 0px 0px 25px -1px #000000;
 }
 
 .lista-plantas-modificar #modificar {
-    -webkit-transition: color .2s; /* For Safari 3.0 to 6.0 */
-    transition: color .2s; /* For modern browsers */
+    -webkit-transition: color .2s;
+    /* For Safari 3.0 to 6.0 */
+    transition: color .2s;
+    /* For modern browsers */
 }
 
 .lista-plantas-modificar:hover #modificar {
-    color:rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 .lista-plantas-eliminar {
@@ -644,18 +695,21 @@ input:not(:checked) ~ #collapse-menu {
 
 .lista-plantas-eliminar:hover {
     background: rgba(255, 55, 55, 0.973);
-    -webkit-box-shadow: 0px 0px 25px -1px #FF0000; 
+    -webkit-box-shadow: 0px 0px 25px -1px #FF0000;
     box-shadow: 0px 0px 25px -1px #FF0000;
 }
 
 .lista-plantas-eliminar #eliminar {
-    -webkit-transition: color .2s; /* For Safari 3.0 to 6.0 */
-    transition: color .2s; /* For modern browsers */
+    -webkit-transition: color .2s;
+    /* For Safari 3.0 to 6.0 */
+    transition: color .2s;
+    /* For modern browsers */
 }
 
 .lista-plantas-eliminar:hover #eliminar {
-    color:rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
 }
+
 
 /* Agregar o quitar deseados */
 
@@ -664,6 +718,7 @@ input:not(:checked) ~ #collapse-menu {
     top: 0;
     left: 160px;
 }
+
 .agregar-deseado button {
     background-color: transparent;
     color: rgb(0, 0, 0);
@@ -681,6 +736,7 @@ input:not(:checked) ~ #collapse-menu {
     top: 0px;
     left: 160px;
 }
+
 .quitar-deseado button {
     background-color: transparent;
     color: rgb(255, 190, 70);
@@ -688,9 +744,11 @@ input:not(:checked) ~ #collapse-menu {
     font-size: 30px;
     transition: transform .2s;
 }
+
 .quitar-deseado button:hover {
     transform: scale(1.5);
 }
+
 
 /* Botón ver detalle */
 
@@ -706,9 +764,8 @@ input:not(:checked) ~ #collapse-menu {
 
 .ver-detalles-planta:hover {
     background: rgba(126, 170, 44, 0.897);
-    -webkit-box-shadow: 0px -5px 25px -1px #91B52D; 
+    -webkit-box-shadow: 0px -5px 25px -1px #91B52D;
     box-shadow: 0px -5px 25px -1px #91B52D;
-    
 }
 
 .ver-detalles-planta input {
@@ -717,23 +774,27 @@ input:not(:checked) ~ #collapse-menu {
     color: rgb(0, 0, 0);
     cursor: pointer;
     max-width: 100%;
-    background: transparent; 
-    -webkit-transition: color .2s; /* For Safari 3.0 to 6.0 */
-    transition: color .2s; /* For modern browsers */
+    background: transparent;
+    -webkit-transition: color .2s;
+    /* For Safari 3.0 to 6.0 */
+    transition: color .2s;
+    /* For modern browsers */
 }
 
 .ver-detalles-planta:hover input {
     color: rgb(255, 255, 255);
 }
 
+
 /* Login */
+
 .formulario-login {
     border: 1px solid black;
     border-radius: 5px;
-	max-width: 300px;
-	margin: 0 auto;
-	padding: 10px 0;
-	text-align: center;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 10px 0;
+    text-align: center;
 }
 
 .formulario-login h1 {
@@ -743,9 +804,9 @@ input:not(:checked) ~ #collapse-menu {
 }
 
 .formulario-login form {
-	padding: 20px 0;
-	position: relative;
-	z-index: 2;
+    padding: 20px 0;
+    position: relative;
+    z-index: 2;
 }
 
 .form-login input {
@@ -768,6 +829,7 @@ input:not(:checked) ~ #collapse-menu {
     height: 200px;
     width: 200px;
 }
+
 
 /* Crear usuario nuevo */
 
@@ -798,6 +860,7 @@ input:not(:checked) ~ #collapse-menu {
     color: #FFF;
 }
 
+
 /* Crear planta nueva */
 
 #nombre {
@@ -810,21 +873,24 @@ input:not(:checked) ~ #collapse-menu {
     height: 150px;
 }
 
+
 /* Side panel */
 
 .side-panel {
-    background: rgb(92,173,69);
-    background: linear-gradient(90deg, rgba(92,173,69,1) 0%, rgba(66,175,126,1) 100%);
+    background: rgb(92, 173, 69);
+    background: linear-gradient(90deg, rgba(92, 173, 69, 1) 0%, rgba(66, 175, 126, 1) 100%);
     width: 300px;
     height: auto;
     margin-right: 10px;
 }
+
 
 /* Content wrapper */
 
 .content-wrapper {
     display: flex;
 }
+
 
 /* carro */
 

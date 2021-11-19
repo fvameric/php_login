@@ -1,38 +1,39 @@
 <?php
-    session_start();
-    if (isset($_SESSION['sessionID'])) {
-        $id_user = $_SESSION['sessionID'];
+session_start();
+if (isset($_SESSION['sessionID'])) {
+    $id_user = $_SESSION['sessionID'];
 
-        //obtencion users
-        require_once('../crud_users/crud_users.php');
-        require_once('../clases/user.php');
-    
-        $crudUser = new CrudUser();
-        $user = new User();
-        $listaUsers = $crudUser->mostrar();
-        $user = $crudUser->obtenerUser($id_user);
-    
-        //obtencion deseados
-        require_once('crud_deseados.php');
-        require_once('../clases/deseados.php');
-    
-        $crudDeseados = new CrudDeseados();
-        $deseado = new Deseados();
-        $listaDeseados = $crudDeseados->mostrar();
-        //$deseado = $crudDeseados->obtenerDeseado($id_user);
+    //obtencion users
+    require_once('../crud_users/crud_users.php');
+    require_once('../clases/user.php');
 
-        //obtencion plantas
-        require_once('../crud_plantas/crud_plantas.php');
-        require_once('../clases/planta.php');
+    $crudUser = new CrudUser();
+    $user = new User();
+    $listaUsers = $crudUser->mostrar();
+    $user = $crudUser->obtenerUser($id_user);
 
-        $crudPlanta = new CrudPlanta();
-        $planta = new Planta();
-        $listaPlantas = $crudPlanta->mostrar();
-    }
+    //obtencion deseados
+    require_once('crud_deseados.php');
+    require_once('../clases/deseados.php');
+
+    $crudDeseados = new CrudDeseados();
+    $deseado = new Deseados();
+    $listaDeseados = $crudDeseados->mostrar();
+    //$deseado = $crudDeseados->obtenerDeseado($id_user);
+
+    //obtencion plantas
+    require_once('../crud_plantas/crud_plantas.php');
+    require_once('../clases/planta.php');
+
+    $crudPlanta = new CrudPlanta();
+    $planta = new Planta();
+    $listaPlantas = $crudPlanta->mostrar();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,11 +41,12 @@
     <title>Deseados</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
+
 <body>
-<div class='header'>
+    <div class='header'>
         <div class='topbar'>
             <div class='header-userinfo'>
-                <a href="profileAdmin.php" class="userinfo">
+                <a href="../profileAdmin.php" class="userinfo">
                     <div class='avatar'>
                         <img src=<?php echo $user->getAvatar(); ?>>
                     </div>
@@ -75,7 +77,7 @@
         <div class="menu-navegacion">
             <div class="menu-logo">
                 <a href="../index.php" class="logo">
-                    <img src="../images/logo.png"/>
+                    <img src="../images/logo.png" />
                 </a>
             </div>
             <div class="botones-menu">
@@ -121,9 +123,9 @@
         </div>
 
         <div class="scroll-plantas">
-            <?php foreach($listaDeseados as $deseados) { ?>
+            <?php foreach ($listaDeseados as $deseados) { ?>
                 <?php if ($deseados->getUserId() == $id_user) { ?>
-                    <?php foreach($listaPlantas as $plantas) { ?>
+                    <?php foreach ($listaPlantas as $plantas) { ?>
                         <?php if ($plantas->getId() == $deseados->getPlantaId()) { ?>
                             <div class="lista-plantas">
                                 <div class="carta">
@@ -138,21 +140,21 @@
                                             <?php echo $plantas->getPrecio() ?> €
                                         </div>
                                         <div class="agregar-deseados">
-                                            <?php 
+                                            <?php
                                             $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
 
                                             if ($idDeseado != null) { ?>
                                                 <div class="quitar-deseado">
                                                     <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
-                                                        <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>"/>
+                                                        <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
                                                         <button type="submit" name="quitarDeseado">★</button>
                                                     </form>
                                                 </div>
                                             <?php } else { ?>
                                                 <div class="agregar-deseado">
                                                     <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
-                                                        <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                                                        <input type="hidden" name="id_user" value="<?php echo $id ?>"/>
+                                                        <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                                        <input type="hidden" name="id_user" value="<?php echo $id ?>" />
                                                         <button type="submit" name="add">☆</button>
                                                     </form>
                                                 </div>
@@ -162,24 +164,24 @@
                                     <div class="lista-plantas-crud">
                                         <div class="lista-plantas-modificar">
                                             <form method="POST" action="/crud_plantas/pagina_modificacion.php">
-                                                <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
-                                                <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                                                <input type="submit" id="modificar" value="Modificar"/>
+                                                <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                                <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                                <input type="submit" id="modificar" value="Modificar" />
                                             </form>
                                         </div>
                                         <div class="lista-plantas-eliminar">
                                             <form method="POST" action="/crud_plantas/gestion_eliminacion.php">
-                                                <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
-                                                <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                                                <input type="submit" id="eliminar" value="Eliminar"/>
+                                                <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                                <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                                <input type="submit" id="eliminar" value="Eliminar" />
                                             </form>
                                         </div>
                                     </div>
                                     <div class="ver-detalles-planta">
                                         <form method="POST" action="ver_detalle.php">
-                                            <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
-                                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                                            <input type="submit" id="detalles" value="Ver detalle"/>
+                                            <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                            <input type="submit" id="detalles" value="Ver detalle" />
                                         </form>
                                     </div>
                                 </div>
@@ -191,4 +193,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -8,16 +8,20 @@
 
     session_start();
     if (isset($_SESSION['sessionID'])) {
-        if (isset($_POST['plant'])) {
-            $planta_id = $_POST['plant'];
-            $planta = $crudPlantas->obtenerPlanta($planta_id);
-            
-            array_push($_SESSION['arrayPlantas'], $planta);
-
+        if (isset($_SESSION['arrayPlantas'])) {
+            if (isset($_POST['plant'])) {
+                $planta_id = $_POST['plant'];
+                $planta = $crudPlantas->obtenerPlanta($planta_id);
+                
+                array_push($_SESSION['arrayPlantas'], $planta);
+            }
+    
             foreach($_SESSION['arrayPlantas'] as $value) {
                 echo $value->getNombre();
                 echo '<br>';
             }
+        } else {
+            $_SESSION['arrayPlantas'] = [];
         }
     } else {
         header("Location: index.php");
