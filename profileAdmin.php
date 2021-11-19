@@ -99,13 +99,12 @@ if (isset($_SESSION['sessionID'])) {
                         <label></label>
                     </form>
 
-                    <span class="dot"> <?php
-                    if (isset($_SESSION['arrayPlantas'])) {
-                        echo count($_SESSION['arrayPlantas']);
-                    } else {
+                    <?php
+                    if (isset($_SESSION['arrayPlantas'])) { ?>
+                        <span class="dot"><?php echo count($_SESSION['arrayPlantas']); ?></span>
+                    <?php } else {
                         $_SESSION['arrayPlantas'] = [];
-                    }
-                    ?> </span>
+                    } ?>
                 </div>
             </div>
         </div>
