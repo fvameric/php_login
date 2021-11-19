@@ -1,7 +1,7 @@
 <?php
-    include '/conexion/db.php';
-    require_once('/clases/planta.php');
-    require_once('/crud_plantas/crud_plantas.php');
+    include 'db.php';
+    require_once('../clases/planta.php');
+    require_once('../crud_plantas/crud_plantas.php');
 
     //obtencion plantas
     $crudPlantas = new CrudPlanta();
@@ -14,16 +14,10 @@
                 $planta = $crudPlantas->obtenerPlanta($planta_id);
                 
                 array_push($_SESSION['arrayPlantas'], $planta);
-            }
-    
-            foreach($_SESSION['arrayPlantas'] as $value) {
-                echo $value->getNombre();
-                echo '<br>';
+                header("Location: ../profileAdmin.php");
             }
         } else {
             $_SESSION['arrayPlantas'] = [];
         }
-    } else {
-        header("Location: index.php");
     }
 ?>
