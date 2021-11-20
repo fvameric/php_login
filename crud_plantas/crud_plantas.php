@@ -58,7 +58,13 @@
         public function eliminar($id){
             include 'db.php';
             $sqlDelete="DELETE FROM `plantas` WHERE id=".$id;
-            $consulta = mysqli_query($con,$sqlDelete);
+            $consultaDelete = mysqli_query($con,$sqlDelete);
+            
+            if(!$consultaDelete) {
+                echo 'no se realizó la consulta';
+            } else {
+                echo 'se realizó la consulta';
+            }
         }
 
         public function modificarPlanta($plantaModif, $id_planta){
@@ -116,18 +122,19 @@
                 foreach ($listaPlantas as $k => $b) {
                     if($b->getId()==$a->getPlantaId()) {
                         $sortarr[]=$b;
-                        //unset($listaPlantas[$k]);
                     }
                 }
             }
-            
-            //$finalarr = array_merge($sortarr, $listaPlantas);
+
             return $sortarr;
         }
 
         public function busqueda($input, $listaPlantas) {
-            $listaBusqueda=[];
             $listaPerc=[];
+            $listaCalc=[];
+            $listaPlantasFinal=[];
+            $max = 0;
+            $calc = 0;
 
             foreach ($listaPlantas as $t) {
                 similar_text($input, $t->getNombre(), $perc);
@@ -135,21 +142,20 @@
                     $listaPerc[] = $perc;
                 }
             }
-            $listaCalc=[];
-            $max = 0;
-            $calc = 0;
+            
             foreach ($listaPerc as $p) {
                 $max = max($listaPerc);
                 $calc = $p / $max * 100;
                 $listaCalc[] = $calc;
             }
-            $listaPlantasFinal=[];
+            
             foreach($listaCalc as $key => $val){
                 $val2 = $listaPlantas[$key];
                 if ($val >= 60) {
                     $listaPlantasFinal[] = $val2;
                 }
               }
+              
             return $listaPlantasFinal;
         }
 
@@ -177,4 +183,3 @@
             return $listaPlantas;
         }
     }
-?>

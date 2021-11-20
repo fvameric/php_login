@@ -4,8 +4,13 @@ include '/conexion/db.php';
 require_once('/crud_users/crud_users.php');
 require_once('/clases/user.php');
 
-$nickname = $_POST['nickname'];
-$password = $_POST['password'];
+$nickname = borrarEspacios($_POST['nickname']);
+$password = borrarEspacios($_POST['password']);
+
+function borrarEspacios($str) {
+    return preg_replace('/\s+/', '', $str);
+}
+
 $crudUser = new CrudUser();
 ?>
 
@@ -36,7 +41,6 @@ $crudUser = new CrudUser();
     <?php if ($nickname != "" && $password != "") {
 
         $password_hash = crypt($password,'$5$rounds=5000$stringforsalt$');
-        print_r($password_hash);
         $arrStr = explode("$", $password_hash);
 
         $user = $crudUser->validarLogin($nickname, $arrStr[4]); ?>
@@ -48,17 +52,10 @@ $crudUser = new CrudUser();
             </form>
         <?php } else
         {
-            if ($user['admin'] == 1) {
-                session_start();
-                $_SESSION['sessionID']=$user['id'];
-                $_SESSION['isAdmin']=$user['admin'];
-                header("Location: profileAdmin.php");
-            } else {
-                session_start();
-                $_SESSION['sessionID']=$user['id'];
-                $_SESSION['isAdmin']=$user['admin'];
-                header("Location: profile.php");
-            }
+            session_start();
+            $_SESSION['sessionID']=$user['id'];
+            $_SESSION['isAdmin']=$user['admin'];
+            header("Location: index.php");
         }
         ?>
     <?php } else { ?>
