@@ -1,33 +1,39 @@
 <?php
-    include 'db.php';
-    require_once('../clases/planta.php');
-    require_once('../crud_plantas/crud_plantas.php');
+include 'db.php';
+require_once('../clases/planta.php');
+require_once('../crud_plantas/crud_plantas.php');
+
+//obtencion plantas
+$crudPlantas = new CrudPlanta();
+
+session_start();
+if (isset($_SESSION['sessionID'])) {
+
+    $id_user = $_SESSION['sessionID'];
+    
+    $ubicacion = $_SESSION['ubicacion'];
+    $id_planta = $_SESSION['plantaid'];
+    
+    
+    //obtencion users
+    require_once('../crud_users/crud_users.php');
+    require_once('../clases/user.php');
+    $crudUser = new CrudUser();
+    $user = new User();
+    $user = $crudUser->obtenerUser($id_user);
 
     //obtencion plantas
-    $crudPlantas = new CrudPlanta();
+    require_once('../crud_plantas/crud_plantas.php');
+    require_once('../clases/planta.php');
 
-    session_start();
-    if (isset($_SESSION['sessionID'])) {
+    $crudPlanta = new CrudPlanta();
+    $planta = new Planta();
+    $planta = $crudPlanta->obtenerPlanta($id_planta);
 
-        $id_user = $_SESSION['sessionID'];
-
-        //obtencion users
-        require_once('../crud_users/crud_users.php');
-        require_once('../clases/user.php');
-        $crudUser = new CrudUser();
-        $user = new User();
-        $user = $crudUser->obtenerUser($id_user);
-    
-        //obtencion plantas
-        require_once('../crud_plantas/crud_plantas.php');
-        require_once('../clases/planta.php');
-    
-        $crudPlanta = new CrudPlanta();
-
-        $contador = 0;
-    } else {
-        header("Location: ../index.php");
-    }
+    $contador = 0;
+} else {
+    header("Location: ../index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,21 +67,6 @@
                     <li><a href="../crud_deseados/pagina_deseados.php">Deseados</a></li>
                     <li><a href="../cierre_sesion.php">Cerrar sesión</a></li>
 
-                    <!--
-                    <div class="dropdown">
-                        <input id="menu-toggle" type="checkbox">
-                        <label id="menu-label" for="menu-toggle">
-                            <div class="triangle">
-                            </div>
-                        </label>
-                        <ul id="collapse-menu">
-                            <li><a href="profileAdmin.php">Perfil</a></li>
-                            <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
-                            <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
-                        </ul>
-                    </div>
-                    -->
-
                     <form method="post" action="" class="btn-carrito">
                         <button>&#128722;</button>
                         <label></label>
@@ -100,7 +91,12 @@
         <div class="flecha-navegacion">
             ▶
         </div>
-        <a href="../profileAdmin.php">Perfil</a>
+        <?php if ($ubicacion == "detalle") { ?>
+            <a href="../ver_detalle.php?id_planta=<?php echo $id_planta; ?>"><?php echo $planta->getNombre(); ?></a>
+        <?php } else { ?>
+            <a href="../profileAdmin.php">Perfil</a>
+        <?php } ?>
+        
         <div class="flecha-navegacion">
             ▶
         </div>
@@ -110,11 +106,9 @@
     <div class="content-wrapper">
         <div class="content">
             <div class="scroll-plantas">
-                <?php
-
-                foreach ($_SESSION['arrayPlantas'] as $key => $plantas) {
+                <?php foreach ($_SESSION['arrayPlantas'] as $key => $plantas) {
                     $contador += $plantas->getPrecio();
-                    ?>
+                ?>
                     <div class="lista-plantas">
                         <div class="carta">
                             <div class="lista-plantas-fotos">
@@ -138,7 +132,7 @@
                             <div class="ver-detalles-planta">
                                 <form method="POST" action="gestion_eliminacion.php">
                                     <input type="hidden" name="index" value="<?php echo $key ?>" />
-                                    <input type="submit"  id="eliminar" value="Quitar del carro" />
+                                    <input type="submit" id="eliminar" value="Quitar del carro" />
                                 </form>
                             </div>
                         </div>

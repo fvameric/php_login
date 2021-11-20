@@ -214,6 +214,12 @@ if (isset($_GET['sort'])) {
                             <div class="lista-plantas-precio">
                                 <?php echo $plantas->getPrecio() ?> €
                             </div>
+                            <div>
+                                <form method="POST" action="/crud_carrito/gestion_carrito.php">
+                                    <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
+                                    <input type="submit" value="Añadir al carrito" />
+                                </form>
+                            </div>
                             <?php if ($logueado) { ?>
                                 <div class="agregar-deseados">
                                     <?php
@@ -239,8 +245,7 @@ if (isset($_GET['sort'])) {
                             <?php } ?>
                         </div>
                         <div class="ver-detalles-planta">
-                            <form method="POST" action="ver_detalle.php">
-                                <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                            <form method="GET" action="ver_detalle.php">
                                 <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
                                 <input type="submit" id="detalles" value="Ver detalle" />
                             </form>

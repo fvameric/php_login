@@ -14,10 +14,10 @@
                 $planta = $crudPlantas->obtenerPlanta($planta_id);
                 
                 array_push($_SESSION['arrayPlantas'], $planta);
-                header("Location: ../profileAdmin.php");
+                //header("Location: ../profileAdmin.php");
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
         } else {
             $_SESSION['arrayPlantas'] = [];
         }
     }
-?>

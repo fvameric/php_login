@@ -37,7 +37,7 @@ if (isset($_SESSION['sessionID'])) {
     if (isset($_GET['categoria'])) {
         $listaPlantas = $crudPlanta->ordenarPorCategoria($_GET['categoria'], $listaPlantas);
     }
-    
+
     if (isset($_GET['sort'])) {
         if ($_GET['sort'] == 1) {
             $listaPlantas = $crudPlanta->mostrar();
@@ -63,7 +63,6 @@ if (isset($_SESSION['sessionID'])) {
         }
     }
     */
-
 } else {
     header("Location: index.php");
 }
@@ -266,7 +265,8 @@ if (isset($_SESSION['sessionID'])) {
                                 </div>
                                 <div>
                                     <form method="POST" action="/crud_carrito/gestion_carrito.php">
-                                        <input type="submit" name="plant" value="<?php echo $plantas->getId(); ?>" />
+                                        <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
+                                        <input type="submit" value="Añadir al carrito" />
                                     </form>
                                 </div>
                                 <div class="agregar-deseados">
@@ -308,8 +308,7 @@ if (isset($_SESSION['sessionID'])) {
                                 </div>
                             </div>
                             <div class="ver-detalles-planta">
-                                <form method="POST" action="ver_detalle.php">
-                                    <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                <form method="GET" action="ver_detalle.php">
                                     <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
                                     <input type="submit" id="detalles" value="Ver detalle" />
                                 </form>
