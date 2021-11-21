@@ -79,6 +79,26 @@ if (isset($_SESSION['sessionID'])) {
     <link rel="stylesheet" href="styles.css">
     <script src="../sweetalert2.all.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+
+    <script>
+        function myFunction() {
+            var input, filter, cartas, splitArray, textoCarta, i;
+            input = document.getElementById('myInput');
+            filtro = input.value.toUpperCase();
+            cartas = document.getElementsByClassName('lista-plantas');
+
+            for (i = 0; i < cartas.length; i++) {
+                splitArray = cartas[i].innerText.split("\n");
+                textoCarta = splitArray[0];
+
+                if (textoCarta.toUpperCase().indexOf(filtro) > -1) {
+                    cartas[i].style.display = "";
+                } else {
+                    cartas[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -157,16 +177,8 @@ if (isset($_SESSION['sessionID'])) {
                     <button type="submit" name="categoria" class="button" value="7">Senecio</button>
                 </div>
             </form>
-            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="buscador">
-                <input type="search" name="search" class="barra-buscador" placeholder="Buscador">
-                <!--<button type="submit" name="buscar" class="btn-buscador" value="0">Buscar</button>-->
-
-                <?php
-                if (isset($_POST['search'])) {
-                    $search = $_POST['search'];
-                    $listaPlantas = $crudPlanta->busqueda($search, $listaPlantas);
-                }
-                ?>
+            <form method="POST" action="" class="buscador">
+                <input type="text" id="myInput" class="barra-buscador" onkeyup="myFunction()" placeholder="Buscador">
             </form>
         </div>
     </div>

@@ -76,6 +76,26 @@ if (isset($_GET['sort'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda</title>
     <link rel="stylesheet" href="styles.css">
+
+    <script>
+        function myFunction() {
+            var input, filter, cartas, splitArray, textoCarta, i;
+            input = document.getElementById('myInput');
+            filtro = input.value.toUpperCase();
+            cartas = document.getElementsByClassName('lista-plantas');
+
+            for (i = 0; i < cartas.length; i++) {
+                splitArray = cartas[i].innerText.split("\n");
+                textoCarta = splitArray[0];
+
+                if (textoCarta.toUpperCase().indexOf(filtro) > -1) {
+                    cartas[i].style.display = "";
+                } else {
+                    cartas[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -122,46 +142,6 @@ if (isset($_GET['sort'])) {
                     </div>
                 </div>
             </div>
-
-            <div class="menu-navegacion">
-                <div class="menu-logo">
-                    <a href="index.php" class="logo">
-                        <img src="images/logo.png" />
-                    </a>
-                </div>
-                <form method="GET" action="" class="botones-menu">
-                    <div class="caja1">
-                        <button type="submit" name="categoria" class="button" value="1">Aeonium</button>
-                    </div>
-                    <div class="caja2">
-                        <button type="submit" name="categoria" class="button" value="2">Cotyledon</button>
-                    </div>
-                    <div class="caja3">
-                        <button type="submit" name="categoria" class="button" value="3">Crassula</button>
-                    </div>
-                    <div class="caja4">
-                        <button type="submit" name="categoria" class="button" value="4">Echeveria</button>
-                    </div>
-                    <div class="caja5">
-                        <button type="submit" name="categoria" class="button" value="5">Euphorbia</button>
-                    </div>
-                    <div class="caja6">
-                        <button type="submit" name="categoria" class="button" value="6">Haworthia</button>
-                    </div>
-                    <div class="caja7">
-                        <button type="submit" name="categoria" class="button" value="7">Senecio</button>
-                    </div>
-                </form>
-                <form method="POST" action="" class="buscador">
-                    <input type="search" name="search" class="barra-buscador" placeholder="Buscador">
-                    <?php
-                    if (isset($_POST['search'])) {
-                        $search = $_POST['search'];
-                        $listaPlantas = $crudPlanta->busqueda($search, $listaPlantas);
-                    }
-                    ?>
-                </form>
-            </div>
         </div>
     <?php } else { ?>
         <div class='header'>
@@ -178,6 +158,41 @@ if (isset($_GET['sort'])) {
             </div>
         </div>
     <?php } ?>
+
+    <div class="menu-navegacion">
+        <div class="menu-logo">
+            <a href="index.php" class="logo">
+                <img src="images/logo.png" />
+            </a>
+        </div>
+        <form method="GET" action="" class="botones-menu">
+            <div class="caja1">
+                <button type="submit" name="categoria" class="button" value="1">Aeonium</button>
+            </div>
+            <div class="caja2">
+                <button type="submit" name="categoria" class="button" value="2">Cotyledon</button>
+            </div>
+            <div class="caja3">
+                <button type="submit" name="categoria" class="button" value="3">Crassula</button>
+            </div>
+            <div class="caja4">
+                <button type="submit" name="categoria" class="button" value="4">Echeveria</button>
+            </div>
+            <div class="caja5">
+                <button type="submit" name="categoria" class="button" value="5">Euphorbia</button>
+            </div>
+            <div class="caja6">
+                <button type="submit" name="categoria" class="button" value="6">Haworthia</button>
+            </div>
+            <div class="caja7">
+                <button type="submit" name="categoria" class="button" value="7">Senecio</button>
+            </div>
+        </form>
+
+        <form method="POST" action="" class="buscador">
+            <input type="text" id="myInput" class="barra-buscador" onkeyup="myFunction()" placeholder="Buscador">
+        </form>
+    </div>
 
     <div class="espacio">
     </div>
