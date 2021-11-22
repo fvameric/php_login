@@ -95,14 +95,15 @@ if (isset($_GET['id_planta'])) {
                         <form method="POST" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
                             <button>&#128722;</button>
                         </form>
-
-                        <?php
-                        if (isset($_SESSION['arrayPlantas'])) { ?>
-                            <span class="dot"><?php echo count($_SESSION['arrayPlantas']); ?></span>
-                        <?php } else {
-                            $_SESSION['arrayPlantas'] = [];
-                        } ?>
                     </div>
+                    <?php
+                    if (isset($_SESSION['arrayPlantas'])) {
+                        if (count($_SESSION['arrayPlantas']) > 0) { ?>
+                            <span class="contadorCarrito"><?php echo count($_SESSION['arrayPlantas']); ?></span>
+                        <?php } ?>
+                    <?php } else {
+                        $_SESSION['arrayPlantas'] = [];
+                    } ?>
                 </div>
             </div>
         </div>

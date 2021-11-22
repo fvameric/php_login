@@ -10,11 +10,9 @@ session_start();
 if (isset($_SESSION['sessionID'])) {
 
     $id_user = $_SESSION['sessionID'];
-    
     $ubicacion = $_SESSION['ubicacion'];
     $id_planta = $_SESSION['plantaid'];
-    
-    
+
     //obtencion users
     require_once('../crud_users/crud_users.php');
     require_once('../clases/user.php');
@@ -69,16 +67,16 @@ if (isset($_SESSION['sessionID'])) {
 
                     <form method="post" action="" class="btn-carrito">
                         <button>&#128722;</button>
-                        <label></label>
                     </form>
-
-                    <?php
-                    if (isset($_SESSION['arrayPlantas'])) { ?>
-                        <span class="dot"><?php echo count($_SESSION['arrayPlantas']); ?></span>
-                    <?php } else {
-                        $_SESSION['arrayPlantas'] = [];
-                    } ?>
                 </div>
+                <?php
+                if (isset($_SESSION['arrayPlantas'])) {
+                    if (count($_SESSION['arrayPlantas']) > 0) { ?>
+                        <span class="contadorCarrito"><?php echo count($_SESSION['arrayPlantas']); ?></span>
+                    <?php } ?>
+                <?php } else {
+                    $_SESSION['arrayPlantas'] = [];
+                } ?>
             </div>
         </div>
     </div>
@@ -93,10 +91,12 @@ if (isset($_SESSION['sessionID'])) {
         </div>
         <?php if ($ubicacion == "detalle") { ?>
             <a href="../ver_detalle.php?id_planta=<?php echo $id_planta; ?>"><?php echo $planta->getNombre(); ?></a>
-        <?php } else { ?>
+        <?php } else if ($ubicacion == "perfilAdmin") { ?>
             <a href="../profileAdmin.php">Perfil</a>
+        <?php } else if ($ubicacion == "perfil") { ?>
+            <a href="../profile.php">Perfil</a>
         <?php } ?>
-        
+
         <div class="flecha-navegacion">
             ▶
         </div>

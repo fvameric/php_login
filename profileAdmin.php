@@ -4,6 +4,7 @@ include '/conexion/db.php';
 // si no hay sesión iniciada, devuelve al home
 session_start();
 if (isset($_SESSION['sessionID'])) {
+    $_SESSION['ubicacion'] = 'perfilAdmin';
     $id_user = $_SESSION['sessionID'];
 
     //obtencion users
@@ -136,16 +137,16 @@ if (isset($_SESSION['sessionID'])) {
 
                     <form method="post" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
                         <button>&#128722;</button>
-                        <label></label>
                     </form>
-
-                    <?php
-                    if (isset($_SESSION['arrayPlantas'])) { ?>
-                        <span class="dot"><?php echo count($_SESSION['arrayPlantas']); ?></span>
-                    <?php } else {
-                        $_SESSION['arrayPlantas'] = [];
-                    } ?>
                 </div>
+                <?php
+                if (isset($_SESSION['arrayPlantas'])) {
+                    if (count($_SESSION['arrayPlantas']) > 0) { ?>
+                        <span class="contadorCarrito"><?php echo count($_SESSION['arrayPlantas']); ?></span>
+                    <?php } ?>
+                <?php } else {
+                    $_SESSION['arrayPlantas'] = [];
+                } ?>
             </div>
         </div>
         <div class="menu-navegacion">
@@ -195,9 +196,6 @@ if (isset($_SESSION['sessionID'])) {
     </div>
 
     <div class="content-wrapper">
-        <div class="side-panel">
-
-        </div>
         <div class="content">
             <?php if ($user->getAdmin() == 1) { ?>
                 <div class="lista-usuarios-crear">
