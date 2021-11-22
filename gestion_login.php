@@ -43,6 +43,8 @@ $crudUser = new CrudUser();
         $password_hash = crypt($password,'$5$rounds=5000$stringforsalt$');
         $arrStr = explode("$", $password_hash);
 
+        echo $password_hash;
+
         $user = $crudUser->validarLogin($nickname, $arrStr[4]); ?>
 
         <?php if (is_null($user) || empty($user)) { ?>
