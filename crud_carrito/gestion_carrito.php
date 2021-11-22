@@ -12,6 +12,14 @@
             if (isset($_POST['plant'])) {
                 $planta_id = $_POST['plant'];
                 $planta = $crudPlantas->obtenerPlanta($planta_id);
+
+                /*
+                foreach($_SESSION['arrayPlantas'] as $elem) {
+                    if ($elem == $planta) {
+
+                    }
+                }
+                */
                 
                 array_push($_SESSION['arrayPlantas'], $planta);
                 //header("Location: ../profileAdmin.php");
