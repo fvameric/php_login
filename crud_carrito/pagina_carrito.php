@@ -9,24 +9,31 @@ $crudPlantas = new CrudPlanta();
 session_start();
 if (isset($_SESSION['sessionID'])) {
 
-    $id_user = $_SESSION['sessionID'];
-    $ubicacion = $_SESSION['ubicacion'];
-    $id_planta = $_SESSION['plantaid'];
+    if (isset($_SESSION['ubicacion'])) {
+        $ubicacion = $_SESSION['ubicacion'];
+    }
+    if (isset($_SESSION['sessionID'])) {
+        $id_user = $_SESSION['sessionID'];
 
-    //obtencion users
-    require_once('../crud_users/crud_users.php');
-    require_once('../clases/user.php');
-    $crudUser = new CrudUser();
-    $user = new User();
-    $user = $crudUser->obtenerUser($id_user);
+        //obtencion users
+        require_once('../crud_users/crud_users.php');
+        require_once('../clases/user.php');
+        $crudUser = new CrudUser();
+        $user = new User();
+        $user = $crudUser->obtenerUser($id_user);
+    }
 
-    //obtencion plantas
-    require_once('../crud_plantas/crud_plantas.php');
-    require_once('../clases/planta.php');
+    if (isset($_SESSION['plantaid'])) {
+        $id_planta = $_SESSION['plantaid'];
 
-    $crudPlanta = new CrudPlanta();
-    $planta = new Planta();
-    $planta = $crudPlanta->obtenerPlanta($id_planta);
+        //obtencion plantas
+        require_once('../crud_plantas/crud_plantas.php');
+        require_once('../clases/planta.php');
+
+        $crudPlanta = new CrudPlanta();
+        $planta = new Planta();
+        $planta = $crudPlanta->obtenerPlanta($id_planta);
+    }
 
     $contador = 0;
 } else {
@@ -106,26 +113,31 @@ if (isset($_SESSION['sessionID'])) {
     <div class="content-wrapper">
         <div class="content">
             <div class="scroll-plantas">
-                <?php foreach ($_SESSION['arrayPlantas'] as $key => $plantas) {
-                    $contador += $plantas->getPrecio();
+                <?php
+                foreach ($_SESSION['arrayPlantas'] as $key => $plantas) {
+                    $contador += $plantas[0]->getPrecio();
                 ?>
                     <div class="lista-plantas">
                         <div class="carta">
                             <div class="lista-plantas-fotos">
-                                <img src=<?php echo $plantas->getFoto() ?> class="lista-fotos">
+                                <img src=<?php echo $plantas[0]->getFoto() ?> class="lista-fotos">
                             </div>
                             <div class="lista-plantas-content">
                                 <div class="lista-plantas-nombre">
-                                    <?php echo $plantas->getNombre() ?>
+                                    <?php echo $plantas[0]->getNombre() ?>
                                 </div>
                                 <div class="lista-plantas-precio">
-                                    <?php echo $plantas->getPrecio() ?> €
+                                    <?php echo $plantas[0]->getPrecio() ?> €
+                                </div>
+                                <div class="lista-plantas-cantidad">
+                                    x <?php echo $plantas[1]; ?> - Total: <?php echo $plantas[0]->getPrecio() * $plantas[1]; ?> €
+
                                 </div>
                             </div>
                             <div class="ver-detalles-planta">
                                 <form method="POST" action="ver_detalle.php">
                                     <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
-                                    <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                    <input type="hidden" name="id_planta" value="<?php echo $plantas[0]->getId() ?>" />
                                     <input type="submit" id="detalles" value="Ver detalle" />
                                 </form>
                             </div>

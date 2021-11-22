@@ -641,6 +641,17 @@ input:not(:checked)~#collapse-menu {
     padding: 10px;
 }
 
+.lista-plantas-gestionCarrito {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cantidadCarrito {
+    width: 40px;
+}
+
 .lista-plantas-crud {
     display: flex;
     justify-content: space-between;

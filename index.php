@@ -135,7 +135,7 @@ if (isset($_GET['sort'])) {
                     <?php
                     if (isset($_SESSION['arrayPlantas'])) {
                         if (count($_SESSION['arrayPlantas']) > 0) { ?>
-                        <span class="contadorCarrito"><?php echo count($_SESSION['arrayPlantas']); ?></span>
+                            <span class="contadorCarrito"><?php echo count($_SESSION['arrayPlantas']); ?></span>
                         <?php } ?>
                     <?php } else {
                         $_SESSION['arrayPlantas'] = [];
@@ -226,14 +226,17 @@ if (isset($_GET['sort'])) {
                             <div class="lista-plantas-nombre">
                                 <?php echo $plantas->getNombre() ?>
                             </div>
-                            <div class="lista-plantas-precio">
-                                <?php echo $plantas->getPrecio() ?> €
-                            </div>
-                            <div>
-                                <form method="POST" action="/crud_carrito/gestion_carrito.php">
-                                    <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
-                                    <input type="submit" value="Añadir al carrito" />
-                                </form>
+                            <div class="lista-plantas-gestionCarrito">
+                                <div class="lista-plantas-precio">
+                                    <?php echo $plantas->getPrecio() ?> €
+                                </div>
+                                <?php if ($logueado) { ?>
+                                    <form method="POST" action="/crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
+                                        <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
+                                        <input type="number" name="cantidad" class="cantidadCarrito"/>
+                                        <input type="submit" value="&#128722;" />
+                                    </form>
+                                <?php } ?>
                             </div>
                             <?php if ($logueado) { ?>
                                 <div class="agregar-deseados">

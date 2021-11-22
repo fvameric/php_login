@@ -116,12 +116,6 @@ if (isset($_SESSION['sessionID'])) {
     </div>
 
     <div class="content">
-        <div class="descargar-xml">
-            <form method="POST" action="crear_xml.php">
-                <button type="submit" name="xml">Crear XML</button>
-            </form>
-        </div>
-
         <div class="scroll-plantas">
             <?php foreach ($listaDeseados as $deseados) { ?>
                 <?php if ($deseados->getUserId() == $id_user) { ?>

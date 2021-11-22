@@ -248,6 +248,12 @@ if (isset($_SESSION['sessionID'])) {
                 </form>
             </div>
 
+            <div class="descargar-xml">
+                <form method="POST" action="crear_xml.php">
+                    <button type="submit" name="xml">Crear XML</button>
+                </form>
+            </div>
+
             <div class="lista-orden">
                 <form method="GET" action="profileAdmin.php">
                     <button type="submit" name="sort" class="button" value="1">Ordenar por defecto</button>
