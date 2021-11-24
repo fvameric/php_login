@@ -57,6 +57,11 @@ if (isset($_SESSION['sessionID'])) {
 <body>
     <div class='header'>
         <div class='topbar'>
+            <div class="menu-logo">
+                <a href="index.php" class="logo">
+                    <img src="images/logo.png" />
+                </a>
+            </div>
             <div class='header-userinfo'>
                 <a href="../profileAdmin.php" class="userinfo">
                     <div class='avatar'>
@@ -92,21 +97,44 @@ if (isset($_SESSION['sessionID'])) {
     </div>
 
     <div class="enlaces-navegacion">
-        <a href="../index.php">Home</a>
-        <div class="flecha-navegacion">
-            ▶
-        </div>
-        <?php if ($ubicacion == "detalle") { ?>
-            <a href="../ver_detalle.php?id_planta=<?php echo $id_planta; ?>"><?php echo $planta->getNombre(); ?></a>
-        <?php } else if ($ubicacion == "perfilAdmin") { ?>
-            <a href="../profileAdmin.php">Perfil</a>
-        <?php } else if ($ubicacion == "perfil") { ?>
-            <a href="../profile.php">Perfil</a>
-        <?php } ?>
 
-        <div class="flecha-navegacion">
-            ▶
-        </div>
+        <?php if ($ubicacion == "detalle") { ?>
+            <a href="../index.php">Home</a>
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+            <a href="../ver_detalle.php?id_planta=<?php echo $id_planta; ?>"><?php echo $planta->getNombre(); ?></a>
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+        <?php } else if ($ubicacion == "perfilAdmin") { ?>
+            <a href="../index.php">Home</a>
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+
+            <a href="../profileAdmin.php">Perfil</a>
+
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+        <?php } else if ($ubicacion == "perfil") { ?>
+            <a href="../index.php">Home</a>
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+
+            <a href="../profile.php">Perfil</a>
+
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+        <?php } else if ($ubicacion == "home") { ?>
+            <a href="../index.php">Home</a>
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+        <?php } ?>
         <a href="pagina_carrito.php">Carrito</a>
     </div>
 

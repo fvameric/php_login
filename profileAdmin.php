@@ -4,6 +4,7 @@ include '/conexion/db.php';
 // si no hay sesión iniciada, devuelve al home
 session_start();
 if (isset($_SESSION['sessionID'])) {
+    $logueado = true;
     $_SESSION['ubicacion'] = 'perfilAdmin';
     $id_user = $_SESSION['sessionID'];
 
@@ -105,6 +106,11 @@ if (isset($_SESSION['sessionID'])) {
 <body>
     <div class='header'>
         <div class='topbar'>
+            <div class="menu-logo">
+                <a href="index.php" class="logo">
+                    <img src="images/logo.png" />
+                </a>
+            </div>
             <div class='header-userinfo'>
                 <a href="profileAdmin.php" class="userinfo">
                     <div class='avatar'>
@@ -150,11 +156,6 @@ if (isset($_SESSION['sessionID'])) {
             </div>
         </div>
         <div class="menu-navegacion">
-            <div class="menu-logo">
-                <a href="index.php" class="logo">
-                    <img src="images/logo.png" />
-                </a>
-            </div>
             <form method="GET" action="" class="botones-menu">
                 <div class="caja1">
                     <button type="submit" name="categoria" class="button" value="1">Aeonium</button>
@@ -276,14 +277,17 @@ if (isset($_SESSION['sessionID'])) {
                                 <div class="lista-plantas-nombre">
                                     <?php echo $plantas->getNombre() ?>
                                 </div>
-                                <div class="lista-plantas-precio">
-                                    <?php echo $plantas->getPrecio() ?> €
-                                </div>
-                                <div>
-                                    <form method="POST" action="/crud_carrito/gestion_carrito.php">
-                                        <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
-                                        <input type="submit" value="Añadir al carrito" />
-                                    </form>
+                                <div class="lista-plantas-gestionCarrito">
+                                    <div class="lista-plantas-precio">
+                                        <?php echo $plantas->getPrecio() ?> €
+                                    </div>
+                                    <?php if ($logueado) { ?>
+                                        <form method="POST" action="/crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
+                                            <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
+                                            <input type="number" name="cantidad" class="cantidadCarrito" />
+                                            <input type="submit" value="&#128722;" />
+                                        </form>
+                                    <?php } ?>
                                 </div>
                                 <div class="agregar-deseados">
                                     <?php

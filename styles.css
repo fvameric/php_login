@@ -53,7 +53,7 @@ button:focus {
     left: 0;
     width: 100%;
     max-width: 100%;
-    height: 35px;
+    height: 50px;
     z-index: 90;
     background: rgb(255, 255, 255);
     /*background: rgb(87,135,31);*/
@@ -93,7 +93,7 @@ button:focus {
 
 .topbar {
     display: flex;
-    height: 35px;
+    height: 50px;
     /*margin: 0 auto;*/
 }
 
@@ -109,8 +109,8 @@ button:focus {
 }
 
 .menu-logo img {
-    width: 100%;
-    height: 100%;
+    width: 40px;
+    height: 40px;
 }
 
 .botones-menu {
