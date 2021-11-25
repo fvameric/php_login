@@ -32,3 +32,4 @@
             $this->planta_id = $planta_id;
         }
     }
+?>

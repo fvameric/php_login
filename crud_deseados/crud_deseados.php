@@ -33,6 +33,16 @@ class CrudDeseados
         return $this->listaDeseados;
     }
 
+    public function obtenerDeseadoPorId($id_planta, $id_user)
+    {
+        foreach ($this->listaDeseados as $deseado) {
+            if ($id_planta == $deseado->getPlantaId() && $id_user == $deseado->getUserId()) {
+                return $deseado;
+            }
+        }
+        return null;
+    }
+
     public function agregarDeseado($user_id, $planta_id)
     {
         $sql = "INSERT INTO `deseados` (`id` ,`user_id` ,`planta_id`)VALUES (NULL , '" . $user_id . "', '" . $planta_id . "')";
@@ -50,14 +60,6 @@ class CrudDeseados
         $sqlUpdate = "UPDATE `deseados` SET id=" . $id_deseado . ", user_id=" . $deseadoModif->getUserId() . ", planta_id=" . $deseadoModif->getPlantaId() . ")";
         $consultaUpdate = mysqli_query($this->db->obtenerConexion(), $sqlUpdate);
     }
-
-    public function obtenerDeseadoPorId($id_planta, $id_user)
-    {
-        foreach ($this->listaDeseados as $deseado) {
-            if ($id_planta == $deseado->getPlantaId() && $id_user == $deseado->getUserId()) {
-                return $deseado;
-            }
-        }
-        return null;
-    }
 }
+
+?>

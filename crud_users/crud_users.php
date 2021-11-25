@@ -7,7 +7,7 @@ class CrudUser
     private $db;
     private $listaUsers = [];
 
-    public function __construct()
+    function __construct()
     {
         $this->db = new db();
         $this->cargarUsuarios();
@@ -36,6 +36,16 @@ class CrudUser
         return $this->listaUsers;
     }
 
+    public function obtenerUserPorId($id)
+    {
+        foreach($this->listaUsers as $user) {
+            if ($id == $user->getId()) {
+                return $user;
+            }
+        }
+        return null;
+    }
+
     public function validarLogin($nickname, $password)
     {
         foreach($this->listaUsers as $user) {
@@ -43,18 +53,6 @@ class CrudUser
                 return $user;
             }
         }
-
-        /*
-
-        $sql = "SELECT * FROM `users` WHERE nickname = '" . $nickname . "' AND password='" . $password . "'";
-        $consulta = mysqli_query($this->db->obtenerConexion(), $sql);
-        $user = $consulta->fetch_assoc();
-        if ($nickname == $user['nickname'] && $password == $user['password']) {
-            return $user;
-        } else {
-            return null;
-        }
-        */
     }
 
     public function emailExiste($email)
@@ -66,16 +64,6 @@ class CrudUser
                 return false;
             }
         }
-        /*
-        $sql = "SELECT * FROM `users` WHERE email='" . $email . "'";
-        $consultaEmail = mysqli_query($this->db->obtenerConexion(), $sql);
-        $fila = $consultaEmail->fetch_assoc();
-        if ($email == $fila['email']) {
-            return true;
-        } else {
-            return false;
-        }
-        */
     }
 
     public function nicknameExiste($nickname)
@@ -87,18 +75,6 @@ class CrudUser
                 return false;
             }
         }
-
-        /*
-
-        $sql = "SELECT * FROM `users` WHERE nickname='" . $nickname . "'";
-        $consultaNickname = mysqli_query($this->db->obtenerConexion(), $sql);
-        $fila = $consultaNickname->fetch_assoc();
-        if ($nickname == $fila['nickname']) {
-            return true;
-        } else {
-            return false;
-        }
-        */
     }
 
     public function convertirBase64($targetFilePath)
@@ -141,11 +117,22 @@ class CrudUser
         }
     }
 
-    public function eliminar($id)
+    public function eliminar($user)
     {
-        include_once '/conexion/db.php';;
+        /*
         $sqlDelete = "DELETE FROM `users` WHERE id=" . $id;
         $consulta = mysqli_query($this->db->obtenerConexion(), $sqlDelete);
+        
+        $flag = false;
+
+        foreach($this->listaUsers as $value) {
+            if ($value->getId() == $user->getId()) {
+                $userrr = $user;
+                break;
+            }
+        }*/
+
+        //echo $user->getNickname();
     }
 
     public function modificarUsuario($userModif, $id_user)
@@ -159,29 +146,5 @@ class CrudUser
         } else {
             echo 'se realizó la consulta';
         }
-    }
-
-    public function obtenerUserPorId($id)
-    {
-        foreach($this->listaUsers as $user) {
-            if ($id == $user->getId()) {
-                return $user;
-            }
-        }
-        return null;
-        /*
-        $sqlUserId = "SELECT * FROM `users` WHERE id = '" . $id . "'";
-        $consultaUser = mysqli_query($this->db->obtenerConexion(), $sqlUserId);
-        $fila = $consultaUser->fetch_assoc();
-
-        $user = new User();
-        $user->setId($fila['id']);
-        $user->setNickname($fila['nickname']);
-        $user->setPassword($fila['password']);
-        $user->setEmail($fila['email']);
-        $user->setAvatar($fila['avatar']);
-        $user->setAdmin($fila['admin']);
-        return $user;
-        */
     }
 }

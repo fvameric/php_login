@@ -1,6 +1,7 @@
 <?php
 include_once('crud_users.php');
-include_once('../clases/user.php');
+include_once('/clases/user.php');
+include_once('db.php');
 
 include_once 'pagina_modificacion.php';
 

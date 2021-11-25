@@ -1,33 +1,12 @@
 <?php
-    session_start();
-    if (isset($_SESSION['sessionID'])) {
-        $id_user = $_SESSION['sessionID'];
-        $id_planta = $_POST['id_planta'];
-    
-        //obtencion deseados
-        include_once('crud_deseados.php');
-        include_once('../clases/deseados.php');
-    
-        $crudDeseados = new CrudDeseados();
-        $deseado = new Deseados();
-    
-        //obtencion users
-        include_once('../crud_users/crud_users.php');
-        include_once('../clases/user.php');
-    
-        $crudUser = new CrudUser();
-        $user = new User();
-        $listaUsers = $crudUser->obtenerListaUsuarios();
-    
-        //obtencion plantas
-        include_once('../crud_plantas/crud_plantas.php');
-        include_once('../clases/planta.php');
-    
-        $crudPlantas = new CrudPlanta();
-        $planta = new Planta();
-        
-        $crudDeseados->agregarDeseado($id_user, $id_planta);
-        //header("Location: pagina_deseados.php");
-        header("Location: ../profileAdmin.php");
-    }
+include_once('/conexion/db.php');
+
+session_start();
+if (isset($_SESSION['sessionID'])) {
+    $id_user = $_SESSION['sessionID'];
+    $id_planta = $_POST['id_planta'];
+
+    $crudDeseados->agregarDeseado($id_user, $id_planta);
+    header("Location: ../profileAdmin.php");
+}
 ?>

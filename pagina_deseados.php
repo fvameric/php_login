@@ -6,7 +6,7 @@ include_once('/crud_users/crud_users.php');
 include_once('/clases/user.php');
 
 //obtencion deseados
-include_once('crud_deseados.php');
+include_once('/crud_deseados/crud_deseados.php');
 include_once('/clases/deseados.php');
 
 //obtencion plantas
@@ -143,7 +143,7 @@ if (isset($_SESSION['sessionID'])) {
                                             if ($idDeseado != null) { ?>
                                                 <div class="quitar-deseado">
                                                     <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
-                                                        <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
+                                                        <input type="hidden" name="id_deseado" value="<?php echo $idDeseado->getId() ?>" />
                                                         <button type="submit" name="quitarDeseado">★</button>
                                                     </form>
                                                 </div>

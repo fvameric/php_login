@@ -24,9 +24,7 @@ if (isset($_SESSION['sessionID'])) {
     //deseados
     $crudDeseados = new CrudDeseados();
     $deseado = new Deseados();
-    if (!isset($listaDeseados)) {
-        $listaDeseados = $crudDeseados->obtenerListaDeseados();
-    }
+    $listaDeseados = $crudDeseados->obtenerListaDeseados();
 } else {
     $logueado = false;
 }
@@ -124,10 +122,10 @@ if (isset($_GET['sort'])) {
 
                     <div class='header-content'>
                         <li><a href="profileAdmin.php">Perfil</a></li>
-                        <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
+                        <li><a href="pagina_deseados.php">Deseados</a></li>
                         <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
 
-                        <form method="post" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
+                        <form method="post" action="pagina_carrito.php" class="btn-carrito">
                             <button>&#128722;</button>
                         </form>
                     </div>
@@ -219,12 +217,11 @@ if (isset($_GET['sort'])) {
                                     <?php if ($logueado) { ?>
                                         <div class="agregar-deseados">
                                             <?php
-                                            $idDeseado = $crudDeseados->obtenerDeseadoPorId($plantas->getId(), $_SESSION['sessionID']);
-
+                                            $idDeseado = $crudDeseados->obtenerDeseadoPorId($plantas->getId(), $id_user);
                                             if ($idDeseado != null) { ?>
                                                 <div class="quitar-deseado">
                                                     <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
-                                                        <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
+                                                        <input type="hidden" name="id_deseado" value="<?php echo $idDeseado->getId() ?>" />
                                                         <button type="submit" name="quitarDeseado">★</button>
                                                     </form>
                                                 </div>
@@ -232,7 +229,6 @@ if (isset($_GET['sort'])) {
                                                 <div class="agregar-deseado">
                                                     <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
                                                         <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                                        <input type="hidden" name="id_user" value="<?php echo $id ?>" />
                                                         <button type="submit" name="add">☆</button>
                                                     </form>
                                                 </div>
