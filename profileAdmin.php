@@ -155,6 +155,7 @@ if (isset($_SESSION['sessionID'])) {
                 } ?>
             </div>
         </div>
+        
         <div class="menu-navegacion">
             <form method="GET" action="" class="botones-menu">
                 <div class="caja1">
@@ -179,6 +180,7 @@ if (isset($_SESSION['sessionID'])) {
                     <button type="submit" name="categoria" class="button" value="7">Senecio</button>
                 </div>
             </form>
+
             <form method="POST" action="" class="buscador">
                 <input type="text" id="myInput" class="barra-buscador" onkeyup="myFunction()" placeholder="Buscador">
             </form>

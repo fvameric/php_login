@@ -15,14 +15,6 @@ if (isset($_SESSION['sessionID'])) {
     $user = new User();
     $listaUsers = $crudUser->mostrar();
     $user = $crudUser->obtenerUser($id_user);
-    //obtencion users
-    require_once('/crud_users/crud_users.php');
-    require_once('/clases/user.php');
-
-    $crudUser = new CrudUser();
-    $user = new User();
-    $listaUsers = $crudUser->mostrar();
-    $user = $crudUser->obtenerUser($_SESSION['sessionID']);
 
     //obtencion deseados
     require_once('/crud_deseados/crud_deseados.php');
@@ -177,14 +169,16 @@ if (isset($_GET['sort'])) {
                     <input type="text" id="myInput" class="barra-buscador" onkeyup="myFunction()" placeholder="Buscador">
                 </form>
             </div>
+        </div>
 
-            <div class="espacio">
-            </div>
+        <div class="espacio">
+        </div>
 
-            <div class="enlaces-navegacion">
-                <a href="index.php">Home</a>
-            </div>
+        <div class="enlaces-navegacion">
+            <a href="index.php">Home</a>
+        </div>
 
+        <div class="content-wrapper">
             <div class="content">
                 <div class="lista-orden">
                     <form method="GET" action="">

@@ -3,9 +3,6 @@ include 'db.php';
 require_once('../clases/planta.php');
 require_once('../crud_plantas/crud_plantas.php');
 
-//obtencion plantas
-$crudPlantas = new CrudPlanta();
-
 session_start();
 if (isset($_SESSION['sessionID'])) {
 
@@ -58,19 +55,30 @@ if (isset($_SESSION['sessionID'])) {
     <div class='header'>
         <div class='topbar'>
             <div class="menu-logo">
-                <a href="index.php" class="logo">
-                    <img src="images/logo.png" />
+                <a href="../index.php" class="logo">
+                    <img src="../images/logo.png" />
                 </a>
             </div>
             <div class='header-userinfo'>
-                <a href="../profileAdmin.php" class="userinfo">
-                    <div class='avatar'>
-                        <img src=<?php echo $user->getAvatar(); ?>>
-                    </div>
-                    <div class='nombre'>
-                        <?php echo $user->getNickname(); ?>
-                    </div>
-                </a>
+                <?php if ($_SESSION['isAdmin'] == 0) { ?>
+                    <a href="../profile.php" class="userinfo">
+                        <div class='avatar'>
+                            <img src=<?php echo $user->getAvatar(); ?>>
+                        </div>
+                        <div class='nombre'>
+                            <?php echo $user->getNickname(); ?>
+                        </div>
+                    </a>
+                <?php } else { ?>
+                    <a href="../profileAdmin.php" class="userinfo">
+                        <div class='avatar'>
+                            <img src=<?php echo $user->getAvatar(); ?>>
+                        </div>
+                        <div class='nombre'>
+                            <?php echo $user->getNickname(); ?>
+                        </div>
+                    </a>
+                <?php } ?>
 
                 <div class='header-content'>
                     <li><a href="../profileAdmin.php">Perfil</a></li>
