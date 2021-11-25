@@ -1,11 +1,11 @@
 <?php
     //obtencion plantas
-    require_once('/crud_plantas/crud_plantas.php');
-    require_once('/clases/planta.php');
+    include_once('/crud_plantas/crud_plantas.php');
+    include_once('/clases/planta.php');
 
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
-    $listaPlantas = $crudPlanta->mostrar();
+    $listaPlantas = $crudPlanta->obtenerListaPlantas();
 
     $xml = new SimpleXMLElement('<xml/>');
 
@@ -29,4 +29,3 @@
     fclose($file);
 
     header('Location: profileAdmin.php');
-?>

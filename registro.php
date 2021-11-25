@@ -1,18 +1,18 @@
 <?php
-    include('/conexion/db.php');
-    
-    require('/crud_users/crud_users.php');
-    require('/clases/user.php');
+    include_once('/conexion/db.php');
+    include_once('/crud_users/crud_users.php');
+    include_once('/clases/user.php');
 
     $crudUser = new CrudUser();
     $user = new User();
 
+    //nick, pass y email
     $nickname = $_POST['nickname'];
     $password = $_POST['password'];
     $password_hash = crypt($password, CRYPT_SHA256);
-
     $email = $_POST['email'];
 
+    //avatar
     $targetDir = "uploads/";
     $filename = $_FILES["file"]["name"];
     $targetFilePath = $targetDir . $filename;
@@ -21,12 +21,12 @@
     if(isset($_POST['submit']))
     {
         $validacion = $crudUser->validarRegistro($nickname, $email, $fileType);
-        if ($validacion == "") {
+        if (empty($validacion)) {
             if ($crudUser->agregarUser($nickname, $password_hash, $email, $fileType) != NULL) {
                 echo 'Se registró correctamente.';
             }
         } else {
-            echo $validacion;
+            echo ('validacion: '.$validacion);
         }
     }
 ?>

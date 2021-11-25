@@ -1,6 +1,6 @@
 <?php
-require_once('crud_plantas.php');
-require_once('../clases/planta.php');
+include_once('crud_plantas.php');
+include_once('../clases/planta.php');
  
 $crud = new CrudPlanta();
 $planta = new Planta();

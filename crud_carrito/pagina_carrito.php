@@ -1,7 +1,7 @@
 <?php
-include 'db.php';
-require_once('../clases/planta.php');
-require_once('../crud_plantas/crud_plantas.php');
+include_once '/conexion/db.php';
+include_once('../clases/planta.php');
+include_once('../crud_plantas/crud_plantas.php');
 
 //obtencion plantas
 $crudPlantas = new CrudPlanta();
@@ -16,23 +16,23 @@ if (isset($_SESSION['sessionID'])) {
         $id_user = $_SESSION['sessionID'];
 
         //obtencion users
-        require_once('../crud_users/crud_users.php');
-        require_once('../clases/user.php');
+        include_once('../crud_users/crud_users.php');
+        include_once('../clases/user.php');
         $crudUser = new CrudUser();
         $user = new User();
-        $user = $crudUser->obtenerUser($id_user);
+        $user = $crudUser->obtenerUserPorId($id_user);
     }
 
     if (isset($_SESSION['plantaid'])) {
         $id_planta = $_SESSION['plantaid'];
 
         //obtencion plantas
-        require_once('../crud_plantas/crud_plantas.php');
-        require_once('../clases/planta.php');
+        include_once('../crud_plantas/crud_plantas.php');
+        include_once('../clases/planta.php');
 
         $crudPlanta = new CrudPlanta();
         $planta = new Planta();
-        $planta = $crudPlanta->obtenerPlanta($id_planta);
+        $planta = $crudPlanta->obtenerPlantaPorId($id_planta);
     }
 
     $contador = 0;

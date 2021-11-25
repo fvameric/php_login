@@ -1,10 +1,10 @@
 <?php
-    include 'db.php';
-    require_once('../clases/planta.php');
-    require_once('../crud_plantas/crud_plantas.php');
+include_once '/conexion/db.php';
+    include_once('../clases/planta.php');
+    include_once('../crud_plantas/crud_plantas.php');
 
     //obtencion plantas
-    $crudPlantas = new CrudPlanta();
+    //$crudPlantas = new CrudPlanta();
 
     session_start();
     if (isset($_SESSION['sessionID'])) {
@@ -17,4 +17,3 @@
             $_SESSION['arrayPlantas'] = [];
         }
     }
-?>

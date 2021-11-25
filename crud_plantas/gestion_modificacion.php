@@ -1,8 +1,8 @@
 <?php
-require_once('crud_plantas.php');
-require_once('../clases/planta.php');
+include_once('crud_plantas.php');
+include_once('../clases/planta.php');
 
-require_once 'pagina_modificacion.php';
+include_once 'pagina_modificacion.php';
 
 $id_admin = $_POST['id_admin'];
 
@@ -16,7 +16,7 @@ $compradas = $_POST['compradas'];
 
 $crud = new CrudPlanta();
 $plantaModif = new Planta();
-$plantaModif = $crud->obtenerPlanta($id_planta);
+$plantaModif = $crud->obtenerPlantaPorId($id_planta);
 
 $targetDir = "../uploads/";
 $filename = $_FILES["file"]["name"];
