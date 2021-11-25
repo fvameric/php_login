@@ -156,7 +156,7 @@ if (isset($_GET['id_planta'])) {
                         </div>
                         <div class="agregar-deseados">
                             <?php
-                            $idDeseado = $crudDeseados->obtenerDeseado($newPlanta->getId(), $_SESSION['sessionID']);
+                            $idDeseado = $crudDeseados->obtenerDeseadoPorId($newPlanta->getId(), $_SESSION['sessionID']);
 
                             if ($idDeseado != null) { ?>
                                 <div class="quitar-deseado">

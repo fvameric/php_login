@@ -219,7 +219,7 @@ if (isset($_GET['sort'])) {
                                     <?php if ($logueado) { ?>
                                         <div class="agregar-deseados">
                                             <?php
-                                            $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
+                                            $idDeseado = $crudDeseados->obtenerDeseadoPorId($plantas->getId(), $_SESSION['sessionID']);
 
                                             if ($idDeseado != null) { ?>
                                                 <div class="quitar-deseado">

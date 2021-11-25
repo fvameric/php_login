@@ -26,8 +26,8 @@ if (isset($_SESSION['sessionID'])) {
     $crudDeseados = new CrudDeseados();
     $deseado = new Deseados();
     $listaDeseados = $crudDeseados->obtenerListaDeseados();
-    //$deseado = $crudDeseados->obtenerDeseado($id_user);
-    
+    //$deseado = $crudDeseados->obtenerDeseadoPorId($id_user);
+
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
     $listaPlantas = $crudPlanta->obtenerListaPlantas();
