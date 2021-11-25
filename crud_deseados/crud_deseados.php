@@ -53,7 +53,7 @@ class CrudDeseados
 
     public function obtenerDeseadoPorId($id_planta, $id_user)
     {
-        foreach($this->listaDeseados as $deseado) {
+        foreach ($this->listaDeseados as $deseado) {
             if ($id_planta == $deseado->getPlantaId() && $id_user == $deseado->getUserId()) {
                 return $deseado;
             }

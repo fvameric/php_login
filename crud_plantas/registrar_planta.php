@@ -1,8 +1,8 @@
 <?php
-    include('db.php');
+    include_once('/conexion/db.php');
     
-    require('crud_plantas.php');
-    require('../clases/planta.php');
+    include_once('crud_plantas.php');
+    include_once('/clases/planta.php');
 
     $crudPlanta= new CrudPlanta();
     $planta = new Planta();

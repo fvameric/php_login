@@ -1,34 +1,38 @@
 <?php
-    include_once('/conexion/db.php');
+include_once('/conexion/db.php');
 
-    session_start();
-    if (isset($_SESSION['sessionID'])) {
-        $id = $_SESSION['sessionID'];
-        
-        //obtencion users
-        include_once('/crud_users/crud_users.php');
-        include_once('/clases/user.php');
+//obtencion users
+include_once('/crud_users/crud_users.php');
+include_once('/clases/user.php');
 
-        $crudUser = new CrudUser();
-        $user = new User();
-        $listaUsers = $crudUser->obtenerListaUsuarios();
-        $user = $crudUser->obtenerUserPorId($id);
+//obtencion plantas
+include_once('/crud_plantas/crud_plantas.php');
+include_once('/clases/planta.php');
 
-        //obtencion plantas
-        include_once('/crud_plantas/crud_plantas.php');
-        include_once('/clases/planta.php');
+session_start();
 
-        $crudPlanta = new CrudPlanta();
-        $planta = new Planta();
-        $listaPlantas = $crudPlanta->obtenerListaPlantas();
-        $planta = $crudPlanta->obtenerPlantaPorId($id);
-    } else {
-        header("Location: index.php");
-    }
+if (isset($_SESSION['sessionID'])) {
+    $id = $_SESSION['sessionID'];
+
+    //users
+    $crudUser = new CrudUser();
+    $user = new User();
+    $listaUsers = $crudUser->obtenerListaUsuarios();
+    $user = $crudUser->obtenerUserPorId($id);
+
+    //plantas
+    $crudPlanta = new CrudPlanta();
+    $planta = new Planta();
+    $listaPlantas = $crudPlanta->obtenerListaPlantas();
+    $planta = $crudPlanta->obtenerPlantaPorId($id);
+} else {
+    header("Location: index.php");
+}
 ?>
-    
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,12 +40,13 @@
     <title>Perfil</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class='header'>
         <div class='topbar'>
             <div class='header-logo'>
                 <a href="index.php" class="logo">
-                    <img src="images/logo.png"/>
+                    <img src="images/logo.png" />
                 </a>
             </div>
             <div class='header-userinfo'>
@@ -79,7 +84,7 @@
     </div>
     <div class="content">
         <div class="scroll-plantas">
-            <?php foreach($listaPlantas as $plantas) { ?>
+            <?php foreach ($listaPlantas as $plantas) { ?>
                 <div class="lista-plantas">
                     <div class="carta">
                         <div class="lista-plantas-fotos">
@@ -95,9 +100,9 @@
                         </div>
                         <div class="ver-detalles-planta">
                             <form method="POST" action="ver_detalle.php">
-                                <input type="hidden" name="id_admin" value="<?php echo $id ?>"/>
-                                <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>"/>
-                                <input type="submit" id="detalles" value="Ver detalle"/>
+                                <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                <input type="submit" id="detalles" value="Ver detalle" />
                             </form>
                         </div>
                     </div>
@@ -106,4 +111,5 @@
         </div>
     </div>
 </body>
+
 </html>

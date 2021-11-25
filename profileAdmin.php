@@ -115,21 +115,6 @@ if (isset($_SESSION['sessionID'])) {
                     <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
                     <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
 
-                    <!--
-                    <div class="dropdown">
-                        <input id="menu-toggle" type="checkbox">
-                        <label id="menu-label" for="menu-toggle">
-                            <div class="triangle">
-                            </div>
-                        </label>
-                        <ul id="collapse-menu">
-                            <li><a href="profileAdmin.php">Perfil</a></li>
-                            <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
-                            <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
-                        </ul>
-                    </div>
-                    -->
-
                     <form method="post" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
                         <button>&#128722;</button>
                     </form>
@@ -280,7 +265,7 @@ if (isset($_SESSION['sessionID'])) {
                                 </div>
                                 <div class="agregar-deseados">
                                     <?php
-                                    $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
+                                    $idDeseado = $crudDeseados->obtenerDeseadoPorId($plantas->getId(), $_SESSION['sessionID']);
 
                                     if ($idDeseado != null) { ?>
                                         <div class="quitar-deseado">

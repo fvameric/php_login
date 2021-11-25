@@ -2,17 +2,19 @@
 include_once('/conexion/db.php');
 
 //obtencion users
-include_once('../crud_users/crud_users.php');
-include_once('../clases/user.php');
+include_once('/crud_users/crud_users.php');
+include_once('/clases/user.php');
 
 //obtencion deseados
 include_once('crud_deseados.php');
-include_once('../clases/deseados.php');
+include_once('/clases/deseados.php');
 
 //obtencion plantas
-include_once('../crud_plantas/crud_plantas.php');
-include_once('../clases/planta.php');
+include_once('/crud_plantas/crud_plantas.php');
+include_once('/clases/planta.php');
+
 session_start();
+
 if (isset($_SESSION['sessionID'])) {
     $id_user = $_SESSION['sessionID'];
 
