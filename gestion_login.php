@@ -1,8 +1,8 @@
 <?php
-include '/conexion/db.php';
+include_once '/conexion/db.php';
 
-require_once('/crud_users/crud_users.php');
-require_once('/clases/user.php');
+include_once('/crud_users/crud_users.php');
+include_once('/clases/user.php');
 
 $nickname = borrarEspacios($_POST['nickname']);
 $password = borrarEspacios($_POST['password']);
@@ -43,20 +43,18 @@ $crudUser = new CrudUser();
         $password_hash = crypt($password,'$5$rounds=5000$stringforsalt$');
         $arrStr = explode("$", $password_hash);
 
-        echo $password_hash;
-
         $user = $crudUser->validarLogin($nickname, $arrStr[4]); ?>
 
         <?php if (is_null($user) || empty($user)) { ?>
-            <label>Nombre o contraseña incorrectos.<label>
+            Nombre o contraseña incorrectos.
             <form action='login.php'>
                 <button type='submit' value='Atrás'>Volver atrás</button>
             </form>
         <?php } else
         {
             session_start();
-            $_SESSION['sessionID']=$user['id'];
-            $_SESSION['isAdmin']=$user['admin'];
+            $_SESSION['sessionID']=$user->getId();
+            $_SESSION['isAdmin']=$user->getAdmin();
             header("Location: index.php");
         }
         ?>

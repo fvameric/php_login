@@ -1,5 +1,5 @@
 <?php
-    require_once('crud_users.php');
+    include_once('crud_users.php');
 
     $crud = new CrudUser();
 

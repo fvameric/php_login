@@ -76,7 +76,7 @@
 
         // get set categoria
         public function getCategoria(){
-            return $this->$categoria;
+            return $this->categoria;
         }
 
         public function setCategoria($categoria){

@@ -1,33 +1,36 @@
 <?php
+include_once('/conexion/db.php');
+
+//obtencion users
+include_once('/crud_users/crud_users.php');
+include_once('/clases/user.php');
+
+//obtencion deseados
+include_once('/crud_deseados/crud_deseados.php');
+include_once('/clases/deseados.php');
+
+//obtencion plantas
+include_once('/crud_plantas/crud_plantas.php');
+include_once('/clases/planta.php');
+
 session_start();
+
 if (isset($_SESSION['sessionID'])) {
     $id_user = $_SESSION['sessionID'];
 
-    //obtencion users
-    require_once('../crud_users/crud_users.php');
-    require_once('../clases/user.php');
-
     $crudUser = new CrudUser();
     $user = new User();
-    $listaUsers = $crudUser->mostrar();
-    $user = $crudUser->obtenerUser($id_user);
-
-    //obtencion deseados
-    require_once('crud_deseados.php');
-    require_once('../clases/deseados.php');
+    $listaUsers = $crudUser->obtenerListaUsuarios();
+    $user = $crudUser->obtenerUserPorId($id_user);
 
     $crudDeseados = new CrudDeseados();
     $deseado = new Deseados();
-    $listaDeseados = $crudDeseados->mostrar();
-    //$deseado = $crudDeseados->obtenerDeseado($id_user);
-
-    //obtencion plantas
-    require_once('../crud_plantas/crud_plantas.php');
-    require_once('../clases/planta.php');
+    $listaDeseados = $crudDeseados->obtenerListaDeseados();
+    //$deseado = $crudDeseados->obtenerDeseadoPorId($id_user);
 
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
-    $listaPlantas = $crudPlanta->mostrar();
+    $listaPlantas = $crudPlanta->obtenerListaPlantas();
 }
 ?>
 
@@ -135,12 +138,12 @@ if (isset($_SESSION['sessionID'])) {
                                         </div>
                                         <div class="agregar-deseados">
                                             <?php
-                                            $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
+                                            $idDeseado = $crudDeseados->obtenerDeseadoPorId($plantas->getId(), $_SESSION['sessionID']);
 
                                             if ($idDeseado != null) { ?>
                                                 <div class="quitar-deseado">
                                                     <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
-                                                        <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
+                                                        <input type="hidden" name="id_deseado" value="<?php echo $idDeseado->getId() ?>" />
                                                         <button type="submit" name="quitarDeseado">★</button>
                                                     </form>
                                                 </div>
