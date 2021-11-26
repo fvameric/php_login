@@ -56,7 +56,7 @@ $crudUser = new CrudUser();
         {
             session_start();
             $_SESSION['sessionID']=$user['id'];
-            $_SESSION['isAdmin']=$user['admin'];
+            $_SESSION['isAdmin'] = $user['admin'];
             header("Location: index.php");
         }
         ?>

@@ -51,20 +51,6 @@ if (isset($_SESSION['sessionID'])) {
             $listaPlantas = $crudPlanta->ordenarPorDeseados($listaPlantas, $listaDeseados);
         }
     }
-
-    /*
-    if ( (!empty($listaCategorias)) && (isset($_POST['sort'])) ) {
-        if ($_POST['sort'] == 1) {
-            $listaPlantas = $crudPlanta->mostrar();
-        } else if ($_POST['sort'] == 2) {
-            $listaPlantas = $crudPlanta->ordenarPorPrecio($listaCategorias);
-        } else if ($_POST['sort'] == 3) {
-            $listaPlantas = $crudPlanta->ordenarPorNombre($listaCategorias);
-        } else if ($_POST['sort'] == 4) {
-            $listaPlantas = $crudPlanta->ordenarPorDeseados($listaCategorias, $listaDeseados);
-        }
-    }
-    */
 } else {
     header("Location: index.php");
 }
@@ -92,7 +78,7 @@ if (isset($_SESSION['sessionID'])) {
             for (i = 0; i < cartas.length; i++) {
                 splitArray = cartas[i].innerText.split("\n");
                 textoCarta = splitArray[0];
-
+                
                 if (textoCarta.toUpperCase().indexOf(filtro) > -1) {
                     cartas[i].style.display = "";
                 } else {
@@ -125,21 +111,6 @@ if (isset($_SESSION['sessionID'])) {
                     <li><a href="profileAdmin.php">Perfil</a></li>
                     <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
                     <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
-
-                    <!--
-                    <div class="dropdown">
-                        <input id="menu-toggle" type="checkbox">
-                        <label id="menu-label" for="menu-toggle">
-                            <div class="triangle">
-                            </div>
-                        </label>
-                        <ul id="collapse-menu">
-                            <li><a href="profileAdmin.php">Perfil</a></li>
-                            <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
-                            <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
-                        </ul>
-                    </div>
-                    -->
 
                     <form method="post" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
                         <button>&#128722;</button>
@@ -195,7 +166,7 @@ if (isset($_SESSION['sessionID'])) {
         <div class="flecha-navegacion">
             ▶
         </div>
-        <a href="../profileAdmin.php">Perfil</a>
+        <a href="profileAdmin.php">Perfil</a>
     </div>
 
     <div class="content-wrapper">
@@ -258,7 +229,7 @@ if (isset($_SESSION['sessionID'])) {
             </div>
 
             <div class="lista-orden">
-                <form method="GET" action="profileAdmin.php">
+                <form method="GET" action="">
                     <button type="submit" name="sort" class="button" value="1">Ordenar por defecto</button>
                     <button type="submit" name="sort" class="button" value="2">Ordenar por precio</button>
                     <button type="submit" name="sort" class="button" value="3">Ordenar por nombre</button>
@@ -267,9 +238,7 @@ if (isset($_SESSION['sessionID'])) {
             </div>
 
             <div class="scroll-plantas">
-                <?php
-
-                foreach ($listaPlantas as $plantas) { ?>
+                <?php foreach ($listaPlantas as $plantas) { ?>
                     <div class="lista-plantas">
                         <div class="carta">
                             <div class="lista-plantas-fotos">
@@ -286,7 +255,7 @@ if (isset($_SESSION['sessionID'])) {
                                     <?php if ($logueado) { ?>
                                         <form method="POST" action="/crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
                                             <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
-                                            <input type="number" name="cantidad" class="cantidadCarrito" />
+                                            <input type="number" min="1" name="cantidad" class="cantidadCarrito" />
                                             <input type="submit" value="&#128722;" />
                                         </form>
                                     <?php } ?>

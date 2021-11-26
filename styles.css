@@ -916,3 +916,7 @@ input:not(:checked)~#collapse-menu {
     display: inline-block;
     text-align: center;
 }
+
+.sin-deseados {
+    padding: 10px;
+}

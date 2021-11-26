@@ -28,5 +28,5 @@
     fwrite($file, $contenidoXML);
     fclose($file);
 
-    header('Location: profileAdmin.php');
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

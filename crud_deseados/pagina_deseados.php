@@ -92,9 +92,13 @@ if (isset($_SESSION['sessionID'])) {
                 <?php } ?>
 
                 <div class='header-content'>
-                    <li><a href="..profileAdmin.php">Perfil</a></li>
+                    <?php if ($_SESSION['isAdmin'] == 0) { ?>
+                        <li><a href="/profile.php">Perfil</a></li>
+                    <?php } else { ?>
+                        <li><a href="/profileAdmin.php">Perfil</a></li>
+                    <?php } ?>
                     <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
-                    <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
+                    <li><a href="/cierre_sesion.php">Cerrar sesión</a></li>
 
                     <form method="post" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
                         <button>&#128722;</button>
@@ -126,86 +130,95 @@ if (isset($_SESSION['sessionID'])) {
         <div class="flecha-navegacion">
             ▶
         </div>
-        <a href="../profileAdmin.php">Perfil</a>
+        <?php if ($_SESSION['isAdmin'] == 0) { ?>
+            <a href="../profile.php">Perfil</a>
+        <?php } else { ?>
+            <a href="../profileAdmin.php">Perfil</a>
+        <?php } ?>
         <div class="flecha-navegacion">
             ▶
         </div>
         <a href="pagina_deseados.php">Deseados</a>
     </div>
-    
-    <div class="content-wrapper">
-        <div class="content">
-            <div class="scroll-plantas">
-                <?php foreach ($listaDeseados as $deseados) { ?>
-                    <?php if ($deseados->getUserId() == $id_user) { ?>
-                        <?php foreach ($listaPlantas as $plantas) { ?>
-                            <?php if ($plantas->getId() == $deseados->getPlantaId()) { ?>
-                                <div class="lista-plantas">
-                                    <div class="carta">
-                                        <div class="lista-plantas-fotos">
-                                            <img src=<?php echo $plantas->getFoto() ?> class="lista-fotos">
-                                        </div>
-                                        <div class="lista-plantas-content">
-                                            <div class="lista-plantas-nombre">
-                                                <?php echo $plantas->getNombre() ?>
+    <?php if (!empty($listaDeseados)) { ?>
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="scroll-plantas">
+                    <?php foreach ($listaDeseados as $deseados) { ?>
+                        <?php if ($deseados->getUserId() == $id_user) { ?>
+                            <?php foreach ($listaPlantas as $plantas) { ?>
+                                <?php if ($plantas->getId() == $deseados->getPlantaId()) { ?>
+                                    <div class="lista-plantas">
+                                        <div class="carta">
+                                            <div class="lista-plantas-fotos">
+                                                <img src=<?php echo $plantas->getFoto() ?> class="lista-fotos">
                                             </div>
-                                            <div class="lista-plantas-precio">
-                                                <?php echo $plantas->getPrecio() ?> €
-                                            </div>
-                                            <div class="agregar-deseados">
-                                                <?php
-                                                $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
+                                            <div class="lista-plantas-content">
+                                                <div class="lista-plantas-nombre">
+                                                    <?php echo $plantas->getNombre() ?>
+                                                </div>
+                                                <div class="lista-plantas-precio">
+                                                    <?php echo $plantas->getPrecio() ?> €
+                                                </div>
+                                                <div class="agregar-deseados">
+                                                    <?php
+                                                    $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
 
-                                                if ($idDeseado != null) { ?>
-                                                    <div class="quitar-deseado">
-                                                        <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
-                                                            <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
-                                                            <button type="submit" name="quitarDeseado">★</button>
-                                                        </form>
-                                                    </div>
-                                                <?php } else { ?>
-                                                    <div class="agregar-deseado">
-                                                        <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
-                                                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                                            <input type="hidden" name="id_user" value="<?php echo $id ?>" />
-                                                            <button type="submit" name="add">☆</button>
-                                                        </form>
-                                                    </div>
-                                                <?php } ?>
+                                                    if ($idDeseado != null) { ?>
+                                                        <div class="quitar-deseado">
+                                                            <form method="POST" action="gestion_eliminacion.php" class="btn-quitar-deseado">
+                                                                <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
+                                                                <button type="submit" name="quitarDeseado">★</button>
+                                                            </form>
+                                                        </div>
+                                                    <?php } else { ?>
+                                                        <div class="agregar-deseado">
+                                                            <form method="POST" action="gestion_creacion.php" class="btn-agregar-deseado">
+                                                                <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                                                <input type="hidden" name="id_user" value="<?php echo $id ?>" />
+                                                                <button type="submit" name="add">☆</button>
+                                                            </form>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="lista-plantas-crud">
-                                            <div class="lista-plantas-modificar">
-                                                <form method="POST" action="/crud_plantas/pagina_modificacion.php">
+                                            <div class="lista-plantas-crud">
+                                                <div class="lista-plantas-modificar">
+                                                    <form method="POST" action="/crud_plantas/pagina_modificacion.php">
+                                                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                                        <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                                        <input type="submit" id="modificar" value="Modificar" />
+                                                    </form>
+                                                </div>
+                                                <div class="lista-plantas-eliminar">
+                                                    <form method="POST" action="/crud_plantas/gestion_eliminacion.php">
+                                                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                                        <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                                        <input type="submit" id="eliminar" value="Eliminar" />
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="ver-detalles-planta">
+                                                <form method="POST" action="ver_detalle.php">
                                                     <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
                                                     <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                                    <input type="submit" id="modificar" value="Modificar" />
+                                                    <input type="submit" id="detalles" value="Ver detalle" />
                                                 </form>
                                             </div>
-                                            <div class="lista-plantas-eliminar">
-                                                <form method="POST" action="/crud_plantas/gestion_eliminacion.php">
-                                                    <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
-                                                    <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                                    <input type="submit" id="eliminar" value="Eliminar" />
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="ver-detalles-planta">
-                                            <form method="POST" action="ver_detalle.php">
-                                                <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
-                                                <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                                <input type="submit" id="detalles" value="Ver detalle" />
-                                            </form>
                                         </div>
                                     </div>
-                                </div>
+                                <?php } ?>
                             <?php } ?>
                         <?php } ?>
                     <?php } ?>
-                <?php } ?>
+                </div>
             </div>
         </div>
-    </div>
+    <?php } else { ?>
+        <div class="sin-deseados">
+            <h2>No tienes deseados.</h2>
+        </div>
+    <?php } ?>
 </body>
 
 </html>

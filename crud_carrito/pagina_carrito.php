@@ -81,7 +81,11 @@ if (isset($_SESSION['sessionID'])) {
                 <?php } ?>
 
                 <div class='header-content'>
-                    <li><a href="../profileAdmin.php">Perfil</a></li>
+                    <?php if ($_SESSION['isAdmin'] == 0) { ?>
+                        <li><a href="/profile.php">Perfil</a></li>
+                    <?php } else { ?>
+                        <li><a href="/profileAdmin.php">Perfil</a></li>
+                    <?php } ?> 
                     <li><a href="../crud_deseados/pagina_deseados.php">Deseados</a></li>
                     <li><a href="../cierre_sesion.php">Cerrar sesión</a></li>
 

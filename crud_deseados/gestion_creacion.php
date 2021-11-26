@@ -28,6 +28,6 @@
         
         $crudDeseados->agregarDeseado($id_user, $id_planta);
         //header("Location: pagina_deseados.php");
-        header("Location: ../profileAdmin.php");
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 ?>
