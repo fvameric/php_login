@@ -52,6 +52,25 @@ if (isset($_SESSION['sessionID'])) {
     <link rel="stylesheet" href="../styles.css">
     <script src="../sweetalert2.all.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+
+    <script>
+        function vaciar() {
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('Saved!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+        }
+    </script>
 </head>
 
 <body>
@@ -156,10 +175,9 @@ if (isset($_SESSION['sessionID'])) {
         <div class="content-wrapper">
             <div class="content-carrito">
                 <div id="shopping-cart">
-
                     <div class="vaciar-carrito">
                         <form method="POST" action="limpiar_carrito.php">
-                            <input type="submit" name="vaciar-carrito" id="#eliminar" value="Vaciar carrito" />
+                            <input type="submit" id="myInput" onclick="vaciar()" name="vaciar-carrito" id="#eliminar" value="Vaciar carrito" />
                         </form>
                     </div>
 
