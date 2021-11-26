@@ -1,3 +1,4 @@
+
 * {
     font-family: Helvetica, Arial, sans-serif;
     font-weight: 200;
@@ -5,7 +6,9 @@
 
 html,
 body {
-    margin: 20px;
+    margin: 0;
+	padding: 0;
+	border: 0;
     -webkit-font-smoothing: antialiased;
     background-color: #f1f1f1;
 }
@@ -899,6 +902,7 @@ input:not(:checked)~#collapse-menu {
 /* Content wrapper */
 
 .content-wrapper {
+    margin: 20px;
     display: flex;
 }
 
@@ -1080,3 +1084,31 @@ input:not(:checked)~#collapse-menu {
     background: rgba(243, 14, 14, 0.719);
     color: #FFF;
 }
+
+
+
+/* FOOOOOOTER */
+
+footer {
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    background-color: #794044;
+    color: #8e99a4;
+}
+
+
+/* chorrada */
+
+.ball {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: 3px solid dodgerblue;
+    border-radius: 50%;
+    pointer-events: none;
+  }
