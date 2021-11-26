@@ -140,6 +140,7 @@ if (isset($_SESSION['sessionID'])) {
         </div>
         <a href="pagina_deseados.php">Deseados</a>
     </div>
+    
     <?php if (!empty($listaDeseados)) { ?>
         <div class="content-wrapper">
             <div class="content">
@@ -215,7 +216,7 @@ if (isset($_SESSION['sessionID'])) {
             </div>
         </div>
     <?php } else { ?>
-        <div class="sin-deseados">
+        <div class="no-content">
             <h2>No tienes deseados.</h2>
         </div>
     <?php } ?>
