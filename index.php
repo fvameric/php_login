@@ -226,7 +226,7 @@ if (isset($_GET['sort'])) {
                                     <?php if ($logueado) { ?>
                                         <form method="POST" action="/crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
                                             <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
-                                            <input type="number" name="cantidad" class="cantidadCarrito" />
+                                            <input type="number" min="1" value="1" name="cantidad" class="cantidadCarrito" />
                                             <input type="submit" value="&#128722;" />
                                         </form>
                                     <?php } ?>
