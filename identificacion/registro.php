@@ -8,16 +8,23 @@ $crudUser = new CrudUser();
 $user = new User();
 
 if (isset($_POST['submit'])) {
-    if (isset($_POST['nickname']) && isset($_POST['password']) && isset($_POST['email']) && $_FILES["file"]["name"]) {
+    if (empty($_POST['nickname']) || empty($_POST['password']) || empty($_POST['email'])) {
+        echo 'Por favor rellena el formulario.';
+    } else {
         $email = $_POST['email'];
         $nickname = $_POST['nickname'];
         $password = $_POST['password'];
         $password_hash = $crudUser->encriptarPassword($password);
 
-        // avatar
-        $filename = $_FILES["file"]["name"];
-        $path = $_FILES["file"]["tmp_name"];
-
+        // avatar en caso de no haber puesto se le pondrá uno por defecto
+        if (!empty($_FILES["file"]["name"])) {
+            $filename = $_FILES["file"]["name"];
+            $path = $_FILES["file"]["tmp_name"];
+        } else {
+            $filename = 'avatardefault.png';
+            $path = realpath('../images/avatardefault.png');
+        }
+    
         $validacionConsulta = $crudUser->agregarUser($nickname, $password_hash, $email, $filename, $path);
 
         if ($validacionConsulta) {
@@ -25,8 +32,6 @@ if (isset($_POST['submit'])) {
         } else {
             echo 'falló la consulta al registrar.';
         }
-    } else {
-        echo 'Por favor rellena el formulario.';
     }
 }
 ?>

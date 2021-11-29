@@ -109,7 +109,13 @@
         public function eliminar($id){
             include 'db.php';
             $sqlDelete="DELETE FROM `users` WHERE id=".$id;
-            $consulta = mysqli_query($con,$sqlDelete);
+            $consultaDelete = mysqli_query($con,$sqlDelete);
+
+            if($consultaDelete) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         public function modificarUsuario($userModif, $id_user){
@@ -117,10 +123,10 @@
             $sqlUpdate="UPDATE `users` SET id=".$id_user.", nickname='".$userModif->getNickname()."', password='".$userModif->getPassword()."', email='".$userModif->getEmail()."', avatar='".$userModif->getAvatar()."' WHERE id=".$id_user;
             $consultaUpdate = mysqli_query($con, $sqlUpdate);
 
-            if(!$consultaUpdate) {
-                echo 'no se realizó la consulta';
+            if($consultaUpdate) {
+                return true;
             } else {
-                echo 'se realizó la consulta';
+                return false;
             }
         }
 

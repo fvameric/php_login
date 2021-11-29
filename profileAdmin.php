@@ -196,16 +196,14 @@ if (isset($_SESSION['sessionID'])) {
                             <div class="lista-usuarios-crud">
                                 <div class="lista-usuarios-modificar">
                                     <form method="POST" action="/crud_users/pagina_modificacion.php">
-                                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
-                                        <input type="hidden" name="id_user" value="<?php echo $usuario->getId() ?>" />
-                                        <input type="submit" id="modificar" value="Modificar" />
+                                        <input type="hidden" name="id_usuario_modificar" value="<?php echo $usuario->getId() ?>" />
+                                        <input type="submit" value="Modificar" />
                                     </form>
                                 </div>
                                 <div class="lista-usuarios-eliminar">
                                     <form method="POST" action="/crud_users/gestion_eliminacion.php">
-                                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
-                                        <input type="hidden" name="id_user" value="<?php echo $usuario->getId() ?>" />
-                                        <input type="submit" id="eliminar" value="Eliminar" />
+                                        <input type="hidden" name="id_usuario_eliminar" value="<?php echo $usuario->getId() ?>" />
+                                        <input type="submit" value="Eliminar" />
                                     </form>
                                 </div>
 

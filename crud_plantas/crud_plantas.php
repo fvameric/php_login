@@ -60,10 +60,10 @@
             $sqlDelete="DELETE FROM `plantas` WHERE id=".$id;
             $consultaDelete = mysqli_query($con,$sqlDelete);
             
-            if(!$consultaDelete) {
-                echo 'no se realizó la consulta';
+            if($consultaDelete) {
+                return true;
             } else {
-                echo 'se realizó la consulta';
+                return false;
             }
         }
 
@@ -72,10 +72,10 @@
             $sqlUpdate="UPDATE `plantas` SET id=".$id_planta.", nombre='".$plantaModif->getNombre()."', descripcion='".$plantaModif->getDescripcion()."', precio=".$plantaModif->getPrecio().", stock=".$plantaModif->getStock().", foto='".$plantaModif->getFoto()."', compradas=".$plantaModif->getCompradas().", categoria=".$plantaModif->getCategoria()." WHERE id=".$id_planta;
             $consultaUpdate = mysqli_query($con, $sqlUpdate);
 
-            if(!$consultaUpdate) {
-                echo 'no se realizó la consulta';
+            if($consultaUpdate) {
+                return true;
             } else {
-                echo 'se realizó la consulta';
+                return false;
             }
         }
 
@@ -181,5 +181,23 @@
                 $listaPlantas[] = $newPlant;
             }
             return $listaPlantas;
+        }
+
+        public function stringCategoria($cat) {
+            if ($cat == 1) {
+                return 'Aeonium';
+            } elseif ($cat == 2) {
+                return 'Cotyledon';
+            } elseif ($cat == 3) {
+                return 'Crassula';
+            } elseif ($cat == 4) {
+                return 'Echeveria';
+            } elseif ($cat == 5) {
+                return 'Euphorbia';
+            } elseif ($cat == 6) {
+                return 'Haworthia';
+            } elseif ($cat == 7) {
+                return 'Senecio';
+            }
         }
     }

@@ -129,33 +129,32 @@ if (isset($_GET['sort'])) {
                         <form method="post" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
                             <button>&#128722;</button>
                         </form>
+                        <?php
+                        if (isset($_SESSION['arrayPlantas'])) {
+                            if (count($_SESSION['arrayPlantas']) > 0) { ?>
+                                <span class="contadorCarrito"><?php echo count($_SESSION['arrayPlantas']); ?></span>
+                            <?php } ?>
+                        <?php } else {
+                            $_SESSION['arrayPlantas'] = [];
+                        } ?>
                     </div>
-                    <?php
-                    if (isset($_SESSION['arrayPlantas'])) {
-                        if (count($_SESSION['arrayPlantas']) > 0) { ?>
-                            <span class="contadorCarrito"><?php echo count($_SESSION['arrayPlantas']); ?></span>
-                        <?php } ?>
-                    <?php } else {
-                        $_SESSION['arrayPlantas'] = [];
-                    } ?>
                 </div>
-                <?php } else { ?>
-        <div class='header'>
-            <div class='topbar'>
-                <div class='header-logo'>
-                    <a href="index.php" class="logo">
-                        <img src="images/logo.png">
-                    </a>
+            <?php } else { ?>
+                <div class='header'>
+                    <div class='topbar'>
+                        <div class='header-logo'>
+                            <a href="index.php" class="logo">
+                                <img src="images/logo.png">
+                            </a>
+                        </div>
+                        <div class='menu-user'>
+                            <a class="btn-registrarse" href="/identificacion/registro.html">Regístrate</a>
+                            <a class="btn-iniciarsesion" href="/identificacion/login.php">Inicia sesión</a>
+                        </div>
+                    </div>
                 </div>
-                <div class='menu-user'>
-                    <a class="btn-registrarse" href="/identificacion/registro.html">Regístrate</a>
-                    <a class="btn-iniciarsesion" href="/identificacion/login.php">Inicia sesión</a>
-                </div>
-            </div>
+            <?php } ?>
         </div>
-    <?php } ?>
-        </div>
-
         <div class="menu-navegacion">
             <form method="GET" action="" class="botones-menu">
                 <div class="caja1">
@@ -275,6 +274,5 @@ if (isset($_GET['sort'])) {
     <footer class="footer">
     </footer>
 </body>
-
 
 </html>
