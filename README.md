@@ -17,15 +17,27 @@ Uploads:
 ## Roadmap
 - [x] Formulario de registro
 - [x] Formulario de log in
-    - [] Mejorar las validaciones de usuario
-    - [] Encriptación de contraseñas
+    - [ ] Mejorar las validaciones de usuario
+    - [X] Encriptación de contraseñas
 - [x] Página de perfil
     - [X] Admin: Consultar usuarios
-    - [] Admin: Eliminar usuarios
-    - [] Consultar items tienda
-    - [] Crear items tienda
-    - [] Modificar items tienda
-    - [] Eliminar items tienda
+    - [X] Admin: Eliminar usuarios
+    - [X] Consultar items tienda
+    - [X] Crear items tienda
+    - [X] Modificar items tienda
+    - [X] Eliminar items tienda
+- [x] Orden de productos
+    - [ ] Filtrar Y ordenar los productos por categorias
+    - [ ] Productos populares
 - [x] Poder subir una imagen como avatar
-    - [] Mejorar la comprobación del formato de ficheros
-    - [] Añadir avatares por defecto en caso de que no se seleccione ninguno
+    - [ ] Mejorar la comprobación del formato de ficheros
+    - [X] Añadir avatares por defecto en caso de que no se seleccione ninguno
+- [] Mejorar considerablemente el estilo de la página
+    - [ ] Uso de SweetAlert2
+    - [ ] Modo oscuro
+- [x] Creación de XML
+    - [ ] XML Personalizado a partir de una lista personal de productos
+    - [] Subida de archivos XML para procesar productos y agregarlos en listas
+- [ ] Distintos idiomas
+- [ ] Consultar las necesidades de cada planta
+    - [ ] Obtener la temperatura mediante la ubicación del usuario
