@@ -26,12 +26,6 @@ if (isset($_POST['submit'])) {
         }
     
         $validacionConsulta = $crudUser->agregarUser($nickname, $password_hash, $email, $filename, $path);
-
-        if ($validacionConsulta) {
-            header('Location: login.php');
-        } else {
-            echo 'falló la consulta al registrar.';
-        }
     }
 }
 ?>
@@ -46,9 +40,12 @@ if (isset($_POST['submit'])) {
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <a href="javascript:history.go(-1)">Volver atrás</a>
+    <?php if (!empty($_SESSION['sessionID'])) { ?>
+        Se creó el usuario con éxito.
+    <?php } else {
+        header('Location: ../profileAdmin.php');
+    } ?>
 </body>
 
 </html>
