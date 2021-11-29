@@ -1,30 +1,29 @@
 <?php
+//obtencion users
+require_once('../crud_users/crud_users.php');
+require_once('../clases/user.php');
+
+//obtencion deseados
+require_once('crud_deseados.php');
+require_once('../clases/deseados.php');
+
+//obtencion plantas
+require_once('../crud_plantas/crud_plantas.php');
+require_once('../clases/planta.php');
+
 session_start();
 if (isset($_SESSION['sessionID'])) {
     $id_user = $_SESSION['sessionID'];
-
-    //obtencion users
-    require_once('../crud_users/crud_users.php');
-    require_once('../clases/user.php');
 
     $crudUser = new CrudUser();
     $user = new User();
     $listaUsers = $crudUser->mostrar();
     $user = $crudUser->obtenerUser($id_user);
 
-    //obtencion deseados
-    require_once('crud_deseados.php');
-    require_once('../clases/deseados.php');
-
     $crudDeseados = new CrudDeseados();
     $deseado = new Deseados();
     $listaDeseados = $crudDeseados->mostrar();
-    //$deseado = $crudDeseados->obtenerDeseado($id_user);
-
-    //obtencion plantas
-    require_once('../crud_plantas/crud_plantas.php');
-    require_once('../clases/planta.php');
-
+    
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
     $listaPlantas = $crudPlanta->mostrar();
@@ -140,7 +139,7 @@ if (isset($_SESSION['sessionID'])) {
         </div>
         <a href="pagina_deseados.php">Deseados</a>
     </div>
-    
+
     <?php if (!empty($listaDeseados)) { ?>
         <div class="content-wrapper">
             <div class="content">

@@ -46,14 +46,14 @@ if (isset($_SESSION['sessionID'])) {
     <div class='header'>
         <div class='topbar'>
             <div class="menu-logo">
-                <a href="index.php" class="logo">
-                    <img src="images/logo.png" />
+                <a href="../index.php" class="logo">
+                    <img src="../images/logo.png" />
                 </a>
             </div>
             <?php if ($logueado) { ?>
                 <div class='header-userinfo'>
                     <?php if ($_SESSION['isAdmin'] == 0) { ?>
-                        <a href="profile.php" class="userinfo">
+                        <a href="../profile.php" class="userinfo">
                             <div class='avatar'>
                                 <img src=<?php echo $user->getAvatar(); ?>>
                             </div>
@@ -62,7 +62,7 @@ if (isset($_SESSION['sessionID'])) {
                             </div>
                         </a>
                     <?php } else { ?>
-                        <a href="profileAdmin.php" class="userinfo">
+                        <a href="../profileAdmin.php" class="userinfo">
                             <div class='avatar'>
                                 <img src=<?php echo $user->getAvatar(); ?>>
                             </div>
@@ -73,11 +73,11 @@ if (isset($_SESSION['sessionID'])) {
                     <?php } ?>
 
                     <div class='header-content'>
-                        <li><a href="profileAdmin.php">Perfil</a></li>
-                        <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
-                        <li><a href="/identificacion/cierre_sesion.php">Cerrar sesión</a></li>
+                        <li><a href="../profileAdmin.php">Perfil</a></li>
+                        <li><a href="../crud_deseados/pagina_deseados.php">Deseados</a></li>
+                        <li><a href="../identificacion/cierre_sesion.php">Cerrar sesión</a></li>
 
-                        <form method="post" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
+                        <form method="post" action="../crud_carrito/pagina_carrito.php" class="btn-carrito">
                             <button>&#128722;</button>
                         </form>
                         <?php
@@ -141,7 +141,15 @@ if (isset($_SESSION['sessionID'])) {
     </div>
 
     <div class="enlaces-navegacion">
-        <a href="index.php">Home</a>
+        <a href="../index.php">Home</a>
+        <div class="flecha-navegacion">
+            ▶
+        </div>
+        <a href="../profileAdmin.php">Perfil</a>
+        <div class="flecha-navegacion">
+            ▶
+        </div>
+        <a href="pagina_modificacion.php">Modificación de usuarios</a>
     </div>
 
     <div class="content-wrapper">
@@ -167,7 +175,6 @@ if (isset($_SESSION['sessionID'])) {
                 </div>
                 <div class='aceptar-modificaciones'>
                     <input type='submit' name="aceptarmodif" value='Aceptar modificaciones'>
-                    <a href="../profileAdmin.php?id=<?php echo $id ?>">Volver atrás</a>
                 </div>
             </form>
         </div>
