@@ -24,6 +24,16 @@
             return $listaUsers;
         }
 
+        function borrarEspacios($str) {
+            return preg_replace('/\s+/', '', $str);
+        }
+
+        function encriptarPassword($password) {
+            $password_crypt = crypt($password,'$5$rounds=5000$stringforsalt$');
+            $arrPassword = explode("$", $password_crypt);
+            return $arrPassword[4];
+        }
+
         public function validarLogin($nickname, $password) {
             include 'db.php';
 
@@ -61,14 +71,29 @@
             }
         }
 
-        public function convertirBase64($targetFilePath) {
-            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-            $imageData = base64_encode(file_get_contents($targetFilePath));
+        public function convertirBase64($filename, $path) {
+            $fileType = pathinfo($filename,PATHINFO_EXTENSION);
+            $imageData = base64_encode(file_get_contents($path));
 
             if ($fileType == 'jpg' || $fileType == 'png' || $fileType == 'gif') {
                 return 'data:'.$fileType.';base64,' . $imageData;
             } else {
                 return "<br>No es una imagen<br>";
+            }
+        }
+        
+        public function agregarUser($nickname, $password, $email, $filename, $path) {
+            include 'db.php';
+
+            $src = $this->convertirBase64($filename, $path);
+
+            $sql = 'INSERT INTO `users` (`id` ,`nickname` ,`password`, `email`, `avatar`, `admin`)VALUES (NULL , "'.$nickname.'", "'.$password.'", "'.$email.'", "'.$src.'",0)';
+            $consulta = mysqli_query($con,$sql);
+            
+            if ($consulta) {
+                return true;
+            } else {
+                return false;
             }
         }
 
@@ -79,24 +104,6 @@
             if ($this->nicknameExiste($nickname)) {
                 return "<br>Este nombre de usuario ya está en uso<br>";
             }          
-        }
-
-        public function agregarUser($nickname, $password, $email) {
-            include 'db.php';
-
-            $targetDir = "uploads/";
-            $filename = $_FILES["file"]["name"];
-            $targetFilePath = $targetDir . $filename;
-
-            if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath))
-            {
-                $src = $this->convertirBase64($targetFilePath);
-
-                $sql = 'INSERT INTO `users` (`id` ,`nickname` ,`password`, `email`, `avatar`, `admin`)VALUES (NULL , "'.$nickname.'", "'.$password.'", "'.$email.'", "'.$src.'",0)';
-                return $consulta = mysqli_query($con,$sql);
-            } else {
-                return null;
-            }
         }
 
         public function eliminar($id){

@@ -110,7 +110,7 @@ if (isset($_SESSION['sessionID'])) {
                 <div class='header-content'>
                     <li><a href="profileAdmin.php">Perfil</a></li>
                     <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
-                    <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
+                    <li><a href="/identificacion/cierre_sesion.php">Cerrar sesión</a></li>
 
                     <form method="post" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
                         <button>&#128722;</button>
@@ -310,6 +310,12 @@ if (isset($_SESSION['sessionID'])) {
             </div>
         </div>
     </div>
+
+    <div class="espacio">
+    </div>
+
+    <footer class="footer">
+    </footer>
 </body>
 
 </html>

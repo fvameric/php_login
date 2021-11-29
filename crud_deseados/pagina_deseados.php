@@ -98,7 +98,7 @@ if (isset($_SESSION['sessionID'])) {
                         <li><a href="/profileAdmin.php">Perfil</a></li>
                     <?php } ?>
                     <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
-                    <li><a href="/cierre_sesion.php">Cerrar sesión</a></li>
+                    <li><a href="../identificacion/cierre_sesion.php">Cerrar sesión</a></li>
 
                     <form method="post" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
                         <button>&#128722;</button>

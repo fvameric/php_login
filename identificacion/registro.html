@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda registro</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <div class='header'>
+        <div class='topbar'>
+            <div class='header-logo'>
+                <a href="../index.php" class="logo">
+                    <img src="../images/logo.png">
+                </a>
+            </div>
+            <div class='menu-user'>
+                <a class="btn-registrarse" href="/identificacion/registro.html">Regístrate</a>
+                <a class="btn-iniciarsesion" href="login.php">Inicia sesión</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="espacio">
+    </div>
+    <div class="crear-nuevo-usuario">
+        <h2>Registro:</h2>
+
+        <form id="formRegistro" action="registro.php" method="POST" enctype="multipart/form-data">
+            <label>Avatar</label><br>
+            <input type="file" name="file"><br><br>
+
+            <label>Email</label><br>
+            <input type="email" name="email"><br><br>
+
+            <label>Nickname</label><br>
+            <input type="text" name="nickname"><br><br>
+
+            <label>Contraseña</label><br>
+            <input type="password" name="password"><br><br>
+
+            <button type="submit" name="submit" value="Registrarse">Registrar</button>
+        </form>
+    </div>
+    <br>
+    <form action="login.php">
+        <button type="submit" value="Login">Login</button>
+    </form>
+
+    <div class="espacio">
+    </div>
+
+    <footer class="footer">
+    </footer>
+</body>
+
+</html>
