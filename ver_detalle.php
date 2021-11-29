@@ -90,7 +90,7 @@ if (isset($_GET['id_planta'])) {
                     <div class='header-content'>
                         <li><a href="profileAdmin.php">Perfil</a></li>
                         <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
-                        <li><a href="cierre_sesion.php">Cerrar sesión</a></li>
+                        <li><a href="/identificacion/cierre_sesion.php">Cerrar sesión</a></li>
 
                         <form method="POST" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
                             <button>&#128722;</button>

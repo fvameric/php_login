@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="styles.css">
     </head>
         <body>
-            <a href="javascript:history.go(-1)">Volver atrás</a>
+        Se creó la planta correctamente.
+        <a href="../profileAdmin.php">Volver atrás</a>
         </body>
 </html>

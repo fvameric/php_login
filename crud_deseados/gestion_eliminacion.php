@@ -6,5 +6,5 @@
 
     $crudDeseados = new CrudDeseados();
     $crudDeseados->eliminarDeseado($id_deseado);
-    header("Location: ../profileAdmin.php");
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

@@ -14,15 +14,21 @@ if (isset($_SESSION['sessionID'])) {
             $cantidad = $_POST['cantidad'];
             $planta = $crudPlantas->obtenerPlantaPorId($planta_id);
 
-            /*
-                foreach($_SESSION['arrayPlantas'] as $elem) {
-                    if ($elem == $planta) {
+            $flag = false;
 
+            if (!empty($_SESSION['arrayPlantas'])) {
+                foreach($_SESSION['arrayPlantas'] as $key => $plantas) {
+                    if ($plantas[0]->getId() == $planta_id) {
+                        $_SESSION['arrayPlantas'][$key][1] += $cantidad;
+                        $flag = true;
                     }
                 }
-                */
+            }
 
-            array_push($_SESSION['arrayPlantas'], array($planta, $cantidad));
+            if (!$flag) {
+                array_push($_SESSION['arrayPlantas'], array($planta, $cantidad));
+            }
+
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     } else {
