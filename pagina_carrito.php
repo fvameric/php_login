@@ -20,14 +20,14 @@ if (isset($_SESSION['sessionID'])) {
 
     $crudUser = new CrudUser();
     $user = new User();
-    $user = $crudUser->obtenerUserPorId($id_user);
+    $user = $crudUser->obtenerUser($id_user);
 
     if (isset($_SESSION['plantaid'])) {
         $id_planta = $_SESSION['plantaid'];
         
         $crudPlanta = new CrudPlanta();
         $planta = new Planta();
-        $planta = $crudPlanta->obtenerPlantaPorId($id_planta);
+        $planta = $crudPlanta->obtenerPlanta($id_planta);
     }
 
     $contador = 0;

@@ -12,7 +12,7 @@ if (isset($_SESSION['sessionID'])) {
         if (isset($_POST['plant']) && isset($_POST['cantidad'])) {
             $planta_id = $_POST['plant'];
             $cantidad = $_POST['cantidad'];
-            $planta = $crudPlantas->obtenerPlantaPorId($planta_id);
+            $planta = $crudPlantas->obtenerPlanta($planta_id);
 
             $flag = false;
 

@@ -13,8 +13,8 @@ if (isset($_SESSION['sessionID'])) {
 
     $crudUser = new CrudUser();
     $user = new User();
-    $listaUsers = $crudUser->obtenerListaUsuarios();
-    $user = $crudUser->obtenerUserPorId($id_admin);
+    $listaUsers = $crudUser->mostrar();
+    $user = $crudUser->obtenerUser($id_admin);
 
     //obtencion deseados
     include_once('/crud_deseados/crud_deseados.php');
@@ -24,7 +24,7 @@ if (isset($_SESSION['sessionID'])) {
     $deseado = new Deseados();
 
     if (!isset($listaDeseados)) {
-        $listaDeseados = $crudDeseados->obtenerListaDeseados();
+        $listaDeseados = $crudDeseados->mostrar();
     }
 }
 
@@ -38,8 +38,8 @@ if (isset($_GET['id_planta'])) {
 
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
-    $listaPlantas = $crudPlanta->obtenerListaPlantas();
-    $planta = $crudPlanta->obtenerPlantaPorId($id_planta);
+    $listaPlantas = $crudPlanta->mostrar();
+    $planta = $crudPlanta->obtenerPlanta($id_planta);
 
     $newPlanta;
 
@@ -156,7 +156,7 @@ if (isset($_GET['id_planta'])) {
                         </div>
                         <div class="agregar-deseados">
                             <?php
-                            $idDeseado = $crudDeseados->obtenerDeseadoPorId($newPlanta->getId(), $_SESSION['sessionID']);
+                            $idDeseado = $crudDeseados->obtenerDeseado($newPlanta->getId(), $_SESSION['sessionID']);
 
                             if ($idDeseado != null) { ?>
                                 <div class="quitar-deseado">
