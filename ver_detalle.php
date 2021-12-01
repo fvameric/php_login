@@ -29,6 +29,7 @@ if (isset($_SESSION['sessionID'])) {
 }
 
 if (isset($_GET['id_planta'])) {
+    $logueado = true;
     $id_planta = $_GET['id_planta'];
     $_SESSION['plantaid'] = $id_planta;
 
@@ -145,36 +146,41 @@ if (isset($_GET['id_planta'])) {
                         <div class="lista-plantas-nombre">
                             <?php echo $newPlanta->getNombre(); ?>
                         </div>
-                        <div class="lista-plantas-precio">
-                            <?php echo $newPlanta->getPrecio(); ?> €
-                        </div>
-                        <div>
-                            <form method="POST" action="../crud_carrito/gestion_carrito.php">
-                                <input type="hidden" name="plant" value="<?php echo $newPlanta->getId(); ?>" />
-                                <input type="submit" value="Añadir al carrito" />
-                            </form>
-                        </div>
-                        <div class="agregar-deseados">
-                            <?php
-                            $idDeseado = $crudDeseados->obtenerDeseado($newPlanta->getId(), $_SESSION['sessionID']);
-
-                            if ($idDeseado != null) { ?>
-                                <div class="quitar-deseado">
-                                    <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
-                                        <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
-                                        <button type="submit" name="quitarDeseado">★</button>
-                                    </form>
-                                </div>
-                            <?php } else { ?>
-                                <div class="agregar-deseado">
-                                    <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
-                                        <input type="hidden" name="id_planta" value="<?php echo $newPlanta->getId() ?>" />
-                                        <input type="hidden" name="id_user" value="<?php echo $id ?>" />
-                                        <button type="submit" name="add">☆</button>
-                                    </form>
-                                </div>
+                        <div class="lista-plantas-gestionCarrito">
+                            <div class="lista-plantas-precio">
+                                <?php echo $newPlanta->getPrecio(); ?> €
+                            </div>
+                            <?php if ($logueado) { ?>
+                                <form method="POST" action="../crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
+                                    <input type="hidden" name="plant" value="<?php echo $newPlanta->getId(); ?>" />
+                                    <input type="number" min="1" value="1" name="cantidad" class="cantidadCarrito" />
+                                    <input type="submit" value="&#128722;" />
+                                </form>
                             <?php } ?>
                         </div>
+                        <?php if ($logueado) { ?>
+                            <div class="agregar-deseados">
+                                <?php
+                                $idDeseado = $crudDeseados->obtenerDeseado($newPlanta->getId(), $_SESSION['sessionID']);
+
+                                if ($idDeseado != null) { ?>
+                                    <div class="quitar-deseado">
+                                        <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
+                                            <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
+                                            <button type="submit" name="quitarDeseado">★</button>
+                                        </form>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="agregar-deseado">
+                                        <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
+                                            <input type="hidden" name="id_planta" value="<?php echo $newPlanta->getId() ?>" />
+                                            <input type="hidden" name="id_user" value="<?php echo $id ?>" />
+                                            <button type="submit" name="add">☆</button>
+                                        </form>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,6 @@ if (isset($_SESSION['sessionID']) == true) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +27,7 @@ if (isset($_SESSION['sessionID']) == true) {
     <div class='header'>
         <div class='topbar'>
             <div class='header-logo'>
-                <a href="index.php" class="logo">
+                <a href="../index.php" class="logo">
                     <img src="../images/logo.png">
                 </a>
             </div>
@@ -51,13 +50,13 @@ if (isset($_SESSION['sessionID']) == true) {
         if (isset($_POST['login'])) {
             if (!isset($_POST['nickname']) || !isset($_POST['password'])) { ?>
                 Nombre o password vacios.
-            <?php
+                <?php
             } else {
                 $nickname = $crudUser->borrarEspacios($_POST['nickname']);
                 $password = $crudUser->borrarEspacios($_POST['password']);
                 $password_crypt = $crudUser->encriptarPassword($password);
                 $userSession = $crudUser->validarLogin($nickname, $password_crypt);
-                
+
                 if (!empty($userSession)) {
                     session_start();
                     $_SESSION['sessionID'] = $userSession['id'];

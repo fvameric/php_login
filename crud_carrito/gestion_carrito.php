@@ -1,7 +1,7 @@
 <?php
-include_once('/conexion/db.php');
-include_once('/clases/planta.php');
-include_once('/crud_plantas/crud_plantas.php');
+include_once('../conexion/db.php');
+include_once('../clases/planta.php');
+include_once('../crud_plantas/crud_plantas.php');
 
 //obtencion plantas
 $crudPlantas = new CrudPlanta();

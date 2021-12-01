@@ -173,69 +173,15 @@ if (isset($_SESSION['sessionID'])) {
 
     <div class="content-wrapper">
         <div class="content">
-            <div class="lista-orden">
-                <form method="GET" action="">
-                    <button type="submit" name="sort" class="button" value="1">Ordenar por defecto</button>
-                    <button type="submit" name="sort" class="button" value="2">Ordenar por precio</button>
-                    <button type="submit" name="sort" class="button" value="3">Ordenar por nombre</button>
-                    <button type="submit" name="sort" class="button" value="4">Ordenar por deseados</button>
-                </form>
-            </div>
-            <div class="scroll-plantas">
-                <?php foreach ($listaPlantas as $plantas) { ?>
-                    <div class="lista-plantas">
-                        <div class="carta">
-                            <div class="lista-plantas-fotos">
-                                <img src=<?php echo $plantas->getFoto() ?> class="lista-fotos">
-                            </div>
-                            <div class="lista-plantas-content">
-                                <div class="lista-plantas-nombre">
-                                    <?php echo $plantas->getNombre() ?>
-                                </div>
-                                <div class="lista-plantas-gestionCarrito">
-                                    <div class="lista-plantas-precio">
-                                        <?php echo $plantas->getPrecio() ?> €
-                                    </div>
-                                    <?php if ($logueado) { ?>
-                                        <form method="POST" action="/crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
-                                            <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
-                                            <input type="number" min="1" value="1" name="cantidad" class="cantidadCarrito" />
-                                            <input type="submit" value="&#128722;" />
-                                        </form>
-                                    <?php } ?>
-                                </div>
-                                <div class="agregar-deseados">
-                                    <?php
-                                    $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
-
-                                    if ($idDeseado != null) { ?>
-                                        <div class="quitar-deseado">
-                                            <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
-                                                <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
-                                                <button type="submit" name="quitarDeseado">★</button>
-                                            </form>
-                                        </div>
-                                    <?php } else { ?>
-                                        <div class="agregar-deseado">
-                                            <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
-                                                <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                                <input type="hidden" name="id_user" value="<?php echo $id ?>" />
-                                                <button type="submit" name="add">☆</button>
-                                            </form>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                            <div class="ver-detalles-planta">
-                                <form method="POST" action="ver_detalle.php">
-                                    <input type="hidden" name="id_admin" value="<?php echo $id_user ?>" />
-                                    <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                    <input type="submit" id="detalles" value="Ver detalle" />
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
+            <div class="detalle-perfil">
+                Avatar:
+                <div class='avatar'>
+                    <img src=<?php echo $user->getAvatar(); ?>>
+                </div>
+                Nombre:
+                <?php echo $user->getNickname(); ?><br>
+                Email:
+                <?php echo $user->getEmail(); ?><br>
             </div>
         </div>
     </div>
