@@ -22,6 +22,6 @@ if (isset($_POST['id_planta'])) {
     <?php if ($validacionDelete) { ?>
         Se eliminó la planta con éxito.
     <?php } ?>
-    <a href="../profileAdmin.php">Volver atrás</a>
+    <a href="../index.php">Volver atrás</a>
 </body>
 </html>
