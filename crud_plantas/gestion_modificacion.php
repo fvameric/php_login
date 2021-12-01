@@ -70,6 +70,6 @@ if (isset($_SESSION['sessionID'])) {
     <?php  if ($validacionUpdate) { ?>
         Se realizó la modificación con éxito. 
     <?php } ?>
-    <a href="../profileAdmin.php">Volver atrás</a>
+    <a href="../index.php">Volver atrás</a>
 </body>
 </html>
