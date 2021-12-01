@@ -46,14 +46,14 @@ if (isset($_GET['categoria'])) {
 }
 
 //ordenes
-if (isset($_GET['sort'])) {
-    if ($_GET['sort'] == 1) {
+if (isset($_POST['sort'])) {
+    if ($_POST['sort'] == 1) {
         $listaPlantas = $crudPlanta->mostrar();
-    } else if ($_GET['sort'] == 2) {
+    } else if ($_POST['sort'] == 2) {
         $listaPlantas = $crudPlanta->ordenarPorPrecio($listaPlantas);
-    } else if ($_GET['sort'] == 3) {
+    } else if ($_POST['sort'] == 3) {
         $listaPlantas = $crudPlanta->ordenarPorNombre($listaPlantas);
-    } else if ($_GET['sort'] == 4) {
+    } else if ($_POST['sort'] == 4) {
         $listaPlantas = $crudPlanta->ordenarPorDeseados($listaPlantas, $listaDeseados);
     }
 }
@@ -122,7 +122,13 @@ if (isset($_GET['sort'])) {
                     <?php } ?>
 
                     <div class='header-content'>
-                        <li><a href="profileAdmin.php">Perfil</a></li>
+                        <li>
+                            <?php if ($_SESSION['isAdmin'] == 0) { ?>
+                                <a href="profile.php">Perfil</a>
+                            <?php } else { ?>
+                                <a href="profileAdmin.php">Perfil</a>
+                            <?php } ?>
+                        </li>
                         <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
                         <li><a href="/identificacion/cierre_sesion.php">Cerrar sesión</a></li>
 
@@ -196,7 +202,7 @@ if (isset($_GET['sort'])) {
     <div class="content-wrapper">
         <div class="content">
             <div class="lista-orden">
-                <form method="GET" action="">
+                <form method="POST" action="">
                     <button type="submit" name="sort" class="button" value="1">Ordenar por defecto</button>
                     <button type="submit" name="sort" class="button" value="2">Ordenar por precio</button>
                     <button type="submit" name="sort" class="button" value="3">Ordenar por nombre</button>
@@ -255,6 +261,24 @@ if (isset($_GET['sort'])) {
                                     </div>
                                 <?php } ?>
                             </div>
+                            <?php if ($logueado && $_SESSION['isAdmin'] == 1) { ?>
+                                <div class="lista-plantas-crud">
+                                    <div class="lista-plantas-modificar">
+                                        <form method="POST" action="/crud_plantas/pagina_modificacion.php">
+                                            <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                            <input type="submit" id="modificar" value="Modificar" />
+                                        </form>
+                                    </div>
+                                    <div class="lista-plantas-eliminar">
+                                        <form method="POST" action="/crud_plantas/gestion_eliminacion.php">
+                                            <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
+                                            <input type="submit" id="eliminar" value="Eliminar" />
+                                        </form>
+                                    </div>
+                                </div>
+                            <?php } ?>
                             <div class="ver-detalles-planta">
                                 <form method="GET" action="ver_detalle.php">
                                     <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
