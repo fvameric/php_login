@@ -65,7 +65,6 @@ if (isset($_SESSION['sessionID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="../sweetalert2.all.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 
     <script>
@@ -113,7 +112,6 @@ if (isset($_SESSION['sessionID'])) {
 
 
                     <div class='header-content'>
-                        <li><a href="profileAdmin.php">Perfil</a></li>
                         <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
                         <li><a href="/identificacion/cierre_sesion.php">Cerrar sesión</a></li>
 
@@ -164,6 +162,13 @@ if (isset($_SESSION['sessionID'])) {
                     </form>
                 </div>
 
+                <div class="lista-plantas-crear">
+                    <form method="POST" action="/crud_plantas/pagina_creacion.php">
+                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                        <input type="submit" name="crear" id="crear" value="Crear planta" />
+                    </form>
+                </div>
+
                 <div class="scroll-usuarios">
                     <?php foreach ($listaUsers as $usuario) { ?>
                         <div class="lista-usuarios">
@@ -195,13 +200,6 @@ if (isset($_SESSION['sessionID'])) {
                             </div>
                         </div>
                     <?php } ?>
-                </div>
-
-                <div class="lista-plantas-crear">
-                    <form method="POST" action="/crud_plantas/pagina_creacion.php">
-                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
-                        <input type="submit" name="crear" id="crear" value="Crear planta" />
-                    </form>
                 </div>
             <?php } ?>
         </div>

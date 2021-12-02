@@ -32,7 +32,6 @@ if (isset($_SESSION['sessionID'])) {
         if ($deseados->getUserId() == $id_user) {
             foreach ($listaPlantas as $plantas) {
                 if ($plantas->getId() == $deseados->getPlantaId()) {
-                    echo 'true';
                     $plantasDeseadas[] = $plantas;
                 }
             }
@@ -64,21 +63,15 @@ if (isset($_SESSION['sessionID'])) {
 
     if (isset($_POST['cargarXML'])) {
         $xml = simplexml_load_file("plantas.xml");
-        echo $xml->getName() . "<br>";
 
         foreach ($xml as $valor) {
-            $newPlant = new Planta();
-            $newPlant->setId($valor->id);
-            $newPlant->setNombre($valor->nombre);
-            $newPlant->setDescripcion($valor->descripcion);
-            $newPlant->setPrecio($valor->precio);
-            $newPlant->setStock($valor->stock);
-            $newPlant->setFoto($valor->foto);
-            $newPlant->setCompradas($valor->compradas);
-            $newPlant->setCategoria($valor->categoria);
-
-            $plantasDeseadas[] = $newPlant;
+            if ($valor->id != 0) {
+                $crudDeseados->agregarDeseado($id_user, $valor->id);
+            }
         }
+
+        header('Location: pagina_deseados.php');
+        
     }
 }
 ?>
@@ -144,11 +137,6 @@ if (isset($_SESSION['sessionID'])) {
                 <?php } ?>
 
                 <div class='header-content'>
-                    <?php if ($_SESSION['isAdmin'] == 0) { ?>
-                        <li><a href="/profile.php">Perfil</a></li>
-                    <?php } else { ?>
-                        <li><a href="/profileAdmin.php">Perfil</a></li>
-                    <?php } ?>
                     <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
                     <li><a href="../identificacion/cierre_sesion.php">Cerrar sesión</a></li>
 

@@ -122,13 +122,6 @@ if (isset($_POST['sort'])) {
                     <?php } ?>
 
                     <div class='header-content'>
-                        <li>
-                            <?php if ($_SESSION['isAdmin'] == 0) { ?>
-                                <a href="profile.php">Perfil</a>
-                            <?php } else { ?>
-                                <a href="profileAdmin.php">Perfil</a>
-                            <?php } ?>
-                        </li>
                         <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
                         <li><a href="/identificacion/cierre_sesion.php">Cerrar sesión</a></li>
 
@@ -261,24 +254,6 @@ if (isset($_POST['sort'])) {
                                     </div>
                                 <?php } ?>
                             </div>
-                            <?php if ($logueado && $_SESSION['isAdmin'] == 1) { ?>
-                                <div class="lista-plantas-crud">
-                                    <div class="lista-plantas-modificar">
-                                        <form method="POST" action="/crud_plantas/pagina_modificacion.php">
-                                            <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
-                                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                            <input type="submit" id="modificar" value="Modificar" />
-                                        </form>
-                                    </div>
-                                    <div class="lista-plantas-eliminar">
-                                        <form method="POST" action="/crud_plantas/gestion_eliminacion.php">
-                                            <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
-                                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                            <input type="submit" id="eliminar" value="Eliminar" />
-                                        </form>
-                                    </div>
-                                </div>
-                            <?php } ?>
                             <div class="ver-detalles-planta">
                                 <form method="GET" action="ver_detalle.php">
                                     <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />

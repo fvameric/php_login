@@ -48,8 +48,6 @@ if (isset($_SESSION['sessionID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <link rel="stylesheet" href="../styles.css">
-    <script src="../sweetalert2.all.js"></script>
-    <script src="../jquery-3.6.0.js"></script>
 </head>
 
 <body>
@@ -82,11 +80,6 @@ if (isset($_SESSION['sessionID'])) {
                 <?php } ?>
 
                 <div class='header-content'>
-                    <?php if ($_SESSION['isAdmin'] == 0) { ?>
-                        <li><a href="/profile.php">Perfil</a></li>
-                    <?php } else { ?>
-                        <li><a href="/profileAdmin.php">Perfil</a></li>
-                    <?php } ?>
                     <li><a href="../crud_deseados/pagina_deseados.php">Deseados</a></li>
                     <li><a href="../identificacion/cierre_sesion.php">Cerrar sesión</a></li>
 

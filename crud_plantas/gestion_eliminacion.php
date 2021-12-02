@@ -16,12 +16,21 @@ if (isset($_POST['id_planta'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../sweetalert2.all.js"></script>
     <title>Planta eliminada</title>
 </head>
 <body>
     <?php if ($validacionDelete) { ?>
-        Se eliminó la planta con éxito.
+        <script>
+            Swal.fire({
+                title: 'Se eliminó con éxito al usuario',
+                confirmButtonText: 'Volver atrás'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `../index.php`;
+                }
+            });
+        </script>
     <?php } ?>
-    <a href="../index.php">Volver atrás</a>
 </body>
 </html>

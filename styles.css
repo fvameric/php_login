@@ -1096,25 +1096,26 @@ input:not(:checked)~#collapse-menu {
 /* FOOOOOOTER */
 
 footer {
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding-top: 150px;
-    padding-bottom: 150px;
+    line-height: 50px;
+    height: 50px;
+    padding: 0 20px;
     background-color: #794044;
     color: #8e99a4;
 }
 
 
-/* chorrada */
+/* detalle planta */
 
-.ball {
-    width: 50px;
-    height: 50px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    border: 3px solid dodgerblue;
-    border-radius: 50%;
-    pointer-events: none;
+.detalle-planta {
+    display: flex;
+}
+
+.detalle-planta img {
+    object-fit: contain;
+}
+
+.planta-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
