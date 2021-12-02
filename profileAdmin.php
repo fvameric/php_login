@@ -14,7 +14,7 @@ if (isset($_SESSION['sessionID'])) {
 
     $crudUser = new CrudUser();
     $user = new User();
-    $listaUsers = $crudUser->mostrar();
+    $listaUsers = $crudUser->obtenerListaUsuarios();
     $user = $crudUser->obtenerUser($id_user);
 
     //obtencion plantas
@@ -24,16 +24,15 @@ if (isset($_SESSION['sessionID'])) {
     $crudPlanta = new CrudPlanta();
 
     if (!isset($listaPlantas)) {
-        $listaPlantas = $crudPlanta->mostrar();
+        $listaPlantas = $crudPlanta->obtenerListaPlantas();
     }
 
     //obtencion deseados
     require_once('/crud_deseados/crud_deseados.php');
-    require_once('/clases/deseados.php');
 
     $crudDeseados = new CrudDeseados();
     if (!isset($listaDeseados)) {
-        $listaDeseados = $crudDeseados->mostrar();
+        $listaDeseados = $crudDeseados->obtenerListaDeseados();
     }
     //categorias
     if (isset($_GET['categoria'])) {
@@ -42,7 +41,7 @@ if (isset($_SESSION['sessionID'])) {
 
     if (isset($_GET['sort'])) {
         if ($_GET['sort'] == 1) {
-            $listaPlantas = $crudPlanta->mostrar();
+            $listaPlantas = $crudPlanta->obtenerListaPlantas();
         } else if ($_GET['sort'] == 2) {
             $listaPlantas = $crudPlanta->ordenarPorPrecio($listaPlantas);
         } else if ($_GET['sort'] == 3) {

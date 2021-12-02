@@ -2,7 +2,7 @@
     class CrudUser {
         public function __construc(){}
 
-        public function mostrar() {
+        public function obtenerListaUsuarios() {
             include 'db.php';
 
             $listaUsers=[];
@@ -106,7 +106,7 @@
             }          
         }
 
-        public function eliminar($id){
+        public function eliminarUsuario($id){
             include 'db.php';
             $sqlDelete="DELETE FROM `users` WHERE id=".$id;
             $consultaDelete = mysqli_query($con,$sqlDelete);

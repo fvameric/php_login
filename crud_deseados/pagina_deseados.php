@@ -17,16 +17,16 @@ if (isset($_SESSION['sessionID'])) {
 
     $crudUser = new CrudUser();
     $user = new User();
-    $listaUsers = $crudUser->mostrar();
+    $listaUsers = $crudUser->obtenerListaUsuarios();
     $user = $crudUser->obtenerUser($id_user);
 
     $crudDeseados = new CrudDeseados();
     $deseado = new Deseados();
-    $listaDeseados = $crudDeseados->mostrar();
+    $listaDeseados = $crudDeseados->obtenerListaDeseados();
 
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
-    $listaPlantas = $crudPlanta->mostrar();
+    $listaPlantas = $crudPlanta->obtenerListaPlantas();
 
     foreach ($listaDeseados as $deseados) {
         if ($deseados->getUserId() == $id_user) {
@@ -56,13 +56,13 @@ if (isset($_SESSION['sessionID'])) {
         $xml->formatOutput = true;
 
         $contenidoXML = $xml->asXML();
-        $file = fopen('plantas.xml', 'w');
+        $file = fopen('../plantas.xml', 'w');
         fwrite($file, $contenidoXML);
         fclose($file);
     }
 
     if (isset($_POST['cargarXML'])) {
-        $xml = simplexml_load_file("plantas.xml");
+        $xml = simplexml_load_file("../plantas.xml");
 
         foreach ($xml as $valor) {
             if ($valor->id != 0) {
@@ -210,7 +210,7 @@ if (isset($_SESSION['sessionID'])) {
                                         if ($idDeseado != null) { ?>
                                             <div class="quitar-deseado">
                                                 <form method="POST" action="gestion_eliminacion.php" class="btn-quitar-deseado">
-                                                    <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
+                                                    <input type="hidden" name="id_deseado" value="<?php echo $idDeseado->getId() ?>" />
                                                     <button type="submit" name="quitarDeseado">★</button>
                                                 </form>
                                             </div>
@@ -218,7 +218,7 @@ if (isset($_SESSION['sessionID'])) {
                                             <div class="agregar-deseado">
                                                 <form method="POST" action="gestion_creacion.php" class="btn-agregar-deseado">
                                                     <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                                    <input type="hidden" name="id_user" value="<?php echo $id ?>" />
+                                                    <input type="hidden" name="id_user" value="<?php echo $id_user ?>" />
                                                     <button type="submit" name="add">☆</button>
                                                 </form>
                                             </div>
@@ -228,14 +228,14 @@ if (isset($_SESSION['sessionID'])) {
                                 <div class="lista-plantas-crud">
                                     <div class="lista-plantas-modificar">
                                         <form method="POST" action="/crud_plantas/pagina_modificacion.php">
-                                            <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                            <input type="hidden" name="id_admin" value="<?php echo $id_user ?>" />
                                             <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
                                             <input type="submit" id="modificar" value="Modificar" />
                                         </form>
                                     </div>
                                     <div class="lista-plantas-eliminar">
                                         <form method="POST" action="/crud_plantas/gestion_eliminacion.php">
-                                            <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                            <input type="hidden" name="id_admin" value="<?php echo $id_user ?>" />
                                             <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
                                             <input type="submit" id="eliminar" value="Eliminar" />
                                         </form>
@@ -243,7 +243,7 @@ if (isset($_SESSION['sessionID'])) {
                                 </div>
                                 <div class="ver-detalles-planta">
                                     <form method="POST" action="ver_detalle.php">
-                                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                                        <input type="hidden" name="id_admin" value="<?php echo $id_user ?>" />
                                         <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
                                         <input type="submit" id="detalles" value="Ver detalle" />
                                     </form>

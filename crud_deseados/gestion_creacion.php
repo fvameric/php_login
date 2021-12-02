@@ -17,7 +17,7 @@
     
         $crudUser = new CrudUser();
         $user = new User();
-        $listaUsers = $crudUser->mostrar();
+        $listaUsers = $crudUser->obtenerListaUsuarios();
     
         //obtencion plantas
         require_once('../crud_plantas/crud_plantas.php');

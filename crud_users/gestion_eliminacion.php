@@ -4,7 +4,7 @@ include_once('crud_users.php');
 $crud = new CrudUser();
 
 if (isset($_POST['id_usuario_eliminar'])) {
-    $validacionDelete = $crud->eliminar($_POST['id_usuario_eliminar']);
+    $validacionDelete = $crud->eliminarUsuario($_POST['id_usuario_eliminar']);
 }
 ?>
 

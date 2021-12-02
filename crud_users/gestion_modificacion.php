@@ -9,7 +9,7 @@ if (isset($_SESSION['sessionID'])) {
 
     $crudUser = new CrudUser();
     $user = new User();
-    $listaUsers = $crudUser->mostrar();
+    $listaUsers = $crudUser->obtenerListaUsuarios();
     $user = $crudUser->obtenerUser($id_user);
 
     if (isset($_POST['aceptarmodif'])) {

@@ -2,7 +2,7 @@
     class CrudPlanta {
         public function __construc(){}
 
-        public function mostrar() {
+        public function obtenerListaPlantas() {
             include 'db.php';
 
             $listaPlantas=[];
@@ -55,7 +55,7 @@
             }
         }
 
-        public function eliminar($id){
+        public function eliminarPlanta($id){
             include 'db.php';
             $sqlDelete="DELETE FROM `plantas` WHERE id=".$id;
             $consultaDelete = mysqli_query($con,$sqlDelete);

@@ -13,7 +13,7 @@ if (isset($_SESSION['sessionID'])) {
 
     $crudUser = new CrudUser();
     $user = new User();
-    $listaUsers = $crudUser->mostrar();
+    $listaUsers = $crudUser->obtenerListaUsuarios();
     $user = $crudUser->obtenerUser($id_admin);
 
     //obtencion deseados
@@ -24,7 +24,7 @@ if (isset($_SESSION['sessionID'])) {
     $deseado = new Deseados();
 
     if (!isset($listaDeseados)) {
-        $listaDeseados = $crudDeseados->mostrar();
+        $listaDeseados = $crudDeseados->obtenerListaDeseados();
     }
 }
 
@@ -39,7 +39,7 @@ if (isset($_GET['id_planta'])) {
 
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
-    $listaPlantas = $crudPlanta->mostrar();
+    $listaPlantas = $crudPlanta->obtenerListaPlantas();
     $planta = $crudPlanta->obtenerPlanta($id_planta);
 
     $newPlanta;

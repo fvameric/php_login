@@ -2,11 +2,11 @@
 include_once('crud_plantas.php');
 include_once('../clases/planta.php');
  
-$crud = new CrudPlanta();
+$crudPlanta = new CrudPlanta();
 $planta = new Planta();
 
 if (isset($_POST['id_planta'])) {
-    $validacionDelete = $crud->eliminar($_POST['id_planta']);
+    $validacionDelete = $crudPlanta->eliminarPlanta($_POST['id_planta']);
 }
 ?>
 
@@ -23,7 +23,7 @@ if (isset($_POST['id_planta'])) {
     <?php if ($validacionDelete) { ?>
         <script>
             Swal.fire({
-                title: 'Se eliminó con éxito al usuario',
+                title: 'Se eliminó con éxito la planta',
                 confirmButtonText: 'Volver atrás'
             }).then((result) => {
                 if (result.isConfirmed) {

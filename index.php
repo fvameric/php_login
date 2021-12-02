@@ -13,7 +13,7 @@ if (isset($_SESSION['sessionID'])) {
 
     $crudUser = new CrudUser();
     $user = new User();
-    $listaUsers = $crudUser->mostrar();
+    $listaUsers = $crudUser->obtenerListaUsuarios();
     $user = $crudUser->obtenerUser($id_user);
 
     //obtencion deseados
@@ -23,7 +23,7 @@ if (isset($_SESSION['sessionID'])) {
     $crudDeseados = new CrudDeseados();
     $deseado = new Deseados();
     if (!isset($listaDeseados)) {
-        $listaDeseados = $crudDeseados->mostrar();
+        $listaDeseados = $crudDeseados->obtenerListaDeseados();
     }
 } else {
     $logueado = false;
@@ -37,7 +37,7 @@ $crudPlanta = new CrudPlanta();
 $planta = new Planta();
 
 if (!isset($listaPlantas)) {
-    $listaPlantas = $crudPlanta->mostrar();
+    $listaPlantas = $crudPlanta->obtenerListaPlantas();
 }
 
 //categorias
@@ -48,7 +48,7 @@ if (isset($_GET['categoria'])) {
 //ordenes
 if (isset($_POST['sort'])) {
     if ($_POST['sort'] == 1) {
-        $listaPlantas = $crudPlanta->mostrar();
+        $listaPlantas = $crudPlanta->obtenerListaPlantas();
     } else if ($_POST['sort'] == 2) {
         $listaPlantas = $crudPlanta->ordenarPorPrecio($listaPlantas);
     } else if ($_POST['sort'] == 3) {
@@ -238,7 +238,7 @@ if (isset($_POST['sort'])) {
                                         if ($idDeseado != null) { ?>
                                             <div class="quitar-deseado">
                                                 <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
-                                                    <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
+                                                    <input type="hidden" name="id_deseado" value="<?php echo $idDeseado->getId() ?>" />
                                                     <button type="submit" name="quitarDeseado">★</button>
                                                 </form>
                                             </div>
