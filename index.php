@@ -1,20 +1,14 @@
 <?php
 include('/conexion/db.php');
 
+include_once('/clases/user.php');
+
 session_start();
-if (isset($_SESSION['sessionID'])) {
+if (isset($_SESSION['userSession'])) {
     $logueado = true;
     $_SESSION['ubicacion'] = 'home';
-    $id_user = $_SESSION['sessionID'];
-
-    //obtencion users
-    require_once('/crud_users/crud_users.php');
-    require_once('/clases/user.php');
-
-    $crudUser = new CrudUser();
-    $user = new User();
-    $listaUsers = $crudUser->obtenerListaUsuarios();
-    $user = $crudUser->obtenerUser($id_user);
+    //$id_user = $_SESSION['sessionID'];
+    $userSession = $_SESSION['userSession'];
 
     //obtencion deseados
     require_once('/crud_deseados/crud_deseados.php');
@@ -101,22 +95,22 @@ if (isset($_POST['sort'])) {
             </div>
             <?php if ($logueado) { ?>
                 <div class='header-userinfo'>
-                    <?php if ($_SESSION['isAdmin'] == 0) { ?>
+                    <?php if ($userSession->getAdmin() == 0) { ?>
                         <a href="profile.php" class="userinfo">
                             <div class='avatar'>
-                                <img src=<?php echo $user->getAvatar(); ?>>
+                                <img src=<?php echo $userSession->getAvatar(); ?>>
                             </div>
                             <div class='nombre'>
-                                <?php echo $user->getNickname(); ?>
+                                <?php echo $userSession->getNickname(); ?>
                             </div>
                         </a>
                     <?php } else { ?>
                         <a href="profileAdmin.php" class="userinfo">
                             <div class='avatar'>
-                                <img src=<?php echo $user->getAvatar(); ?>>
+                                <img src=<?php echo $userSession->getAvatar(); ?>>
                             </div>
                             <div class='nombre'>
-                                <?php echo $user->getNickname(); ?>
+                                <?php echo $userSession->getNickname(); ?>
                             </div>
                         </a>
                     <?php } ?>
@@ -199,7 +193,7 @@ if (isset($_POST['sort'])) {
                     <button type="submit" name="sort" class="button" value="1">Ordenar por defecto</button>
                     <button type="submit" name="sort" class="button" value="2">Ordenar por precio</button>
                     <button type="submit" name="sort" class="button" value="3">Ordenar por nombre</button>
-                    <?php if (isset($_SESSION['sessionID'])) { ?>
+                    <?php if (isset($_SESSION['userSession'])) { ?>
                         <button type="submit" name="sort" class="button" value="4">Ordenar por deseados</button>
                     <?php } ?>
                 </form>
@@ -233,7 +227,7 @@ if (isset($_POST['sort'])) {
                                 <?php if ($logueado) { ?>
                                     <div class="agregar-deseados">
                                         <?php
-                                        $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
+                                        $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $userSession->getId());
 
                                         if ($idDeseado != null) { ?>
                                             <div class="quitar-deseado">

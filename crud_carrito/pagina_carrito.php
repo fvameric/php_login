@@ -14,13 +14,14 @@ include_once('../crud_plantas/crud_plantas.php');
 include_once('../clases/planta.php');
 
 session_start();
-if (isset($_SESSION['sessionID'])) {
+if (isset($_SESSION['userSession'])) {
     $ubicacion = $_SESSION['ubicacion'];
-    $id_user = $_SESSION['sessionID'];
+    //$id_user = $_SESSION['sessionID'];
+    $userSession = $_SESSION['userSession'];
 
     $crudUser = new CrudUser();
-    $user = new User();
-    $user = $crudUser->obtenerUser($id_user);
+    //$user = new User();
+    //$user = $crudUser->obtenerUser($id_user);
 
     if (isset($_SESSION['plantaid'])) {
         $id_planta = $_SESSION['plantaid'];
@@ -59,22 +60,22 @@ if (isset($_SESSION['sessionID'])) {
                 </a>
             </div>
             <div class='header-userinfo'>
-                <?php if ($_SESSION['isAdmin'] == 0) { ?>
+                <?php if ($userSession->getAdmin() == 0) { ?>
                     <a href="../profile.php" class="userinfo">
                         <div class='avatar'>
-                            <img src=<?php echo $user->getAvatar(); ?>>
+                            <img src=<?php echo $userSession->getAvatar(); ?>>
                         </div>
                         <div class='nombre'>
-                            <?php echo $user->getNickname(); ?>
+                            <?php echo $userSession->getNickname(); ?>
                         </div>
                     </a>
                 <?php } else { ?>
                     <a href="../profileAdmin.php" class="userinfo">
                         <div class='avatar'>
-                            <img src=<?php echo $user->getAvatar(); ?>>
+                            <img src=<?php echo $userSession->getAvatar(); ?>>
                         </div>
                         <div class='nombre'>
-                            <?php echo $user->getNickname(); ?>
+                            <?php echo $userSession->getNickname(); ?>
                         </div>
                     </a>
                 <?php } ?>

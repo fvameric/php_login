@@ -1,8 +1,52 @@
 <?php
+    //archivo DB antiguo
+    if (is_file("conexion/db.php")) {
+        include_once('conexion/db.php');
+    } else {
+        include_once('../conexion/db.php');
+    }
+
+    // clase BD
+    if (is_file("conexion/bd.php")) {
+        include_once('conexion/bd.php');
+    } else {
+        include_once('../conexion/bd.php');
+    }
+
+    if (is_file("clases/user.php")) {
+        include_once('clases/user.php');
+    } else {
+        include_once('../clases/user.php');
+    }
     class CrudUser {
-        public function __construc(){}
+
+        private $bd;
+        private $listaUsuarios = [];
+
+        public function __construct(){
+            $this->bd = new claseBD();
+            $this->cargarUsuarios();
+        }
+
+        public function cargarUsuarios() {
+            $sql = "SELECT * FROM `users` WHERE 1";
+            $consulta = mysqli_query($this->bd->obtenerConexion(), $sql);
+
+            while($fila = $consulta->fetch_assoc()) {
+                $newUser = new User();
+                $newUser->setId($fila['id']);
+                $newUser->setNickname($fila['nickname']);
+                $newUser->setPassword($fila['password']);
+                $newUser->setEmail($fila['email']);
+                $newUser->setAvatar($fila['avatar']);
+                $newUser->setAdmin($fila['admin']);
+
+                $this->listaUsuarios[] = $newUser;
+            }
+        }
 
         public function obtenerListaUsuarios() {
+            /*
             include 'db.php';
 
             $listaUsers=[];
@@ -22,6 +66,9 @@
                 $listaUsers[] = $newUser;
             }
             return $listaUsers;
+            */
+
+            return $this->listaUsuarios;
         }
 
         function borrarEspacios($str) {
@@ -45,6 +92,18 @@
             } else {
                 return null;
             }
+        }
+
+        public function validarLoginUser($nickname, $password) {
+            foreach ($this->listaUsuarios as $usuario) {
+                echo 'userr: '.$usuario->getNickname();
+                echo '<br>';
+                echo 'userrpass: '.$usuario->getPassword();
+                if ($nickname == $usuario->getNickname() && $password == $usuario->getPassword()) {
+                    return $usuario;
+                }
+            }
+            return null;
         }
 
         public function emailExiste($email) {

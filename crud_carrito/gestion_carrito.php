@@ -7,7 +7,7 @@ include_once('../crud_plantas/crud_plantas.php');
 $crudPlantas = new CrudPlanta();
 
 session_start();
-if (isset($_SESSION['sessionID'])) {
+if (isset($_SESSION['userSession'])) {
     if (isset($_SESSION['arrayPlantas'])) {
         if (isset($_POST['plant']) && isset($_POST['cantidad'])) {
             $planta_id = $_POST['plant'];

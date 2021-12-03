@@ -12,8 +12,9 @@ require_once('../crud_plantas/crud_plantas.php');
 require_once('../clases/planta.php');
 
 session_start();
-if (isset($_SESSION['sessionID'])) {
-    $id_user = $_SESSION['sessionID'];
+if (isset($_SESSION['userSession'])) {
+    //$id_user = $_SESSION['sessionID'];
+    $userSession = $_SESSION['userSession'];
 
     $crudUser = new CrudUser();
     $user = new User();
@@ -29,7 +30,7 @@ if (isset($_SESSION['sessionID'])) {
     $listaPlantas = $crudPlanta->obtenerListaPlantas();
 
     foreach ($listaDeseados as $deseados) {
-        if ($deseados->getUserId() == $id_user) {
+        if ($deseados->getUserId() == $userSession->getId()) {
             foreach ($listaPlantas as $plantas) {
                 if ($plantas->getId() == $deseados->getPlantaId()) {
                     $plantasDeseadas[] = $plantas;
@@ -60,18 +61,21 @@ if (isset($_SESSION['sessionID'])) {
         fwrite($file, $contenidoXML);
         fclose($file);
     }
-
+    $validacionFichero = false;
     if (isset($_POST['cargarXML'])) {
-        $xml = simplexml_load_file("../plantas.xml");
-
-        foreach ($xml as $valor) {
-            if ($valor->id != 0) {
-                $crudDeseados->agregarDeseado($id_user, $valor->id);
+        if (!empty($_FILES["file"]["tmp_name"])) {
+            $validacionFichero = true;
+            $path = $_FILES["file"]["tmp_name"];
+            $xml = simplexml_load_file($path);
+    
+            foreach ($xml as $valor) {
+                if ($valor->id != 0) {
+                    $crudDeseados->agregarDeseado($userSession->getId(), $valor->id);
+                }
             }
+    
+            header('Location: pagina_deseados.php');
         }
-
-        header('Location: pagina_deseados.php');
-        
     }
 }
 ?>
@@ -116,22 +120,22 @@ if (isset($_SESSION['sessionID'])) {
                 </a>
             </div>
             <div class='header-userinfo'>
-                <?php if ($_SESSION['isAdmin'] == 0) { ?>
+                <?php if ($userSession->getId() == 0) { ?>
                     <a href="../profile.php" class="userinfo">
                         <div class='avatar'>
-                            <img src=<?php echo $user->getAvatar(); ?>>
+                            <img src=<?php echo $userSession->getAvatar(); ?>>
                         </div>
                         <div class='nombre'>
-                            <?php echo $user->getNickname(); ?>
+                            <?php echo $userSession->getNickname(); ?>
                         </div>
                     </a>
                 <?php } else { ?>
                     <a href="../profileAdmin.php" class="userinfo">
                         <div class='avatar'>
-                            <img src=<?php echo $user->getAvatar(); ?>>
+                            <img src=<?php echo $userSession->getAvatar(); ?>>
                         </div>
                         <div class='nombre'>
-                            <?php echo $user->getNickname(); ?>
+                            <?php echo $userSession->getNickname(); ?>
                         </div>
                     </a>
                 <?php } ?>
@@ -170,7 +174,7 @@ if (isset($_SESSION['sessionID'])) {
         <div class="flecha-navegacion">
             ▶
         </div>
-        <?php if ($_SESSION['isAdmin'] == 0) { ?>
+        <?php if ($userSession->getAdmin() == 0) { ?>
             <a href="../profile.php">Perfil</a>
         <?php } else { ?>
             <a href="../profileAdmin.php">Perfil</a>
@@ -205,7 +209,7 @@ if (isset($_SESSION['sessionID'])) {
                                     </div>
                                     <div class="agregar-deseados">
                                         <?php
-                                        $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $_SESSION['sessionID']);
+                                        $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $userSession->getId());
 
                                         if ($idDeseado != null) { ?>
                                             <div class="quitar-deseado">
@@ -218,7 +222,6 @@ if (isset($_SESSION['sessionID'])) {
                                             <div class="agregar-deseado">
                                                 <form method="POST" action="gestion_creacion.php" class="btn-agregar-deseado">
                                                     <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                                    <input type="hidden" name="id_user" value="<?php echo $id_user ?>" />
                                                     <button type="submit" name="add">☆</button>
                                                 </form>
                                             </div>
@@ -228,14 +231,12 @@ if (isset($_SESSION['sessionID'])) {
                                 <div class="lista-plantas-crud">
                                     <div class="lista-plantas-modificar">
                                         <form method="POST" action="/crud_plantas/pagina_modificacion.php">
-                                            <input type="hidden" name="id_admin" value="<?php echo $id_user ?>" />
                                             <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
                                             <input type="submit" id="modificar" value="Modificar" />
                                         </form>
                                     </div>
                                     <div class="lista-plantas-eliminar">
                                         <form method="POST" action="/crud_plantas/gestion_eliminacion.php">
-                                            <input type="hidden" name="id_admin" value="<?php echo $id_user ?>" />
                                             <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
                                             <input type="submit" id="eliminar" value="Eliminar" />
                                         </form>
@@ -243,7 +244,6 @@ if (isset($_SESSION['sessionID'])) {
                                 </div>
                                 <div class="ver-detalles-planta">
                                     <form method="POST" action="ver_detalle.php">
-                                        <input type="hidden" name="id_admin" value="<?php echo $id_user ?>" />
                                         <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
                                         <input type="submit" id="detalles" value="Ver detalle" />
                                     </form>
@@ -259,9 +259,17 @@ if (isset($_SESSION['sessionID'])) {
             <h2>No tienes deseados<h2>
         </div>
         <div class="cargar-xml">
-            <form method="POST" action="">
+            <form method="POST" action="" enctype="multipart/form-data">
+                <label>Fichero xml:</label><br>
+                <input type="file" name="file"><br><br>
                 <button type="submit" name="cargarXML">Cargar fichero XML</button>
             </form>
+
+            <?php if (!$validacionFichero) { ?>
+                <div>
+                    Selecciona un fichero XML.
+                </div>
+            <?php } ?>
         </div>
     <?php } ?>
 </body>

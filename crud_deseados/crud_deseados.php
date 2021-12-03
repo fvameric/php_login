@@ -1,4 +1,5 @@
 <?php
+    //archivo DB antiguo
     if (is_file("conexion/db.php")) {
         include_once('conexion/db.php');
     } else {

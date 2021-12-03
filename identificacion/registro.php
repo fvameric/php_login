@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <?php if (!empty($_SESSION['sessionID'])) { ?>
+    <?php if (!empty($_SESSION['userSession'])) { ?>
         Se creó el usuario con éxito.
     <?php } else {
         header('Location: ../profileAdmin.php');

@@ -1,21 +1,21 @@
 <?php
 include '/conexion/db.php';
 
+    //obtencion users
+include_once('/crud_users/crud_users.php');
+include_once('/clases/user.php');
+
 // si no hay sesión iniciada, devuelve al home
 session_start();
-if (isset($_SESSION['sessionID'])) {
+if (isset($_SESSION['userSession'])) {
     $logueado = true;
     $_SESSION['ubicacion'] = 'perfilAdmin';
-    $id_user = $_SESSION['sessionID'];
-
-    //obtencion users
-    require_once('/crud_users/crud_users.php');
-    require_once('/clases/user.php');
-
+    //$id_user = $_SESSION['sessionID'];
+    $userSession = $_SESSION['userSession'];
+    
     $crudUser = new CrudUser();
-    $user = new User();
     $listaUsers = $crudUser->obtenerListaUsuarios();
-    $user = $crudUser->obtenerUser($id_user);
+    //$user = $crudUser->obtenerUser($id_user);
 
     //obtencion plantas
     require_once('/crud_plantas/crud_plantas.php');
@@ -96,16 +96,16 @@ if (isset($_SESSION['sessionID'])) {
                 </a>
             </div>
             <div class='header-userinfo'>
-                <?php if ($user->getAdmin() == 0) { ?>
+                <?php if ($userSession->getAdmin() == 0) { ?>
                         <a href="profile.php" class="userinfo">
                     <?php } else { ?>
                         <a href="profileAdmin.php" class="userinfo">
                     <?php } ?>
                         <div class='avatar'>
-                            <img src=<?php echo $user->getAvatar(); ?>>
+                            <img src=<?php echo $userSession->getAvatar(); ?>>
                         </div>
                         <div class='nombre'>
-                            <?php echo $user->getNickname(); ?>
+                            <?php echo $userSession->getNickname(); ?>
                         </div>
                     </a>
 
@@ -146,14 +146,14 @@ if (isset($_SESSION['sessionID'])) {
             <div class="detalle-perfil">
                 Avatar:
                 <div class='avatar'>
-                    <img src=<?php echo $user->getAvatar(); ?>>
+                    <img src=<?php echo $userSession->getAvatar(); ?>>
                 </div>
                 Nombre:
-                <?php echo $user->getNickname(); ?><br>
+                <?php echo $userSession->getNickname(); ?><br>
                 Email:
-                <?php echo $user->getEmail(); ?><br>
+                <?php echo $userSession->getEmail(); ?><br>
             </div>
-            <?php if ($user->getAdmin() == 1) { ?>
+            <?php if ($userSession->getAdmin() == 1) { ?>
                 <div class="lista-usuarios-crear">
                     <form method="POST" action="/crud_users/pagina_creacion.php">
                         <input type="hidden" name="id_admin" value="<?php echo $id ?>" />

@@ -3,14 +3,9 @@ include_once('crud_users.php');
 include_once('../clases/user.php');
 
 session_start();
-if (isset($_SESSION['sessionID'])) {
+if (isset($_SESSION['userSession'])) {
     $logueado = true;
-    $id_user = $_SESSION['sessionID'];
-
     $crudUser = new CrudUser();
-    $user = new User();
-    $listaUsers = $crudUser->obtenerListaUsuarios();
-    $user = $crudUser->obtenerUser($id_user);
 
     if (isset($_POST['aceptarmodif'])) {
         if (isset($_POST['id_user_modificar'])) {

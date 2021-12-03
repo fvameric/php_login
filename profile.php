@@ -1,20 +1,19 @@
 <?php
 include('/conexion/db.php');
+include_once('/clases/user.php');
 
 session_start();
-if (isset($_SESSION['sessionID'])) {
+if (isset($_SESSION['userSession'])) {
     $logueado = true;
     $_SESSION['ubicacion'] = 'perfil';
-    $id_user = $_SESSION['sessionID'];
+    //$id_user = $_SESSION['sessionID'];
+    $userSession = $_SESSION['userSession'];
 
     //obtencion users
     require_once('/crud_users/crud_users.php');
-    require_once('/clases/user.php');
-
+    
     $crudUser = new CrudUser();
-    $user = new User();
     $listaUsers = $crudUser->obtenerListaUsuarios();
-    $user = $crudUser->obtenerUser($id_user);
 
     //obtencion plantas
     require_once('/crud_plantas/crud_plantas.php');
@@ -23,7 +22,7 @@ if (isset($_SESSION['sessionID'])) {
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
     $listaPlantas = $crudPlanta->obtenerListaPlantas();
-    $planta = $crudPlanta->obtenerPlanta($id_user);
+    $planta = $crudPlanta->obtenerPlanta($userSession->getId());
 
     if (!isset($listaPlantas)) {
         $listaPlantas = $crudPlanta->obtenerListaPlantas();
@@ -101,10 +100,10 @@ if (isset($_SESSION['sessionID'])) {
             <div class='header-userinfo'>
                 <a href="profile.php" class="userinfo">
                     <div class='avatar'>
-                        <img src=<?php echo $user->getAvatar(); ?>>
+                        <img src=<?php echo $userSession->getAvatar(); ?>>
                     </div>
                     <div class='nombre'>
-                        <?php echo $user->getNickname(); ?>
+                        <?php echo $userSession->getNickname(); ?>
                     </div>
                 </a>
 
@@ -174,12 +173,12 @@ if (isset($_SESSION['sessionID'])) {
             <div class="detalle-perfil">
                 Avatar:
                 <div class='avatar'>
-                    <img src=<?php echo $user->getAvatar(); ?>>
+                    <img src=<?php echo $userSession->getAvatar(); ?>>
                 </div>
                 Nombre:
-                <?php echo $user->getNickname(); ?><br>
+                <?php echo $userSession->getNickname(); ?><br>
                 Email:
-                <?php echo $user->getEmail(); ?><br>
+                <?php echo $userSession->getEmail(); ?><br>
             </div>
         </div>
     </div>

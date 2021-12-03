@@ -7,14 +7,10 @@ require_once('crud_plantas.php');
 require_once('../clases/planta.php');
 
 session_start();
-if (isset($_SESSION['sessionID'])) {
+if (isset($_SESSION['$userSession'])) {
     $logueado = true;
-    $id_user = $_SESSION['sessionID'];
-
-    $crudUser = new CrudUser();
-    $user = new User();
-    $listaUsers = $crudUser->obtenerListaUsuarios();
-    $user = $crudUser->obtenerUser($id_user);
+    //$id_user = $_SESSION['sessionID'];
+    $userSession = $_SESSION['userSession'];
 
     if (isset($_POST['aceptarmodif'])) {
         if (isset($_POST['id_planta'])) {
@@ -31,7 +27,6 @@ if (isset($_SESSION['sessionID'])) {
             //$foto = $_POST['foto'];
             $compradas = $_POST['compradas'];
             
-
             $plantaModif->setId($id_planta);
             $plantaModif->setNombre($nombre);
             $plantaModif->setDescripcion($descripcion);

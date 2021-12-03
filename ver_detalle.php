@@ -1,24 +1,28 @@
 <?php
 include_once('/conexion/db.php');
 
+//obtencion users
+include_once('/crud_users/crud_users.php');
+include_once('/clases/user.php');
+
+//obtencion deseados
+include_once('/crud_deseados/crud_deseados.php');
+include_once('/clases/deseados.php');
+
+//obtencion plantas
+include_once('/crud_plantas/crud_plantas.php');
+include_once('/clases/planta.php');
 session_start();
-if (isset($_SESSION['sessionID'])) {
+if (isset($_SESSION['userSession'])) {
     $_SESSION['ubicacion'] = 'detalle';
 
-    $id_admin = $_SESSION['sessionID'];
-
-    //obtencion users
-    include_once('/crud_users/crud_users.php');
-    include_once('/clases/user.php');
+    //$id_admin = $_SESSION['sessionID'];
+    $userSession = $_SESSION['userSession'];
 
     $crudUser = new CrudUser();
-    $user = new User();
+    //$user = new User();
     $listaUsers = $crudUser->obtenerListaUsuarios();
-    $user = $crudUser->obtenerUser($id_admin);
-
-    //obtencion deseados
-    include_once('/crud_deseados/crud_deseados.php');
-    include_once('/clases/deseados.php');
+    //$user = $crudUser->obtenerUser($id_admin);
 
     $crudDeseados = new CrudDeseados();
     $deseado = new Deseados();
@@ -33,9 +37,7 @@ if (isset($_GET['id_planta'])) {
     $id_planta = $_GET['id_planta'];
     $_SESSION['plantaid'] = $id_planta;
 
-    //obtencion plantas
-    include_once('/crud_plantas/crud_plantas.php');
-    include_once('/clases/planta.php');
+
 
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
@@ -64,26 +66,26 @@ if (isset($_GET['id_planta'])) {
 </head>
 
 <body>
-    <?php if (isset($_SESSION['sessionID'])) { ?>
+    <?php if (isset($_SESSION['userSession'])) { ?>
         <div class='header'>
             <div class='topbar'>
                 <div class='header-userinfo'>
-                    <?php if ($_SESSION['isAdmin'] == 0) { ?>
+                    <?php if ($userSession->getAdmin() == 0) { ?>
                         <a href="profile.php" class="userinfo">
                             <div class='avatar'>
-                                <img src=<?php echo $user->getAvatar(); ?>>
+                                <img src=<?php echo $userSession->getAvatar(); ?>>
                             </div>
                             <div class='nombre'>
-                                <?php echo $user->getNickname(); ?>
+                                <?php echo $userSession->getNickname(); ?>
                             </div>
                         </a>
                     <?php } else { ?>
                         <a href="profileAdmin.php" class="userinfo">
                             <div class='avatar'>
-                                <img src=<?php echo $user->getAvatar(); ?>>
+                                <img src=<?php echo $userSession->getAvatar(); ?>>
                             </div>
                             <div class='nombre'>
-                                <?php echo $user->getNickname(); ?>
+                                <?php echo $userSession->getNickname(); ?>
                             </div>
                         </a>
                     <?php } ?>
@@ -142,7 +144,7 @@ if (isset($_GET['id_planta'])) {
             <?php if ($logueado) { ?>
                 <div class="agregar-deseados">
                     <?php
-                    $idDeseado = $crudDeseados->obtenerDeseado($newPlanta->getId(), $_SESSION['sessionID']);
+                    $idDeseado = $crudDeseados->obtenerDeseado($newPlanta->getId(), $userSession->getId());
 
                     if ($idDeseado != null) { ?>
                         <div class="quitar-deseado">
@@ -170,8 +172,8 @@ if (isset($_GET['id_planta'])) {
                 <div class="planta-nombre">
                     <?php echo $newPlanta->getDescripcion(); ?>
                 </div>
-                
-                
+
+
                 <?php echo $newPlanta->getPrecio(); ?> €
                 <?php if ($logueado) { ?>
                     <form method="POST" action="../crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
@@ -182,18 +184,16 @@ if (isset($_GET['id_planta'])) {
                 <?php } ?>
             </div>
         </div>
-        <?php if ($logueado && $_SESSION['isAdmin'] == 1) { ?>
+        <?php if ($logueado && $userSession->getAdmin() == 1) { ?>
             <div class="lista-plantas-crud">
                 <div class="lista-plantas-modificar">
                     <form method="POST" action="/crud_plantas/pagina_modificacion.php">
-                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
                         <input type="hidden" name="id_planta" value="<?php echo $newPlanta->getId() ?>" />
                         <input type="submit" id="modificar" value="Modificar" />
                     </form>
                 </div>
                 <div class="lista-plantas-eliminar">
                     <form method="POST" action="/crud_plantas/gestion_eliminacion.php">
-                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
                         <input type="hidden" name="id_planta" value="<?php echo $newPlanta->getId() ?>" />
                         <input type="submit" id="eliminar" value="Eliminar" />
                     </form>

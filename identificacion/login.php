@@ -7,7 +7,7 @@ require_once('../clases/user.php');
 $crudUser = new CrudUser();
 
 session_start();
-if (isset($_SESSION['sessionID']) == true) {
+if (isset($_SESSION['userSession'])) {
     header("Location: index.php");
 }
 ?>
@@ -55,12 +55,14 @@ if (isset($_SESSION['sessionID']) == true) {
                 $nickname = $crudUser->borrarEspacios($_POST['nickname']);
                 $password = $crudUser->borrarEspacios($_POST['password']);
                 $password_crypt = $crudUser->encriptarPassword($password);
-                $userSession = $crudUser->validarLogin($nickname, $password_crypt);
+                //$userSession = $crudUser->validarLogin($nickname, $password_crypt);
+                $userSession = $crudUser->validarLoginUser($nickname, $password_crypt);
 
-                if (!empty($userSession)) {
+                if ($userSession != null) {
                     session_start();
-                    $_SESSION['sessionID'] = $userSession['id'];
-                    $_SESSION['isAdmin'] = $userSession['admin'];
+                    $_SESSION['userSession'] = $userSession;
+                    //$_SESSION['sessionID'] = $userSession['id'];
+                    //$_SESSION['isAdmin'] = $userSession['admin'];
                     header("Location: ../index.php");
                 } else { ?>
                     No se encuentra el usuario.

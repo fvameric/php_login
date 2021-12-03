@@ -7,7 +7,7 @@ include_once '/conexion/db.php';
     //$crudPlantas = new CrudPlanta();
 
     session_start();
-    if (isset($_SESSION['sessionID'])) {
+    if (isset($_SESSION['userSession'])) {
         if (isset($_SESSION['arrayPlantas'])) {
             if (isset($_POST['index'])) {
                 unset($_SESSION['arrayPlantas'][$_POST['index']]);

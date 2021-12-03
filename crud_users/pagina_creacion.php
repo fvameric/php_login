@@ -4,16 +4,17 @@ include('../conexion/db.php');
 session_start();
 if (isset($_SESSION['sessionID'])) {
     $logueado = true;
-    $id_user = $_SESSION['sessionID'];
+    //$id_user = $_SESSION['sessionID'];
+    $userSession = $_SESSION['userSession'];
 
     //obtencion users
     require_once('../crud_users/crud_users.php');
     require_once('../clases/user.php');
 
     $crudUser = new CrudUser();
-    $user = new User();
+    //$user = new User();
     $listaUsers = $crudUser->obtenerListaUsuarios();
-    $user = $crudUser->obtenerUser($id_user);
+    //$user = $crudUser->obtenerUser($id_user);
 } else {
     $logueado = false;
 }
@@ -40,22 +41,22 @@ if (isset($_SESSION['sessionID'])) {
             </div>
             <?php if ($logueado) { ?>
                 <div class='header-userinfo'>
-                    <?php if ($_SESSION['isAdmin'] == 0) { ?>
+                    <?php if ($userSession->getAdmin() == 0) { ?>
                         <a href="../profile.php" class="userinfo">
                             <div class='avatar'>
-                                <img src=<?php echo $user->getAvatar(); ?>>
+                                <img src=<?php echo $userSession->getAvatar(); ?>>
                             </div>
                             <div class='nombre'>
-                                <?php echo $user->getNickname(); ?>
+                                <?php echo $userSession->getNickname(); ?>
                             </div>
                         </a>
                     <?php } else { ?>
                         <a href="../profileAdmin.php" class="userinfo">
                             <div class='avatar'>
-                                <img src=<?php echo $user->getAvatar(); ?>>
+                                <img src=<?php echo $userSession->getAvatar(); ?>>
                             </div>
                             <div class='nombre'>
-                                <?php echo $user->getNickname(); ?>
+                                <?php echo $userSession->getNickname(); ?>
                             </div>
                         </a>
                     <?php } ?>
