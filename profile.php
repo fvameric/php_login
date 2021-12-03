@@ -1,5 +1,5 @@
 <?php
-include('/conexion/db.php');
+//include_once('/conexion/db.php');
 include_once('/clases/user.php');
 
 session_start();

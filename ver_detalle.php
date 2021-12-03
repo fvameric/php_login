@@ -1,5 +1,5 @@
 <?php
-include_once('/conexion/db.php');
+//include_once('/conexion/db.php');
 
 //obtencion users
 include_once('/crud_users/crud_users.php');
@@ -51,7 +51,6 @@ if (isset($_GET['id_planta'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -64,6 +63,11 @@ if (isset($_GET['id_planta'])) {
     <?php if (isset($_SESSION['userSession'])) { ?>
         <div class='header'>
             <div class='topbar'>
+                <div class="menu-logo">
+                    <a href="index.php" class="logo">
+                        <img src="images/logo.png" />
+                    </a>
+                </div>
                 <div class='header-userinfo'>
                     <?php if ($userSession->getAdmin() == 0) { ?>
                         <a href="profile.php" class="userinfo">
@@ -144,15 +148,14 @@ if (isset($_GET['id_planta'])) {
                     if ($idDeseado != null) { ?>
                         <div class="quitar-deseado">
                             <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
-                                <input type="hidden" name="id_deseado" value="<?php echo $idDeseado ?>" />
+                                <input type="hidden" name="id_deseado" value="<?php echo $idDeseado->getId() ?>" />
                                 <button type="submit" name="quitarDeseado">★</button>
                             </form>
                         </div>
                     <?php } else { ?>
                         <div class="agregar-deseado">
                             <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
-                                <input type="hidden" name="id_planta" value="<?php echo $newPlanta->getId() ?>" />
-                                <input type="hidden" name="id_user" value="<?php echo $id ?>" />
+                                <input type="hidden" name="id_planta" value="<?php echo $id_planta; ?>" />
                                 <button type="submit" name="add">☆</button>
                             </form>
                         </div>

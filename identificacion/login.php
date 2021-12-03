@@ -1,5 +1,5 @@
 <?php
-include '../conexion/db.php';
+//include_once '../conexion/db.php';
 
 include_once('../crud_users/crud_users.php');
 include_once('../clases/user.php');

@@ -1,5 +1,5 @@
 * {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-weight: 200;
 }
 
@@ -309,7 +309,7 @@ input:not(:checked)~#collapse-menu {
 .content {
     width: 100%;
     /*margin: 0 auto;*/
-    background-color: #ffffff;
+    background-color: #f6f5f5;
 }
 
 
@@ -578,9 +578,8 @@ input:not(:checked)~#collapse-menu {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: 1px solid rgb(134, 134, 134);
     border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0px 0px 50px -20px rgb(0 0 0 / 25%);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
@@ -590,10 +589,10 @@ input:not(:checked)~#collapse-menu {
 
 .lista-plantas-content {
     height: 100px;
-    border-top: 1px solid rgb(134, 134, 134);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #FFF;
 }
 
 .lista-plantas-fotos {
@@ -606,27 +605,20 @@ input:not(:checked)~#collapse-menu {
     height: 200px;
     width: 100%;
     vertical-align: middle;
-    transition: transform 1s;
+    transition: transform 650ms ease;
     /* Animation */
 }
 
 .lista-plantas-fotos:hover img {
     position: relative;
-    transform: scale(1.5);
+    transform: scale(1.2);
     image-rendering: optimizeSpeed;
-    /* STOP SMOOTHING, GIVE ME SPEED  */
     image-rendering: -moz-crisp-edges;
-    /* Firefox                        */
     image-rendering: -o-crisp-edges;
-    /* Opera                          */
     image-rendering: -webkit-optimize-contrast;
-    /* Chrome (and eventually Safari) */
     image-rendering: pixelated;
-    /* Chrome */
     image-rendering: optimize-contrast;
-    /* CSS3 Proposed                  */
     -ms-interpolation-mode: nearest-neighbor;
-    /* IE8+                           */
 }
 
 .lista-plantas-nombre {
@@ -666,7 +658,6 @@ input:not(:checked)~#collapse-menu {
     display: flex;
     justify-content: space-between;
     text-align: center;
-    border-top: 1px solid rgb(134, 134, 134);
 }
 
 .lista-plantas-crud input {
@@ -680,7 +671,6 @@ input:not(:checked)~#collapse-menu {
 
 .lista-plantas-modificar {
     flex: 1 1 auto;
-    border-right: 1px solid rgb(134, 134, 134);
     background: rgba(255, 255, 255, 0);
     -webkit-transition: background .3s ease-out, box-shadow .3s ease-out;
     -moz-transition: background .3s ease-out, box-shadow .3s ease-out;
@@ -774,8 +764,8 @@ input:not(:checked)~#collapse-menu {
 /* Botón ver detalle */
 
 .ver-detalles-planta {
-    border-top: 1px solid rgb(134, 134, 134);
     text-align: center;
+    background-color: #FFF;
     background: rgba(255, 255, 255, 0);
     -webkit-transition: background .3s ease-out, box-shadow .3s ease-out;
     -moz-transition: background .3s ease-out, box-shadow .3s ease-out;
@@ -1095,7 +1085,7 @@ input:not(:checked)~#collapse-menu {
 
 /* FOOOOOOTER */
 
-footer {
+.footer {
     line-height: 50px;
     height: 50px;
     padding: 0 20px;

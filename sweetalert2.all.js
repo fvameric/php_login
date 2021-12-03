@@ -449,7 +449,7 @@
     /* istanbul ignore if */
 
     if (isNodeEnv()) {
-      error('SweetAlert2 requires document to initialize');
+      error('SweetAlert2 include_onces document to initialize');
       return;
     }
 
@@ -1492,7 +1492,7 @@
 
   const showWarningsForParams = params => {
     if (!params.backdrop && params.allowOutsideClick) {
-      warn('"allowOutsideClick" parameter requires `backdrop` parameter to be set to `true`');
+      warn('"allowOutsideClick" parameter include_onces `backdrop` parameter to be set to `true`');
     }
 
     for (const param in params) {

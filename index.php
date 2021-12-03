@@ -1,5 +1,5 @@
 <?php
-include('/conexion/db.php');
+//include_once('/conexion/db.php');
 include_once('/clases/user.php');
 
 //obtencion plantas
@@ -62,6 +62,7 @@ if (isset($_POST['sort'])) {
     <title>Tienda</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
 
     <script>
         function myFunction() {
@@ -239,7 +240,6 @@ if (isset($_POST['sort'])) {
                                             <div class="agregar-deseado">
                                                 <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
                                                     <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                                    <input type="hidden" name="id_user" value="<?php echo $id ?>" />
                                                     <button type="submit" name="add">☆</button>
                                                 </form>
                                             </div>

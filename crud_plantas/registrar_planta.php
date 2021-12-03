@@ -1,5 +1,5 @@
 <?php
-    include_once('../conexion/db.php');
+    //include_once('../conexion/db.php');
     
     include_once('crud_plantas.php');
     include_once('../clases/planta.php');
@@ -7,22 +7,20 @@
     $crudPlanta= new CrudPlanta();
     $planta = new Planta();
 
-    $nombre = $_POST['nombre'];
-    $descripcion = $_POST['descripcion'];
-    $precio = $_POST['precio'];
-    $stock = $_POST['stock'];
-    $compradas = $_POST['compradas'];
-    $categoria = $_POST['categoria'];
+    if(isset($_POST['submit'])) {
+        if (empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['precio']) || empty($_POST['stock']) || empty($_POST['compradas']) || empty($_POST['categoria']) || empty($_FILES["file"]["name"])) {
+            echo 'Por favor rellena el formulario.';
+        } else {
+            $nombre = $_POST['nombre'];
+            $descripcion = $_POST['descripcion'];
+            $precio = $_POST['precio'];
+            $stock = $_POST['stock'];
+            $compradas = $_POST['compradas'];
+            $categoria = $_POST['categoria'];
 
-    $targetDir = "uploads/";
-    $filename = $_FILES["file"]["name"];
-    $targetFilePath = $targetDir . $filename;
-    $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-
-    if(isset($_POST['submit']))
-    {
-        if ($crudPlanta->agregarPlanta($nombre, $descripcion, $precio, $stock, $compradas, $categoria) != NULL) {
-            echo 'Se registró correctamente.';
+            $filename = $_FILES["file"]["name"];
+            $path = $_FILES["file"]["tmp_name"];
+            $crudPlanta->agregarPlanta($nombre, $descripcion, $precio, $stock, $compradas, $categoria, $filename, $path);
         }
     }
 ?>

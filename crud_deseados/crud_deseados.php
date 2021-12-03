@@ -39,6 +39,15 @@
             return $this->listaDeseados;
         }
 
+        public function obtenerDeseado($id_planta, $id_user) {
+            foreach ($this->listaDeseados as $deseado) {
+                if ($id_planta == $deseado->getPlantaId() && $id_user == $deseado->getUserId()) {
+                    return $deseado;
+                }
+            }
+            return null;
+        }
+
         public function agregarDeseado($user_id, $planta_id) {
             $sql = "INSERT INTO `deseados` (`id` ,`user_id` ,`planta_id`)VALUES (NULL , '".$user_id."', '".$planta_id."')";
             $consulta = mysqli_query($this->bd->obtenerConexion(), $sql);
@@ -52,16 +61,6 @@
         public function modificarDeseados($deseadoModif, $id_deseado) {
             $sqlUpdate="UPDATE `deseados` SET id=".$id_deseado.", user_id=".$deseadoModif->getUserId().", planta_id=".$deseadoModif->getPlantaId().")";
             $consultaUpdate = mysqli_query($this->bd->obtenerConexion(), $sqlUpdate);
-        }
-
-        public function obtenerDeseado($id_planta, $id_user) {
-            foreach ($this->listaDeseados as $deseado) {
-                if ($id_planta == $deseado->getPlantaId() && $id_user == $deseado->getUserId()) {
-                    return $deseado;
-                }
-            }
-            return null;
-
         }
     }
 ?>

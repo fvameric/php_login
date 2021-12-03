@@ -1,16 +1,15 @@
 <?php
-include('../conexion/db.php');
+//include_once('../conexion/db.php');
+
+//obtencion users
+include_once('../crud_users/crud_users.php');
+include_once('../clases/user.php');
 
 session_start();
-if (isset($_SESSION['$userSession'])) {
+if (isset($_SESSION['userSession'])) {
     $logueado = true;
     //$id_user = $_SESSION['sessionID'];
     $userSession = $_SESSION['userSession'];
-
-    //obtencion users
-    include_once('../crud_users/crud_users.php');
-    include_once('../clases/user.php');
-
     $crudUser = new CrudUser();
     //$user = new User();
     $listaUsers = $crudUser->obtenerListaUsuarios();

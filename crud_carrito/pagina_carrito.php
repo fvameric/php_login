@@ -1,5 +1,5 @@
 <?php
-include_once '../conexion/db.php';
+//include_once '../conexion/db.php';
 
 //obtencion plantas
 include_once('../clases/planta.php');

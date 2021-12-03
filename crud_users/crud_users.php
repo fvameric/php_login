@@ -4,7 +4,7 @@
     if (is_file("conexion/db.php")) {
         include_once('conexion/db.php');
     } else {
-        include_once('../conexion/db.php');
+        //include_once('../conexion/db.php');
     }
     */
 
@@ -51,6 +51,15 @@
             return $this->listaUsuarios;
         }
 
+        public function obtenerUser($id) {
+            foreach ($this->listaUsuarios as $usuario) {
+                if ($id == $usuario->getId()) {
+                    return $usuario;
+                }
+            }
+            return null;
+        }
+
         function borrarEspacios($str) {
             return preg_replace('/\s+/', '', $str);
         }
@@ -69,7 +78,7 @@
             }
             return null;
         }
-
+        
         public function emailExiste($email) {
             foreach($this->listaUsuarios as $usuario) {
                 if ($email == $usuario->getEmail()) {
@@ -78,17 +87,6 @@
                     return false;
                 }
             }
-
-            /*
-            $sql="SELECT * FROM `users` WHERE email='".$email."'";
-            $consultaEmail = mysqli_query($con,$sql);
-            $fila = $consultaEmail->fetch_assoc();
-            if ($email == $fila['email']) {
-                return true;
-            } else {
-                return false;
-            }
-            */
         }
 
         public function nicknameExiste($nickname) {
@@ -99,18 +97,15 @@
                     return false;
                 }
             }
+        }
 
-            /*
-            include 'db.php';
-            $sql="SELECT * FROM `users` WHERE nickname='".$nickname."'";
-            $consultaNickname = mysqli_query($con,$sql);
-            $fila = $consultaNickname->fetch_assoc();
-            if ($nickname == $fila['nickname']) {
-                return true;
-            } else {
-                return false;
+        public function validarRegistro($nickname, $email, $avatar) {
+            if ($this->emailExiste($email)) {
+                return "<br>El email ya está en uso<br>";
             }
-            */
+            if ($this->nicknameExiste($nickname)) {
+                return "<br>Este nombre de usuario ya está en uso<br>";
+            }          
         }
 
         public function convertirBase64($filename, $path) {
@@ -137,15 +132,6 @@
             }
         }
 
-        public function validarRegistro($nickname, $email, $avatar) {
-            if ($this->emailExiste($email)) {
-                return "<br>El email ya está en uso<br>";
-            }
-            if ($this->nicknameExiste($nickname)) {
-                return "<br>Este nombre de usuario ya está en uso<br>";
-            }          
-        }
-
         public function eliminarUsuario($id){
             $sqlDelete = "DELETE FROM `users` WHERE id=".$id;
             $consultaDelete = mysqli_query($this->bd->obtenerConexion(), $sqlDelete);
@@ -166,21 +152,6 @@
             } else {
                 return false;
             }
-        }
-
-        public function obtenerUser($id) {
-            $sqlUserId = "SELECT * FROM `users` WHERE id = '".$id."'";
-            $consultaUser = mysqli_query($this->bd->obtenerConexion(), $sqlUserId);
-            $fila = $consultaUser->fetch_assoc();
-            
-            $user = new User();
-            $user->setId($fila['id']);
-            $user->setNickname($fila['nickname']);
-            $user->setPassword($fila['password']);
-            $user->setEmail($fila['email']);
-            $user->setAvatar($fila['avatar']);
-            $user->setAdmin($fila['admin']);
-            return $user;
         }
     }
 ?>
