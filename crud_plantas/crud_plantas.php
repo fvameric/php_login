@@ -1,14 +1,30 @@
 <?php
+    // clase BD
+    if (is_file("conexion/bd.php")) {
+        include_once('conexion/bd.php');
+    } else {
+        include_once('../conexion/bd.php');
+    }
+
+    if (is_file("clases/planta.php")) {
+        include_once('clases/planta.php');
+    } else {
+        include_once('../clases/planta.php');
+    }
+
     class CrudPlanta {
-        public function __construc(){}
 
-        public function obtenerListaPlantas() {
-            include 'db.php';
+        private $bd;
+        private $listaPlantas = [];
 
-            $listaPlantas=[];
+        public function __construct(){
+            $this->bd = new claseBD();
+            $this->cargarPlantas();
+        }
 
+        public function cargarPlantas() {
             $sql="SELECT * FROM `plantas` WHERE 1";
-            $consulta = mysqli_query($con,$sql);
+            $consulta = mysqli_query($this->bd->obtenerConexion(), $sql);
 
             while($fila=$consulta->fetch_assoc()) {
                 $newPlant = new Planta();
@@ -21,9 +37,12 @@
                 $newPlant->setCompradas($fila['compradas']);
                 $newPlant->setCategoria($fila['categoria']);
 
-                $listaPlantas[] = $newPlant;
+                $this->listaPlantas[] = $newPlant;
             }
-            return $listaPlantas;
+        }
+
+        public function obtenerListaPlantas() {
+            return $this->listaPlantas;
         }
 
         public function convertirBase64($targetFilePath) {

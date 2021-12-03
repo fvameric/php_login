@@ -1,8 +1,8 @@
 <?php
 include '../conexion/db.php';
 
-require_once('../crud_users/crud_users.php');
-require_once('../clases/user.php');
+include_once('../crud_users/crud_users.php');
+include_once('../clases/user.php');
 
 $crudUser = new CrudUser();
 

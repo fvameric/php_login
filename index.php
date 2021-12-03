@@ -1,7 +1,10 @@
 <?php
 include('/conexion/db.php');
-
 include_once('/clases/user.php');
+
+//obtencion plantas
+include_once('/crud_plantas/crud_plantas.php');
+include_once('/clases/planta.php');
 
 session_start();
 if (isset($_SESSION['userSession'])) {
@@ -11,8 +14,8 @@ if (isset($_SESSION['userSession'])) {
     $userSession = $_SESSION['userSession'];
 
     //obtencion deseados
-    require_once('/crud_deseados/crud_deseados.php');
-    require_once('/clases/deseados.php');
+    include_once('/crud_deseados/crud_deseados.php');
+    include_once('/clases/deseados.php');
 
     $crudDeseados = new CrudDeseados();
     $deseado = new Deseados();
@@ -22,10 +25,6 @@ if (isset($_SESSION['userSession'])) {
 } else {
     $logueado = false;
 }
-
-//obtencion plantas
-require_once('/crud_plantas/crud_plantas.php');
-require_once('/clases/planta.php');
 
 $crudPlanta = new CrudPlanta();
 $planta = new Planta();

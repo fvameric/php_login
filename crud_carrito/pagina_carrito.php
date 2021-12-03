@@ -6,7 +6,6 @@ include_once('../clases/planta.php');
 include_once('../crud_plantas/crud_plantas.php');
 
 //obtencion users
-include_once('../crud_users/crud_users.php');
 include_once('../clases/user.php');
 
 //obtencion plantas
@@ -16,16 +15,10 @@ include_once('../clases/planta.php');
 session_start();
 if (isset($_SESSION['userSession'])) {
     $ubicacion = $_SESSION['ubicacion'];
-    //$id_user = $_SESSION['sessionID'];
     $userSession = $_SESSION['userSession'];
-
-    $crudUser = new CrudUser();
-    //$user = new User();
-    //$user = $crudUser->obtenerUser($id_user);
 
     if (isset($_SESSION['plantaid'])) {
         $id_planta = $_SESSION['plantaid'];
-        
         $crudPlanta = new CrudPlanta();
         $planta = new Planta();
         $planta = $crudPlanta->obtenerPlanta($id_planta);

@@ -1,6 +1,6 @@
 <?php
-require_once('crud_users.php');
-require_once('../clases/user.php');
+include_once('crud_users.php');
+include_once('../clases/user.php');
 
 $crud = new CrudUser();
 //$user = new User();
@@ -12,8 +12,8 @@ if (isset($_SESSION['userSession'])) {
     $userSession = $_SESSION['userSession'];
 
     //obtencion users
-    require_once('../crud_users/crud_users.php');
-    require_once('../clases/user.php');
+    include_once('../crud_users/crud_users.php');
+    include_once('../clases/user.php');
 
     $crudUser = new CrudUser();
     //$user = new User();

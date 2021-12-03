@@ -1,10 +1,12 @@
 <?php
+/*
     //archivo DB antiguo
     if (is_file("conexion/db.php")) {
         include_once('conexion/db.php');
     } else {
         include_once('../conexion/db.php');
     }
+    */
 
     // clase BD
     if (is_file("conexion/bd.php")) {
@@ -46,28 +48,6 @@
         }
 
         public function obtenerListaUsuarios() {
-            /*
-            include 'db.php';
-
-            $listaUsers=[];
-
-            $sql="SELECT * FROM `users` WHERE admin=0";
-            $consulta = mysqli_query($con,$sql);
-
-            while($fila=$consulta->fetch_assoc()) {
-                $newUser = new User();
-                $newUser->setId($fila['id']);
-                $newUser->setNickname($fila['nickname']);
-                $newUser->setPassword($fila['password']);
-                $newUser->setEmail($fila['email']);
-                $newUser->setAvatar($fila['avatar']);
-                $newUser->setAdmin($fila['admin']);
-
-                $listaUsers[] = $newUser;
-            }
-            return $listaUsers;
-            */
-
             return $this->listaUsuarios;
         }
 
@@ -81,24 +61,8 @@
             return $arrPassword[4];
         }
 
-        public function validarLogin($nickname, $password) {
-            include 'db.php';
-
-            $sql="SELECT * FROM `users` WHERE nickname = '".$nickname."' AND password='".$password."'";
-            $consulta = mysqli_query($con,$sql);
-            $user = $consulta->fetch_assoc();
-            if ($nickname == $user['nickname'] && $password == $user['password']) {
-                return $user;
-            } else {
-                return null;
-            }
-        }
-
         public function validarLoginUser($nickname, $password) {
             foreach ($this->listaUsuarios as $usuario) {
-                echo 'userr: '.$usuario->getNickname();
-                echo '<br>';
-                echo 'userrpass: '.$usuario->getPassword();
                 if ($nickname == $usuario->getNickname() && $password == $usuario->getPassword()) {
                     return $usuario;
                 }
@@ -107,7 +71,15 @@
         }
 
         public function emailExiste($email) {
-            include 'db.php';
+            foreach($this->listaUsuarios as $usuario) {
+                if ($email == $usuario->getEmail()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            /*
             $sql="SELECT * FROM `users` WHERE email='".$email."'";
             $consultaEmail = mysqli_query($con,$sql);
             $fila = $consultaEmail->fetch_assoc();
@@ -116,9 +88,19 @@
             } else {
                 return false;
             }
+            */
         }
 
         public function nicknameExiste($nickname) {
+            foreach($this->listaUsuarios as $usuario) {
+                if ($nickname == $usuario->getNickname()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            /*
             include 'db.php';
             $sql="SELECT * FROM `users` WHERE nickname='".$nickname."'";
             $consultaNickname = mysqli_query($con,$sql);
@@ -128,6 +110,7 @@
             } else {
                 return false;
             }
+            */
         }
 
         public function convertirBase64($filename, $path) {
@@ -142,12 +125,10 @@
         }
         
         public function agregarUser($nickname, $password, $email, $filename, $path) {
-            include 'db.php';
-
             $src = $this->convertirBase64($filename, $path);
 
             $sql = 'INSERT INTO `users` (`id` ,`nickname` ,`password`, `email`, `avatar`, `admin`)VALUES (NULL , "'.$nickname.'", "'.$password.'", "'.$email.'", "'.$src.'",0)';
-            $consulta = mysqli_query($con,$sql);
+            $consulta = mysqli_query($this->bd->obtenerConexion(), $sql);
             
             if ($consulta) {
                 return true;
@@ -166,9 +147,8 @@
         }
 
         public function eliminarUsuario($id){
-            include 'db.php';
-            $sqlDelete="DELETE FROM `users` WHERE id=".$id;
-            $consultaDelete = mysqli_query($con,$sqlDelete);
+            $sqlDelete = "DELETE FROM `users` WHERE id=".$id;
+            $consultaDelete = mysqli_query($this->bd->obtenerConexion(), $sqlDelete);
 
             if($consultaDelete) {
                 return true;
@@ -178,9 +158,8 @@
         }
 
         public function modificarUsuario($userModif, $id_user){
-            include 'db.php';
-            $sqlUpdate="UPDATE `users` SET id=".$id_user.", nickname='".$userModif->getNickname()."', password='".$userModif->getPassword()."', email='".$userModif->getEmail()."', avatar='".$userModif->getAvatar()."' WHERE id=".$id_user;
-            $consultaUpdate = mysqli_query($con, $sqlUpdate);
+            $sqlUpdate = "UPDATE `users` SET id=".$id_user.", nickname='".$userModif->getNickname()."', password='".$userModif->getPassword()."', email='".$userModif->getEmail()."', avatar='".$userModif->getAvatar()."' WHERE id=".$id_user;
+            $consultaUpdate = mysqli_query($this->bd->obtenerConexion(), $sqlUpdate);
 
             if($consultaUpdate) {
                 return true;
@@ -190,10 +169,8 @@
         }
 
         public function obtenerUser($id) {
-            include 'db.php';
-
-            $sqlUserId="SELECT * FROM `users` WHERE id = '".$id."'";
-            $consultaUser = mysqli_query($con, $sqlUserId);
+            $sqlUserId = "SELECT * FROM `users` WHERE id = '".$id."'";
+            $consultaUser = mysqli_query($this->bd->obtenerConexion(), $sqlUserId);
             $fila = $consultaUser->fetch_assoc();
             
             $user = new User();

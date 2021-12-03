@@ -12,17 +12,14 @@ include_once('/clases/deseados.php');
 //obtencion plantas
 include_once('/crud_plantas/crud_plantas.php');
 include_once('/clases/planta.php');
+
 session_start();
 if (isset($_SESSION['userSession'])) {
     $_SESSION['ubicacion'] = 'detalle';
-
-    //$id_admin = $_SESSION['sessionID'];
     $userSession = $_SESSION['userSession'];
 
     $crudUser = new CrudUser();
-    //$user = new User();
     $listaUsers = $crudUser->obtenerListaUsuarios();
-    //$user = $crudUser->obtenerUser($id_admin);
 
     $crudDeseados = new CrudDeseados();
     $deseado = new Deseados();
@@ -37,14 +34,12 @@ if (isset($_GET['id_planta'])) {
     $id_planta = $_GET['id_planta'];
     $_SESSION['plantaid'] = $id_planta;
 
-
-
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
     $listaPlantas = $crudPlanta->obtenerListaPlantas();
     $planta = $crudPlanta->obtenerPlanta($id_planta);
 
-    $newPlanta;
+    $newPlanta  = new Planta();
 
     foreach ($listaPlantas as $planta) {
         if ($id_planta == $planta->getId()) {

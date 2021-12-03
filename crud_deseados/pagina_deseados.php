@@ -1,38 +1,32 @@
 <?php
-//obtencion users
-require_once('../crud_users/crud_users.php');
-require_once('../clases/user.php');
+//obtencion deseados
+include_once('crud_deseados.php');
+include_once('../clases/deseados.php');
 
 //obtencion deseados
-require_once('crud_deseados.php');
-require_once('../clases/deseados.php');
+include_once('../clases/user.php');
 
 //obtencion plantas
-require_once('../crud_plantas/crud_plantas.php');
-require_once('../clases/planta.php');
+include_once('../crud_plantas/crud_plantas.php');
+include_once('../clases/planta.php');
 
 session_start();
 if (isset($_SESSION['userSession'])) {
-    //$id_user = $_SESSION['sessionID'];
+    //variables
     $userSession = $_SESSION['userSession'];
 
-    $crudUser = new CrudUser();
-    $user = new User();
-    $listaUsers = $crudUser->obtenerListaUsuarios();
-    $user = $crudUser->obtenerUser($id_user);
-
+    //cruds
     $crudDeseados = new CrudDeseados();
-    $deseado = new Deseados();
     $listaDeseados = $crudDeseados->obtenerListaDeseados();
 
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
     $listaPlantas = $crudPlanta->obtenerListaPlantas();
 
-    foreach ($listaDeseados as $deseados) {
-        if ($deseados->getUserId() == $userSession->getId()) {
+    foreach ($listaDeseados as $deseado) {
+        if ($deseado->getUserId() == $userSession->getId()) {
             foreach ($listaPlantas as $plantas) {
-                if ($plantas->getId() == $deseados->getPlantaId()) {
+                if ($plantas->getId() == $deseado->getPlantaId()) {
                     $plantasDeseadas[] = $plantas;
                 }
             }
@@ -67,13 +61,13 @@ if (isset($_SESSION['userSession'])) {
             $validacionFichero = true;
             $path = $_FILES["file"]["tmp_name"];
             $xml = simplexml_load_file($path);
-    
+
             foreach ($xml as $valor) {
                 if ($valor->id != 0) {
                     $crudDeseados->agregarDeseado($userSession->getId(), $valor->id);
                 }
             }
-    
+
             header('Location: pagina_deseados.php');
         }
     }
@@ -226,20 +220,6 @@ if (isset($_SESSION['userSession'])) {
                                                 </form>
                                             </div>
                                         <?php } ?>
-                                    </div>
-                                </div>
-                                <div class="lista-plantas-crud">
-                                    <div class="lista-plantas-modificar">
-                                        <form method="POST" action="/crud_plantas/pagina_modificacion.php">
-                                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                            <input type="submit" id="modificar" value="Modificar" />
-                                        </form>
-                                    </div>
-                                    <div class="lista-plantas-eliminar">
-                                        <form method="POST" action="/crud_plantas/gestion_eliminacion.php">
-                                            <input type="hidden" name="id_planta" value="<?php echo $plantas->getId() ?>" />
-                                            <input type="submit" id="eliminar" value="Eliminar" />
-                                        </form>
                                     </div>
                                 </div>
                                 <div class="ver-detalles-planta">

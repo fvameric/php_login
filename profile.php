@@ -10,14 +10,14 @@ if (isset($_SESSION['userSession'])) {
     $userSession = $_SESSION['userSession'];
 
     //obtencion users
-    require_once('/crud_users/crud_users.php');
+    include_once('/crud_users/crud_users.php');
     
     $crudUser = new CrudUser();
     $listaUsers = $crudUser->obtenerListaUsuarios();
 
     //obtencion plantas
-    require_once('/crud_plantas/crud_plantas.php');
-    require_once('/clases/planta.php');
+    include_once('/crud_plantas/crud_plantas.php');
+    include_once('/clases/planta.php');
 
     $crudPlanta = new CrudPlanta();
     $planta = new Planta();
@@ -29,8 +29,8 @@ if (isset($_SESSION['userSession'])) {
     }
 
     //obtencion deseados
-    require_once('/crud_deseados/crud_deseados.php');
-    require_once('/clases/deseados.php');
+    include_once('/crud_deseados/crud_deseados.php');
+    include_once('/clases/deseados.php');
 
     $crudDeseados = new CrudDeseados();
     if (!isset($listaDeseados)) {

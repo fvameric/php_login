@@ -2,11 +2,11 @@
 include('../conexion/db.php');
 
 //obtencion users
-require_once('../crud_users/crud_users.php');
-require_once('../clases/user.php');
+include_once('../crud_users/crud_users.php');
+include_once('../clases/user.php');
 
-require_once('crud_plantas.php');
-require_once('../clases/planta.php');
+include_once('crud_plantas.php');
+include_once('../clases/planta.php');
 
 session_start();
 if (isset($_SESSION['userSession'])) {
