@@ -1,4 +1,5 @@
 <?php
+
 //obtencion deseados
 include_once('crud_deseados.php');
 include_once('../clases/deseados.php');
@@ -23,6 +24,11 @@ if (isset($_SESSION['userSession'])) {
     $planta = new Planta();
     $listaPlantas = $crudPlanta->obtenerListaPlantas();
 
+    // obtener contador del carrito
+    $contadorCarrito = 0;
+    if (isset($_SESSION['arrayPlantas'])) {
+        $contadorCarrito = count($_SESSION['arrayPlantas']);
+    }
     foreach ($listaDeseados as $deseado) {
         if ($deseado->getUserId() == $userSession->getId()) {
             foreach ($listaPlantas as $plantas) {
@@ -83,81 +89,13 @@ if (isset($_SESSION['userSession'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deseados</title>
     <link rel="stylesheet" href="../styles.css">
-
-    <script>
-        function myFunction() {
-            var input, filter, cartas, splitArray, textoCarta, i;
-            input = document.getElementById('myInput');
-            filtro = input.value.toUpperCase();
-            cartas = document.getElementsByClassName('lista-plantas');
-
-            for (i = 0; i < cartas.length; i++) {
-                splitArray = cartas[i].innerText.split("\n");
-                textoCarta = splitArray[0];
-
-                if (textoCarta.toUpperCase().indexOf(filtro) > -1) {
-                    cartas[i].style.display = "";
-                } else {
-                    cartas[i].style.display = "none";
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
+    <script src="/buscador.js"></script>
 </head>
 
 <body>
     <div class='header'>
-        <div class='topbar'>
-            <div class="menu-logo">
-                <a href="../index.php" class="logo">
-                    <img src="../images/logo.png" />
-                </a>
-            </div>
-            <div class='header-userinfo'>
-                <?php if ($userSession->getId() == 0) { ?>
-                    <a href="../profile.php" class="userinfo">
-                        <div class='avatar'>
-                            <img src=<?php echo $userSession->getAvatar(); ?>>
-                        </div>
-                        <div class='nombre'>
-                            <?php echo $userSession->getNickname(); ?>
-                        </div>
-                    </a>
-                <?php } else { ?>
-                    <a href="../profileAdmin.php" class="userinfo">
-                        <div class='avatar'>
-                            <img src=<?php echo $userSession->getAvatar(); ?>>
-                        </div>
-                        <div class='nombre'>
-                            <?php echo $userSession->getNickname(); ?>
-                        </div>
-                    </a>
-                <?php } ?>
-
-                <div class='header-content'>
-                    <li><a href="/crud_deseados/pagina_deseados.php">Deseados</a></li>
-                    <li><a href="../identificacion/cierre_sesion.php">Cerrar sesión</a></li>
-
-                    <form method="post" action="/crud_carrito/pagina_carrito.php" class="btn-carrito">
-                        <button>&#128722;</button>
-                    </form>
-                </div>
-                <?php
-                if (isset($_SESSION['arrayPlantas'])) {
-                    if (count($_SESSION['arrayPlantas']) > 0) { ?>
-                        <span class="contadorCarrito"><?php echo count($_SESSION['arrayPlantas']); ?></span>
-                    <?php } ?>
-                <?php } else {
-                    $_SESSION['arrayPlantas'] = [];
-                } ?>
-            </div>
-        </div>
-
-        <div class="menu-navegacion">
-            <form method="POST" action="" class="buscador">
-                <input type="text" id="myInput" class="barra-buscador" onkeyup="myFunction()" placeholder="Buscador">
-            </form>
-        </div>
+        <?php include_once('../html_header/navbar.php') ?>
     </div>
 
     <div class="espacio">
@@ -168,11 +106,7 @@ if (isset($_SESSION['userSession'])) {
         <div class="flecha-navegacion">
             ▶
         </div>
-        <?php if ($userSession->getAdmin() == 0) { ?>
-            <a href="../profile.php">Perfil</a>
-        <?php } else { ?>
-            <a href="../profileAdmin.php">Perfil</a>
-        <?php } ?>
+        <a href="../profile.php">Perfil</a>
         <div class="flecha-navegacion">
             ▶
         </div>
@@ -252,6 +186,9 @@ if (isset($_SESSION['userSession'])) {
             <?php } ?>
         </div>
     <?php } ?>
+
+    <div class="espacio"></div>
+    <?php include_once('../html_footer/footer.php'); ?>
 </body>
 
 </html>

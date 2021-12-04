@@ -4,7 +4,6 @@ include_once('../clases/user.php');
 
 session_start();
 if (isset($_SESSION['userSession'])) {
-    $logueado = true;
     $crudUser = new CrudUser();
 
     if (isset($_POST['aceptarmodif'])) {
@@ -29,8 +28,6 @@ if (isset($_SESSION['userSession'])) {
             $validacionConsulta = $crudUser->modificarUsuario($userModif, $id_user_modificar);
         }
     }
-} else {
-    $logueado = false;
 }
 ?>
 
@@ -48,7 +45,7 @@ if (isset($_SESSION['userSession'])) {
     <?php if ($validacionConsulta) { ?>
         Se realizó la modificación.
     <?php } ?>
-    <a href="../profileAdmin.php">Volver atrás</a>
+    <a href="../profile.php">Volver atrás</a>
 </body>
 
 </html>

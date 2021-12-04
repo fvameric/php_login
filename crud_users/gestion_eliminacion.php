@@ -27,7 +27,7 @@ if (isset($_POST['id_usuario_eliminar'])) {
                 confirmButtonText: 'Volver atrás'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = `../profileAdmin.php`;
+                    window.location.href = `../profile.php`;
                 }
             });
         </script>

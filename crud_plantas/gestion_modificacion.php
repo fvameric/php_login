@@ -1,6 +1,4 @@
 <?php
-//include_once('../conexion/db.php');
-
 include_once('../crud_users/crud_users.php');
 include_once('../clases/user.php');
 include_once('crud_plantas.php');
@@ -8,8 +6,6 @@ include_once('../clases/planta.php');
 
 session_start();
 if (isset($_SESSION['$userSession'])) {
-    $logueado = true;
-    //$id_user = $_SESSION['sessionID'];
     $userSession = $_SESSION['userSession'];
 
     if (isset($_POST['aceptarmodif'])) {
@@ -48,7 +44,6 @@ if (isset($_SESSION['$userSession'])) {
         }
     }
 } else {
-    $logueado = false;
     header('Location: ../index.php');
 }
 ?>

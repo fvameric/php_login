@@ -1,13 +1,4 @@
 <?php
-/*
-    //archivo DB antiguo
-    if (is_file("conexion/db.php")) {
-        include_once('conexion/db.php');
-    } else {
-        //include_once('../conexion/db.php');
-    }
-    */
-
     // clase BD
     if (is_file("conexion/bd.php")) {
         include_once('conexion/bd.php');

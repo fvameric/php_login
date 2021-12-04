@@ -1,6 +1,4 @@
 <?php
-//include_once '../conexion/db.php';
-
 include_once('../crud_users/crud_users.php');
 include_once('../clases/user.php');
 
@@ -21,21 +19,12 @@ if (isset($_SESSION['userSession'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda login</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
 </head>
 
 <body>
     <div class='header'>
-        <div class='topbar'>
-            <div class='header-logo'>
-                <a href="../index.php" class="logo">
-                    <img src="../images/logo.png">
-                </a>
-            </div>
-            <div class='menu-user'>
-                <a class="btn-registrarse" href="/identificacion/registro.html">Regístrate</a>
-                <a class="btn-iniciarsesion" href="/identificacion/login.php">Inicia sesión</a>
-            </div>
-        </div>
+        <?php include_once('../html_header/navbar.php'); ?>
     </div>
     <div class="espacio">
     </div>
@@ -55,22 +44,22 @@ if (isset($_SESSION['userSession'])) {
                 $nickname = $crudUser->borrarEspacios($_POST['nickname']);
                 $password = $crudUser->borrarEspacios($_POST['password']);
                 $password_crypt = $crudUser->encriptarPassword($password);
-                //$userSession = $crudUser->validarLogin($nickname, $password_crypt);
                 $userSession = $crudUser->validarLoginUser($nickname, $password_crypt);
 
                 if ($userSession != null) {
                     session_start();
                     $_SESSION['userSession'] = $userSession;
-                    //$_SESSION['sessionID'] = $userSession['id'];
-                    //$_SESSION['isAdmin'] = $userSession['admin'];
                     header("Location: ../index.php");
                 } else { ?>
                     No se encuentra el usuario.
                 <?php } ?>
             <?php } ?>
         <?php } ?>
-        <a href="/identificacion/registro.html">Crear cuenta</a>
+        <a href="/identificacion/registro.php">Crear cuenta</a>
     </div>
+
+    <div class="espacio"></div>
+    <?php include_once('../html_footer/footer.php'); ?>
 </body>
 
 </html>

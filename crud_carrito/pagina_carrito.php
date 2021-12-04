@@ -1,6 +1,4 @@
 <?php
-//include_once '../conexion/db.php';
-
 //obtencion plantas
 include_once('../clases/planta.php');
 include_once('../crud_plantas/crud_plantas.php');
@@ -16,6 +14,12 @@ session_start();
 if (isset($_SESSION['userSession'])) {
     $ubicacion = $_SESSION['ubicacion'];
     $userSession = $_SESSION['userSession'];
+
+    // obtener contador del carrito
+    $contadorCarrito = 0;
+    if (isset($_SESSION['arrayPlantas'])) {
+        $contadorCarrito = count($_SESSION['arrayPlantas']);
+    }
 
     if (isset($_SESSION['plantaid'])) {
         $id_planta = $_SESSION['plantaid'];
@@ -42,55 +46,12 @@ if (isset($_SESSION['userSession'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
 </head>
 
 <body>
     <div class='header'>
-        <div class='topbar'>
-            <div class="menu-logo">
-                <a href="../index.php" class="logo">
-                    <img src="../images/logo.png" />
-                </a>
-            </div>
-            <div class='header-userinfo'>
-                <?php if ($userSession->getAdmin() == 0) { ?>
-                    <a href="../profile.php" class="userinfo">
-                        <div class='avatar'>
-                            <img src=<?php echo $userSession->getAvatar(); ?>>
-                        </div>
-                        <div class='nombre'>
-                            <?php echo $userSession->getNickname(); ?>
-                        </div>
-                    </a>
-                <?php } else { ?>
-                    <a href="../profileAdmin.php" class="userinfo">
-                        <div class='avatar'>
-                            <img src=<?php echo $userSession->getAvatar(); ?>>
-                        </div>
-                        <div class='nombre'>
-                            <?php echo $userSession->getNickname(); ?>
-                        </div>
-                    </a>
-                <?php } ?>
-
-                <div class='header-content'>
-                    <li><a href="../crud_deseados/pagina_deseados.php">Deseados</a></li>
-                    <li><a href="../identificacion/cierre_sesion.php">Cerrar sesión</a></li>
-
-                    <form method="post" action="" class="btn-carrito">
-                        <button>&#128722;</button>
-                    </form>
-                </div>
-                <?php
-                if (isset($_SESSION['arrayPlantas'])) {
-                    if (count($_SESSION['arrayPlantas']) > 0) { ?>
-                        <span class="contadorCarrito"><?php echo count($_SESSION['arrayPlantas']); ?></span>
-                    <?php } ?>
-                <?php } else {
-                    $_SESSION['arrayPlantas'] = [];
-                } ?>
-            </div>
-        </div>
+        <?php include_once('../html_header/navbar.php'); ?>
     </div>
 
     <div class="espacio">
@@ -104,17 +65,6 @@ if (isset($_SESSION['userSession'])) {
                 ▶
             </div>
             <a href="../ver_detalle.php?id_planta=<?php echo $id_planta; ?>"><?php echo $planta->getNombre(); ?></a>
-            <div class="flecha-navegacion">
-                ▶
-            </div>
-        <?php } else if ($ubicacion == "perfilAdmin") { ?>
-            <a href="../index.php">Home</a>
-            <div class="flecha-navegacion">
-                ▶
-            </div>
-
-            <a href="../profileAdmin.php">Perfil</a>
-
             <div class="flecha-navegacion">
                 ▶
             </div>
@@ -193,6 +143,9 @@ if (isset($_SESSION['userSession'])) {
             <h2>No tienes productos en el carrito.</h2>
         </div>
     <?php } ?>
+
+    <div class="espacio"></div>
+    <?php include_once('../html_footer/footer.php'); ?>
 </body>
 
 </html>

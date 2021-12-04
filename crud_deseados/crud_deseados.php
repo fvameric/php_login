@@ -39,6 +39,16 @@
             return $this->listaDeseados;
         }
 
+        public function obtenerDeseadosPorLogin($user) {
+            $listaDeseadosUser = [];
+            foreach($this->listaDeseados as $deseado) {
+                if ($user->getId() == $deseado->getUserId()) {
+                    $listaDeseadosUser[] = $deseado;
+                }
+            }
+            return $listaDeseadosUser;
+        }
+
         public function obtenerDeseado($id_planta, $id_user) {
             foreach ($this->listaDeseados as $deseado) {
                 if ($id_planta == $deseado->getPlantaId() && $id_user == $deseado->getUserId()) {
