@@ -9,21 +9,24 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['nickname']) || empty($_POST['password']) || empty($_POST['email'])) {
         echo 'Por favor rellena el formulario.';
     } else {
-        $email = $_POST['email'];
-        $nickname = $_POST['nickname'];
-        $password = $_POST['password'];
-        $password_hash = $crudUser->encriptarPassword($password);
+        $validacionRegistro = $crudUser->validarRegistro($_POST['nickname'], $_POST['email']);
+        if ($validacionRegistro) {
+            $email = $_POST['email'];
+            $nickname = $_POST['nickname'];
+            $password = $_POST['password'];
+            $password_hash = $crudUser->encriptarPassword($password);
 
-        // avatar en caso de no haber puesto se le pondrá uno por defecto
-        if (!empty($_FILES["file"]["name"])) {
-            $filename = $_FILES["file"]["name"];
-            $path = $_FILES["file"]["tmp_name"];
-        } else {
-            $filename = 'avatardefault.png';
-            $path = realpath('../images/avatardefault.png');
+            // avatar en caso de no haber puesto se le pondrá uno por defecto
+            if (!empty($_FILES["file"]["name"])) {
+                $filename = $_FILES["file"]["name"];
+                $path = $_FILES["file"]["tmp_name"];
+            } else {
+                $filename = 'avatardefault.png';
+                $path = realpath('../images/avatardefault.png');
+            }
+
+            $validacionConsulta = $crudUser->agregarUser($nickname, $password_hash, $email, $filename, $path);
         }
-    
-        $validacionConsulta = $crudUser->agregarUser($nickname, $password_hash, $email, $filename, $path);
     }
 }
 ?>
@@ -38,13 +41,36 @@ if (isset($_POST['submit'])) {
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
+    <script src="../sweetalert2.all.js"></script>
 </head>
+
 <body>
-    <?php if (!empty($_SESSION['userSession'])) { ?>
-        Se creó el usuario con éxito.
-    <?php } else {
-        header('Location: ../profile.php');
-    } ?>
+    <?php if ($validacionRegistro) { ?>
+        <?php if ($validacionConsulta) { ?>
+            <script>
+                Swal.fire({
+                    title: 'Se modificó el usuario con éxito',
+                    confirmButtonText: 'Volver atrás'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = `../profile.php`;
+                    }
+                });
+            </script>
+        <?php } ?>
+    <?php } else { ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Este nick o email ya está en uso.'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = document.referrer;
+                }
+            });
+        </script>
+    <?php } ?>
 </body>
 
 </html>

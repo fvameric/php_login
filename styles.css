@@ -765,7 +765,7 @@ input:not(:checked)~#collapse-menu {
 
 .ver-detalles-planta {
     text-align: center;
-    background-color: #FFF;
+    background-color: #FFF !important;
     background: rgba(255, 255, 255, 0);
     -webkit-transition: background .3s ease-out, box-shadow .3s ease-out;
     -moz-transition: background .3s ease-out, box-shadow .3s ease-out;
@@ -774,7 +774,7 @@ input:not(:checked)~#collapse-menu {
 }
 
 .ver-detalles-planta:hover {
-    background: rgba(126, 170, 44, 0.897);
+    background: rgba(126, 170, 44, 0.897) !important;
     -webkit-box-shadow: 0px -5px 25px -1px #91B52D;
     box-shadow: 0px -5px 25px -1px #91B52D;
 }

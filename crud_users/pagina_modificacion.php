@@ -80,7 +80,7 @@ if (isset($_SESSION['userSession'])) {
                             <input type="email" name="email" value="<?php echo $usuario_modificar->getEmail() ?>">
                         </div>
                     </div>
-                    <input type='hidden' name='id_user_modificar' value='<?php echo $usuario_modificar->getId() ?>'>
+                    <input type='hidden' name='id_usuario_modificar' value='<?php echo $usuario_modificar->getId() ?>'>
                     <input type='hidden' name='actualizar' value='actualizar'>
                 </div>
                 <div class='aceptar-modificaciones'>

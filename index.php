@@ -43,12 +43,10 @@ if (isset($_GET['categoria'])) {
 // Botones de ordenar por nombre, precio...
 if (isset($_POST['sort'])) {
     if ($_POST['sort'] == 1) {
-        $listaPlantas = $crudPlanta->obtenerListaPlantas();
-    } else if ($_POST['sort'] == 2) {
         $listaPlantas = $crudPlanta->ordenarPorPrecio($listaPlantas);
-    } else if ($_POST['sort'] == 3) {
+    } else if ($_POST['sort'] == 2) {
         $listaPlantas = $crudPlanta->ordenarPorNombre($listaPlantas);
-    } else if ($_POST['sort'] == 4) {
+    } else if ($_POST['sort'] == 3) {
         $listaPlantas = $crudPlanta->ordenarPorDeseados($listaPlantas, $listaDeseados);
     }
 }
@@ -84,11 +82,10 @@ if (isset($_POST['sort'])) {
         <div class="content">
             <div class="lista-orden">
                 <form method="POST" action="">
-                    <button type="submit" name="sort" class="button" value="1">Ordenar por defecto</button>
-                    <button type="submit" name="sort" class="button" value="2">Ordenar por precio</button>
-                    <button type="submit" name="sort" class="button" value="3">Ordenar por nombre</button>
+                    <button type="submit" name="sort" class="button" value="1">Ordenar por precio</button>
+                    <button type="submit" name="sort" class="button" value="2">Ordenar por nombre</button>
                     <?php if (isset($_SESSION['userSession']) && $contadorDeseados > 0) { ?>
-                        <button type="submit" name="sort" class="button" value="4">Ordenar por deseados</button>
+                        <button type="submit" name="sort" class="button" value="3">Ordenar por deseados</button>
                     <?php } ?>
                 </form>
             </div>

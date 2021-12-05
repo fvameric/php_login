@@ -10,7 +10,7 @@ $crudPlanta = new CrudPlanta();
 
 // si se pulsa en crear pero faltan datos por rellenar, se vuelven a pedir
 if (isset($_POST['submit'])) {
-    if (empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['precio']) || empty($_POST['stock']) || empty($_POST['compradas']) || empty($_POST['categoria']) || empty($_FILES["file"]["name"])) {
+    if (empty($_POST['nombre']) || empty($_POST['descripcion']) || $_POST['precio'] == null || $_POST['stock'] == null || $_POST['compradas'] == null || empty($_POST['categoria']) || empty($_FILES["file"]["name"])) {
         echo 'Por favor rellena el formulario.';
     } else {
         $validacionInsert = $crudPlanta->agregarPlanta($_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $_POST['stock'], $_POST['compradas'], $_POST['categoria'], $_FILES["file"]["name"], $_FILES["file"]["tmp_name"]);
@@ -33,17 +33,17 @@ if (isset($_POST['submit'])) {
 
 <body>
 <?php if ($validacionInsert) { ?>
-        <script>
-            Swal.fire({
-                title: 'Se creó con éxito la planta',
-                confirmButtonText: 'Volver atrás'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = `../profile.php`;
-                }
-            });
-        </script>
-    <?php } ?>
+    <script>
+        Swal.fire({
+            title: 'Se creó con éxito la planta',
+            confirmButtonText: 'Volver atrás'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `../profile.php`;
+            }
+        });
+    </script>
+<?php } ?>
 </body>
 
 </html>

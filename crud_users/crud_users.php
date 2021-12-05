@@ -88,37 +88,15 @@
             }
             return null;
         }
-        
-        // para comprobar que el email no exista al registrarse
-        public function emailExiste($email) {
+
+        // validación en caso de que email o el nick ya exista
+        public function validarRegistro($nickname, $email) {
             foreach($this->listaUsuarios as $usuario) {
-                if ($email == $usuario->getEmail()) {
-                    return true;
-                } else {
+                if ($nickname == $usuario->getNickname() || $email == $usuario->getEmail()) {
                     return false;
                 }
             }
-        }
-
-        // para comprobar que el nick no exista al registrarse
-        public function nicknameExiste($nickname) {
-            foreach($this->listaUsuarios as $usuario) {
-                if ($nickname == $usuario->getNickname()) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }
-
-        // devolverá una string en caso de que email o el nick exista
-        public function validarRegistro($nickname, $email, $avatar) {
-            if ($this->emailExiste($email)) {
-                return "<br>El email ya está en uso<br>";
-            }
-            if ($this->nicknameExiste($nickname)) {
-                return "<br>Este nombre de usuario ya está en uso<br>";
-            }          
+            return true;
         }
 
         // convierte los avatares en base64
@@ -151,10 +129,10 @@
 
         // se hace un delete a base de datos según la ID especificada
         public function eliminarUsuario($id){
-            $sqlDelete = "DELETE FROM `users` WHERE id=".$id;
-            $consultaDelete = mysqli_query($this->bd->obtenerConexion(), $sqlDelete);
+            $sql = "DELETE FROM `users` WHERE id=".$id;
+            $consulta = mysqli_query($this->bd->obtenerConexion(), $sql);
 
-            if($consultaDelete) {
+            if($consulta) {
                 return true;
             } else {
                 return false;
@@ -162,11 +140,11 @@
         }
 
         // según el usuario y su id, se modifica en base de datos con los nuevos (o mismos) valores
-        public function modificarUsuario($userModif, $id_user){
-            $sqlUpdate = "UPDATE `users` SET id=".$id_user.", nickname='".$userModif->getNickname()."', password='".$userModif->getPassword()."', email='".$userModif->getEmail()."', avatar='".$userModif->getAvatar()."' WHERE id=".$id_user;
-            $consultaUpdate = mysqli_query($this->bd->obtenerConexion(), $sqlUpdate);
+        public function modificarUsuario($userModif){
+            $sql = "UPDATE `users` SET id=".$userModif->getId().", nickname='".$userModif->getNickname()."', password='".$userModif->getPassword()."', email='".$userModif->getEmail()."', avatar='".$userModif->getAvatar()."' WHERE id=".$userModif->getId();
+            $consulta = mysqli_query($this->bd->obtenerConexion(), $sql);
 
-            if($consultaUpdate) {
+            if($consulta) {
                 return true;
             } else {
                 return false;
