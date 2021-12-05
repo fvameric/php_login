@@ -136,6 +136,17 @@ button:focus {
     padding-right: 10px;
 }
 
+.caja1 button,
+.caja2 button,
+.caja3 button,
+.caja4 button,
+.caja5 button,
+.caja6 button,
+.caja7 button{
+    background:transparent;
+    color: black;
+}
+
 .header-logo {
     cursor: pointer;
 }
