@@ -1,9 +1,9 @@
 <?php
+// include cruds
 include_once('crud_plantas.php');
-include_once('../clases/planta.php');
- 
+
+// cruds
 $crudPlanta = new CrudPlanta();
-$planta = new Planta();
 
 if (isset($_POST['id_planta'])) {
     $validacionDelete = $crudPlanta->eliminarPlanta($_POST['id_planta']);

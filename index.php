@@ -20,10 +20,8 @@ if (isset($_SESSION['userSession'])) {
 
     // obtención de elementos de la BD
     $contadorDeseados = 0;
-    if (!isset($listaDeseados)) {
-        $listaDeseados = $crudDeseados->obtenerDeseadosPorLogin($userSession);
-        $contadorDeseados = count($listaDeseados);
-    }
+    $listaDeseados = $crudDeseados->obtenerDeseadosPorLogin($userSession);
+    $contadorDeseados = count($listaDeseados);
 
     // obtener contador del carrito
     $contadorCarrito = 0;
@@ -35,10 +33,7 @@ if (isset($_SESSION['userSession'])) {
 // también se quiere que se muestre el listado de plantas
 // para usuarios que no se han registrado o iniciado sesión
 $crudPlanta = new CrudPlanta();
-
-if (!isset($listaPlantas)) {
-    $listaPlantas = $crudPlanta->obtenerListaPlantas();
-}
+$listaPlantas = $crudPlanta->obtenerListaPlantas();
 
 // Botones de ordenar por categorias
 if (isset($_GET['categoria'])) {

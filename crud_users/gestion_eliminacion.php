@@ -1,10 +1,12 @@
 <?php
+// include cruds
 include_once('crud_users.php');
 
-$crud = new CrudUser();
+// cruds
+$crudUser = new CrudUser();
 
 if (isset($_POST['id_usuario_eliminar'])) {
-    $validacionDelete = $crud->eliminarUsuario($_POST['id_usuario_eliminar']);
+    $validacionDelete = $crudUser->eliminarUsuario($_POST['id_usuario_eliminar']);
 }
 ?>
 
@@ -32,7 +34,5 @@ if (isset($_POST['id_usuario_eliminar'])) {
             });
         </script>
     <?php } ?>
-    
 </body>
-
 </html>

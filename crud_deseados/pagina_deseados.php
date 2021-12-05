@@ -1,27 +1,25 @@
 <?php
-
-//obtencion deseados
-include_once('crud_deseados.php');
+// include clases
+include_once('../clases/user.php');
+include_once('../clases/planta.php');
 include_once('../clases/deseados.php');
 
-//obtencion deseados
-include_once('../clases/user.php');
-
-//obtencion plantas
+// include cruds
 include_once('../crud_plantas/crud_plantas.php');
-include_once('../clases/planta.php');
+include_once('crud_deseados.php');
 
 session_start();
 if (isset($_SESSION['userSession'])) {
-    //variables
+    
+    // variables de sesión
     $userSession = $_SESSION['userSession'];
 
-    //cruds
+    // cruds
     $crudDeseados = new CrudDeseados();
-    $listaDeseados = $crudDeseados->obtenerListaDeseados();
-
     $crudPlanta = new CrudPlanta();
-    $planta = new Planta();
+
+    // obtención de elementos de la BD
+    $listaDeseados = $crudDeseados->obtenerDeseadosPorLogin($userSession);
     $listaPlantas = $crudPlanta->obtenerListaPlantas();
 
     // obtener contador del carrito
@@ -29,51 +27,25 @@ if (isset($_SESSION['userSession'])) {
     if (isset($_SESSION['arrayPlantas'])) {
         $contadorCarrito = count($_SESSION['arrayPlantas']);
     }
+
+    // obtener una lista de plantas que coincidan con el usuario logueado y la planta
     foreach ($listaDeseados as $deseado) {
-        if ($deseado->getUserId() == $userSession->getId()) {
-            foreach ($listaPlantas as $plantas) {
-                if ($plantas->getId() == $deseado->getPlantaId()) {
-                    $plantasDeseadas[] = $plantas;
-                }
+        foreach ($listaPlantas as $plantas) {
+            if ($plantas->getId() == $deseado->getPlantaId()) {
+                $plantasDeseadas[] = $plantas;
             }
         }
     }
 
+    // si se pulsa el botón de crear XML
     if (isset($_POST['descargarXML'])) {
-        $xml = new SimpleXMLElement('<xml/>');
-        foreach ($plantasDeseadas as $p) {
-            $planta = $xml->addChild('planta');
-            $planta->addChild('id', $p->getId());
-            $planta->addChild('nombre', $p->getNombre());
-            $planta->addChild('descripcion', $p->getDescripcion());
-            $planta->addChild('precio', $p->getPrecio());
-            $planta->addChild('stock', $p->getStock());
-            $planta->addChild('foto', $p->getFoto());
-            $planta->addChild('compradas', $p->getCompradas());
-            $planta->addChild('categoria', $p->getCategoria());
-        }
-
-        $xml->preserveWhiteSpace = false;
-        $xml->formatOutput = true;
-
-        $contenidoXML = $xml->asXML();
-        $file = fopen('../plantas.xml', 'w');
-        fwrite($file, $contenidoXML);
-        fclose($file);
+       $crudDeseados->crearXML($plantasDeseadas);
     }
-    $validacionFichero = false;
+
+    // si se pulsa el botón de cargar XML y antes se ha seleccionado un archivo XML
     if (isset($_POST['cargarXML'])) {
         if (!empty($_FILES["file"]["tmp_name"])) {
-            $validacionFichero = true;
-            $path = $_FILES["file"]["tmp_name"];
-            $xml = simplexml_load_file($path);
-
-            foreach ($xml as $valor) {
-                if ($valor->id != 0) {
-                    $crudDeseados->agregarDeseado($userSession->getId(), $valor->id);
-                }
-            }
-
+            $crudDeseados->cargarXML($userSession, $_FILES["file"]["tmp_name"]);
             header('Location: pagina_deseados.php');
         }
     }
@@ -136,8 +108,7 @@ if (isset($_SESSION['userSession'])) {
                                         <?php echo $plantas->getPrecio() ?> €
                                     </div>
                                     <div class="agregar-deseados">
-                                        <?php
-                                        $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $userSession->getId());
+                                        <?php $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $userSession->getId());
 
                                         if ($idDeseado != null) { ?>
                                             <div class="quitar-deseado">
@@ -178,12 +149,6 @@ if (isset($_SESSION['userSession'])) {
                 <input type="file" name="file"><br><br>
                 <button type="submit" name="cargarXML">Cargar fichero XML</button>
             </form>
-
-            <?php if (!$validacionFichero) { ?>
-                <div>
-                    Selecciona un fichero XML.
-                </div>
-            <?php } ?>
         </div>
     <?php } ?>
 

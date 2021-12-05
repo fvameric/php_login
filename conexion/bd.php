@@ -7,10 +7,12 @@ class claseBD {
     private $bd         = 'tienda';
     private $con;
 
+    // se carga en el constructor la conexión
     function __construct() {
         $this->iniciarConexion();
     }
 
+    // funcion que creará conexión con mysqli_connect y se guarda en variable $con
     function iniciarConexion() {
         $this->con = mysqli_connect(
             $this->servidor,
@@ -26,6 +28,7 @@ class claseBD {
         }
     }
 
+    // para utilizar la conexión en cualquier archivo y poder hacer las consultas
     function obtenerConexion() {
         return $this->con;
     }

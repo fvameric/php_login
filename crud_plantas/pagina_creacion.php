@@ -1,19 +1,27 @@
 <?php
-//obtencion users
-include_once('../crud_users/crud_users.php');
+// include clases
 include_once('../clases/user.php');
+
+// include cruds
+include_once('../crud_users/crud_users.php');
 
 session_start();
 if (isset($_SESSION['userSession'])) {
+
+    // variables de sesión
     $userSession = $_SESSION['userSession'];
+
+    // cruds
     $crudUser = new CrudUser();
+
+    // obtención de elementos de la BD
     $listaUsers = $crudUser->obtenerListaUsuarios();
 
-        // obtener contador del carrito
-        $contadorCarrito = 0;
-        if (isset($_SESSION['arrayPlantas'])) {
-            $contadorCarrito = count($_SESSION['arrayPlantas']);
-        }
+    // obtener contador del carrito
+    $contadorCarrito = 0;
+    if (isset($_SESSION['arrayPlantas'])) {
+        $contadorCarrito = count($_SESSION['arrayPlantas']);
+    }
 }
 ?>
 
@@ -51,7 +59,7 @@ if (isset($_SESSION['userSession'])) {
     <div class="content-wrapper">
         <div class="content">
             <h1>Crear planta nueva:</h1>
-            <form id="formRegistro" action="registrar_planta.php" method="POST" enctype="multipart/form-data">
+            <form id="formRegistro" action="gestion_creacion.php" method="POST" enctype="multipart/form-data">
                 <label>Nombre</label><br>
                 <textarea type="text" id="nombre" name="nombre"></textarea><br><br>
 

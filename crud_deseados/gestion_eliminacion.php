@@ -1,11 +1,14 @@
 <?php
-    include_once('crud_deseados.php');
+// include cruds
+include_once('crud_deseados.php');
 
-    //variables
-    $id_deseado = $_POST['id_deseado'];
+if (isset($_POST['id_deseado'])) {
 
-    // eliminar deseado con el crud
+    // eliminar deseado de la base de datos
     $crudDeseados = new CrudDeseados();
-    $crudDeseados->eliminarDeseado($id_deseado);
+    $crudDeseados->eliminarDeseado($_POST['id_deseado']);
+
+    // volvemos atrás
     header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
 ?>

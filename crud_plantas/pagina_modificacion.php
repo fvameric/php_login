@@ -1,16 +1,26 @@
 <?php
-//obtencion users
-include_once('../crud_users/crud_users.php');
+// include clases
 include_once('../clases/user.php');
-
-include_once('crud_plantas.php');
 include_once('../clases/planta.php');
+
+// include cruds
+include_once('../crud_users/crud_users.php');
+include_once('crud_plantas.php');
 
 session_start();
 if (isset($_SESSION['userSession'])) {
+    
+    // variables de sesión
     $userSession = $_SESSION['userSession'];
 
+    // cruds
     $crudUser = new CrudUser();
+    $crudPlanta = new CrudPlanta();
+
+    // objetos
+    $planta = new Planta();
+
+    // obtención de elementos de la BD
     $listaUsers = $crudUser->obtenerListaUsuarios();
 
     // obtener contador del carrito
@@ -19,10 +29,10 @@ if (isset($_SESSION['userSession'])) {
         $contadorCarrito = count($_SESSION['arrayPlantas']);
     }
 
-    $crud = new CrudPlanta();
-    $planta = new Planta();
+    // obtener planta por su ID
     if (isset($_POST['id_planta'])) {
-        $planta = $crud->obtenerPlanta($_POST['id_planta']);
+        $planta = $crudPlanta->obtenerPlanta($_POST['id_planta']);
+        $cat = $planta->getCategoria();
     }
 }
 ?>
@@ -84,30 +94,58 @@ if (isset($_SESSION['userSession'])) {
                             <input type="number" name="compradas" value="<?php echo $planta->getCompradas() ?>">
                         </div>
                         <div class='modificar-content-categoria'>
-                            <p>Categoria actual: <?php
-                                                    $cat = $planta->getCategoria();
-                                                    $categoriaActual = $crud->stringCategoria($cat);
-                                                    echo $categoriaActual;
-                                                    ?></p>
                             <p>Categoria:</p>
-                            <input type="radio" id="Aeonium" name="categoria" value="1">
+                            <?php if ($cat == 1) { ?>
+                                <input type="radio" id="Aeonium" name="categoria" value="1" checked>
+                            <?php } else { ?>
+                                <input type="radio" id="Aeonium" name="categoria" value="1">
+                            <?php } ?>
                             <label for="Aeonium">Aeonium</label><br>
-                            <input type="radio" id="Cotyledon" name="categoria" value="2">
+                            
+                            <?php if ($cat == 2) { ?>
+                                <input type="radio" id="Cotyledon" name="categoria" value="2" checked>
+                            <?php } else { ?>
+                                <input type="radio" id="Cotyledon" name="categoria" value="2">
+                            <?php } ?>
                             <label for="Cotyledon">Cotyledon</label><br>
-                            <input type="radio" id="Crassula" name="categoria" value="3">
+                            
+                            <?php if ($cat == 3) { ?>
+                                <input type="radio" id="Crassula" name="categoria" value="3" checked>
+                            <?php } else { ?>
+                                <input type="radio" id="Crassula" name="categoria" value="3">
+                            <?php } ?>
                             <label for="Crassula">Crassula</label><br>
-                            <input type="radio" id="Echeveria" name="categoria" value="4">
+                            
+                            <?php if ($cat == 4) { ?>
+                                <input type="radio" id="Echeveria" name="categoria" value="4" checked>
+                            <?php } else { ?>
+                                <input type="radio" id="Echeveria" name="categoria" value="4">
+                            <?php } ?>
                             <label for="Echeveria">Echeveria</label><br>
-                            <input type="radio" id="Euphorbia" name="categoria" value="5">
+                            
+                            <?php if ($cat == 5) { ?>
+                                <input type="radio" id="Euphorbia" name="categoria" value="5" checked>
+                            <?php } else { ?>
+                                <input type="radio" id="Euphorbia" name="categoria" value="5">
+                            <?php } ?>
                             <label for="Euphorbia">Euphorbia</label><br>
-                            <input type="radio" id="Haworthia" name="categoria" value="6">
+                            
+                            <?php if ($cat == 6) { ?>
+                                <input type="radio" id="Haworthia" name="categoria" value="6" checked>
+                            <?php } else { ?>
+                                <input type="radio" id="Haworthia" name="categoria" value="6">
+                            <?php } ?>
                             <label for="Haworthia">Haworthia</label><br>
-                            <input type="radio" id="Senecio" name="categoria" value="7">
-                            <label for="Senecio">Senecio</label><br><br>
+                            
+                            <?php if ($cat == 7) { ?>
+                                <input type="radio" id="Senecio" name="categoria" value="7" checked>
+                            <?php } else { ?>
+                                <input type="radio" id="Senecio" name="categoria" value="7">
+                            <?php } ?>
+                            <label for="Senecio">Senecio</label><br>
                         </div>
                     </div>
                     <input type='hidden' name='id_planta' value='<?php echo $planta->getId() ?>'>
-                    <input type='hidden' name='actualizar' value='actualizar'>
                 </div>
                 <div class='aceptar-modificaciones'>
                     <input type='submit' name="aceptarmodif" value='Aceptar modificaciones'>

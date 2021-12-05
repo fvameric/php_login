@@ -1,13 +1,20 @@
 <?php
-//obtencion users
-include_once('../crud_users/crud_users.php');
+// include clases
 include_once('../clases/user.php');
+
+// include cruds
+include_once('../crud_users/crud_users.php');
 
 session_start();
 if (isset($_SESSION['userSession'])) {
+
+    // variables de sesión
     $userSession = $_SESSION['userSession'];
 
+    // cruds
     $crudUser = new CrudUser();
+
+    // obtención de elementos de la BD
     $listaUsers = $crudUser->obtenerListaUsuarios();
 
     // obtener contador del carrito

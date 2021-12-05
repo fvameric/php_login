@@ -1,37 +1,50 @@
 <?php
-//obtencion plantas
+// include clases
 include_once('../clases/planta.php');
-include_once('../crud_plantas/crud_plantas.php');
-
-//obtencion users
 include_once('../clases/user.php');
 
-//obtencion plantas
+// include cruds
 include_once('../crud_plantas/crud_plantas.php');
-include_once('../clases/planta.php');
 
+// aseguramos que no se entre en la página del carrito si no hay sesión
 session_start();
 if (isset($_SESSION['userSession'])) {
+
+    // variables de sesión
     $ubicacion = $_SESSION['ubicacion'];
     $userSession = $_SESSION['userSession'];
+
+    // cruds
+    $crudPlanta = new CrudPlanta();
+    $planta = new Planta();
+
+    // variables para calcular los precios y unidades
+    $contador = 0;
+    $total = 0;
+    $total_unidad = 0;
+    $total_cantidad = 0;
 
     // obtener contador del carrito
     $contadorCarrito = 0;
     if (isset($_SESSION['arrayPlantas'])) {
         $contadorCarrito = count($_SESSION['arrayPlantas']);
+
+        // array[planta][cantidad]
+        // con += $plantas[1] sumo las cantidades especificadas en total_cantidad
+        // con $plantas[0]->getPrecio() * $plantas[1] multiplico el precio de las plantas por la cantidad especificada
+        // $total += $total_unidad suma todas las multiplicaciones
+        foreach ($_SESSION['arrayPlantas'] as $key => $plantas) {
+            $total_cantidad += $plantas[1];
+            $total_unidad = $plantas[0]->getPrecio() * $plantas[1];
+            $total += $total_unidad;
+        }
     }
 
+    // obtener planta para especificarla en los enlaces de navegación
     if (isset($_SESSION['plantaid'])) {
         $id_planta = $_SESSION['plantaid'];
-        $crudPlanta = new CrudPlanta();
-        $planta = new Planta();
         $planta = $crudPlanta->obtenerPlanta($id_planta);
     }
-
-    $contador = 0;
-    $total = 0;
-    $total_unidad = 0;
-    $total_cantidad = 0;
 } else {
     header("Location: ../index.php");
 }
@@ -44,7 +57,7 @@ if (isset($_SESSION['userSession'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+    <title>Carrito</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
 </head>
@@ -57,8 +70,10 @@ if (isset($_SESSION['userSession'])) {
     <div class="espacio">
     </div>
 
+    <!--
+        Según la ubicación cambiamos los enlaces
+    -->
     <div class="enlaces-navegacion">
-
         <?php if ($ubicacion == "detalle") { ?>
             <a href="../index.php">Home</a>
             <div class="flecha-navegacion">
@@ -87,6 +102,9 @@ if (isset($_SESSION['userSession'])) {
         <?php } ?>
         <a href="pagina_carrito.php">Carrito</a>
     </div>
+    <!--
+        Si hay cosas en el carrito se mostrarán
+    -->
     <?php if (!empty($_SESSION['arrayPlantas'])) { ?>
         <div class="content-wrapper">
             <div class="content-carrito">
@@ -96,7 +114,6 @@ if (isset($_SESSION['userSession'])) {
                             <input type="submit" name="vaciar-carrito" value="Vaciar carrito" />
                         </form>
                     </div>
-
                     <table class="tbl-cart" cellpadding="10" cellspacing="1">
                         <tbody>
                             <tr>
@@ -106,11 +123,7 @@ if (isset($_SESSION['userSession'])) {
                                 <th style="text-align:right;" width="10%">Precio total</th>
                                 <th style="text-align:center;" width="5%">Eliminar</th>
                             </tr>
-                            <?php foreach ($_SESSION['arrayPlantas'] as $key => $plantas) {
-                                $total_cantidad += $plantas[1];
-                                $total_unidad = $plantas[0]->getPrecio() * $plantas[1];
-                                $total += $total_unidad;
-                            ?>
+                            <?php foreach ($_SESSION['arrayPlantas'] as $key => $plantas) { ?>
                                 <tr>
                                     <td><img src="<?php echo $plantas[0]->getFoto(); ?>" class="cart-item-image" /><?php echo $plantas[0]->getNombre(); ?></td>
                                     <td style="text-align:right;"><?php echo $plantas[1]; ?></td>
@@ -123,9 +136,7 @@ if (isset($_SESSION['userSession'])) {
                                         </form>
                                     </td>
                                 </tr>
-
                             <?php } ?>
-
                             <tr>
                                 <td colspan="1" align="right">Total:</td>
                                 <td align="right"><?php echo $total_cantidad; ?></td>

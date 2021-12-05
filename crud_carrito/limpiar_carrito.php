@@ -1,4 +1,7 @@
 <?php
+// en caso de que tengamos sesión y se haya pulado el botón de vaciar
+// hacemos unset sin especificar index
+// así se borra todo el array
 session_start();
 if (isset($_SESSION['userSession'])) {
     if (isset($_POST['vaciar-carrito'])) {
