@@ -20,12 +20,16 @@ if (isset($_POST['submit'])) {
             if (!empty($_FILES["file"]["name"])) {
                 $filename = $_FILES["file"]["name"];
                 $path = $_FILES["file"]["tmp_name"];
+                $size = $_FILES["file"]["size"];
             } else {
                 $filename = 'avatardefault.png';
                 $path = realpath('../images/avatardefault.png');
             }
-
-            $validacionConsulta = $crudUser->agregarUser($nickname, $password_hash, $email, $filename, $path);
+            $validacionTamañoImagen = $crudUser->validarSizeImagen($size);
+            $validacionImagen = $crudUser->validarImagen($filename);
+            if ($validacionImagen && $validacionTamañoImagen) {
+                $validacionConsulta = $crudUser->agregarUser($nickname, $password_hash, $email, $filename, $path);
+            }
         }
     }
 }
@@ -46,11 +50,52 @@ if (isset($_POST['submit'])) {
 
 <body>
     <?php if ($validacionRegistro) { ?>
-        <?php if ($validacionConsulta) { ?>
+        <?php if ($validacionImagen) { ?>
+            <?php if ($validacionTamañoImagen) { ?>
+                <?php if ($validacionConsulta || $validacionConsulta == null) { ?>
+                    <script>
+                        Swal.fire({
+                            title: 'Ya estas ready!',
+                            confirmButtonText: 'Cerrar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = document.referrer;
+                            }
+                        });
+                    </script>
+                <?php } else { ?>
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Hubo un error insertando en la base de datos'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = document.referrer;
+                            }
+                        });
+                    </script>
+                <?php } ?>
+            <?php } else { ?>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'La imagen es demasiado grande!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = document.referrer;
+                        }
+                    });
+                </script>
+            <?php } ?>
+        <?php } else { ?>
             <script>
                 Swal.fire({
-                    title: 'Ya estas ready!',
-                    confirmButtonText: 'Cerrar'
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'El formato de la imagen no es compatible',
+                    footer: 'Formatos permitidos: jpeg, jpg, png, gif'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         window.location.href = document.referrer;
@@ -63,7 +108,7 @@ if (isset($_POST['submit'])) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Este nick o email ya está en uso.'
+                text: 'Este nick o email ya está en uso'
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = document.referrer;
