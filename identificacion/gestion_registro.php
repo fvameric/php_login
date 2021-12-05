@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro finalizado</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
     <script src="../sweetalert2.all.js"></script>
@@ -49,11 +49,11 @@ if (isset($_POST['submit'])) {
         <?php if ($validacionConsulta) { ?>
             <script>
                 Swal.fire({
-                    title: 'Se modificó el usuario con éxito',
-                    confirmButtonText: 'Volver atrás'
+                    title: 'Ya estas ready!',
+                    confirmButtonText: 'Cerrar'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = `../profile.php`;
+                        window.location.href = document.referrer;
                     }
                 });
             </script>

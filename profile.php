@@ -94,7 +94,7 @@ if (isset($_SESSION['userSession'])) {
         <div class="content">
             <div class="detalle-perfil">
                 Avatar:
-                <div class='avatar'>
+                <div class='avatar-perfil'>
                     <img src=<?php echo $userSession->getAvatar(); ?>>
                 </div>
                 Nombre:

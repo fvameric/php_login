@@ -181,12 +181,19 @@ button:focus {
 }
 
 .avatar img {
-    height: 35px;
-    width: 35px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
 }
 
 .avatar input {
     margin-top: 5px;
+}
+
+.avatar-perfil img {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
 }
 
 .nombre {

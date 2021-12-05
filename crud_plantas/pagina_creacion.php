@@ -35,6 +35,8 @@ if (isset($_SESSION['userSession'])) {
     <title>Crear planta</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
+    <script src="../jquery-3.6.0.js"></script>
+    <script src="../preview.js"></script>
 </head>
 
 <body>
@@ -75,8 +77,9 @@ if (isset($_SESSION['userSession'])) {
                 <label>Compradas</label><br>
                 <input type="number" id="compradas" name="compradas"><br><br>
 
+                <div id="preview"></div>
                 <label>Foto</label><br>
-                <input type="file" name="file"><br><br>
+                <input onChange="previsualizar(this)" type="file" name="file" id="#imagen"><br><br>
 
                 <p>Categoria:</p>
                 <input type="radio" id="Aeonium" name="categoria" value="1">
