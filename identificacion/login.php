@@ -31,6 +31,7 @@ if (isset($_POST['login'])) {
         if ($userSession != null) {
             session_start();
             $_SESSION['userSession'] = $userSession;
+            $_SESSION['plantasVisitadas'] = [];
             header("Location: ../index.php");
         } else {
             $validacionLogin = true;

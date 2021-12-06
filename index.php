@@ -12,7 +12,6 @@ session_start();
 if (isset($_SESSION['userSession'])) {
 
     // variables de sesión
-    $_SESSION['ubicacion'] = 'index';
     $userSession = $_SESSION['userSession'];
 
     // cruds
@@ -28,6 +27,11 @@ if (isset($_SESSION['userSession'])) {
     if (isset($_SESSION['arrayPlantas'])) {
         $contadorCarrito = count($_SESSION['arrayPlantas']);
     }
+
+    // plantas visitadas recientemente
+    if (isset($_SESSION['plantasVisitadas'])) {
+        $plantasRecientes = $_SESSION['plantasVisitadas'];
+    }
 }
 
 // también se quiere que se muestre el listado de plantas
@@ -38,6 +42,7 @@ $listaPlantas = $crudPlanta->obtenerListaPlantas();
 // Botones de ordenar por categorias
 if (isset($_GET['categoria'])) {
     $listaPlantas = $crudPlanta->ordenarPorCategoria($_GET['categoria'], $listaPlantas);
+    $strCategoria = $crudPlanta->stringCategoria($_GET['categoria']);
 }
 
 // Botones de ordenar por nombre, precio...
@@ -59,7 +64,11 @@ if (isset($_POST['sort'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda</title>
+    <?php if (isset($_GET['categoria'])) { ?>
+        <title>Tienda > <?php echo $strCategoria; ?></title>
+    <?php } else { ?>
+        <title>Tienda</title>
+    <?php } ?>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
@@ -76,6 +85,39 @@ if (isset($_POST['sort'])) {
 
     <div class="enlaces-navegacion">
         <a href="index.php">Home</a>
+        <?php if (isset($_GET['categoria'])) { ?>
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+            <a href=""><?php echo $strCategoria; ?></a>
+        <?php } ?>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="content">
+            <div>
+                <h3>Plantas visitadas recientemente:</h3>
+            </div>
+            <div class="scroll-plantas">
+                <?php if (isset($plantasRecientes)) {
+                    foreach ($plantasRecientes as $reciente) { ?>
+                        <div class="plantas-recientes">
+                            <form method="GET" action="ver_detalle.php">
+                                <input type="hidden" name="id_planta" value="<?php echo $reciente->getId(); ?>" />
+                                <button type="submit" class="carta-reciente">
+                                    <div class="fotos-recientes">
+                                        <img src=<?php echo $reciente->getFoto(); ?>>
+                                    </div>
+                                    <div class="nombres-recientes">
+                                        <?php echo $reciente->getNombre(); ?>
+                                    </div>
+                                </button>
+                            </form>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+        </div>
     </div>
 
     <div class="content-wrapper">
@@ -95,7 +137,7 @@ if (isset($_POST['sort'])) {
                     <div class="lista-plantas">
                         <div class="carta">
                             <div class="lista-plantas-fotos">
-                                <img src=<?php echo $plantas->getFoto(); ?> class="lista-fotos">
+                                <img src=<?php echo $plantas->getFoto(); ?>>
                             </div>
                             <div class="lista-plantas-content">
                                 <div class="lista-plantas-nombre">

@@ -14,7 +14,6 @@ session_start();
 if (isset($_SESSION['userSession'])) {
 
     // variables de sesión
-    $_SESSION['ubicacion'] = 'perfil';
     $userSession = $_SESSION['userSession'];
 
     // cruds

@@ -11,7 +11,6 @@ session_start();
 if (isset($_SESSION['userSession'])) {
 
     // variables de sesión
-    $ubicacion = $_SESSION['ubicacion'];
     $userSession = $_SESSION['userSession'];
 
     // cruds
@@ -70,36 +69,15 @@ if (isset($_SESSION['userSession'])) {
     <div class="espacio">
     </div>
 
-    <!--
-        Según la ubicación cambiamos los enlaces
-    -->
     <div class="enlaces-navegacion">
-        <?php if ($ubicacion == "detalle") { ?>
-            <a href="../index.php">Home</a>
-            <div class="flecha-navegacion">
-                ▶
-            </div>
-            <a href="../ver_detalle.php?id_planta=<?php echo $id_planta; ?>"><?php echo $planta->getNombre(); ?></a>
-            <div class="flecha-navegacion">
-                ▶
-            </div>
-        <?php } else if ($ubicacion == "perfil") { ?>
-            <a href="../index.php">Home</a>
-            <div class="flecha-navegacion">
-                ▶
-            </div>
-
-            <a href="../profile.php">Perfil</a>
-
-            <div class="flecha-navegacion">
-                ▶
-            </div>
-        <?php } else if ($ubicacion == "home") { ?>
-            <a href="../index.php">Home</a>
-            <div class="flecha-navegacion">
-                ▶
-            </div>
-        <?php } ?>
+        <a href="../index.php">Home</a>
+        <div class="flecha-navegacion">
+            ▶
+        </div>
+        <a href="../profile.php">Perfil</a>
+        <div class="flecha-navegacion">
+            ▶
+        </div>
         <a href="pagina_carrito.php">Carrito</a>
     </div>
     <!--

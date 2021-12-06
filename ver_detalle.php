@@ -9,32 +9,6 @@ include_once('/crud_users/crud_users.php');
 include_once('/crud_plantas/crud_plantas.php');
 include_once('/crud_deseados/crud_deseados.php');
 
-session_start();
-if (isset($_SESSION['userSession'])) {
-
-    // variables de sesión
-    $_SESSION['ubicacion'] = 'detalle';
-    $userSession = $_SESSION['userSession'];
-
-    // cruds
-    $crudUser = new CrudUser();
-    $crudDeseados = new CrudDeseados();
-
-    // obtención de elementos de la BD
-    if (!isset($listaUsers)) {
-        $listaUsers = $crudUser->obtenerListaUsuarios();
-    }
-    if (!isset($listaDeseados)) {
-        $listaDeseados = $crudDeseados->obtenerListaDeseados();
-    }
-
-    // obtener contador del carrito
-    $contadorCarrito = 0;
-    if (isset($_SESSION['arrayPlantas'])) {
-        $contadorCarrito = count($_SESSION['arrayPlantas']);
-    }
-}
-
 // también se quiere que se muestre el detalle de la planta
 // para usuarios que no se han registrado o iniciado sesión
 $crudPlanta = new CrudPlanta();
@@ -56,6 +30,48 @@ if (isset($_GET['id_planta'])) {
 
     //obtener el nombre de la categoria en string
     $strCategoria = $crudPlanta->stringCategoria($planta->getCategoria());
+}
+
+session_start();
+if (isset($_SESSION['userSession'])) {
+
+    // variables de sesión
+    $userSession = $_SESSION['userSession'];
+
+    // cruds
+    $crudUser = new CrudUser();
+    $crudDeseados = new CrudDeseados();
+
+    // obtención de elementos de la BD
+    if (!isset($listaUsers)) {
+        $listaUsers = $crudUser->obtenerListaUsuarios();
+    }
+    if (!isset($listaDeseados)) {
+        $listaDeseados = $crudDeseados->obtenerListaDeseados();
+    }
+
+    // obtener contador del carrito
+    $contadorCarrito = 0;
+    if (isset($_SESSION['arrayPlantas'])) {
+        $contadorCarrito = count($_SESSION['arrayPlantas']);
+    }
+
+    // se agrega la planta visitada
+    // maximo 5 plantas
+    if (isset($_SESSION['plantasVisitadas'])) {
+        if (!array_search($planta, $_SESSION['plantasVisitadas'])) {
+            if (count($_SESSION['plantasVisitadas']) <= 4) {
+                array_push($_SESSION['plantasVisitadas'], $planta);
+            } else if(count($_SESSION['plantasVisitadas']) > 4) {
+                array_shift($_SESSION['plantasVisitadas']);
+                array_push($_SESSION['plantasVisitadas'], $planta);
+            }
+        }
+
+        foreach ($_SESSION['plantasVisitadas'] as $key => $recientes) {
+            echo '['.$key.']'.$_SESSION['plantasVisitadas'][$key]->getNombre();
+        }
+    }
 }
 ?>
 
