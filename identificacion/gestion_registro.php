@@ -11,7 +11,7 @@ $crudUser = new CrudUser();
 // objetos
 $user = new User();
 
-// flags de validacion
+// flags de validación
 $validacionFormulario = false;
 $validacionNick  = false;
 $validacionEmail = false;
@@ -20,9 +20,6 @@ $validacionConsulta = false;
 
 if (isset($_POST['submit'])) {
     if (empty($_POST['nickname']) || empty($_POST['password']) || empty($_POST['email'])) {
-        echo '';
-        echo '';
-        echo '';
         $validacionFormulario = true;
     } else {
         $validacionNick = $crudUser->validarNick($_POST['nickname']);
