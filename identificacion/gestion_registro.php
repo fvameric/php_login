@@ -1,16 +1,33 @@
 <?php
-include_once('../crud_users/crud_users.php');
+// include clases
 include_once('../clases/user.php');
 
+// include cruds
+include_once('../crud_users/crud_users.php');
+
+// cruds
 $crudUser = new CrudUser();
+
+// objetos
 $user = new User();
+
+// flags de validacion
+$validacionFormulario = false;
+$validacionNick  = false;
+$validacionEmail = false;
+$validacionTamañoImagen  = false;
+$validacionConsulta = false;
 
 if (isset($_POST['submit'])) {
     if (empty($_POST['nickname']) || empty($_POST['password']) || empty($_POST['email'])) {
-        echo 'Por favor rellena el formulario.';
+        echo '';
+        echo '';
+        echo '';
+        $validacionFormulario = true;
     } else {
-        $validacionRegistro = $crudUser->validarRegistro($_POST['nickname'], $_POST['email']);
-        if ($validacionRegistro) {
+        $validacionNick = $crudUser->validarNick($_POST['nickname']);
+        $validacionEmail = $crudUser->validarEmail($_POST['email']);
+        if ($validacionNick && $validacionEmail) {
             $email = $_POST['email'];
             $nickname = $_POST['nickname'];
             $password = $_POST['password'];
@@ -18,16 +35,20 @@ if (isset($_POST['submit'])) {
 
             // avatar en caso de no haber puesto se le pondrá uno por defecto
             if (!empty($_FILES["file"]["name"])) {
+                $size = $_FILES["file"]["size"];
                 $filename = $_FILES["file"]["name"];
                 $path = $_FILES["file"]["tmp_name"];
-                $size = $_FILES["file"]["size"];
+
+                $validacionTamañoImagen = $crudUser->validarSizeImagen($size);
+                $validacionImagen = $crudUser->validarImagen($filename);
+                if ($validacionImagen && $validacionTamañoImagen) {
+                    $validacionConsulta = $crudUser->agregarUser($nickname, $password_hash, $email, $filename, $path);
+                }
             } else {
+                $validacionImagen = true;
+                $validacionTamañoImagen = true;
                 $filename = 'avatardefault.png';
                 $path = realpath('../images/avatardefault.png');
-            }
-            $validacionTamañoImagen = $crudUser->validarSizeImagen($size);
-            $validacionImagen = $crudUser->validarImagen($filename);
-            if ($validacionImagen && $validacionTamañoImagen) {
                 $validacionConsulta = $crudUser->agregarUser($nickname, $password_hash, $email, $filename, $path);
             }
         }
@@ -48,70 +69,99 @@ if (isset($_POST['submit'])) {
     <script src="../sweetalert2.all.js"></script>
 </head>
 
+<!--
+    Se mostrará una notificación con SweetAlert2
+    dependiendo de si las validaciones de arriba son true o false
+
+    validacionFormulario = valida que se haya rellenado todo el formulario
+    validacionNick = valida que el nick no esté en uso
+    validacionEmail = valida que el email no esté en uso
+    validacionImagen = valida que la imagen sea del formato correcto
+    validacionTamañoImagen = valida que la imagen no sea excesivamente grande/pesada
+    validacionConsulta = valia que el insert a base de datos se haya cumplido
+-->
+
 <body>
-    <?php if ($validacionRegistro) { ?>
-        <?php if ($validacionImagen) { ?>
-            <?php if ($validacionTamañoImagen) { ?>
-                <?php if ($validacionConsulta || $validacionConsulta == null) { ?>
-                    <script>
-                        Swal.fire({
-                            title: 'Ya estas ready!',
-                            confirmButtonText: 'Cerrar'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = document.referrer;
-                            }
-                        });
-                    </script>
-                <?php } else { ?>
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Hubo un error insertando en la base de datos'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = document.referrer;
-                            }
-                        });
-                    </script>
-                <?php } ?>
-            <?php } else { ?>
-                <script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'La imagen es demasiado grande!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = document.referrer;
-                        }
-                    });
-                </script>
-            <?php } ?>
-        <?php } else { ?>
-            <script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'El formato de la imagen no es compatible',
-                    footer: 'Formatos permitidos: jpeg, jpg, png, gif'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = document.referrer;
-                    }
-                });
-            </script>
-        <?php } ?>
-    <?php } else { ?>
+    <?php if ($validacionFormulario) { ?>
         <script>
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Este nick o email ya está en uso'
+                text: 'Por favor rellena todo el formulario'
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = document.referrer;
+                }
+            });
+        </script>
+    <?php } else if (!$validacionNick) { ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Este nick ya está en uso'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = document.referrer;
+                }
+            });
+        </script>
+    <?php } else if (!$validacionEmail) { ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Este email ya está en uso'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = document.referrer;
+                }
+            });
+        </script>
+    <?php } else if (!$validacionImagen) { ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'La imagen no es válida',
+                footer: 'Formatos permitidos: jpeg, jpg, png, gif'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = document.referrer;
+                }
+            });
+        </script>
+    <?php } else if (!$validacionTamañoImagen) { ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'La imagen es demasiado grande!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = document.referrer;
+                }
+            });
+        </script>
+    <?php } else if (!$validacionConsulta || $validacionConsulta = null) { ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Hubo un error insertando en la base de datos'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = document.referrer;
+                }
+            });
+        </script>
+    <?php } else { ?>
+        <script>
+            Swal.fire({
+                title: 'Ya estas ready!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '../index.php';
                 }
             });
         </script>

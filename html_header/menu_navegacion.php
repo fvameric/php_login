@@ -1,3 +1,5 @@
+<!-- Botones para ordenar por categoria y barra de buscador -->
+
 <div class="menu-navegacion">
     <form method="GET" action="" class="botones-menu">
         <div class="caja1">

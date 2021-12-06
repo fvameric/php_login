@@ -98,10 +98,20 @@ class CrudUser
     }
 
     // validación en caso de que email o el nick ya exista
-    public function validarRegistro($nickname, $email)
+    public function validarNick($nickname)
     {
         foreach ($this->listaUsuarios as $usuario) {
-            if ($nickname == $usuario->getNickname() || $email == $usuario->getEmail()) {
+            if ($nickname == $usuario->getNickname()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function validarEmail($email)
+    {
+        foreach ($this->listaUsuarios as $usuario) {
+            if ($email == $usuario->getEmail()) {
                 return false;
             }
         }
@@ -109,14 +119,13 @@ class CrudUser
     }
 
     // convierte los avatares en base64
-    public function convertirBase64($filename, $path)
-    {
+    public function convertirBase64($filename, $path) {
         $fileType = pathinfo($filename, PATHINFO_EXTENSION);
         $imageData = base64_encode(file_get_contents($path));
         return 'data:' . $fileType . ';base64,' . $imageData;
     }
 
-    // validación en caso de que email o el nick ya exista
+    // valida que la imagen sea del formato includo en la whitelist
     public function validarImagen($filename)
     {
         $formato = explode(".", $filename);
@@ -129,10 +138,10 @@ class CrudUser
         }
     }
 
-    // validación en caso de que email o el nick ya exista
+    // si la imagen excede de 1 MB, que no permita subirla
     public function validarSizeImagen($size)
     {
-        if ($size > 100000) {
+        if ($size > 1*1048576) {
             return false;
         } else {
             return true;
@@ -142,7 +151,6 @@ class CrudUser
     // insert a base de datos del nuevo usuario
     public function agregarUser($nickname, $password, $email, $filename, $path)
     {
-
         // avatar
         $src = $this->convertirBase64($filename, $path);
 

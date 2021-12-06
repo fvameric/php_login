@@ -1,5 +1,5 @@
 <?php
-// en caso de que tengamos sesión y se haya pulado el botón de vaciar
+// en caso de que tengamos sesión y se haya pulsado el botón de vaciar
 // hacemos unset sin especificar index
 // así se borra todo el array
 session_start();

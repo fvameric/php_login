@@ -69,12 +69,7 @@
         public function convertirBase64($filename, $path) {
             $fileType = pathinfo($filename,PATHINFO_EXTENSION);
             $imageData = base64_encode(file_get_contents($path));
-
-            if ($fileType == 'jpg' || $fileType == 'png' || $fileType == 'gif') {
-                return 'data:'.$fileType.';base64,' . $imageData;
-            } else {
-                return "<br>No es una imagen<br>";
-            }
+            return 'data:' . $fileType . ';base64,' . $imageData;
         }
 
         // CRUD

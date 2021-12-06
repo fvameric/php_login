@@ -1,5 +1,4 @@
 <?php
-
 class claseBD {
     private $servidor   = 'localhost';
     private $usuario    = 'root';

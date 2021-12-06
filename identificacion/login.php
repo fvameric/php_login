@@ -1,12 +1,41 @@
 <?php
-include_once('../crud_users/crud_users.php');
+// include clases
 include_once('../clases/user.php');
 
+// include cruds
+include_once('../crud_users/crud_users.php');
+
+// cruds
 $crudUser = new CrudUser();
 
+// flags de validacion
+$validacionFormulario = false;
+$validacionLogin = false;
+
+// si hay sesión se reenvia al índex
+// no hace falta volver a loguearse
 session_start();
 if (isset($_SESSION['userSession'])) {
     header("Location: index.php");
+}
+
+if (isset($_POST['login'])) {
+    if (empty($_POST['nickname']) || empty($_POST['password'])) {
+        $validacionFormulario = true;
+    } else {
+        $nickname = $crudUser->borrarEspacios($_POST['nickname']);
+        $password = $crudUser->borrarEspacios($_POST['password']);
+        $password_crypt = $crudUser->encriptarPassword($password);
+        $userSession = $crudUser->validarLoginUser($nickname, $password_crypt);
+
+        if ($userSession != null) {
+            session_start();
+            $_SESSION['userSession'] = $userSession;
+            header("Location: ../index.php");
+        } else {
+            $validacionLogin = true;
+        }
+    }
 }
 ?>
 
@@ -34,30 +63,25 @@ if (isset($_SESSION['userSession'])) {
             <input type="text" name="nickname" placeholder="Nombre"><br>
             <input type="password" name="password" placeholder="Contraseña"><br>
             <button type="submit" name="login">Iniciar sesión</button>
-        </form>
-        <?php
-        if (isset($_POST['login'])) {
-            if (!isset($_POST['nickname']) || !isset($_POST['password'])) { ?>
-                Nombre o password vacios.
-                <?php
-            } else {
-                $nickname = $crudUser->borrarEspacios($_POST['nickname']);
-                $password = $crudUser->borrarEspacios($_POST['password']);
-                $password_crypt = $crudUser->encriptarPassword($password);
-                $userSession = $crudUser->validarLoginUser($nickname, $password_crypt);
-
-                if ($userSession != null) {
-                    session_start();
-                    $_SESSION['userSession'] = $userSession;
-                    header("Location: ../index.php");
-                } else { ?>
-                    No se encuentra el usuario.
-                <?php } ?>
+            
+            <!--
+                validacionLogin = valida que el usuario exista
+                validacionFormulario = si se deja el nombre y pass vacios
+            -->
+            <?php
+            if(!$validacionLogin) {
+            } else { ?>
+                <br>No se encuentra el usuario.
             <?php } ?>
-        <?php } ?>
+
+            <?php 
+            if(!$validacionFormulario) {
+            } else { ?>
+                <br>Por favor rellena el formulario.
+            <?php } ?>
+        </form>
         <a href="/identificacion/registro.php">Crear cuenta</a>
     </div>
-
     <div class="espacio"></div>
     <?php include_once('../html_footer/footer.php'); ?>
 </body>
