@@ -7,11 +7,13 @@ $crudPlanta = new CrudPlanta();
 
 session_start();
 if (isset($_POST['id_planta'])) {
-    /* TO-DO: eliminar las plantas visitadas recientemente si se han eliminado
-    if(($key = array_search($_POST['id_planta'],$_SESSION['plantasVisitadas'])) !== false) {
-        unset($_SESSION['plantasVisitadas'][$key]);
+    // elimina (unset) las plantas visitadas recientemente si se han eliminado a través del crud
+    foreach ($_SESSION['plantasVisitadas'] as $key => $reciente) {
+        if ($reciente->getId() == $_POST['id_planta']) {
+            unset($_SESSION['plantasVisitadas'][$key]);
+            $_SESSION['plantasVisitadas'] = array_values($_SESSION['plantasVisitadas']);
+        }
     }
-    */
     $validacionDelete = $crudPlanta->eliminarPlanta($_POST['id_planta']);
 }
 ?>

@@ -59,17 +59,13 @@ if (isset($_SESSION['userSession'])) {
     // se agrega la planta visitada
     // maximo 5 plantas
     if (isset($_SESSION['plantasVisitadas'])) {
-        if (!array_search($planta, $_SESSION['plantasVisitadas'])) {
+        if (array_search($planta, $_SESSION['plantasVisitadas']) === false) {
             if (count($_SESSION['plantasVisitadas']) <= 4) {
                 array_push($_SESSION['plantasVisitadas'], $planta);
             } else if(count($_SESSION['plantasVisitadas']) > 4) {
                 array_shift($_SESSION['plantasVisitadas']);
                 array_push($_SESSION['plantasVisitadas'], $planta);
             }
-        }
-
-        foreach ($_SESSION['plantasVisitadas'] as $key => $recientes) {
-            echo '['.$key.']'.$_SESSION['plantasVisitadas'][$key]->getNombre();
         }
     }
 }
