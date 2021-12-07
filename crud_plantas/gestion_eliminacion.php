@@ -5,7 +5,13 @@ include_once('crud_plantas.php');
 // cruds
 $crudPlanta = new CrudPlanta();
 
+session_start();
 if (isset($_POST['id_planta'])) {
+    /* TO-DO: eliminar las plantas visitadas recientemente si se han eliminado
+    if(($key = array_search($_POST['id_planta'],$_SESSION['plantasVisitadas'])) !== false) {
+        unset($_SESSION['plantasVisitadas'][$key]);
+    }
+    */
     $validacionDelete = $crudPlanta->eliminarPlanta($_POST['id_planta']);
 }
 ?>
