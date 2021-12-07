@@ -94,13 +94,13 @@ if (isset($_POST['sort'])) {
     </div>
 
     <div class="content-wrapper">
-        <div class="content">
-            <div>
-                <h3>Plantas visitadas recientemente:</h3>
-            </div>
-            <div class="scroll-plantas">
-                <?php if (isset($plantasRecientes)) {
-                    foreach ($plantasRecientes as $reciente) { ?>
+        <?php if (!empty($plantasRecientes)) { ?>
+            <div class="content">
+                <div>
+                    <h3>Plantas visitadas recientemente:</h3>
+                </div>
+                <div class="scroll-plantas">
+                    <?php foreach ($plantasRecientes as $reciente) { ?>
                         <div class="plantas-recientes">
                             <form method="GET" action="ver_detalle.php">
                                 <input type="hidden" name="id_planta" value="<?php echo $reciente->getId(); ?>" />
@@ -115,9 +115,10 @@ if (isset($_POST['sort'])) {
                             </form>
                         </div>
                     <?php } ?>
-                <?php } ?>
+
+                </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
 
     <div class="content-wrapper">
