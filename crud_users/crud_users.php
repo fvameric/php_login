@@ -108,10 +108,30 @@ class CrudUser
         return true;
     }
 
+    public function validarNickModificacion($id, $nickname)
+    {
+        foreach ($this->listaUsuarios as $usuario) {
+            if ($nickname == $usuario->getNickname() && $id != $usuario->getId()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function validarEmail($email)
     {
         foreach ($this->listaUsuarios as $usuario) {
             if ($email == $usuario->getEmail()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function validarEmailModificacion($id, $email)
+    {
+        foreach ($this->listaUsuarios as $usuario) {
+            if ($email == $usuario->getEmail() && $id != $usuario->getId()) {
                 return false;
             }
         }

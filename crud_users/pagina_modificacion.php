@@ -5,6 +5,7 @@ include_once('../clases/user.php');
 // include cruds
 include_once('crud_users.php');
 
+$userId = '';
 session_start();
 if (isset($_SESSION['userSession'])) {
     
@@ -14,9 +15,6 @@ if (isset($_SESSION['userSession'])) {
     // cruds
     $crudUser = new CrudUser();
 
-    // obtención de elementos de la BD
-    $listaUsers = $crudUser->obtenerListaUsuarios();
-
     // obtener contador del carrito
     $contadorCarrito = 0;
     if (isset($_SESSION['arrayPlantas'])) {
@@ -25,8 +23,9 @@ if (isset($_SESSION['userSession'])) {
 
     // obtenemos a partir de su id la información del usuario que vamos a modificar
     if (isset($_POST['id_usuario_modificar'])) {
-        $usuario_modificar = $crudUser->obtenerUser($_POST['id_usuario_modificar']);
+        $_SESSION['userIdModif'] = $_POST['id_usuario_modificar'];
     }
+    $usuario_modificar = $crudUser->obtenerUser($_SESSION['userIdModif']);
 }
 ?>
 

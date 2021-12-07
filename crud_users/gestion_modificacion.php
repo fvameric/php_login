@@ -4,14 +4,16 @@ include_once('../clases/user.php');
 
 // include cruds
 include_once('crud_users.php');
+
+// crud
+$crudUser = new CrudUser();
+
 if (isset($_POST['aceptarmodif'])) {
     if (isset($_POST['id_usuario_modificar'])) {
+        $validacionNick = $crudUser->validarNickModificacion($_POST['id_usuario_modificar'], $_POST['nickname']);
+        $validacionEmail = $crudUser->validarEmailModificacion($_POST['id_usuario_modificar'], $_POST['email']);
 
-        // crud
-        $crudUser = new CrudUser();
-        $validacionRegistro = $crudUser->validarRegistro($_POST['nickname'], $_POST['email']);
-
-        if ($validacionRegistro) {
+        if ($validacionNick && $validacionEmail) {
 
             // user a modificar según la id
             $userModif = new User();
@@ -47,25 +49,35 @@ if (isset($_POST['aceptarmodif'])) {
 </head>
 
 <body>
-    <?php if ($validacionRegistro) { ?>
-        <?php if ($validacionConsulta) { ?>
-            <script>
-                Swal.fire({
-                    title: 'Se creó el usuario con éxito',
-                    confirmButtonText: 'Volver atrás'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = `../profile.php`;
-                    }
-                });
-            </script>
-        <?php } ?>
-    <?php } else { ?>
+    <?php if (!$validacionNick) { ?>
         <script>
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Este nick o email ya está en uso.'
+                text: 'Este nick ya está en uso'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = document.referrer;
+                }
+            });
+        </script>
+    <?php } else if (!$validacionEmail) { ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Este email ya está en uso'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = document.referrer;
+                }
+            });
+        </script>
+    <?php } else { ?>
+        <script>
+            Swal.fire({
+                title: 'Se modificó el usuario con éxito',
+                confirmButtonText: 'Volver atrás'
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = `../profile.php`;
