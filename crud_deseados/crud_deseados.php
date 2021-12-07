@@ -103,6 +103,7 @@
             foreach ($plantasDeseadas as $p) {
                 $planta = $xml->addChild('planta');
                 $planta->addChild('id', $p->getId());
+                /*
                 $planta->addChild('nombre', $p->getNombre());
                 $planta->addChild('descripcion', $p->getDescripcion());
                 $planta->addChild('precio', $p->getPrecio());
@@ -110,6 +111,7 @@
                 $planta->addChild('foto', $p->getFoto());
                 $planta->addChild('compradas', $p->getCompradas());
                 $planta->addChild('categoria', $p->getCategoria());
+                */
             }
     
             $xml->preserveWhiteSpace = false;
@@ -121,6 +123,16 @@
             fclose($file);
         }
 
+        public function plantaExiste($idPlanta) {
+            $crudPlanta = new CrudPlanta();
+            foreach ($crudPlanta->obtenerListaPlantas() as $planta) {
+                if ($idPlanta == $planta->getId()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         // se carga el fichero en simplexml_load_file
         // paso sus valores a agregarDeseado para que me cree los deseados en base de datos
         public function cargarXML($user, $fichero) {
@@ -129,10 +141,11 @@
 
             foreach ($xml as $valor) {
                 if ($valor->id != 0) {
-                    $validacionFichero = $this->agregarDeseado($user->getId(), $valor->id);
+                    if ($this->plantaExiste($valor->id)) {
+                        $validacionFichero = $this->agregarDeseado($user->getId(), $valor->id);
+                    }
                 }
             }
-
             return $validacionFichero;
         }
     }
