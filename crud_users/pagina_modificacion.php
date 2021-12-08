@@ -5,7 +5,6 @@ include_once('../clases/user.php');
 // include cruds
 include_once('crud_users.php');
 
-$userId = '';
 session_start();
 if (isset($_SESSION['userSession'])) {
     

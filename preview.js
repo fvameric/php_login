@@ -1,3 +1,6 @@
+// si existe algún cambio en el input de #imagen
+// carga esa imagen subida para previsualizarla en #preview
+
 $("#imagen").change(function () {
     previsualizar(this);
 });

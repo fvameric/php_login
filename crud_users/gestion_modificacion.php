@@ -27,7 +27,7 @@ if (isset($_POST['aceptarmodif'])) {
             if (!empty($_FILES["file"]["name"])) {
                 $filename = $_FILES["file"]["name"];
                 $path = $_FILES["file"]["tmp_name"];
-                $src = $this->convertirBase64($filename, $path);
+                $src = $crudUser->convertirBase64($filename, $path);
                 $userModif->setAvatar($src);
             }
             // se hace el update en base de datos
