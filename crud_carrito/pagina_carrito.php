@@ -27,16 +27,6 @@ if (isset($_SESSION['userSession'])) {
     $contadorCarrito = 0;
     if (isset($_SESSION['arrayPlantas'])) {
         $contadorCarrito = count($_SESSION['arrayPlantas']);
-
-        // array[planta][cantidad]
-        // con += $plantas[1] sumo las cantidades especificadas en total_cantidad
-        // con $plantas[0]->getPrecio() * $plantas[1] multiplico el precio de las plantas por la cantidad especificada
-        // $total += $total_unidad suma todas las multiplicaciones
-        foreach ($_SESSION['arrayPlantas'] as $key => $plantas) {
-            $total_cantidad += $plantas[1];
-            $total_unidad = $plantas[0]->getPrecio() * $plantas[1];
-            $total += $total_unidad;
-        }
     }
 
     // obtener planta para especificarla en los enlaces de navegación
@@ -101,7 +91,17 @@ if (isset($_SESSION['userSession'])) {
                                 <th style="text-align:right;" width="10%">Precio total</th>
                                 <th style="text-align:center;" width="5%">Eliminar</th>
                             </tr>
-                            <?php foreach ($_SESSION['arrayPlantas'] as $key => $plantas) { ?>
+                            <?php
+                            // array[planta][cantidad]
+                            // con += $plantas[1] sumo las cantidades especificadas en total_cantidad
+                            // con $plantas[0]->getPrecio() * $plantas[1] multiplico el precio de las plantas por la cantidad especificada
+                            // $total += $total_unidad suma todas las multiplicaciones
+                            foreach ($_SESSION['arrayPlantas'] as $key => $plantas) {
+                                $total_cantidad += $plantas[1];
+                                $total_unidad = $plantas[0]->getPrecio() * $plantas[1];
+                                $total += $total_unidad;
+
+                            ?>
                                 <tr>
                                     <td><img src="<?php echo $plantas[0]->getFoto(); ?>" class="cart-item-image" /><?php echo $plantas[0]->getNombre(); ?></td>
                                     <td style="text-align:right;"><?php echo $plantas[1]; ?></td>
