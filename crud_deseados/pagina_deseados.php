@@ -10,7 +10,7 @@ include_once('crud_deseados.php');
 
 session_start();
 if (isset($_SESSION['userSession'])) {
-    
+
     // variables de sesión
     $userSession = $_SESSION['userSession'];
 
@@ -39,7 +39,7 @@ if (isset($_SESSION['userSession'])) {
 
     // si se pulsa el botón de crear XML
     if (isset($_POST['descargarXML'])) {
-       $crudDeseados->crearXML($plantasDeseadas);
+        $crudDeseados->crearXML($plantasDeseadas);
     }
 
     // si se pulsa el botón de cargar XML y antes se ha seleccionado un archivo XML
@@ -47,6 +47,16 @@ if (isset($_SESSION['userSession'])) {
         if (!empty($_FILES["file"]["tmp_name"])) {
             $crudDeseados->cargarXML($userSession, $_FILES["file"]["tmp_name"]);
             header('Location: pagina_deseados.php');
+        }
+    }
+
+    // Botones de ordenar por nombre, precio...
+    $contadorDeseados = 0;
+    if (isset($_POST['sort'])) {
+        if ($_POST['sort'] == 1) {
+            $plantasDeseadas = $crudPlanta->ordenarPorPrecio($plantasDeseadas);
+        } else if ($_POST['sort'] == 2) {
+            $plantasDeseadas = $crudPlanta->ordenarPorNombre($plantasDeseadas);
         }
     }
 }
@@ -60,14 +70,15 @@ if (isset($_SESSION['userSession'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deseados</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="/styles/global.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
     <script src="/buscador.js"></script>
 </head>
 
 <body>
     <div class='header'>
-        <?php include_once('../html_header/navbar.php') ?>
+        <?php include_once('../html_header/navbar.php'); ?>
+        <?php include_once('../html_header/buscador.php'); ?>
     </div>
 
     <div class="espacio">
@@ -93,6 +104,7 @@ if (isset($_SESSION['userSession'])) {
                         <button type="submit" name="descargarXML">Crear XML</button>
                     </form>
                 </div>
+                <?php include_once('../html_content/btn_orden.php'); ?>
                 <div class="scroll-plantas">
                     <?php foreach ($plantasDeseadas as $plantas) { ?>
                         <div class="lista-plantas">

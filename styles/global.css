@@ -30,23 +30,29 @@ button:focus {
 }
 
 
-/* header */
+/* Posicionamiento de header */
 
-.menu-user {
-    margin-left: auto;
-    margin-right: 0;
-    padding: 10px;
+.header-userinfo {
+    display: flex;
+    flex-direction: row;
+    float: right;
 }
 
-.btn-registrarse,
-.btn-iniciarsesion {
-    background-color: black;
-    border-radius: 5px;
-    border: 0px;
-    color: white;
-    cursor: pointer;
-    padding: 5px 10px;
+.header-userinfo a {
     text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+.header-content {
+    display: flex;
+    flex-direction: row;
+    width: 550px;
+    padding: 10px;
+    justify-content: space-around;
+}
+
+.header-content li {
+    list-style: none;
 }
 
 .header {
@@ -67,86 +73,6 @@ button:focus {
     */
 }
 
-@media only screen and (min-width: 1200px) {
-    .topbar {
-        width: 1080px;
-        max-width: 1080px;
-    }
-}
-
-@media only screen and (min-width: 1200px) {
-    .topbar {
-        max-width: 1080px;
-    }
-}
-
-@media only screen and (min-width: 996px) {
-    .topbar {
-        max-width: 1080px;
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    .topbar {
-        max-width: 1080px;
-        padding: 0;
-    }
-}
-
-.topbar {
-    height: 40px;
-    display: flex;
-}
-
-
-/* Menu navegacion debajo de header */
-
-.menu-navegacion {
-    height: 60px;
-    background-color: #ffffff;
-    border: 2px solid rgb(207, 207, 207);
-    display: flex;
-    justify-content: space-around;
-}
-
-.menu-logo img {
-    width: 40px;
-    height: 40px;
-}
-
-.botones-menu {
-    width: 750px;
-    display: flex;
-    border-left: 2px solid rgb(207, 207, 207);
-    border-right: 2px solid rgb(207, 207, 207);
-}
-
-.caja1,
-.caja2,
-.caja3,
-.caja4,
-.caja5,
-.caja6,
-.caja7 {
-    width: 100%;
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.caja1 button,
-.caja2 button,
-.caja3 button,
-.caja4 button,
-.caja5 button,
-.caja6 button,
-.caja7 button{
-    background:transparent;
-    color: black;
-}
-
 .header-logo {
     cursor: pointer;
 }
@@ -157,59 +83,25 @@ button:focus {
     width: 42px;
 }
 
-.header-userinfo {
+.menu-navegacion {
+    height: 60px;
+    background-color: #ffffff;
+    /*border: 2px solid rgb(207, 207, 207);*/
     display: flex;
-    flex-direction: row;
-    margin-left: 30px;
-    float: right;
+    justify-content: space-around;
 }
 
-.header-userinfo a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
+.botones-menu {
+    width: 750px;
+    display: flex;
+    /*border-left: 2px solid rgb(207, 207, 207);*/
+    /*border-right: 2px solid rgb(207, 207, 207);*/
 }
 
 .userinfo {
     display: flex;
     flex-direction: row;
     margin-left: auto;
-}
-
-.nombre {
-    padding: 10px;
-}
-
-.header-content {
-    display: flex;
-    flex-direction: row;
-    width: 550px;
-    padding: 10px;
-    justify-content: space-around;
-}
-
-.header-content li {
-    list-style: none;
-}
-
-.avatar img {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-}
-
-.avatar input {
-    margin-top: 5px;
-}
-
-.avatar-perfil img {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-}
-
-.nombre {
-    font-size: 20px;
-    font-weight: bold;
 }
 
 .email {
@@ -481,39 +373,7 @@ input:not(:checked)~#collapse-menu {
 }
 
 
-/* Buscador de plantas */
-
-.buscador {
-    width: 100%;
-    display: flex;
-}
-
-.barra-buscador {
-    width: 100%;
-    height: 100%;
-    border: transparent;
-}
-
-.barra-buscador::placeholder {
-    font-size: 25px;
-    color: #CCC;
-    padding: 30px;
-}
-
-.btn-buscador {
-    margin-left: 20px;
-    width: 120px;
-    height: 40px;
-    font-size: 15px;
-}
-
-
 /* Carrito */
-
-.btn-carrito button {
-    background: transparent;
-    border: 1px solid black;
-}
 
 .carrito {
     background-color: transparent;
@@ -538,6 +398,11 @@ input:not(:checked)~#collapse-menu {
     margin-top: 10px;
 }
 
+.scroll-plantas {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 
 /* Crear XML */
 
@@ -553,14 +418,6 @@ input:not(:checked)~#collapse-menu {
     color: white;
     cursor: pointer;
     padding: 5px 10px;
-}
-
-
-/* Plantas */
-
-.scroll-plantas {
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .lista-plantas-crear input {
@@ -597,7 +454,7 @@ input:not(:checked)~#collapse-menu {
     flex-direction: column;
     overflow: hidden;
     border-radius: 5px;
-    box-shadow: 0px 0px 50px -20px rgb(0 0 0 / 25%);
+    box-shadow: 0px 0px 50px -20px rgb(0 0 0 / 45%);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
@@ -606,10 +463,10 @@ input:not(:checked)~#collapse-menu {
 }
 
 .lista-plantas-content {
-    height: 100px;
+    height: 75px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     background-color: #FFF;
 }
 
@@ -798,7 +655,7 @@ input:not(:checked)~#collapse-menu {
 }
 
 .ver-detalles-planta input {
-    margin: 10px;
+    margin: 5px;
     border: 0px;
     color: rgb(0, 0, 0);
     cursor: pointer;
@@ -923,18 +780,6 @@ input:not(:checked)~#collapse-menu {
 
 
 /* carro */
-
-.contadorCarrito {
-    position: absolute;
-    left: 680px;
-    height: 25px;
-    width: 25px;
-    background-color: rgb(255, 41, 4);
-    color: #FFF;
-    border-radius: 50%;
-    display: inline-block;
-    text-align: center;
-}
 
 .no-content {
     padding: 10px;
@@ -1126,57 +971,4 @@ input:not(:checked)~#collapse-menu {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-}
-
-/* recientes */
-
-.plantas-recientes {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 8px;
-    width: 200px;
-}
-
-.fotos-recientes {
-    overflow: hidden;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.fotos-recientes img {
-    display: block;
-    height: 200px;
-    width: 200px;
-}
-
-.nombres-recientes {
-    position: absolute;
-    bottom: 18px;
-    left: 30px;
-    font-weight:900;
-    width: 170px;
-    font-size: 15px;
-    color: rgb(0, 0, 0);
-}
-
-.carta-reciente {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border-radius: 5px;
-    box-shadow: 0px 0px 50px -20px rgb(0 0 0 / 25%);
-    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-    height: 60px;
-    background: none;
-}
-
-.carta-reciente:hover {
-    background: none;
-}
-
-.carta-reciente:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }

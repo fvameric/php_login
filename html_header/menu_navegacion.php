@@ -1,6 +1,13 @@
 <!-- Botones para ordenar por categoria y barra de buscador -->
 
-<div class="menu-navegacion">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/styles/menu_navegacion.css">
+</head>
+
+<body>
     <form method="GET" action="" class="botones-menu">
         <div class="caja1">
             <button type="submit" name="categoria" class="button" value="1">Aeonium</button>
@@ -24,8 +31,6 @@
             <button type="submit" name="categoria" class="button" value="7">Senecio</button>
         </div>
     </form>
+</body>
 
-    <form method="POST" action="" class="buscador">
-        <input type="text" id="inputBuscador" class="barra-buscador" onkeyup="funcionBuscador()" placeholder="Buscador">
-    </form>
-</div>
+</html>

@@ -1,0 +1,105 @@
+/* HTML HEADER - NAVBAR */
+
+
+/* topbar */
+
+@media only screen and (min-width: 1200px) {
+    .topbar {
+        width: 1080px;
+        max-width: 1080px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .topbar {
+        max-width: 1080px;
+    }
+}
+
+@media only screen and (min-width: 996px) {
+    .topbar {
+        max-width: 1080px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .topbar {
+        max-width: 1080px;
+        padding: 0;
+    }
+}
+
+.topbar {
+    height: 40px;
+    display: flex;
+}
+
+
+/* Menu logo */
+
+.menu-logo img {
+    width: 40px;
+    height: 40px;
+}
+
+
+/* Información del usuario */
+
+.avatar img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.avatar input {
+    margin-top: 5px;
+}
+
+.avatar-perfil img {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+.nombre {
+    padding: 10px;
+}
+
+.nombre {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-carrito button {
+    background: transparent;
+    border: 1px solid black;
+}
+
+.contadorCarrito {
+    position: absolute;
+    left: 680px;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(255, 41, 4);
+    color: #FFF;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+}
+
+.menu-user {
+    margin-left: auto;
+    margin-right: 0;
+    padding: 10px;
+}
+
+.btn-registrarse,
+.btn-iniciarsesion {
+    background-color: black;
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    text-decoration: none;
+}

@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planta creada</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles/global.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
     <script src="../sweetalert2.all.js"></script>
 </head>

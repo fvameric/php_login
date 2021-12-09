@@ -1,0 +1,27 @@
+/* Menu navegacion debajo de header */
+
+.caja1,
+.caja2,
+.caja3,
+.caja4,
+.caja5,
+.caja6,
+.caja7 {
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.caja1 button,
+.caja2 button,
+.caja3 button,
+.caja4 button,
+.caja5 button,
+.caja6 button,
+.caja7 button {
+    background: transparent;
+    color: black;
+}

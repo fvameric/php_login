@@ -69,7 +69,8 @@ if (isset($_POST['sort'])) {
     <?php } else { ?>
         <title>Tienda</title>
     <?php } ?>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
     <script src="/buscador.js"></script>
@@ -78,7 +79,10 @@ if (isset($_POST['sort'])) {
 <body>
     <div class='header'>
         <?php include_once('/html_header/navbar.php'); ?>
-        <?php include_once('/html_header/menu_navegacion.php'); ?>
+        <div class="menu-navegacion">
+            <?php include_once('/html_header/menu_navegacion.php'); ?>
+            <?php include_once('/html_header/buscador.php'); ?>
+        </div>
     </div>
 
     <div class="espacio"></div>
@@ -123,16 +127,7 @@ if (isset($_POST['sort'])) {
 
     <div class="content-wrapper">
         <div class="content">
-            <div class="lista-orden">
-                <form method="POST" action="">
-                    <button type="submit" name="sort" class="button" value="1">Ordenar por precio</button>
-                    <button type="submit" name="sort" class="button" value="2">Ordenar por nombre</button>
-                    <?php if (isset($_SESSION['userSession']) && $contadorDeseados > 0) { ?>
-                        <button type="submit" name="sort" class="button" value="3">Ordenar por deseados</button>
-                    <?php } ?>
-                </form>
-            </div>
-
+            <?php include_once('/html_content/btn_orden.php'); ?>
             <div class="scroll-plantas">
                 <?php foreach ($listaPlantas as $plantas) { ?>
                     <div class="lista-plantas">
