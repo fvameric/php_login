@@ -5,33 +5,35 @@
 
 @media only screen and (min-width: 1200px) {
     .topbar {
-        width: 1080px;
-        max-width: 1080px;
+        width: 1086px;
+        max-width: 1086px;
     }
 }
 
 @media only screen and (min-width: 1200px) {
     .topbar {
-        max-width: 1080px;
+        max-width: 1086px;
     }
 }
 
 @media only screen and (min-width: 996px) {
     .topbar {
-        max-width: 1080px;
+        max-width: 1086px;
     }
 }
 
 @media only screen and (min-width: 768px) {
     .topbar {
-        max-width: 1080px;
+        max-width: 1086px;
         padding: 0;
     }
 }
 
 .topbar {
     height: 40px;
+    margin: 0 auto;
     display: flex;
+    justify-content: space-between;
 }
 
 

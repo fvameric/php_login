@@ -80,7 +80,6 @@ if (isset($_POST['sort'])) {
     <div class='header'>
         <?php include_once('/html_header/navbar.php'); ?>
         <div class="menu-navegacion">
-            <?php include_once('/html_header/menu_navegacion.php'); ?>
             <?php include_once('/html_header/buscador.php'); ?>
         </div>
     </div>
@@ -97,12 +96,12 @@ if (isset($_POST['sort'])) {
         <?php } ?>
     </div>
 
+
+
     <div class="content-wrapper">
         <?php if (!empty($plantasRecientes)) { ?>
             <div class="content">
-                <div>
-                    <h3>Plantas visitadas recientemente:</h3>
-                </div>
+                <h3>Plantas visitadas recientemente:</h3>
                 <div class="scroll-plantas">
                     <?php foreach ($plantasRecientes as $reciente) { ?>
                         <div class="plantas-recientes">
@@ -127,7 +126,10 @@ if (isset($_POST['sort'])) {
 
     <div class="content-wrapper">
         <div class="content">
-            <?php include_once('/html_content/btn_orden.php'); ?>
+            
+            <div class="sidepanel-container">
+                <?php include_once('/html_content/sidepanel.php'); ?>
+            </div>
             <div class="scroll-plantas">
                 <?php foreach ($listaPlantas as $plantas) { ?>
                     <div class="lista-plantas">

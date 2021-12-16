@@ -46,7 +46,7 @@ button:focus {
 .header-content {
     display: flex;
     flex-direction: row;
-    width: 550px;
+    width: 285px;
     padding: 10px;
     justify-content: space-around;
 }
@@ -89,13 +89,6 @@ button:focus {
     /*border: 2px solid rgb(207, 207, 207);*/
     display: flex;
     justify-content: space-around;
-}
-
-.botones-menu {
-    width: 750px;
-    display: flex;
-    /*border-left: 2px solid rgb(207, 207, 207);*/
-    /*border-right: 2px solid rgb(207, 207, 207);*/
 }
 
 .userinfo {
@@ -185,7 +178,7 @@ input:not(:checked)~#collapse-menu {
 
 @media only screen and (min-width: 1200px) {
     .content {
-        max-width: 1080px;
+        max-width: 1086px;
         padding-top: 14px;
         padding-left: 0px;
         padding-right: 0px;
@@ -218,8 +211,12 @@ input:not(:checked)~#collapse-menu {
 
 .content {
     width: 100%;
-    /*margin: 0 auto;*/
+    margin: 0 auto;
     background-color: #f6f5f5;
+}
+
+.content h3 {
+    margin-left: 20px;
 }
 
 
@@ -390,12 +387,12 @@ input:not(:checked)~#collapse-menu {
 
 /* Ordenar plantas */
 
-.lista-orden {
-    padding: 0px 0px 10px 10px;
+.lista-orden button {
+    background: none;
 }
 
-.lista-orden button {
-    margin-top: 10px;
+.lista-orden button:hover {
+    color: aqua;
 }
 
 .scroll-plantas {
@@ -445,8 +442,8 @@ input:not(:checked)~#collapse-menu {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    padding: 8px;
-    width: 200px;
+    padding: 5px;
+    width: 165px;
 }
 
 .carta {
@@ -463,7 +460,7 @@ input:not(:checked)~#collapse-menu {
 }
 
 .lista-plantas-content {
-    height: 75px;
+    height: 90px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -471,13 +468,13 @@ input:not(:checked)~#collapse-menu {
 }
 
 .lista-plantas-fotos {
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 165px;
     overflow: hidden;
 }
 
 .lista-plantas-fotos img {
-    height: 200px;
+    height: 170px;
     width: 100%;
     vertical-align: middle;
     transition: transform 650ms ease;
@@ -602,7 +599,7 @@ input:not(:checked)~#collapse-menu {
 .carta .btn-agregar-deseado {
     position: absolute;
     top: 0;
-    left: 160px;
+    left: 130px;
 }
 
 .agregar-deseado button {
@@ -620,7 +617,7 @@ input:not(:checked)~#collapse-menu {
 .carta .btn-quitar-deseado {
     position: absolute;
     top: 0px;
-    left: 160px;
+    left: 130px;
 }
 
 .quitar-deseado button {
@@ -916,7 +913,7 @@ input:not(:checked)~#collapse-menu {
 
 @media only screen and (min-width: 1200px) {
     .content-carrito {
-        max-width: 1080px;
+        max-width: 1086px;
         padding-top: 14px;
         padding-left: 0px;
         padding-right: 0px;
@@ -971,4 +968,36 @@ input:not(:checked)~#collapse-menu {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+
+/* side panel test */
+
+.sidepanel-container {
+    display: block;
+    float: left;
+    padding: 5px;
+    width: 160px;
+    margin-right: 10px;
+}
+
+.side-orden {
+    position: relative;
+    height: 95px;
+    background-color: #794044;
+}
+
+.side-categorias {
+    position: relative;
+    height: 257px;
+    background-color: #405979;
+    margin-top: 15px;
+}
+
+.side-categorias button {
+    background: none;
+}
+
+.side-categorias button:hover {
+    color: aqua;
 }

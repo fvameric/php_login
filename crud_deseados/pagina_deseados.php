@@ -99,12 +99,14 @@ if (isset($_SESSION['userSession'])) {
     <?php if (!empty($plantasDeseadas)) { ?>
         <div class="content-wrapper">
             <div class="content">
+                <div class="sidepanel-container">
+                    <?php include_once('../html_content/sidepanel.php'); ?>
+                </div>
                 <div class="descargar-xml">
                     <form method="POST" action="">
                         <button type="submit" name="descargarXML">Crear XML</button>
                     </form>
                 </div>
-                <?php include_once('../html_content/btn_orden.php'); ?>
                 <div class="scroll-plantas">
                     <?php foreach ($plantasDeseadas as $plantas) { ?>
                         <div class="lista-plantas">

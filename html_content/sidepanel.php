@@ -1,13 +1,16 @@
-<!-- Botones para ordenar por categoria y barra de buscador -->
+<div class="side-orden">
+    <div class="lista-orden">
+        <form method="POST" action="">
+            <button type="submit" name="sort" value="1">Ordenar por precio</button>
+            <button type="submit" name="sort" value="2">Ordenar por nombre</button>
+            <?php if (isset($_SESSION['userSession']) && $contadorDeseados > 0) { ?>
+                <button type="submit" name="sort" value="3">Ordenar por deseados</button>
+            <?php } ?>
+        </form>
+    </div>
+</div>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <link rel="stylesheet" href="/styles/menu_navegacion.css">
-</head>
-
-<body>
+<div class="side-categorias">
     <form method="GET" action="" class="botones-menu">
         <div class="caja1">
             <button type="submit" name="categoria" class="button" value="1">Aeonium</button>
@@ -31,6 +34,4 @@
             <button type="submit" name="categoria" class="button" value="7">Senecio</button>
         </div>
     </form>
-</body>
-
-</html>
+</div>
