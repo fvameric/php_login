@@ -1,0 +1,39 @@
+/* side panel test */
+
+.sidepanel-container {
+    display: block;
+    float: left;
+    padding: 5px;
+    width: 160px;
+    margin-right: 10px;
+}
+
+.side-orden {
+    position: relative;
+    height: 95px;
+    background-color: #80b34d;
+    border-radius: 5px;
+}
+
+.side-categorias {
+    position: relative;
+    height: 257px;
+    background: linear-gradient(0deg, rgba(72, 139, 4, 1) 0%, rgba(121, 187, 56, 1) 100%);
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.side-categorias button {
+    background: none;
+    display: block;
+}
+
+.side-orden button:hover,
+.side-categorias button:hover {
+    color: rgb(0, 0, 0);
+}
+
+.side-orden button:focus,
+.side-categorias button:focus {
+    color: rgb(0, 255, 221);
+}

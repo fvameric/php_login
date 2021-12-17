@@ -49,6 +49,7 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda login</title>
     <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/login.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
 </head>
 

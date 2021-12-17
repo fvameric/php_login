@@ -71,6 +71,7 @@ if (isset($_POST['sort'])) {
     <?php } ?>
     <link rel="stylesheet" href="/styles/global.css">
     <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/sidepanel.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
     <script src="/buscador.js"></script>
@@ -79,24 +80,9 @@ if (isset($_POST['sort'])) {
 <body>
     <div class='header'>
         <?php include_once('/html_header/navbar.php'); ?>
-        <div class="menu-navegacion">
-            <?php include_once('/html_header/buscador.php'); ?>
-        </div>
     </div>
 
     <div class="espacio"></div>
-
-    <div class="enlaces-navegacion">
-        <a href="index.php">Home</a>
-        <?php if (isset($_GET['categoria'])) { ?>
-            <div class="flecha-navegacion">
-                ▶
-            </div>
-            <a href=""><?php echo $strCategoria; ?></a>
-        <?php } ?>
-    </div>
-
-
 
     <div class="content-wrapper">
         <?php if (!empty($plantasRecientes)) { ?>
@@ -126,7 +112,15 @@ if (isset($_POST['sort'])) {
 
     <div class="content-wrapper">
         <div class="content">
-            
+            <div class="enlaces-navegacion">
+                <a href="index.php">Home</a>
+                <?php if (isset($_GET['categoria'])) { ?>
+                    <div class="flecha-navegacion">
+                        ▶
+                    </div>
+                    <a href=""><?php echo $strCategoria; ?></a>
+                <?php } ?>
+            </div>
             <div class="sidepanel-container">
                 <?php include_once('/html_content/sidepanel.php'); ?>
             </div>

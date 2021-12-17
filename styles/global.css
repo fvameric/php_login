@@ -669,43 +669,6 @@ input:not(:checked)~#collapse-menu {
 }
 
 
-/* Login */
-
-.formulario-login {
-    border: 1px solid black;
-    border-radius: 5px;
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 10px 0;
-    text-align: center;
-}
-
-.formulario-login h1 {
-    font-size: 40px;
-    font-weight: 200;
-    padding: 0 0 50px 0;
-}
-
-.formulario-login form {
-    padding: 20px 0;
-    position: relative;
-    z-index: 2;
-}
-
-.form-login input {
-    display: block;
-    appearance: none;
-    outline: 0;
-    width: 250px;
-    border-radius: 5px;
-    padding: 10px 15px;
-    margin: 0 auto 10px auto;
-    display: block;
-    text-align: center;
-    font-size: 18px;
-}
-
-
 /* Ver Detalle */
 
 .foto-planta-detalle img {
@@ -968,36 +931,4 @@ input:not(:checked)~#collapse-menu {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-}
-
-
-/* side panel test */
-
-.sidepanel-container {
-    display: block;
-    float: left;
-    padding: 5px;
-    width: 160px;
-    margin-right: 10px;
-}
-
-.side-orden {
-    position: relative;
-    height: 95px;
-    background-color: #794044;
-}
-
-.side-categorias {
-    position: relative;
-    height: 257px;
-    background-color: #405979;
-    margin-top: 15px;
-}
-
-.side-categorias button {
-    background: none;
-}
-
-.side-categorias button:hover {
-    color: aqua;
 }

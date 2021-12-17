@@ -71,6 +71,7 @@ if (isset($_SESSION['userSession'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deseados</title>
     <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/sidepanel.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
     <script src="/buscador.js"></script>
 </head>
