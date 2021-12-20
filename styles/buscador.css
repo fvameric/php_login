@@ -1,6 +1,6 @@
 /* Buscador de plantas */
 
-.buscador {
+.buscador input {
     width: 100%;
     display: flex;
 }

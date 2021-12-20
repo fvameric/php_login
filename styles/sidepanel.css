@@ -1,11 +1,8 @@
 /* side panel test */
 
 .sidepanel-container {
-    display: block;
-    float: left;
     padding: 5px;
-    width: 160px;
-    margin-right: 10px;
+    width: 500px;
 }
 
 .side-orden {
@@ -15,10 +12,15 @@
     border-radius: 5px;
 }
 
+.side-orden button {
+    background: none;
+    display: block;
+}
+
 .side-categorias {
     position: relative;
     height: 257px;
-    background: linear-gradient(0deg, rgba(72, 139, 4, 1) 0%, rgba(121, 187, 56, 1) 100%);
+    background: #80b34d;
     margin-top: 15px;
     border-radius: 5px;
 }
@@ -31,9 +33,4 @@
 .side-orden button:hover,
 .side-categorias button:hover {
     color: rgb(0, 0, 0);
-}
-
-.side-orden button:focus,
-.side-categorias button:focus {
-    color: rgb(0, 255, 221);
 }

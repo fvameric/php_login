@@ -8,9 +8,7 @@
 </head>
 
 <body>
-    <form method="POST" action="" class="buscador">
-        <input type="text" id="inputBuscador" class="barra-buscador" onkeyup="funcionBuscador()" placeholder="Buscador">
-    </form>
+
 </body>
 
 </html>

@@ -30,10 +30,18 @@
 }
 
 .topbar {
-    height: 40px;
+    height: 60px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.topbar input {
+    height: 30px;
+    width: 60vh;
+    border-radius: 5px;
+    border: 0;
 }
 
 
@@ -67,14 +75,21 @@
     padding: 10px;
 }
 
-.nombre {
-    font-size: 20px;
-    font-weight: bold;
+.nombre:hover {
+    color: rgb(31, 31, 31);
 }
 
 .btn-carrito button {
-    background: transparent;
-    border: 1px solid black;
+    background: #353535;
+}
+
+.btn-carrito svg {
+    width: 22px;
+    height: 22px;
+}
+
+.btn-carrito button:hover {
+    background-color: rgb(14, 14, 14);
 }
 
 .contadorCarrito {

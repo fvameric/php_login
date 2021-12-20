@@ -70,7 +70,6 @@ if (isset($_POST['sort'])) {
         <title>Tienda</title>
     <?php } ?>
     <link rel="stylesheet" href="/styles/global.css">
-    <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/sidepanel.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
@@ -85,32 +84,6 @@ if (isset($_POST['sort'])) {
     <div class="espacio"></div>
 
     <div class="content-wrapper">
-        <?php if (!empty($plantasRecientes)) { ?>
-            <div class="content">
-                <h3>Plantas visitadas recientemente:</h3>
-                <div class="scroll-plantas">
-                    <?php foreach ($plantasRecientes as $reciente) { ?>
-                        <div class="plantas-recientes">
-                            <form method="GET" action="ver_detalle.php">
-                                <input type="hidden" name="id_planta" value="<?php echo $reciente->getId(); ?>" />
-                                <button type="submit" class="carta-reciente">
-                                    <div class="fotos-recientes">
-                                        <img src=<?php echo $reciente->getFoto(); ?>>
-                                    </div>
-                                    <div class="nombres-recientes">
-                                        <?php echo $reciente->getNombre(); ?>
-                                    </div>
-                                </button>
-                            </form>
-                        </div>
-                    <?php } ?>
-
-                </div>
-            </div>
-        <?php } ?>
-    </div>
-
-    <div class="content-wrapper">
         <div class="content">
             <div class="enlaces-navegacion">
                 <a href="index.php">Home</a>
@@ -121,75 +94,94 @@ if (isset($_POST['sort'])) {
                     <a href=""><?php echo $strCategoria; ?></a>
                 <?php } ?>
             </div>
-            <div class="sidepanel-container">
-                <?php include_once('/html_content/sidepanel.php'); ?>
-            </div>
-            <div class="scroll-plantas">
-                <?php foreach ($listaPlantas as $plantas) { ?>
-                    <div class="lista-plantas">
-                        <div class="carta">
-                            <div class="lista-plantas-fotos">
-                                <img src=<?php echo $plantas->getFoto(); ?>>
-                            </div>
-                            <div class="lista-plantas-content">
-                                <div class="lista-plantas-nombre">
-                                    <?php echo $plantas->getNombre(); ?>
+            <div class="flex-contenido">
+                <div class="sidepanel-container">
+                    <?php include_once('/html_content/sidepanel.php'); ?>
+                </div>
+                <div class="scroll-plantas">
+                    <?php foreach ($listaPlantas as $plantas) { ?>
+                        <div class="lista-plantas">
+                            <div class="carta">
+                                <div class="lista-plantas-fotos">
+                                    <img src=<?php echo $plantas->getFoto(); ?>>
                                 </div>
-                                <div class="lista-plantas-gestionCarrito">
-                                    <div class="lista-plantas-precio">
-                                        <?php echo $plantas->getPrecio(); ?> €
+                                <div class="lista-plantas-content">
+                                    <div class="lista-plantas-nombre">
+                                        <?php echo $plantas->getNombre(); ?>
                                     </div>
-                                    <!--
-                                        Si hay sesión iniciada, se muestra
-                                        el botón del carrito
-                                    -->
-                                    <?php if (isset($_SESSION['userSession'])) { ?>
-                                        <form method="POST" action="/crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
-                                            <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
-                                            <input type="number" min="1" value="1" name="cantidad" class="cantidadCarrito" />
-                                            <input type="submit" value="&#128722;" />
-                                        </form>
-                                    <?php } ?>
-                                </div>
-                                <?php if (isset($_SESSION['userSession'])) { ?>
-                                    <div class="agregar-deseados">
-                                        <?php
-                                        // mediante la id de la planta y la id del usuario logueado,
-                                        // compruebo si la planta ha sido deseada o no
-                                        $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $userSession->getId());
-
-                                        if ($idDeseado != null) { ?>
-                                            <div class="quitar-deseado">
-                                                <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
-                                                    <input type="hidden" name="id_deseado" value="<?php echo $idDeseado->getId(); ?>" />
-                                                    <button type="submit" name="quitarDeseado">★</button>
-                                                </form>
-                                            </div>
-                                        <?php } else { ?>
-                                            <div class="agregar-deseado">
-                                                <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
-                                                    <input type="hidden" name="id_planta" value="<?php echo $plantas->getId(); ?>" />
-                                                    <button type="submit" name="add">☆</button>
-                                                </form>
-                                            </div>
+                                    <div class="lista-plantas-gestionCarrito">
+                                        <div class="lista-plantas-precio">
+                                            <?php echo $plantas->getPrecio(); ?> €
+                                        </div>
+                                        <!--
+                                            Si hay sesión iniciada, se muestra
+                                            el botón del carrito
+                                        -->
+                                        <?php if (isset($_SESSION['userSession'])) { ?>
+                                            <form method="POST" action="/crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
+                                                <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
+                                                <input type="number" min="1" value="1" name="cantidad" class="cantidadCarrito" />
+                                                <input type="submit" value="&#128722;" />
+                                            </form>
                                         <?php } ?>
                                     </div>
-                                <?php } ?>
-                            </div>
-                            <div class="ver-detalles-planta">
-                                <form method="GET" action="ver_detalle.php">
-                                    <input type="hidden" name="id_planta" value="<?php echo $plantas->getId(); ?>" />
-                                    <input type="submit" id="detalles" value="Ver detalle" />
-                                </form>
+                                    <?php if (isset($_SESSION['userSession'])) { ?>
+                                        <div class="agregar-deseados">
+                                            <?php
+                                            // mediante la id de la planta y la id del usuario logueado,
+                                            // compruebo si la planta ha sido deseada o no
+                                            $idDeseado = $crudDeseados->obtenerDeseado($plantas->getId(), $userSession->getId());
+
+                                            if ($idDeseado != null) { ?>
+                                                <div class="quitar-deseado">
+                                                    <form method="POST" action="/crud_deseados/gestion_eliminacion.php" class="btn-quitar-deseado">
+                                                        <input type="hidden" name="id_deseado" value="<?php echo $idDeseado->getId(); ?>" />
+                                                        <button type="submit" name="quitarDeseado">★</button>
+                                                    </form>
+                                                </div>
+                                            <?php } else { ?>
+                                                <div class="agregar-deseado">
+                                                    <form method="POST" action="/crud_deseados/gestion_creacion.php" class="btn-agregar-deseado">
+                                                        <input type="hidden" name="id_planta" value="<?php echo $plantas->getId(); ?>" />
+                                                        <button type="submit" name="add">☆</button>
+                                                    </form>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                                <div class="ver-detalles-planta">
+                                    <form method="GET" action="ver_detalle.php">
+                                        <input type="hidden" name="id_planta" value="<?php echo $plantas->getId(); ?>" />
+                                        <input type="submit" id="detalles" value="Ver detalle" />
+                                    </form>
+                                </div>
                             </div>
                         </div>
+                    <?php } ?>
+                </div>
+                <div class="sidepanel-recientes">
+                    <div class="side-plantas">
+                        <div class="title-recientes">
+                            Vistas recientes:
+                        </div>
+                        <?php if (!empty($plantasRecientes)) { ?>
+                            <?php foreach ($plantasRecientes as $reciente) { ?>
+                                <div class="plantas-recientes">
+                                    <form method="GET" action="ver_detalle.php">
+                                        <input type="hidden" name="id_planta" value="<?php echo $reciente->getId(); ?>" />
+                                        <button type="submit" class="carta-reciente">
+                                            <?php echo $reciente->getNombre(); ?>
+                                        </button>
+                                    </form>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
-                <?php } ?>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="espacio"></div>
 
     <?php include_once('/html_footer/footer.php'); ?>
 </body>
