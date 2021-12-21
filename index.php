@@ -185,5 +185,4 @@ if (isset($_POST['sort'])) {
 
     <?php include_once('/html_footer/footer.php'); ?>
 </body>
-
 </html>

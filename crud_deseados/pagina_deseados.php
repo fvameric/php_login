@@ -71,7 +71,6 @@ if (isset($_SESSION['userSession'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deseados</title>
     <link rel="stylesheet" href="/styles/global.css">
-    <link rel="stylesheet" href="/styles/sidepanel.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
     <script src="/buscador.js"></script>
 </head>
@@ -79,29 +78,24 @@ if (isset($_SESSION['userSession'])) {
 <body>
     <div class='header'>
         <?php include_once('../html_header/navbar.php'); ?>
-        <?php include_once('../html_header/buscador.php'); ?>
     </div>
 
     <div class="espacio">
     </div>
 
-    <div class="enlaces-navegacion">
-        <a href="../index.php">Home</a>
-        <div class="flecha-navegacion">
-            ▶
-        </div>
-        <a href="../profile.php">Perfil</a>
-        <div class="flecha-navegacion">
-            ▶
-        </div>
-        <a href="pagina_deseados.php">Deseados</a>
-    </div>
-
     <?php if (!empty($plantasDeseadas)) { ?>
         <div class="content-wrapper">
             <div class="content">
-                <div class="sidepanel-container">
-                    <?php include_once('../html_content/sidepanel.php'); ?>
+                <div class="enlaces-navegacion">
+                    <a href="../index.php">Home</a>
+                    <div class="flecha-navegacion">
+                        ▶
+                    </div>
+                    <a href="../profile.php">Perfil</a>
+                    <div class="flecha-navegacion">
+                        ▶
+                    </div>
+                    <a href="pagina_deseados.php">Deseados</a>
                 </div>
                 <div class="descargar-xml">
                     <form method="POST" action="">

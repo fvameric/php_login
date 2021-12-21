@@ -81,24 +81,23 @@ if (isset($_SESSION['userSession'])) {
     <div class="espacio">
     </div>
 
-    <div class="enlaces-navegacion">
-        <a href="index.php">Home</a>
-        <div class="flecha-navegacion">
-            ▶
-        </div>
-        <a href="profile.php">Perfil</a>
-    </div>
-
     <div class="content-wrapper">
         <div class="content">
+            <div class="enlaces-navegacion">
+                <a href="index.php">Home</a>
+                <div class="flecha-navegacion">
+                    ▶
+                </div>
+                <a href="profile.php">Perfil</a>
+            </div>
             <div class="detalle-perfil">
                 Avatar:
                 <div class='avatar-perfil'>
                     <img src=<?php echo $userSession->getAvatar(); ?>>
                 </div>
-                Nombre:
+                Nombre:<br>
                 <?php echo $userSession->getNickname(); ?><br>
-                Email:
+                <br>Email:<br>
                 <?php echo $userSession->getEmail(); ?><br>
             </div>
             <!--
@@ -107,20 +106,21 @@ if (isset($_SESSION['userSession'])) {
                 en caso de que el usuario sea admin
             -->
             <?php if ($userSession->getAdmin() == 1) { ?>
-                <div class="lista-usuarios-crear">
-                    <form method="POST" action="/crud_users/pagina_creacion.php">
-                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
-                        <input type="submit" name="crear" id="crear" value="Crear usuario" />
-                    </form>
-                </div>
+                <div class="div-crud-usuarios">
+                    <div class="lista-usuarios-crear">
+                        <form method="POST" action="/crud_users/pagina_creacion.php">
+                            <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                            <input type="submit" name="crear" id="crear" value="Crear usuario" />
+                        </form>
+                    </div>
 
-                <div class="lista-plantas-crear">
-                    <form method="POST" action="/crud_plantas/pagina_creacion.php">
-                        <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
-                        <input type="submit" name="crear" id="crear" value="Crear planta" />
-                    </form>
+                    <div class="lista-plantas-crear">
+                        <form method="POST" action="/crud_plantas/pagina_creacion.php">
+                            <input type="hidden" name="id_admin" value="<?php echo $id ?>" />
+                            <input type="submit" name="crear" id="crear" value="Crear planta" />
+                        </form>
+                    </div>
                 </div>
-
                 <div class="scroll-usuarios">
                     <?php foreach ($listaUsers as $usuario) { ?>
                         <div class="lista-usuarios">

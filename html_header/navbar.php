@@ -15,9 +15,11 @@
             </a>
         </div>
 
-        <form method="POST" action="" class="buscador">
-            <input type="text" id="inputBuscador" class="barra-buscador" onkeyup="funcionBuscador()" placeholder="Buscador">
-        </form>
+        <div class="form-buscador">
+            <form method="POST" action="" class="buscador">
+                <input type="text" id="inputBuscador" class="barra-buscador" onkeyup="funcionBuscador()" placeholder="Buscador">
+            </form>
+        </div>
         <!--
             Si hay sesión iniciada se muestra la información del user
             y si no hay sesión iniciada,
