@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2021 at 07:14 PM
+-- Generation Time: Dec 21, 2021 at 09:48 PM
 -- Server version: 5.6.13
 -- PHP Version: 5.4.17
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `deseados` (
   `user_id` int(11) NOT NULL,
   `planta_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=53 ;
 
 --
 -- Dumping data for table `deseados`
@@ -42,11 +42,9 @@ CREATE TABLE IF NOT EXISTS `deseados` (
 INSERT INTO `deseados` (`id`, `user_id`, `planta_id`) VALUES
 (1, 21, 7),
 (19, 12, 5),
-(20, 11, 20),
-(21, 11, 9),
-(22, 11, 13),
-(23, 11, 23),
-(24, 11, 16);
+(50, 11, 9),
+(51, 11, 11),
+(52, 36, 6);
 
 -- --------------------------------------------------------
 

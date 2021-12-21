@@ -25,19 +25,11 @@
             <h2>Registro:</h2>
 
             <form id="formRegistro" action="gestion_registro.php" method="POST" enctype="multipart/form-data">
-                <div id="preview" class="avatar-perfil"><img src="/images/avatardefault.png" ></div>
-
-                <label>Avatar</label><br>
-                <input onChange="previsualizar(this)" type="file" name="file" id="#imagen"><br><br>
-                
-                <label>Email</label><br>
-                <input type="email" name="email"><br><br>
-
-                <label>Nickname</label><br>
-                <input type="text" name="nickname"><br><br>
-
-                <label>Contraseña</label><br>
-                <input type="password" name="password"><br><br>
+                <div id="preview" class="avatar-perfil"><img src="/images/avatardefault.png"></div>
+                <input onChange="previsualizar(this)" type="file" name="file" id="#imagen" placeholder="Avatar"><br>
+                <input type="email" name="email" placeholder="Email"><br>
+                <input type="text" name="nickname" placeholder="Nickname"><br>
+                <input type="password" name="password" placeholder="Contraseña"><br>
 
                 <button type="submit" name="submit" value="Registrarse">Registrar</button>
             </form>

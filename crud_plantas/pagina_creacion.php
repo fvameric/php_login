@@ -40,7 +40,7 @@ if (isset($_SESSION['userSession'])) {
 </head>
 
 <body>
-<div class='header'>
+    <div class='header'>
         <?php include_once('../html_header/navbar.php'); ?>
     </div>
 
@@ -59,7 +59,7 @@ if (isset($_SESSION['userSession'])) {
     </div>
 
     <div class="content-wrapper">
-        <div class="content">
+        <div class="crear-nuevo-usuario">
             <h1>Crear planta nueva:</h1>
             <form id="formRegistro" action="gestion_creacion.php" method="POST" enctype="multipart/form-data">
                 <label>Nombre</label><br>
