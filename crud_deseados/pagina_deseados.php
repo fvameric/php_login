@@ -149,15 +149,31 @@ if (isset($_SESSION['userSession'])) {
             </div>
         </div>
     <?php } else { ?>
-        <div class="no-content">
-            <h2>No tienes deseados<h2>
-        </div>
-        <div class="cargar-xml">
-            <form method="POST" action="" enctype="multipart/form-data">
-                <label>Fichero xml:</label><br>
-                <input type="file" name="file"><br><br>
-                <button type="submit" name="cargarXML">Cargar fichero XML</button>
-            </form>
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="enlaces-navegacion">
+                    <a href="../index.php">Home</a>
+                    <div class="flecha-navegacion">
+                        ▶
+                    </div>
+                    <a href="../profile.php">Perfil</a>
+                    <div class="flecha-navegacion">
+                        ▶
+                    </div>
+                    <a href="pagina_deseados.php">Deseados</a>
+                </div>
+                <div class="no-content">
+                    <h2>No tienes deseados<h2>
+                </div>
+                <div class="cargar-xml">
+                    
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        <label>Agrega un producto a deseados o carga un fichero XML previamente descargado:</label><br>
+                        <input type="file" name="file"><br><br>
+                        <button type="submit" name="cargarXML">Cargar fichero XML</button>
+                    </form>
+                </div>
+            </div>
         </div>
     <?php } ?>
 

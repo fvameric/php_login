@@ -160,6 +160,7 @@ if (isset($_POST['sort'])) {
                         </div>
                     <?php } ?>
                 </div>
+                <?php if (isset($_SESSION['userSession'])) { ?>
                 <div class="sidepanel-recientes">
                     <div class="side-plantas">
                         <div class="title-recientes">
@@ -179,6 +180,8 @@ if (isset($_POST['sort'])) {
                         <?php } ?>
                     </div>
                 </div>
+                <?php } else { ?>
+                <?php } ?>
             </div>
         </div>
     </div>

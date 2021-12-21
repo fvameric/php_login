@@ -129,7 +129,6 @@ if (isset($_SESSION['userSession'])) {
             </div>
         </div>
     <?php } else { ?>
-
         <div class="content-wrapper">
             <div class="content">
                 <div class="enlaces-navegacion">

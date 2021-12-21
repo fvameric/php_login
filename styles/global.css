@@ -401,6 +401,9 @@ input:not(:checked)~#collapse-menu {
 
 /* Crear XML */
 
+.cargar-xml {
+    padding: 10px;
+}
 .descargar-xml {
     margin: 10px;
 }
@@ -674,6 +677,41 @@ input:not(:checked)~#collapse-menu {
     width: 200px;
 }
 
+.planta-nombre {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.planta-precio {
+    font-weight: bold;
+}
+
+.planta-info {
+    padding: 10px;
+}
+
+.planta-fotos img {
+    width: 400px;
+    height: auto;
+    overflow: hidden;
+}
+
+.btn-detalle-carrito {
+    font-weight: bold;
+}
+
+.btn-detalle-carrito {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(36, 36, 36);
+    color: #FFF;
+    border: 0 solid;
+    cursor: pointer;
+}
+
+.btn-detalle-carrito:hover {
+    background-color: rgb(71, 71, 71);
+}
 
 /* Crear usuario nuevo */
 
@@ -987,3 +1025,4 @@ input:not(:checked)~#collapse-menu {
 .div-crud-usuarios {
     display: flex;
 }
+

@@ -62,7 +62,7 @@ if (isset($_SESSION['userSession'])) {
         if (array_search($planta, $_SESSION['plantasVisitadas']) === false) {
             if (count($_SESSION['plantasVisitadas']) <= 4) {
                 array_push($_SESSION['plantasVisitadas'], $planta);
-            } else if(count($_SESSION['plantasVisitadas']) > 4) {
+            } else if (count($_SESSION['plantasVisitadas']) > 4) {
                 array_shift($_SESSION['plantasVisitadas']);
                 array_push($_SESSION['plantasVisitadas'], $planta);
             }
@@ -93,17 +93,16 @@ if (isset($_SESSION['userSession'])) {
     <div class="espacio">
     </div>
 
-    <div class="enlaces-navegacion">
-        <a href="index.php">Home</a>
-        <div class="flecha-navegacion">
-            ▶
-        </div>
-        <a href=""><?php echo $planta->getNombre(); ?></a>
-    </div>
-
     <div class="content">
+        <div class="enlaces-navegacion">
+            <a href="index.php">Home</a>
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+            <a href=""><?php echo $planta->getNombre(); ?></a>
+        </div>
         <div class="detalle-planta">
-            <div class="lista-plantas-fotos">
+            <div class="planta-fotos">
                 <img src="<?php echo $planta->getFoto(); ?>" />
             </div>
             <?php if (isset($_SESSION['userSession'])) { ?>
@@ -133,17 +132,18 @@ if (isset($_SESSION['userSession'])) {
                     <?php echo $planta->getNombre(); ?>
                 </div>
 
-                <div class="planta-nombre">
+                <div class="planta-descripcion">
                     <?php echo $planta->getDescripcion(); ?>
                 </div>
-                <?php echo $planta->getPrecio(); ?> €
-                <br>
+                <div class="planta-precio">
+                    <?php echo $planta->getPrecio(); ?> € - Stock: <?php echo $planta->getStock(); ?>
+                </div>
                 Categoria: <?php echo $strCategoria; ?>
                 <?php if (isset($_SESSION['userSession'])) { ?>
                     <form method="POST" action="../crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
                         <input type="hidden" name="plant" value="<?php echo $planta->getId(); ?>" />
                         <input type="number" min="1" value="1" name="cantidad" class="cantidadCarrito" />
-                        <input type="submit" value="&#128722;" />
+                        <input type="submit" value="Agregar al carrito" class="btn-detalle-carrito"/>
                     </form>
                 <?php } ?>
             </div>
@@ -171,7 +171,7 @@ if (isset($_SESSION['userSession'])) {
     </div>
 
     <div class="espacio"></div>
-    
+
     <?php include_once('/html_footer/footer.php'); ?>
 </body>
 
