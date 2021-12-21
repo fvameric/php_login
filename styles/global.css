@@ -746,7 +746,9 @@ input:not(:checked)~#collapse-menu {
 /* css del carro */
 
 #shopping-cart {
-    margin: 40px 0px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    width: 90%;
 }
 
 #product-grid {

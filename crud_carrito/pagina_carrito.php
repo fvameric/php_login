@@ -129,8 +129,26 @@ if (isset($_SESSION['userSession'])) {
             </div>
         </div>
     <?php } else { ?>
-        <div class="no-content">
-            <h2>No tienes productos en el carrito.</h2>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="enlaces-navegacion">
+                    <a href="../index.php">Home</a>
+                    <div class="flecha-navegacion">
+                        ▶
+                    </div>
+                    <a href="../profile.php">Perfil</a>
+                    <div class="flecha-navegacion">
+                        ▶
+                    </div>
+                    <a href="pagina_carrito.php">Carrito</a>
+                </div>
+                <div class="flex-contenido">
+                    <div class="no-content">
+                        <h2>No tienes productos en el carrito.</h2>
+                    </div>
+                </div>
+            </div>
         </div>
     <?php } ?>
 
