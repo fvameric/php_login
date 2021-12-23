@@ -29,7 +29,7 @@ if (isset($_POST['login'])) {
         $userSession = $crudUser->validarLoginUser($nickname, $password_crypt);
 
         if ($userSession != null) {
-            session_start();
+            //session_start();
             $_SESSION['userSession'] = $userSession;
             $_SESSION['plantasVisitadas'] = [];
             header("Location: ../index.php");
