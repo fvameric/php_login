@@ -94,10 +94,33 @@ if (isset($_POST['sort'])) {
                     <a href=""><?php echo $strCategoria; ?></a>
                 <?php } ?>
             </div>
-            <div class="flex-contenido">
-                <div class="sidepanel-container">
-                    <?php include_once('/html_content/sidepanel.php'); ?>
+            <?php if (isset($_SESSION['userSession']) && !empty($plantasRecientes)) { ?>
+                <div class="sidepanel-recientes">
+                <div class="title-recientes">
+                    Vistas recientes:
                 </div>
+                <div class="side-plantas">
+                    <?php if (!empty($plantasRecientes)) { ?>
+                        <?php foreach ($plantasRecientes as $reciente) { ?>
+                            <div class="plantas-recientes">
+                                <form method="GET" action="ver_detalle.php">
+                                    <input type="hidden" name="id_planta" value="<?php echo $reciente->getId(); ?>" />
+                                    <button type="submit" class="carta-reciente">
+                                        <?php echo $reciente->getNombre(); ?>
+                                    </button>
+                                </form>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } else { ?>
+            <?php } ?>
+            
+            <div class="sidepanel-container">
+                <?php include_once('/html_content/sidepanel.php'); ?>
+            </div>
+            <div class="flex-contenido">
                 <div class="scroll-plantas">
                     <?php foreach ($listaPlantas as $plantas) { ?>
                         <div class="lista-plantas">
@@ -114,9 +137,9 @@ if (isset($_POST['sort'])) {
                                             <?php echo $plantas->getPrecio(); ?> €
                                         </div>
                                         <!--
-                                            Si hay sesión iniciada, se muestra
-                                            el botón del carrito
-                                        -->
+                                                Si hay sesión iniciada, se muestra
+                                                el botón del carrito
+                                            -->
                                         <?php if (isset($_SESSION['userSession'])) { ?>
                                             <form method="POST" action="/crud_carrito/gestion_carrito.php" class="lista-plantas-addcarrito">
                                                 <input type="hidden" name="plant" value="<?php echo $plantas->getId(); ?>" />
@@ -160,32 +183,12 @@ if (isset($_POST['sort'])) {
                         </div>
                     <?php } ?>
                 </div>
-                <?php if (isset($_SESSION['userSession'])) { ?>
-                <div class="sidepanel-recientes">
-                    <div class="side-plantas">
-                        <div class="title-recientes">
-                            Vistas recientes:
-                        </div>
-                        <?php if (!empty($plantasRecientes)) { ?>
-                            <?php foreach ($plantasRecientes as $reciente) { ?>
-                                <div class="plantas-recientes">
-                                    <form method="GET" action="ver_detalle.php">
-                                        <input type="hidden" name="id_planta" value="<?php echo $reciente->getId(); ?>" />
-                                        <button type="submit" class="carta-reciente">
-                                            <?php echo $reciente->getNombre(); ?>
-                                        </button>
-                                    </form>
-                                </div>
-                            <?php } ?>
-                        <?php } ?>
-                    </div>
-                </div>
-                <?php } else { ?>
-                <?php } ?>
             </div>
         </div>
     </div>
 
-    <?php include_once('/html_footer/footer.php'); ?>
+    <?php //include_once('/html_footer/footer.php'); 
+    ?>
 </body>
+
 </html>

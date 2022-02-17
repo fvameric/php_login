@@ -44,40 +44,44 @@ if (isset($_SESSION['userSession'])) {
 
     <div class="espacio">
     </div>
-    <div class="enlaces-navegacion">
-        <a href="../index.php">Home</a>
-        <div class="flecha-navegacion">
-            ▶
+
+    <div class="content-creacion">
+        <div class="enlaces-navegacion">
+            <a href="../index.php">Home</a>
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+            <a href="../profile.php">Perfil</a>
+            <div class="flecha-navegacion">
+                ▶
+            </div>
+            <a href="pagina_creacion.php">Creación de usuarios</a>
         </div>
-        <a href="../profile.php">Perfil</a>
-        <div class="flecha-navegacion">
-            ▶
+
+        <div class="crear-nuevo-usuario">
+            <h2>Crear usuario nuevo:</h2>
+
+            <form id="formRegistro" action="../identificacion/gestion_registro.php" method="POST" enctype="multipart/form-data">
+                <label>Avatar</label><br>
+                <input type="file" name="file"><br><br>
+
+                <label>Email</label><br>
+                <input type="email" name="email"><br><br>
+
+                <label>Nombre de usuario</label><br>
+                <input type="text" name="nickname"><br><br>
+
+                <label>Contraseña</label><br>
+                <input type="password" name="password"><br><br>
+
+                <button type="submit" name="submit" value="Registrarse">Registrar</button>
+            </form>
         </div>
-        <a href="pagina_creacion.php">Creación de usuarios</a>
-    </div>
-
-    <div class="crear-nuevo-usuario">
-        <h2>Crear usuario nuevo:</h2>
-
-        <form id="formRegistro" action="../identificacion/gestion_registro.php" method="POST" enctype="multipart/form-data">
-            <label>Avatar</label><br>
-            <input type="file" name="file"><br><br>
-
-            <label>Email</label><br>
-            <input type="email" name="email"><br><br>
-
-            <label>Nombre de usuario</label><br>
-            <input type="text" name="nickname"><br><br>
-
-            <label>Contraseña</label><br>
-            <input type="password" name="password"><br><br>
-
-            <button type="submit" name="submit" value="Registrarse">Registrar</button>
-        </form>
     </div>
 
     <div class="espacio"></div>
-    <?php include_once('../html_footer/footer.php'); ?>
+    <?php //include_once('../html_footer/footer.php'); 
+    ?>
 </body>
 
 </html>

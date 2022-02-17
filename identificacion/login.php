@@ -85,7 +85,7 @@ if (isset($_POST['login'])) {
         <a href="/identificacion/registro.php">Crear cuenta</a>
     </div>
     <div class="espacio"></div>
-    <?php include_once('../html_footer/footer.php'); ?>
+    <?php //include_once('../html_footer/footer.php'); ?>
 </body>
 
 </html>
