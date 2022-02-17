@@ -38,6 +38,8 @@ if (isset($_SESSION['userSession'])) {
     <title>Modificar usuario</title>
     <link rel="stylesheet" href="/styles/global.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
+    <script src="../jquery-3.6.0.js"></script>
+    <script src="../preview.js"></script>
 </head>
 
 <body>
@@ -61,30 +63,33 @@ if (isset($_SESSION['userSession'])) {
                 </div>
                 <a href="pagina_modificacion.php">Modificación de usuarios</a>
             </div>
-            <div class="form-modificar">
-                <form action='/crud_users/gestion_modificacion.php' method='POST' enctype="multipart/form-data">
-                    <div class='modificar-user'>
-                        <div class='modificar-avatar'>
-                            <img src=<?php echo $usuario_modificar->getAvatar() ?>>
-                            <input type="file" name='file'>
-                        </div>
-                        <div class='modificar-content'>
-                            <div class='modificar-content-nombre'>
-                                <label>Nickname:</label>
-                                <input type="text" name="nickname" value="<?php echo $usuario_modificar->getNickname() ?>">
+            <div class="modificar-usuario-estilo">
+                <div class="form-modificar">
+                    <form action='/crud_users/gestion_modificacion.php' method='POST' enctype="multipart/form-data">
+                        <div class='modificar-user'>
+                            <div class='modificar-avatar'>
+                            <div id="preview"><img src=<?php echo $usuario_modificar->getAvatar() ?>></div>
+                            <input onChange="previsualizar(this)" type="file" name="file" id="#imagen"><br><br>
                             </div>
-                            <div class='modificar-content-email'>
-                                <label>Email:</label>
-                                <input type="email" name="email" value="<?php echo $usuario_modificar->getEmail() ?>">
+                            
+                            <div class='modificar-content'>
+                                <div class='modificar-content-nombre'>
+                                    <label>Nickname:</label>
+                                    <input type="text" name="nickname" value="<?php echo $usuario_modificar->getNickname() ?>">
+                                </div>
+                                <div class='modificar-content-email'>
+                                    <label>Email:</label>
+                                    <input type="email" name="email" value="<?php echo $usuario_modificar->getEmail() ?>">
+                                </div>
                             </div>
+                            <input type='hidden' name='id_usuario_modificar' value='<?php echo $usuario_modificar->getId() ?>'>
+                            <input type='hidden' name='actualizar' value='actualizar'>
                         </div>
-                        <input type='hidden' name='id_usuario_modificar' value='<?php echo $usuario_modificar->getId() ?>'>
-                        <input type='hidden' name='actualizar' value='actualizar'>
-                    </div>
-                    <div class='aceptar-modificaciones'>
-                        <input type='submit' name="aceptarmodif" value='Aceptar modificaciones'>
-                    </div>
-                </form>
+                        <div class='aceptar-modificaciones'>
+                            <input type='submit' name="aceptarmodif" value='Aceptar modificaciones'>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

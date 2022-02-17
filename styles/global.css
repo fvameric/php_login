@@ -353,6 +353,7 @@ input:not(:checked)~#collapse-menu {
 
 .modificar-user {
     display: flex;
+    justify-content: space-evenly;
 }
 
 .modificar-avatar {
@@ -377,6 +378,29 @@ input:not(:checked)~#collapse-menu {
 
 .aceptar-modificaciones {
     margin-top: 5px;
+}
+
+.aceptar-modificaciones input {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0px 0 10px 10px;
+    border-radius: 3px;
+    border: 1px solid rgb(2, 99, 155) !important;
+    color: rgb(2, 99, 155);
+    cursor: pointer;
+    padding: 15px 20px;
+    background-color: #FFF;
+    -webkit-transition: background .3s ease-out;
+    -moz-transition: background .3s ease-out;
+    -o-transition: background .3s ease-out;
+    transition: background .3s ease-out;
+    -webkit-transition: color .2s;
+    transition: color .2s;
+}
+
+.aceptar-modificaciones input:hover {
+    background: rgba(2, 99, 155, 0.719);
+    color: #FFF;
 }
 
 
@@ -977,6 +1001,7 @@ input:not(:checked)~#collapse-menu {
     justify-content: space-evenly;
 }
 
+
 /* side panel test */
 
 .flex-contenido {
@@ -1041,6 +1066,35 @@ input:not(:checked)~#collapse-menu {
     width: 1100px;
     margin: 0 auto;
     background-color: #f9f9f9;
+}
+
+.modificar-usuario-estilo {
+    padding: 10px;
+    max-width: 520px;
+    margin: 0 auto;
+    background-color: #ebebeb;
+    padding: 20px;
+    border-radius: 10px;
+    color: #FFF;
+    background: radial-gradient(circle, rgba(122, 176, 52, 1) 0%, rgba(88, 133, 43, 1) 100%);
+    -webkit-box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 50px 15px rgba(121, 121, 121, 0.3);
+}
+
+.modificar-usuario-estilo input {
+    width: auto;
+    /*height: 30px;*/
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 0 solid;
+}
+
+.modificar-content input {
+    width: auto;
+    height: 30px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 0 solid;
 }
 
 .crear-nuevo-usuario {

@@ -35,6 +35,8 @@ if (isset($_SESSION['userSession'])) {
     <title>Crear nuevo usuario</title>
     <link rel="stylesheet" href="/styles/global.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700" />
+    <script src="../jquery-3.6.0.js"></script>
+    <script src="../preview.js"></script>
 </head>
 
 <body>
@@ -62,8 +64,10 @@ if (isset($_SESSION['userSession'])) {
             <h2>Crear usuario nuevo:</h2>
 
             <form id="formRegistro" action="../identificacion/gestion_registro.php" method="POST" enctype="multipart/form-data">
-                <label>Avatar</label><br>
-                <input type="file" name="file"><br><br>
+                
+                <div id="preview"></div>
+                <label>Foto</label><br>
+                <input onChange="previsualizar(this)" type="file" name="file" id="#imagen"><br><br>
 
                 <label>Email</label><br>
                 <input type="email" name="email"><br><br>

@@ -98,7 +98,7 @@ if (isset($_SESSION['userSession'])) {
                     <input type="radio" id="Senecio" name="categoria" value="7">
                     <label for="Senecio">Senecio</label><br><br>
 
-                    <button type="submit" name="submit" value="Registrarse">Registrar</button>
+                    <button class="" type="submit" name="submit" value="Registrarse">Registrar</button>
                 </form>
             </div>
         </div>
